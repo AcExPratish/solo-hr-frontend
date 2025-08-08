@@ -1,12 +1,12 @@
 import Button from 'components/base/Button';
-import AuthSocialButtons from 'components/common/AuthSocialButtons';
+// import AuthSocialButtons from 'components/common/AuthSocialButtons';
 import { Col, Form, Row } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
 
 const SignUpForm = ({ layout }: { layout: 'simple' | 'card' | 'split' }) => {
   return (
     <>
-      <div className="text-center mb-7">
+      {/* <div className="text-center mb-7">
         <h3 className="text-body-highlight">Sign Up</h3>
         <p className="text-body-tertiary">Create your account today</p>
       </div>
@@ -14,7 +14,7 @@ const SignUpForm = ({ layout }: { layout: 'simple' | 'card' | 'split' }) => {
       <div className="position-relative mt-4">
         <hr className="bg-body-secondary" />
         <div className="divider-content-center">or use email</div>
-      </div>
+      </div> */}
       <Form>
         <Form.Group className="mb-3 text-start">
           <Form.Label htmlFor="name">Name</Form.Label>

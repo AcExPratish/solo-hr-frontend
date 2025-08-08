@@ -1,0 +1,5 @@
+{
+    "dialog_expired_token_title": "Session Expired",
+    "dialog_expired_token_body": "Your session has expired. Please log in again.",
+    "sign_in": "Sign In"
+}

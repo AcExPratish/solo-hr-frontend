@@ -6,7 +6,6 @@ import { Link } from 'react-router-dom';
 import { TravelStatistics } from 'components/modules/travel-agency/dashboard/TravelStatistics';
 import { FinancialActivities } from 'components/modules/travel-agency/dashboard/FinancialActivities';
 import { HolidaysCard } from 'components/cards/HolidaysCard';
-import { IntegrationsCard } from 'components/cta/IntegrationsCard';
 import Bookings from 'components/modules/travel-agency/dashboard/Bookings';
 import Flights from 'components/modules/travel-agency/dashboard/Flights';
 import { VisitorsCard } from 'components/cards/VisitorsCard';
@@ -51,9 +50,6 @@ const TravelAgency = () => {
             </Col>
             <Col xs={12} lg={6} xxl={12}>
               <HolidaysCard />
-            </Col>
-            <Col xs={12}>
-              <IntegrationsCard />
             </Col>
           </Row>
         </Col>

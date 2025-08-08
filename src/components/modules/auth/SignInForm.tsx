@@ -1,14 +1,14 @@
 import { faKey, faUser } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import Button from 'components/base/Button';
-import AuthSocialButtons from 'components/common/AuthSocialButtons';
+// import AuthSocialButtons from 'components/common/AuthSocialButtons';
 import { Col, Form, Row } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
 
 const SignInForm = ({ layout }: { layout: 'simple' | 'card' | 'split' }) => {
   return (
     <>
-      <div className="text-center mb-7">
+      {/* <div className="text-center mb-7">
         <h3 className="text-body-highlight">Sign In</h3>
         <p className="text-body-tertiary">Get access to your account</p>
       </div>
@@ -16,7 +16,7 @@ const SignInForm = ({ layout }: { layout: 'simple' | 'card' | 'split' }) => {
       <div className="position-relative">
         <hr className="bg-body-secondary mt-5 mb-4" />
         <div className="divider-content-center">or use email</div>
-      </div>
+      </div> */}
       <Form.Group className="mb-3 text-start">
         <Form.Label htmlFor="email">Email address</Form.Label>
         <div className="form-icon-container">
