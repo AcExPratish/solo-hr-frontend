@@ -3,7 +3,7 @@ import Button from 'components/base/Button';
 import { Col, Form, Row } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
 
-const SignUpForm = ({ layout }: { layout: 'simple' | 'card' | 'split' }) => {
+const SignUpForm = () => {
   return (
     <>
       {/* <div className="text-center mb-7">
@@ -29,13 +29,13 @@ const SignUpForm = ({ layout }: { layout: 'simple' | 'card' | 'split' }) => {
           />
         </Form.Group>
         <Row className="g-3 mb-3">
-          <Col sm={layout === 'card' ? 12 : 6} lg={6}>
+          <Col sm={6} lg={6}>
             <Form.Group>
               <Form.Label htmlFor="password">Password</Form.Label>
               <Form.Control id="password" type="text" placeholder="Password" />
             </Form.Group>
           </Col>
-          <Col sm={layout === 'card' ? 12 : 6} lg={6}>
+          <Col sm={6} lg={6}>
             <Form.Group>
               <Form.Label htmlFor="confirmPassword">
                 Confirm Password
@@ -66,10 +66,7 @@ const SignUpForm = ({ layout }: { layout: 'simple' | 'card' | 'split' }) => {
           Sign up
         </Button>
         <div className="text-center">
-          <Link
-            to={`/pages/authentication/${layout}/sign-in`}
-            className="fs-9 fw-bold"
-          >
+          <Link to={`/auth/sign-in`} className="fs-9 fw-bold">
             Sign in to an existing account
           </Link>
         </div>

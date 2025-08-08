@@ -5,7 +5,7 @@ import bg from 'assets/img/bg/34.png';
 const ForgotPassword = () => {
   return (
     <AuthSplitLayout bg={bg}>
-      <ForgotPasswordForm layout="split" />
+      <ForgotPasswordForm />
     </AuthSplitLayout>
   );
 };

@@ -24,7 +24,12 @@ const LockScreenForm = () => {
           type="password"
           placeholder="Enter Password"
         />
-        <Button variant="primary" as={Link} to="/" className="w-100">
+        <Button
+          variant="primary"
+          as={Link}
+          to="/auth/sign-in"
+          className="w-100"
+        >
           Sign In
         </Button>
       </Form>

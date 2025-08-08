@@ -1,5 +1,3 @@
-/* eslint-disable @typescript-eslint/no-non-null-assertion */
-import classNames from 'classnames';
 import Button from 'components/base/Button';
 import React, { ChangeEvent, useRef, useState } from 'react';
 import { Form } from 'react-bootstrap';
@@ -7,7 +5,7 @@ import { Link } from 'react-router-dom';
 
 const totalInputLength = 6;
 
-const TwoFAForm = ({ layout }: { layout?: 'simple' | 'card' | 'split' }) => {
+const TwoFAForm = () => {
   const [otp, setOtp] = useState('');
   const inputRefs = useRef<(HTMLInputElement | null)[]>([]);
 
@@ -38,12 +36,8 @@ const TwoFAForm = ({ layout }: { layout?: 'simple' | 'card' | 'split' }) => {
 
   return (
     <div>
-      <div className={classNames({ 'px-xxl-5': !(layout === 'split') })}>
-        <div
-          className={classNames('text-center', {
-            'mb-6': !(layout === 'split')
-          })}
-        >
+      <div className="px-xxl-5">
+        <div className="text-center mb-6">
           <h4 className="text-body-highlight">Enter the verification code</h4>
           <p className="text-body-tertiary mb-0">
             An email containing a 6-digit verification code has been sent to the

@@ -5,7 +5,7 @@ import Button from 'components/base/Button';
 import { Col, Form, Row } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
 
-const SignInForm = ({ layout }: { layout: 'simple' | 'card' | 'split' }) => {
+const SignInForm = () => {
   return (
     <>
       {/* <div className="text-center mb-7">
@@ -56,10 +56,7 @@ const SignInForm = ({ layout }: { layout: 'simple' | 'card' | 'split' }) => {
           </Form.Check>
         </Col>
         <Col xs="auto">
-          <Link
-            to={`/pages/authentication/${layout}/forgot-password`}
-            className="fs-9 fw-semibold"
-          >
+          <Link to={`/auth/forgot-password`} className="fs-9 fw-semibold">
             Forgot Password?
           </Link>
         </Col>
@@ -68,10 +65,7 @@ const SignInForm = ({ layout }: { layout: 'simple' | 'card' | 'split' }) => {
         Sign In
       </Button>
       <div className="text-center">
-        <Link
-          to={`/pages/authentication/${layout}/sign-up`}
-          className="fs-9 fw-bold"
-        >
+        <Link to={`/auth/sign-up`} className="fs-9 fw-bold">
           Create an account
         </Link>
       </div>
