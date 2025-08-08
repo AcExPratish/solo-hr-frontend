@@ -56,7 +56,7 @@ const routes: RouteObject[] = [
       },
 
       {
-        path: '/pages/errors/',
+        path: '/errors/',
         children: [
           {
             path: '404',
