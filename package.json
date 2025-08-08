@@ -87,7 +87,8 @@
     "deploy": "echo https://phoenix-react.prium.me > ./build/CNAME && gh-pages -d build",
     "deploy:alt": "echo phoenix-react-alt.prium.me > ./build/CNAME && gh-pages -d build -r git@github.com:prium/phoenix-react-alt.git",
     "build:css": "webpack --config webpack.config.cjs --mode=production",
-    "watch:css": "webpack --config webpack.config.cjs --watch"
+    "watch:css": "webpack --config webpack.config.cjs --watch",
+    "prepare": "husky"
   },
   "browserslist": {
     "production": [
@@ -139,6 +140,15 @@
     "webpack": "^5.75.0",
     "webpack-cli": "^5.0.1",
     "webpack-fix-style-only-entries": "^0.6.1"
+  },
+  "lint-staged": {
+    "*.{js,jsx,ts,tsx}": [
+      "eslint --fix",
+      "prettier --write"
+    ],
+    "*.{css,md,json}": [
+      "prettier --write"
+    ]
   },
   "overrides": {
     "react-scripts": {
