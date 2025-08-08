@@ -7,6 +7,40 @@
 @import 'user-variables';
 @import 'theme/variables';
 @import '~bootstrap/scss/variables';
+@import 'custom';
+.dh-tree {
+  &__block {
+    padding: .6rem 1.6rem;
+    position: relative;
+    z-index: 2;
+
+    &:hover {
+      transition: background .3ms ease-in-out;
+      background-color: var(--#{$prefix}item-hover-bg-color);
+    }
+  }
+
+  &__group {
+    position: relative;
+    margin-left: 2.2rem;
+
+    &::before {
+      content: "";
+      width: 1px;
+      height: 100%;
+      border-left: 1px dashed $gray-300;
+      position: absolute;
+      top: -10px;
+      left: -6px;
+      z-index: 1;
+    }
+
+    .list-group-item {
+      padding: 0;
+    }
+  }
+}
+
 
 //
 //

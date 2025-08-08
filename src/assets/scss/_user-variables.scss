@@ -3,3 +3,66 @@
 // user-variables.scss
 //
 // Place your own variable overrides here, these will override any Bootstrap and theme variables.
+
+//*-----------------------------------------------
+//|   Theme Colors
+//-----------------------------------------------*/
+
+$primary: #0aaf32 !default;
+$success: #0aaf32 !default;
+$warning: #ff8a0d !default;
+$danger: #d61b2b !default;
+$purple: #684fcb;
+
+.btn {
+  font-weight: 600;
+  padding-left: 0.9rem;
+  padding-right: 0.9rem;
+}
+
+.btn-primary {
+  &:hover {
+    background-color: #23890b !important;
+    border: 1px solid transparent;
+  }
+  &:focus {
+    background-color: #23890b !important;
+  }
+}
+.alert-subtle-success {
+  color: $success;
+  background-color: #e5f2ec;
+  font-weight: 600;
+}
+
+.alert-subtle-danger {
+  color: $danger;
+  background-color: #f3e8ec;
+  font-weight: 600;
+}
+
+.text-purple {
+  color: $purple;
+}
+
+.bg-purple {
+  background-color: $purple;
+  color: #fff;
+
+  &:hover {
+    color: #fff;
+    background-color: darken($purple, 10%);
+  }
+}
+
+.fs-normal {
+  font-size: 14px;
+}
+
+.icon-light-gray {
+  color: #a4b2c8;
+}
+
+.bg-primary-light {
+  background-color: lighten($primary, 56%) !important;
+}
