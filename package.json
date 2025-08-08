@@ -71,7 +71,8 @@
     "tinymce": "^7.1.1",
     "uuid": "^11.0.4",
     "web-vitals": "^3.5.0",
-    "worker-loader": "^3.0.8"
+    "worker-loader": "^3.0.8",
+    "yup": "^1.7.0"
   },
   "scripts": {
     "start": "craco start",
@@ -103,6 +104,8 @@
   "devDependencies": {
     "@automattic/webpack-rtl-plugin": "^6.0.0",
     "@babel/plugin-proposal-private-property-in-object": "^7.21.11",
+    "@commitlint/cli": "^19.8.1",
+    "@commitlint/config-conventional": "^19.8.1",
     "@craco/craco": "^7.1.0",
     "@craco/types": "^7.1.0",
     "@types/fslightbox-react": "^1.7.3",
@@ -125,6 +128,8 @@
     "eslint-plugin-react": "^7.32.2",
     "eslint-plugin-react-hooks": "^4.6.0",
     "glob": "^10.3.4",
+    "husky": "^9.1.7",
+    "lint-staged": "^16.1.4",
     "mini-css-extract-plugin": "^2.7.6",
     "prettier": "^3.0.3",
     "sass": "^1.64.2",
