@@ -5,7 +5,7 @@ import SignUpForm from 'components/modules/auth/SignUpForm';
 const SignUp = () => {
   return (
     <AuthSplitLayout bg={bg}>
-      <SignUpForm layout="split" />
+      <SignUpForm />
     </AuthSplitLayout>
   );
 };

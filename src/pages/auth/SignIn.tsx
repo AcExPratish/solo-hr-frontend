@@ -6,7 +6,7 @@ import SignInForm from 'components/modules/auth/SignInForm';
 const SignIn = () => {
   return (
     <AuthSplitLayout bg={bg}>
-      <SignInForm layout="split" />
+      <SignInForm />
     </AuthSplitLayout>
   );
 };

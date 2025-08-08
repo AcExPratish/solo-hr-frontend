@@ -5,7 +5,7 @@ import bg from 'assets/img/bg/40.png';
 const TwoFA = () => {
   return (
     <AuthSplitLayout bg={bg}>
-      <TwoFAForm layout="split" />
+      <TwoFAForm />
     </AuthSplitLayout>
   );
 };

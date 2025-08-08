@@ -5,7 +5,7 @@ import SignOutForm from 'components/modules/auth/SignOutForm';
 const SignOut = () => {
   return (
     <AuthSplitLayout bg={bg} logo={false}>
-      <SignOutForm layout="split" />
+      <SignOutForm />
     </AuthSplitLayout>
   );
 };
