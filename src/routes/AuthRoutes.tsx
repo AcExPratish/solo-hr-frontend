@@ -6,37 +6,66 @@ import ResetPassword from 'pages/auth/ResetPassword';
 import LockScreen from 'pages/auth/LockScreen';
 import TwoFA from 'pages/auth/TwoFA';
 import { RouteObject } from 'react-router-dom';
+import GuestGuard from '../utils/route-guard/GuestGuard';
 
 export const AuthRoutes: RouteObject = {
   path: '/auth',
   children: [
     {
       path: 'sign-in',
-      element: <SignIn />
+      element: (
+        <GuestGuard>
+          <SignIn />
+        </GuestGuard>
+      )
     },
     {
       path: 'sign-up',
-      element: <SignUp />
+      element: (
+        <GuestGuard>
+          <SignUp />
+        </GuestGuard>
+      )
     },
     {
       path: 'sign-out',
-      element: <SignOut />
+      element: (
+        <GuestGuard>
+          <SignOut />
+        </GuestGuard>
+      )
     },
     {
       path: 'forgot-password',
-      element: <ForgotPassword />
+      element: (
+        <GuestGuard>
+          <ForgotPassword />
+        </GuestGuard>
+      )
     },
     {
       path: 'reset-password',
-      element: <ResetPassword />
+      element: (
+        <GuestGuard>
+          <ResetPassword />
+        </GuestGuard>
+      )
     },
     {
       path: 'lock-screen',
-      element: <LockScreen />
+      element: (
+        <GuestGuard>
+          <LockScreen />
+        </GuestGuard>
+      )
     },
     {
       path: '2FA',
-      element: <TwoFA />
+      element: (
+        <GuestGuard>
+          <TwoFA />
+        </GuestGuard>
+      )
     }
   ]
 };

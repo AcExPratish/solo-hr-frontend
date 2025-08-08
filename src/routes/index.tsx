@@ -8,6 +8,7 @@ import App from 'App';
 import ComingSoon from 'pages/ComingSoon';
 
 import { AuthRoutes } from './AuthRoutes';
+import AuthGuard from '@/utils/route-guard/AuthGuard';
 
 const routes: RouteObject[] = [
   {
@@ -19,7 +20,9 @@ const routes: RouteObject[] = [
         path: '/',
         element: (
           <MainLayoutProvider>
-            <MainLayout />
+            <AuthGuard>
+              <MainLayout />
+            </AuthGuard>
           </MainLayoutProvider>
         ),
         children: [
@@ -51,6 +54,7 @@ const routes: RouteObject[] = [
           }
         ]
       },
+
       {
         path: '/pages/errors/',
         children: [
@@ -68,6 +72,7 @@ const routes: RouteObject[] = [
           }
         ]
       },
+
       {
         path: '*',
         element: <Error404 />

@@ -2,10 +2,10 @@ import axios from 'axios';
 import { getAuthFromLocalStorage, removeAuthFromLocalStorage } from './storage';
 import { confirmExpiredTokenAlert } from '@/components/common/custom/ConfirmExpiredTokenAlert';
 import AuthService from '@/services/AuthService';
-import { getAPIEndpoint } from '@/helpers/utils';
+import { apiEndpoint } from '@/helpers/common';
 
 const axiosServices = axios.create({
-  baseURL: `${getAPIEndpoint()}`,
+  baseURL: `${apiEndpoint}`,
   headers: {
     'Content-type': 'application/json',
     Accept: 'application/json'

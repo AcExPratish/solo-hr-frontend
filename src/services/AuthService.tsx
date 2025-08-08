@@ -9,10 +9,10 @@ import {
   TForgotPassword,
   TLogin,
   TResetPassword
-} from '../types/modules/auth';
-import { getAPIEndpoint } from '@/helpers/utils';
+} from '@/types/modules/auth';
+import { apiEndpoint } from '@/helpers/common';
 
-const authEndpoint: string = `${getAPIEndpoint()}/auth`;
+const authEndpoint: string = `${apiEndpoint}/auth`;
 
 const login = (data: TLogin) => {
   return axios.post(`${authEndpoint}/login`, data);

@@ -3,11 +3,21 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import classNames from 'classnames';
 import Avatar from 'components/base/Avatar';
 import RevealDropdown from 'components/base/RevealDropdown';
-import { Notification } from 'data/notifications';
 import { Dropdown } from 'react-bootstrap';
 
 export interface NotificationItemProps {
-  notification: Notification;
+  notification: {
+    read: boolean;
+    avatar: string;
+    name: string;
+    interactionIcon: string;
+    interaction: string;
+    detail: string;
+    ago: string;
+    time: string;
+    date: string;
+    notificationPosition: string;
+  };
   className?: string;
   type: 'dropdownItem' | 'pageItem';
 }

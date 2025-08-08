@@ -283,7 +283,3 @@ export const formatDateToTime = (date: Date) => {
   });
   return formatter.format(date);
 };
-
-export const getAPIEndpoint = (): string => {
-  return process.env.REACT_APP_API_ENDPOINT || '';
-};

@@ -1,10 +1,10 @@
 import { createSlice } from '@reduxjs/toolkit';
+import { TAuthUser } from '@/types/modules/auth';
 import {
   addAuthToLocalStorage,
   getAuthFromLocalStorage,
   removeAuthFromLocalStorage
 } from '@/utils/storage';
-import { TAuthUser } from '../../types/modules/auth';
 
 interface TAuthState {
   isAuthenticated: boolean;
