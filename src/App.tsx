@@ -1,5 +1,3 @@
-import SettingsPanel from 'components/settings-panel/SettingsPanel';
-import SettingsToggle from 'components/settings-panel/SettingsToggle';
 import useToggleStyle from 'hooks/useToggleStyle';
 import { useAppContext } from 'providers/AppProvider';
 import { useSettingsPanelContext } from 'providers/SettingsPanelProvider';
@@ -10,10 +8,7 @@ const App = () => {
   const { isStylesheetLoaded } = useToggleStyle();
   const { pathname } = useLocation();
 
-  const {
-    settingsPanelConfig: { showSettingPanelButton },
-    setSettingsPanelConfig
-  } = useSettingsPanelContext();
+  const { setSettingsPanelConfig } = useSettingsPanelContext();
 
   const {
     config: { theme, isRTL }
@@ -46,12 +41,6 @@ const App = () => {
       ) : (
         <>
           <Outlet />
-          {showSettingPanelButton && (
-            <>
-              <SettingsToggle />
-              <SettingsPanel />
-            </>
-          )}
         </>
       )}
     </>

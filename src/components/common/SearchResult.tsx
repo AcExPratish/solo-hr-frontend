@@ -4,7 +4,6 @@ import { Link } from 'react-router-dom';
 import { getFileIcon } from 'helpers/utils';
 import { IconProp } from '@fortawesome/fontawesome-svg-core';
 import Avatar, { Status } from 'components/base/Avatar';
-import { SearchResult as SearchResultType, searchItems } from 'data/search';
 import Scrollbar from 'components/base/Scrollbar';
 import useSearchHook from 'hooks/useSearchHook';
 import { ColumnDef } from '@tanstack/react-table';
@@ -19,14 +18,15 @@ const ResultSectionHeader = ({ title }: { title: string }) => {
   );
 };
 
-const searchFields: ColumnDef<SearchResultType>[] = [
+// eslint-disable-next-line
+const searchFields: ColumnDef<any>[] = [
   {
     accessorKey: 'label'
   }
 ];
 
 const SearchResult = ({ searchValue = '' }: { searchValue?: string }) => {
-  const results = useSearchHook(searchItems, searchFields, searchValue);
+  const results = useSearchHook([], searchFields, searchValue);
 
   const recentlySearchedItems = useMemo(
     () => results.filter(item => item.category === 'recently_searched'),

@@ -2,15 +2,15 @@ import { Card, Dropdown } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
 import Scrollbar from 'components/base/Scrollbar';
 import Button from 'components/base/Button';
-import { notifications as notificationData } from 'data/notifications';
 import NotificationItem from 'components/common/NotificationItem';
 import classNames from 'classnames';
 import { useMemo } from 'react';
 
 const NotificationDropdownMenu = ({ className }: { className?: string }) => {
   const notifications = useMemo(() => {
-    return notificationData.slice(0, 6);
-  }, [notificationData]);
+    return [].slice(0, 6);
+  }, []);
+
   return (
     <Dropdown.Menu
       align="end"
@@ -38,7 +38,7 @@ const NotificationDropdownMenu = ({ className }: { className?: string }) => {
                   'border-bottom border-translucent':
                     index !== notifications.length - 1
                 })}
-                key={notification.id}
+                key={index}
               />
             ))}
           </Scrollbar>
