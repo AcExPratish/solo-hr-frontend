@@ -42,11 +42,11 @@ const authSlice = createSlice({
         state.user = action.payload.user;
         state.token = action.payload.token;
         state.refreshToken = action.payload.refreshToken;
-        state.token = action.payload.token;
         state.scopes = action.payload.scopes;
         addAuthToLocalStorage(action.payload);
       }
     },
+
     setProfile(state, action) {
       if (action.payload.user) {
         state.user = action.payload.user;
@@ -61,9 +61,11 @@ const authSlice = createSlice({
       state.token = null;
       removeAuthFromLocalStorage();
     },
+
     setAuthLoading(state, action) {
       state.isAuthLoading = action.payload;
     },
+
     setAuthInitialized(state) {
       state.isAuthLoading = false;
     }

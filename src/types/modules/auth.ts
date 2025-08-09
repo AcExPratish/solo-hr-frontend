@@ -4,14 +4,14 @@ export interface TLogin {
 }
 
 export interface TForgotPassword {
-  to: string;
-  reset_url: string;
+  to?: string;
+  reset_url?: string;
 }
 
 export interface TResetPassword {
-  email: string;
-  token: string;
-  new_password: string;
+  email?: string;
+  token?: string;
+  new_password?: string;
 }
 
 export interface TAuthUser {
@@ -22,10 +22,9 @@ export interface TAuthUser {
   phone?: string;
   delete_image?: number;
 }
+
 export interface TAuthRefreshToken {
-  refresh_token: string;
-  client_id?: string;
-  client_secret?: string;
+  refresh_token?: string;
 }
 
 export interface TChangePassword {

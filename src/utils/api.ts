@@ -39,8 +39,8 @@ axiosServices.interceptors.response.use(
           refresh_token: auth.refresh_token
         });
 
-        const token: string = resp?.data?.access_token || '';
-        const refreshToken: string = resp?.data?.refresh_token || '';
+        const token: string = resp?.data?.data?.access_token || '';
+        const refreshToken: string = resp?.data?.data?.refresh_token || '';
         localStorage.setItem('token', token);
         localStorage.setItem('refresh_token', refreshToken);
 
