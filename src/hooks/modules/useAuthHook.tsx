@@ -35,7 +35,7 @@ const useAuthHook = () => {
   };
 
   const logout = async () => {
-    AuthService.logout().catch(e => console.log('Logout Error:', e));
+    // AuthService.logout().catch(e => console.log('Logout Error:', e));
     dispatch(setLogout());
     // dispatch({ type: 'RESET_STATE' });
   };
