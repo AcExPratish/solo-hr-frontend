@@ -42,5 +42,16 @@
     "privacy_policy": "Privacy Policy",
     "terms_of_service": "Terms of Service",
     "message_success_logout": "Logout successful",
-    "message_success_login": "Login successful"
+    "message_success_login": "Login successful",
+    "still_having_problems": "Still having problems",
+    "forgot_your_password": "Forgot your password",
+    "forgot_password_description": "Enter your email below and we will send you a reset link",
+    "send": "Send",
+    "message_success_forgot_password": "Reset link sent to your email",
+    "message_error_forgot_password": "Failed to send reset link",
+    "invalid_credentials": "Invalid credentials",
+    "reset_new_password": "Reset new password",
+    "reset_new_password_description": "Type your new password",
+    "confirm_password": "Confirm Password",
+    "passwords_do_not_match": "Passwords do not match"
 }

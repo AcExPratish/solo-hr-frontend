@@ -38,7 +38,7 @@ const useAuthHook = () => {
   };
 
   const logout = async () => {
-    // AuthService.logout().catch(e => console.log('Logout Error:', e));
+    // AuthService.logout().catch(e => console.error('Logout Error:', e));
     dispatch(setLogout());
     // dispatch({ type: 'RESET_STATE' });
   };
@@ -47,15 +47,16 @@ const useAuthHook = () => {
     try {
       await AuthService.forgotPassword(data);
     } catch (e: unknown) {
-      console.log('Forgot Password:', e);
+      console.error('Forgot Password:', e);
       throw e;
     }
   };
+
   const resetPassword = async (data: TResetPassword) => {
     try {
       await AuthService.resetPassword(data);
     } catch (e: unknown) {
-      console.log('Reset Password:', e);
+      console.error('Reset Password:', e);
       throw e;
     }
   };
@@ -64,10 +65,11 @@ const useAuthHook = () => {
     try {
       await AuthService.changePassword(data);
     } catch (e: unknown) {
-      console.log('Change Password:', e);
+      console.error('Change Password:', e);
       throw e;
     }
   };
+
   const updateProfile = async (data: TAuthUser) => {
     try {
       const resp = await AuthService.updateProfile(data);
@@ -76,7 +78,7 @@ const useAuthHook = () => {
       if (row) dispatch(setProfile({ user: row }));
       return row;
     } catch (e: unknown) {
-      console.log('Update Profile:', e);
+      console.error('Update Profile:', e);
       throw e;
     }
   };

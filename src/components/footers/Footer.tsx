@@ -10,19 +10,16 @@ const Footer = ({ className }: FooterProps) => {
     <footer className={classNames(className, 'footer bg-body-emphasis')}>
       <Row className="g-1 justify-content-between align-items-center h-100">
         <Col xs={12} sm="auto" className="text-center">
-          <p className="mb-0 mt-2 mt-sm-0 text-body">
-            Thank you for creating with {process.env.REACT_APP_TITLE} React
-            <span className="d-none d-sm-inline-block" />
+          <p className="mb-0 mt-2 mt-sm-0 mb-0 text-body-tertiary text-opacity-85 text-muted fs-9">
+            All Rights Reserved
             <span className="d-none d-sm-inline-block mx-1">|</span>
             <br className="d-sm-none" />
-            {new Date().getFullYear()} &copy;{' '}
-            <a href="https://themewagon.com" target="_blank" rel="noreferrer">
-              Themewagon
-            </a>
+            {new Date().getFullYear()} &copy;
+            <span className="ms-1">{process.env.REACT_APP_TITLE}</span>
           </p>
         </Col>
         <Col xs={12} sm="auto" className="text-center">
-          <p className="mb-0 text-body-tertiary text-opacity-85">
+          <p className="mb-0 text-body-tertiary text-opacity-85 text-muted fs-9">
             v{process.env.REACT_APP_VERSION}
           </p>
         </Col>

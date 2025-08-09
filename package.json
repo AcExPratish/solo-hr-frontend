@@ -1,6 +1,6 @@
 {
-  "name": "phoenix-react",
-  "version": "1.7.0",
+  "name": "suave-hr",
+  "version": "0.0.1",
   "private": true,
   "type": "module",
   "dependencies": {

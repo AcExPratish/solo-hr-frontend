@@ -19,11 +19,11 @@ const login = (data: TLogin) => {
 };
 
 const forgotPassword = (data: TForgotPassword) => {
-  return axios.post(`${authEndpoint}/request-password-reset`, data);
+  return axios.post(`${authEndpoint}/forgot-password`, data);
 };
 
 const resetPassword = (data: TResetPassword) => {
-  return axios.post(`${authEndpoint}/password-reset`, data);
+  return axios.post(`${authEndpoint}/reset-password`, data);
 };
 
 const changePassword = (data: TChangePassword) => {
