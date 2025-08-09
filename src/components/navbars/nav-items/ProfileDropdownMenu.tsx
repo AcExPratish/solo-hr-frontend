@@ -10,7 +10,6 @@ import useAuthHook from '@/hooks/modules/useAuthHook';
 import { profileDropdownNavItems } from '@/data';
 import { defaultAvatar } from '@/helpers/common';
 import { getUserFirstAndLastName } from '@/helpers/utils';
-import { toast } from 'react-toastify';
 
 const ProfileDropdownMenu = ({ className }: { className?: string }) => {
   const { t } = useTranslation();
@@ -20,14 +19,8 @@ const ProfileDropdownMenu = ({ className }: { className?: string }) => {
   const handleOnLogoutSubmit = async () => {
     setLoading(true);
     setTimeout(() => {
-      logout()
-        .catch(e => {
-          toast.error(e?.response?.data?.message || t('message_failed'));
-          console.error(e);
-        })
-        .finally(() => {
-          setLoading(false);
-        });
+      logout();
+      setLoading(false);
     }, 500);
   };
 
