@@ -35,22 +35,22 @@ const fetchUserProfile = () => {
 };
 
 const updateProfile = (data: TAuthUser) => {
-  const formData = new FormData();
+  // const formData = new FormData();
 
-  if (data.image instanceof File) {
-    formData.append('image', data.image);
-  }
+  // if (data.image instanceof File) {
+  //   formData.append('image', data.image);
+  // }
 
-  if (data.phone) {
-    formData.append('phone', data.phone);
-  }
+  // if (data.phone) {
+  //   formData.append('phone', data.phone);
+  // }
 
-  if (data.name) {
-    formData.append('name', data.name);
-  }
-  if (data.delete_image) {
-    formData.append('delete_image', '');
-  }
+  // if (data.name) {
+  //   formData.append('name', data.name);
+  // }
+  // if (data.delete_image) {
+  //   formData.append('delete_image', '');
+  // }
 
   return api.post(`${authEndpoint}/myProfile/updateProfile`, data, {
     headers: {
@@ -70,7 +70,7 @@ const logout = () => {
     {},
     {
       headers: {
-        Authorization: 'Bearer ' + auth.token //the token is a variable which holds the token
+        Authorization: 'Bearer ' + auth.token
       }
     }
   );
@@ -86,4 +86,5 @@ const AuthService = {
   refreshToken,
   changePassword
 };
+
 export default AuthService;

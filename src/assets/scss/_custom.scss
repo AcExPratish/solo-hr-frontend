@@ -646,29 +646,3 @@ a {
   justify-content: center;
   background: white;
 }
-
-.moto-status {
-  display: grid;
-  grid-template-columns: repeat(5, 1fr);
-
-  &__item {
-    padding: 0.8rem;
-    border-left: 1px solid #e3e6ed;
-    border-bottom: 1px solid #e3e6ed;
-    display: flex;
-    gap: 8px;
-
-    &:nth-child(1),
-    &:nth-child(6) {
-      border-left: 0;
-    }
-
-    &:nth-child(6),
-    &:nth-child(7),
-    &:nth-child(8),
-    &:nth-child(9),
-    &:nth-child(10) {
-      border-bottom: 0;
-    }
-  }
-}

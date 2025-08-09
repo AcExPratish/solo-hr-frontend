@@ -1,3 +1,4 @@
+import { TUser } from '@/types/modules/user';
 import { IconProp } from '@fortawesome/fontawesome-svg-core';
 import {
   faFileCircleExclamation,
@@ -282,4 +283,18 @@ export const formatDateToTime = (date: Date) => {
     minute: '2-digit'
   });
   return formatter.format(date);
+};
+
+export const getUserFirstAndLastName = (user: TUser | null): string => {
+  if (!user) return '';
+
+  return [user?.first_name, user?.last_name].filter(Boolean).join(' ');
+};
+
+export const getUserFullName = (user: TUser): string => {
+  if (!user) return '';
+
+  return [user?.first_name, user?.middle_name, user?.last_name]
+    .filter(Boolean)
+    .join(' ');
 };

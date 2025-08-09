@@ -2,7 +2,8 @@ import { useDispatch, useSelector } from 'store';
 import {
   setLogin,
   setLogout,
-  setProfile
+  setProfile,
+  setAuthInitialized
 } from '../../store/reducers/authSlice';
 import {
   TAuthUser,
@@ -15,7 +16,9 @@ import AuthService from '@/services/AuthService';
 
 const useAuthHook = () => {
   const dispatch = useDispatch();
-  const { isAuthenticated, user } = useSelector(state => state.auth);
+  const { isAuthenticated, isAuthLoading, user } = useSelector(
+    state => state.auth
+  );
 
   const login = async (data: TLogin) => {
     const resp = await AuthService.login(data);
@@ -35,7 +38,7 @@ const useAuthHook = () => {
   };
 
   const logout = async () => {
-    AuthService.logout().catch(e => console.log('Logout Error:', e));
+    // AuthService.logout().catch(e => console.log('Logout Error:', e));
     dispatch(setLogout());
     // dispatch({ type: 'RESET_STATE' });
   };
@@ -80,13 +83,15 @@ const useAuthHook = () => {
 
   return {
     isAuthenticated,
+    isAuthLoading,
     user,
     login,
     logout,
     updateProfile,
     forgotPassword,
     resetPassword,
-    changePassword
+    changePassword,
+    setAuthInitialized: () => dispatch(setAuthInitialized())
   };
 };
 

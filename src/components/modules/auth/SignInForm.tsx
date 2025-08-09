@@ -2,7 +2,6 @@ import React from 'react';
 import { faKey, faUser } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import Button from 'components/base/Button';
-// import AuthSocialButtons from 'components/common/AuthSocialButtons';
 import { Col, Form, Row } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
 import useAuthHook from '@/hooks/modules/useAuthHook';
@@ -10,9 +9,11 @@ import { Formik } from 'formik';
 import { TLogin } from '@/types/modules/auth';
 import AlertMessage from '@/components/common/AlertMessage';
 import { TAlert } from '@/types/modules';
-import { SignInSchema } from '@/validation-schema/AuthSchema';
 import { useTranslation } from 'react-i18next';
+import { SignInSchema } from '@/validation/AuthSchema';
+import { toast } from 'react-toastify';
 
+// Initial values
 const initialValues: TLogin = {
   email: '',
   password: ''
@@ -30,7 +31,7 @@ const SignInForm = () => {
     setRememberMe(e.target.checked);
   };
 
-  const handleOnSubmit = async (values: TLogin) => {
+  const handleOnLoginSubmit = async (values: TLogin) => {
     setLoading(true);
 
     if (rememberMe) {
@@ -40,6 +41,9 @@ const SignInForm = () => {
     }
 
     login(values)
+      .then(() => {
+        toast.success(t('message_success_login'));
+      })
       .catch(e => {
         if (e?.response?.status == '401') {
           setAlert({
@@ -61,7 +65,7 @@ const SignInForm = () => {
     <Formik
       initialValues={initialValues}
       enableReinitialize
-      onSubmit={handleOnSubmit}
+      onSubmit={handleOnLoginSubmit}
       validationSchema={SignInSchema}
     >
       {({
@@ -72,7 +76,7 @@ const SignInForm = () => {
         errors,
         touched
       }) => (
-        <Form onSubmit={handleSubmit}>
+        <Form noValidate onSubmit={handleSubmit}>
           {alert && <AlertMessage type={alert.type} message={alert.message} />}
 
           <Form.Group className="mb-3 text-start">
@@ -94,13 +98,13 @@ const SignInForm = () => {
                 icon={faUser}
                 className="text-body fs-9 form-icon"
               />
-            </div>
 
-            {touched.email && errors.email && (
-              <Form.Control.Feedback type="invalid">
-                {errors.email}
-              </Form.Control.Feedback>
-            )}
+              {touched.email && errors.email && (
+                <Form.Control.Feedback type="invalid">
+                  {errors.email}
+                </Form.Control.Feedback>
+              )}
+            </div>
           </Form.Group>
 
           <Form.Group className="mb-3 text-start">
@@ -122,13 +126,13 @@ const SignInForm = () => {
                 icon={faKey}
                 className="text-body fs-9 form-icon"
               />
-            </div>
 
-            {touched.password && errors.password && (
-              <Form.Control.Feedback type="invalid">
-                {errors.password}
-              </Form.Control.Feedback>
-            )}
+              {touched.password && errors.password && (
+                <Form.Control.Feedback type="invalid">
+                  {errors.password}
+                </Form.Control.Feedback>
+              )}
+            </div>
           </Form.Group>
 
           <Row className="flex-between-center mb-7">
@@ -162,12 +166,6 @@ const SignInForm = () => {
           >
             {t('sign_in')}
           </Button>
-
-          <div className="text-center">
-            <Link to={`/auth/sign-up`} className="fs-9 fw-bold">
-              {t('create_an_account')}
-            </Link>
-          </div>
         </Form>
       )}
     </Formik>

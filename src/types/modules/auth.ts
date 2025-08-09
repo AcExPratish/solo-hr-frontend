@@ -1,31 +1,25 @@
+import { TUser } from './user';
+
 export interface TLogin {
   email?: string;
   password?: string;
 }
 
 export interface TForgotPassword {
-  to: string;
-  reset_url: string;
+  to?: string;
+  reset_url?: string;
 }
 
 export interface TResetPassword {
-  email: string;
-  token: string;
-  new_password: string;
+  email?: string;
+  token?: string;
+  new_password?: string;
 }
 
-export interface TAuthUser {
-  id?: number;
-  name?: string;
-  email?: string;
-  image?: string | Blob | File;
-  phone?: string;
-  delete_image?: number;
-}
+export interface TAuthUser extends TUser {}
+
 export interface TAuthRefreshToken {
-  refresh_token: string;
-  client_id?: string;
-  client_secret?: string;
+  refresh_token?: string;
 }
 
 export interface TChangePassword {
