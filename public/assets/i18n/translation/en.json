@@ -5,5 +5,21 @@
     "active": "Active",
     "inactive": "Inactive",
     "success": "Success",
-    "failed": "Failed"
+    "failed": "Failed",
+    "form_validation_date_before": "{{from}} date can't be before the {{to}} date.",
+    "form_validation_time_before": "{{end}} time can't be before the {{start}} time.",
+    "form_validation_mandatory": "The {{field}} field is required.",
+    "form_validation_max": "The {{field}} must not be greater than {{max}}.",
+    "form_validation_min": "The {{field}} must not be less than {{min}}.",
+    "form_validation_numeric": "The {{field}} must be numeric.",
+    "form_validation_alphanumeric": "The {{field}} must be alphanumeric.",
+    "form_validation_invalid_email": "The email seems to be invalid.",
+    "form_validation_phone": "The Phone Number must be exactly 11 digits and numeric only.",
+    "form_validation_image": "The image seems to be invalid.",
+    "email": "Email",
+    "password": "Password",
+    "email_address": "Email Address",
+    "remember_me": "Remember Me",
+    "forgot_password": "Forgot Password",
+    "create_an_account": "Create an Account"
 }

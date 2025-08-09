@@ -13,17 +13,12 @@ const GuestGuard = ({ children }: GuardProps) => {
 
   useEffect(() => {
     if (isAuthenticated) {
-      navigate(
-        location?.state?.from
-          ? location?.state?.from
-          : '/fleet-management/dashboard',
-        {
-          state: {
-            from: location.pathname
-          },
-          replace: true
-        }
-      );
+      navigate(location?.state?.from ? location?.state?.from : '/dashboard', {
+        state: {
+          from: location.pathname
+        },
+        replace: true
+      });
     }
   }, [isAuthenticated, navigate, location]);
 

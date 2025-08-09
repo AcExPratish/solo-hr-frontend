@@ -19,10 +19,10 @@ const useAuthHook = () => {
 
   const login = async (data: TLogin) => {
     const resp = await AuthService.login(data);
-    const token: string = resp?.data?.access_token || '';
-    const refreshToken: string = resp?.data?.refresh_token || '';
+    const token: string = resp?.data?.data?.access_token || '';
+    const refreshToken: string = resp?.data?.data?.refresh_token || '';
     const user: TAuthUser = resp?.data?.data?.user || null;
-    const scopes = resp?.data?.scopes || [];
+    const scopes = resp?.data?.data?.scopes || [];
     dispatch(
       setLogin({
         user,
@@ -33,11 +33,13 @@ const useAuthHook = () => {
     );
     // window.location.reload();
   };
+
   const logout = async () => {
     AuthService.logout().catch(e => console.log('Logout Error:', e));
     dispatch(setLogout());
     // dispatch({ type: 'RESET_STATE' });
   };
+
   const forgotPassword = async (data: TForgotPassword) => {
     try {
       await AuthService.forgotPassword(data);

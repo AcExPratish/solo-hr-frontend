@@ -1,8 +1,6 @@
 export interface TLogin {
-  username: string;
-  password: string;
-  client_id?: string;
-  client_secret?: string;
+  email?: string;
+  password?: string;
 }
 
 export interface TForgotPassword {
