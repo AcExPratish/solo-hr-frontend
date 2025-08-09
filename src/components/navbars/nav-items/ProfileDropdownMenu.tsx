@@ -90,15 +90,15 @@ const ProfileDropdownMenu = ({ className }: { className?: string }) => {
             </Link>
           </div>
           <div className="my-2 text-center fw-bold fs-10 text-body-quaternary">
-            <Link className="text-body-quaternary me-1" to="#!">
+            <Link className="text-body-quaternary me-1" to="#">
               {t('privacy_policy')}
             </Link>
             •
-            <Link className="text-body-quaternary mx-1" to="#!">
+            <Link className="text-body-quaternary mx-1" to="#">
               {t('terms_of_service')}
             </Link>
             •
-            <Link className="text-body-quaternary ms-1" to="#!">
+            <Link className="text-body-quaternary ms-1" to="#">
               {t('cookies')}
             </Link>
           </div>
