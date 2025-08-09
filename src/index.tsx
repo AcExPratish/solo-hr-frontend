@@ -9,6 +9,7 @@ import { router } from 'routes';
 import { store } from './store';
 import { Provider as ReduxProvider } from 'react-redux';
 import './i18n';
+import ToastMessage from './components/common/custom/ToastMessage';
 
 const root = ReactDOM.createRoot(
   document.getElementById('root') as HTMLElement
@@ -21,6 +22,7 @@ root.render(
         <SettingsPanelProvider>
           <BreakpointsProvider>
             <RouterProvider router={router} />
+            <ToastMessage />
           </BreakpointsProvider>
         </SettingsPanelProvider>
       </AppProvider>

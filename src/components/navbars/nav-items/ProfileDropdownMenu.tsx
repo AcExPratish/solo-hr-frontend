@@ -23,7 +23,6 @@ const ProfileDropdownMenu = ({ className }: { className?: string }) => {
     setTimeout(() => {
       logout()
         .then(() => {
-          toast.success(t('message_success_logout'));
           navigate('/auth/sign-in');
         })
         .catch(e => {

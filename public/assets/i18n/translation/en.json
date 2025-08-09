@@ -41,5 +41,6 @@
     "cookies": "Cookies",
     "privacy_policy": "Privacy Policy",
     "terms_of_service": "Terms of Service",
-    "message_success_logout": "Logout successful"
+    "message_success_logout": "Logout successful",
+    "message_success_login": "Login successful"
 }

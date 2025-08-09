@@ -8,6 +8,7 @@ import { useAppContext } from 'providers/AppProvider';
 import { useMainLayoutContext } from 'providers/MainLayoutProvider';
 import { Container } from 'react-bootstrap';
 import { Outlet } from 'react-router-dom';
+import { AlertMessageProvider } from 'providers/AlertMessageProvider';
 
 const MainLayout = () => {
   const {
@@ -28,7 +29,10 @@ const MainLayout = () => {
       {navbarPosition === 'dual' && <NavbarDual />}
 
       <div className={classNames(contentClass, 'content')}>
-        <Outlet />
+        <AlertMessageProvider>
+          <Outlet />
+        </AlertMessageProvider>
+
         <Footer className={classNames(footerClass, 'position-absolute')} />
       </div>
     </Container>

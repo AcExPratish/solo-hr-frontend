@@ -11,7 +11,9 @@ import AlertMessage from '@/components/common/AlertMessage';
 import { TAlert } from '@/types/modules';
 import { useTranslation } from 'react-i18next';
 import { SignInSchema } from '@/validation/AuthSchema';
+import { toast } from 'react-toastify';
 
+// Initial values
 const initialValues: TLogin = {
   email: '',
   password: ''
@@ -39,6 +41,9 @@ const SignInForm = () => {
     }
 
     login(values)
+      .then(() => {
+        toast.success(t('message_success_login'));
+      })
       .catch(e => {
         if (e?.response?.status == '401') {
           setAlert({

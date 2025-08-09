@@ -1,5 +1,4 @@
 import SignIn from 'pages/auth/SignIn';
-import SignOut from 'pages/auth/SignOut';
 import ForgotPassword from 'pages/auth/ForgotPassword';
 import ResetPassword from 'pages/auth/ResetPassword';
 import { RouteObject } from 'react-router-dom';
@@ -13,14 +12,6 @@ export const AuthRoutes: RouteObject = {
       element: (
         <GuestGuard>
           <SignIn />
-        </GuestGuard>
-      )
-    },
-    {
-      path: 'sign-out',
-      element: (
-        <GuestGuard>
-          <SignOut />
         </GuestGuard>
       )
     },
