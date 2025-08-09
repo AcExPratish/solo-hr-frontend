@@ -2,7 +2,7 @@ import React from 'react';
 import Avatar from 'components/base/Avatar';
 import { Card, Dropdown, Nav } from 'react-bootstrap';
 import FeatherIcon from 'feather-icons-react';
-import { Link, useNavigate } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import Scrollbar from 'components/base/Scrollbar';
 import classNames from 'classnames';
 import { useTranslation } from 'react-i18next';
@@ -14,7 +14,6 @@ import { toast } from 'react-toastify';
 
 const ProfileDropdownMenu = ({ className }: { className?: string }) => {
   const { t } = useTranslation();
-  const navigate = useNavigate();
   const { user, logout } = useAuthHook();
   const [loading, setLoading] = React.useState<boolean>(false);
 
@@ -22,9 +21,6 @@ const ProfileDropdownMenu = ({ className }: { className?: string }) => {
     setLoading(true);
     setTimeout(() => {
       logout()
-        .then(() => {
-          navigate('/auth/sign-in');
-        })
         .catch(e => {
           toast.error(e?.response?.data?.message || t('message_failed'));
           console.error(e);
@@ -32,7 +28,7 @@ const ProfileDropdownMenu = ({ className }: { className?: string }) => {
         .finally(() => {
           setLoading(false);
         });
-    }, 1000);
+    }, 500);
   };
 
   return (
