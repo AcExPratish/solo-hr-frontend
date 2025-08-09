@@ -10,13 +10,16 @@ import AlertMessage from '@/components/common/AlertMessage';
 import { Formik } from 'formik';
 import { ResetPasswordSchema } from '@/validation/AuthSchema';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faLock } from '@fortawesome/free-solid-svg-icons';
+import { faEye, faEyeSlash } from '@fortawesome/free-solid-svg-icons';
 import { useNavigate } from 'react-router-dom';
 
 const ResetPasswordForm = () => {
   const { t } = useTranslation();
   const navigate = useNavigate();
   const { resetPassword } = useAuthHook();
+  const [showPassword, setShowPassword] = React.useState<boolean>(false);
+  const [showConfirmPassword, setShowConfirmPassword] =
+    React.useState<boolean>(false);
   const [loading, setLoading] = React.useState<boolean>(false);
   const [alert, setAlert] = React.useState<TAlert | null>(null);
   const urlParams = new URLSearchParams(window.location.search);
@@ -78,7 +81,7 @@ const ResetPasswordForm = () => {
               <div className="form-icon-container">
                 <Form.Control
                   id="password"
-                  type="password"
+                  type={showPassword ? 'text' : 'password'}
                   placeholder={t('password')}
                   onChange={handleChange}
                   onBlur={handleBlur}
@@ -92,8 +95,17 @@ const ResetPasswordForm = () => {
                 />
 
                 <FontAwesomeIcon
-                  icon={faLock}
-                  className="text-body fs-9 form-icon"
+                  icon={showPassword ? faEye : faEyeSlash}
+                  className="text-body fs-9 form-icon cursor-pointer"
+                  onClick={() => setShowPassword(!showPassword)}
+                  style={{
+                    transitionProperty: 'transform, opacity',
+                    transitionDuration: '0.3s',
+                    transitionTimingFunction: 'ease',
+                    transform: showPassword ? 'scale(1.2)' : 'scale(1)',
+                    opacity: showPassword ? 1 : 0.8,
+                    display: 'inline-block'
+                  }}
                 />
 
                 {touched.new_password && errors.new_password && (
@@ -111,7 +123,7 @@ const ResetPasswordForm = () => {
               <div className="form-icon-container">
                 <Form.Control
                   id="confirm_password"
-                  type="confirm_password"
+                  type={showConfirmPassword ? 'text' : 'password'}
                   placeholder={t('confirm_password')}
                   onChange={handleChange}
                   onBlur={handleBlur}
@@ -125,8 +137,17 @@ const ResetPasswordForm = () => {
                 />
 
                 <FontAwesomeIcon
-                  icon={faLock}
-                  className="text-body fs-9 form-icon"
+                  icon={showConfirmPassword ? faEye : faEyeSlash}
+                  className="text-body fs-9 form-icon cursor-pointer"
+                  onClick={() => setShowConfirmPassword(!showConfirmPassword)}
+                  style={{
+                    transitionProperty: 'transform, opacity',
+                    transitionDuration: '0.3s',
+                    transitionTimingFunction: 'ease',
+                    transform: showConfirmPassword ? 'scale(1.2)' : 'scale(1)',
+                    opacity: showConfirmPassword ? 1 : 0.8,
+                    display: 'inline-block'
+                  }}
                 />
 
                 {touched.confirm_password && errors.confirm_password && (

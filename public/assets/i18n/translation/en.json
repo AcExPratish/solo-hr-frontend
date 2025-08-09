@@ -53,5 +53,7 @@
     "reset_new_password": "Reset new password",
     "reset_new_password_description": "Type your new password",
     "confirm_password": "Confirm Password",
-    "passwords_do_not_match": "Passwords do not match"
+    "passwords_do_not_match": "Passwords do not match",
+    "set_password": "Set Password",
+    "message_success_reset_password": "Password reset successful"
 }
