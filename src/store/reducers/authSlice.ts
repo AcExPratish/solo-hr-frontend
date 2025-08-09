@@ -8,6 +8,7 @@ import {
 
 interface TAuthState {
   isAuthenticated: boolean;
+  isAuthLoading: boolean;
   user: TAuthUser | null;
   token: string | null;
   refreshToken?: string | null;
@@ -23,6 +24,7 @@ const scopes = auth.scopes;
 
 const initialState: TAuthState = {
   isAuthenticated: !!token,
+  isAuthLoading: true, // Start with loading true to prevent flash
   user,
   token,
   refreshToken,
@@ -36,6 +38,7 @@ const authSlice = createSlice({
     setLogin(state, action) {
       if (action.payload.user && action.payload.token) {
         state.isAuthenticated = true;
+        state.isAuthLoading = false;
         state.user = action.payload.user;
         state.token = action.payload.token;
         state.refreshToken = action.payload.refreshToken;
@@ -53,12 +56,25 @@ const authSlice = createSlice({
 
     setLogout(state) {
       state.isAuthenticated = false;
+      state.isAuthLoading = false;
       state.user = null;
       state.token = null;
       removeAuthFromLocalStorage();
+    },
+    setAuthLoading(state, action) {
+      state.isAuthLoading = action.payload;
+    },
+    setAuthInitialized(state) {
+      state.isAuthLoading = false;
     }
   }
 });
 
-export const { setLogin, setLogout, setProfile } = authSlice.actions;
+export const {
+  setLogin,
+  setLogout,
+  setProfile,
+  setAuthLoading,
+  setAuthInitialized
+} = authSlice.actions;
 export default authSlice.reducer;

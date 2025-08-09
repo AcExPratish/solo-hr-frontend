@@ -611,24 +611,6 @@ a:hover {
   background: white;
 }
 
-.moto-status {
-  display: grid;
-  grid-template-columns: repeat(5, 1fr);
-}
-.moto-status__item {
-  padding: 0.8rem;
-  border-left: 1px solid #e3e6ed;
-  border-bottom: 1px solid #e3e6ed;
-  display: flex;
-  gap: 8px;
-}
-.moto-status__item:nth-child(1), .moto-status__item:nth-child(6) {
-  border-left: 0;
-}
-.moto-status__item:nth-child(6), .moto-status__item:nth-child(7), .moto-status__item:nth-child(8), .moto-status__item:nth-child(9), .moto-status__item:nth-child(10) {
-  border-bottom: 0;
-}
-
 .dh-tree__block {
   padding: 0.6rem 1.6rem;
   position: relative;
