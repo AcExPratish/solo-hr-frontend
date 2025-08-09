@@ -51,6 +51,7 @@ const useAuthHook = () => {
       throw e;
     }
   };
+
   const resetPassword = async (data: TResetPassword) => {
     try {
       await AuthService.resetPassword(data);
@@ -68,6 +69,7 @@ const useAuthHook = () => {
       throw e;
     }
   };
+
   const updateProfile = async (data: TAuthUser) => {
     try {
       const resp = await AuthService.updateProfile(data);

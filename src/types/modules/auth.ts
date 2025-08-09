@@ -14,6 +14,7 @@ export interface TResetPassword {
   email?: string;
   token?: string;
   new_password?: string;
+  confirm_password?: string;
 }
 
 export interface TAuthUser extends TUser {}

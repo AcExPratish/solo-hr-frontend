@@ -54,7 +54,7 @@ const SignInForm = () => {
           console.error(e);
           setAlert({
             type: 'ERROR',
-            message: e?.response?.data?.message || t('something_went_wrong')
+            message: e?.response?.data?.message || t('message_failed')
           });
         }
       })
@@ -113,7 +113,7 @@ const SignInForm = () => {
               <Form.Control
                 id="password"
                 type="password"
-                placeholder="Password"
+                placeholder={t('password')}
                 onChange={handleChange}
                 onBlur={handleBlur}
                 value={values.password}
