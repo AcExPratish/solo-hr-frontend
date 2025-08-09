@@ -30,7 +30,7 @@ const SignInForm = () => {
     setRememberMe(e.target.checked);
   };
 
-  const handleOnSubmit = async (values: TLogin) => {
+  const handleOnLoginSubmit = async (values: TLogin) => {
     setLoading(true);
 
     if (rememberMe) {
@@ -61,7 +61,7 @@ const SignInForm = () => {
     <Formik
       initialValues={initialValues}
       enableReinitialize
-      onSubmit={handleOnSubmit}
+      onSubmit={handleOnLoginSubmit}
       validationSchema={SignInSchema}
     >
       {({
@@ -72,7 +72,7 @@ const SignInForm = () => {
         errors,
         touched
       }) => (
-        <Form onSubmit={handleSubmit}>
+        <Form noValidate onSubmit={handleSubmit}>
           {alert && <AlertMessage type={alert.type} message={alert.message} />}
 
           <Form.Group className="mb-3 text-start">
