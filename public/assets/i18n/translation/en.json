@@ -55,5 +55,9 @@
     "confirm_password": "Confirm Password",
     "passwords_do_not_match": "Passwords do not match",
     "set_password": "Set Password",
-    "message_success_reset_password": "Password reset successful"
+    "message_success_reset_password": "Password reset successful",
+    "clock_in": "Clock In",
+    "clock_out": "Clock Out",
+    "clock_in_success": "Clock in successful",
+    "clock_out_success": "Clock out successful"
 }
