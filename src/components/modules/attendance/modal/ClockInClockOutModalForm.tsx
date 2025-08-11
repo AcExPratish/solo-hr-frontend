@@ -7,6 +7,10 @@ import { TAttendance } from '@/types/modules/attendance';
 import Avatar from '@/components/base/Avatar';
 import { defaultAvatar } from '@/helpers/common';
 import useAuthHook from '@/hooks/modules/useAuthHook';
+import dayjs from 'dayjs';
+import duration from 'dayjs/plugin/duration';
+
+dayjs.extend(duration);
 
 interface ModalProps {
   attendance: TAttendance;
@@ -24,6 +28,7 @@ const ClockInClockOutModalForm = ({
   const { t } = useTranslation();
   const { user } = useAuthHook();
   const isClockIn = Boolean(attendance?.clock_in);
+  const [timeDiff, setTimeDiff] = React.useState<string>('00:00:00');
 
   const handleClose = () => {
     onClose();
@@ -32,6 +37,31 @@ const ClockInClockOutModalForm = ({
   const handleOnSubmit = (values: TAttendance) => {
     onSubmit(values);
   };
+
+  React.useEffect(() => {
+    if (attendance?.clock_in) {
+      const interval = setInterval(() => {
+        const now = dayjs();
+
+        if (attendance?.clock_in) {
+          const start = dayjs(attendance?.clock_in);
+          const diffMs = now.diff(start);
+          const diffDuration = dayjs.duration(diffMs);
+
+          setTimeDiff(
+            `${String(diffDuration.hours()).padStart(2, '0')}:${String(
+              diffDuration.minutes()
+            ).padStart(2, '0')}:${String(diffDuration.seconds()).padStart(
+              2,
+              '0'
+            )}`
+          );
+        }
+      }, 1000);
+
+      return () => clearInterval(interval);
+    }
+  }, [attendance?.clock_in]);
 
   return (
     <>
@@ -56,20 +86,22 @@ const ClockInClockOutModalForm = ({
 
               {/* Body */}
               <Modal.Body className="ps-4 pe-4 pt-0 mb-1">
-                <Row className="gap-2">
+                <Row className="gap-3">
                   <Col
                     xs={12}
-                    className="d-flex justify-content-center fw-semibold fs-6"
+                    className="d-flex justify-content-center fw-semibold fs-6 text-black"
                   >
                     {!isClockIn ? t('clock_in') : t('clock_out')}
                   </Col>
 
                   <Col xs={12} className="d-flex justify-content-center">
-                    <Avatar
-                      src={user?.avatar || defaultAvatar}
-                      size="4xl"
-                      className="mb-3"
-                    />
+                    <Avatar src={user?.avatar || defaultAvatar} size="4xl" />
+                  </Col>
+
+                  <Col xs={12} className="d-flex justify-content-center">
+                    <span className="fw-semibold fs-5 text-black">
+                      {timeDiff}
+                    </span>
                   </Col>
 
                   <Col xs={12}>
@@ -81,7 +113,7 @@ const ClockInClockOutModalForm = ({
                         <Form.Control
                           as="textarea"
                           placeholder={t('leave_a_note_here')}
-                          style={{ height: '80px' }}
+                          style={{ height: '80px', resize: 'none' }}
                           name={!isClockIn ? 'in_note' : 'out_note'}
                           value={values[!isClockIn ? 'in_note' : 'out_note']}
                           onChange={handleChange}
