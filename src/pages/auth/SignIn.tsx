@@ -1,7 +1,7 @@
 import React from 'react';
-import AuthSplitLayout from 'layouts/AuthSplitLayout';
-import bg from 'assets/img/bg/30.png';
-import SignInForm from 'components/modules/auth/SignInForm';
+import AuthSplitLayout from '@/layouts/AuthSplitLayout';
+import bg from '@/assets/img/bg/30.png';
+import SignInForm from '@/components/modules/auth/form/SignInForm';
 
 const SignIn = () => {
   return (
