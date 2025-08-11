@@ -106,7 +106,7 @@ const NavItems = () => {
             size="lg"
             className={`${
               !attendance?.clock_in ? 'text-success' : 'text-danger'
-            } me-1`}
+            } animate-pulse me-1`}
           />
         }
         onClick={() =>

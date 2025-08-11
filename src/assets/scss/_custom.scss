@@ -646,3 +646,21 @@ a {
   justify-content: center;
   background: white;
 }
+
+@keyframes pulse-animation {
+  0% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.15);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+
+.animate-pulse {
+  display: inline-block;
+  transform-origin: center;
+  animation: pulse-animation 1.2s ease-in-out infinite;
+}
