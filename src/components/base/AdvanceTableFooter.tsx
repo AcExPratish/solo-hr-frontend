@@ -24,7 +24,7 @@ const AdvanceTableFooter = ({
   className,
   pagination,
   navBtn,
-  showViewAllBtn = true,
+  showViewAllBtn = false,
   viewAllBtnClass,
   tableInfo
 }: AdvanceTableFooterProps) => {
@@ -38,7 +38,11 @@ const AdvanceTableFooter = ({
     getPrePaginationRowModel,
     getPaginationRowModel,
     getPageCount,
-    setPageIndex
+    setPageIndex,
+
+    // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+    //@ts-expect-error
+    totalRows
   } = useAdvanceTableContext();
 
   const {
@@ -67,7 +71,7 @@ const AdvanceTableFooter = ({
           {pageSize * pageIndex + 1} to{' '}
           {pageSize * pageIndex + getPaginationRowModel().rows.length}
           <span className="text-body-tertiary"> items of </span>
-          {getPrePaginationRowModel().rows.length}
+          {totalRows ? totalRows : getPrePaginationRowModel().rows.length}
         </p>
         {showViewAllBtn && (
           <Button

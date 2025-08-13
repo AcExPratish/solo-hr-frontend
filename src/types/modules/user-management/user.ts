@@ -1,3 +1,5 @@
+import { TFilter } from '..';
+
 export interface TUser {
   id?: string;
   username?: string;
@@ -17,3 +19,5 @@ export interface TUser {
   updated_by?: string;
   deleted_at?: string;
 }
+
+export interface TUserFilter extends TFilter {}

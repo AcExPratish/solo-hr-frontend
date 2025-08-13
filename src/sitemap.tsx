@@ -1,5 +1,5 @@
 import { IconProp } from '@fortawesome/fontawesome-svg-core';
-import { Icon, UilCube } from '@iconscout/react-unicons';
+import { Icon, UilCube, UilFolder } from '@iconscout/react-unicons';
 
 export interface Route {
   name: string;
@@ -15,6 +15,7 @@ export interface Route {
   new?: boolean;
   hasNew?: boolean;
   isNext?: boolean;
+  permission?: string;
 }
 
 export interface RouteItems {
@@ -25,73 +26,44 @@ export interface RouteItems {
   pages: Route[];
   megaMenu?: boolean;
   active?: boolean;
+  permission?: string;
 }
 
 export const routes: RouteItems[] = [
   {
-    label: 'apps',
+    label: 'Apps',
     icon: UilCube,
     pages: [
-      // {
-      //   name: 'CRM',
-      //   icon: 'phone',
-      //   active: true,
-      //   pages: [
-      //     {
-      //       name: 'analytics',
-      //       path: '/apps/crm/analytics',
-      //       pathName: 'crm-analytics',
-      //       active: true
-      //     },
-      //     {
-      //       name: 'deals',
-      //       path: '/apps/crm/deals',
-      //       pathName: 'crm-deals',
-      //       active: true
-      //     },
-      //     {
-      //       name: 'deal-details',
-      //       path: '/apps/crm/deal-details',
-      //       pathName: 'crm-deal-details',
-      //       active: true
-      //     },
-      //     {
-      //       name: 'leads',
-      //       path: '/apps/crm/leads',
-      //       pathName: 'crm-leads',
-      //       active: true
-      //     },
-      //     {
-      //       name: 'lead details',
-      //       path: '/apps/crm/lead-details',
-      //       pathName: 'crm-lead-details',
-      //       active: true
-      //     },
-      //     {
-      //       name: 'reports',
-      //       path: '/apps/crm/reports',
-      //       pathName: 'crm-reports',
-      //       active: true
-      //     },
-      //     {
-      //       name: 'report details',
-      //       path: '/apps/crm/report-details',
-      //       pathName: 'crm-report-details',
-      //       active: true
-      //     },
-      //     {
-      //       name: 'add-contact',
-      //       path: '/apps/crm/add-contact',
-      //       pathName: 'crm-add-contact',
-      //       active: true
-      //     }
-      //   ]
-      // },
       {
-        name: 'dashboard',
-        icon: 'layout',
+        name: 'Dashboard',
+        icon: 'pie-chart',
         path: '/dashboard',
-        pathName: 'dashboard',
+        pathName: 'Dashboard',
+        active: true
+      }
+    ]
+  },
+
+  {
+    label: 'User Management',
+    icon: UilFolder,
+    permission: 'users.view',
+    active: true,
+    pages: [
+      {
+        name: 'Users List',
+        path: '/user-management/user',
+        pathName: 'user',
+        permission: 'users.view',
+        icon: 'list',
+        active: true
+      },
+      {
+        name: 'Roles List',
+        path: '/user-management/role',
+        pathName: 'role',
+        permission: 'roles.view',
+        icon: 'list',
         active: true
       }
     ]

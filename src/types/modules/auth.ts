@@ -1,4 +1,4 @@
-import { TUser } from './user';
+import { TUser } from './user-management/user';
 
 export interface TLogin {
   email?: string;

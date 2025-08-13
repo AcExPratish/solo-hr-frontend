@@ -46,3 +46,8 @@ export interface TValidationError {
   errors?: any;
   onClose?: () => void;
 }
+
+export interface TLoader {
+  list?: boolean;
+  form?: boolean;
+}

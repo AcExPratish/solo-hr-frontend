@@ -1,69 +1,57 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import IndeterminateCheckbox from 'components/base/IndeterminateCheckbox';
 import { PropsWithChildren } from 'react';
 import {
-  useReactTable,
+  ColumnDef,
   getCoreRowModel,
   getFilteredRowModel,
   getPaginationRowModel,
   getSortedRowModel,
-  ColumnDef,
-  InitialTableState
+  InitialTableState,
+  OnChangeFn,
+  PaginationState,
+  SortingState,
+  useReactTable
 } from '@tanstack/react-table';
-interface UseAdvanceTableProps<T> {
+import { TableOptions } from '@tanstack/table-core';
+
+export interface UseAdvanceTableProps<T> {
   columns: ColumnDef<T>[];
   data: T[];
   selection?: boolean;
   sortable?: boolean;
+  action?: boolean;
   pagination?: boolean;
   pageSize?: number;
+  pageCount?: number;
+  totalRows?: number;
   selectionColumnWidth?: number | string;
   initialState?: InitialTableState;
-  state?: object;
-  onPaginationChange?: any;
   manualPagination?: boolean;
-  rowCount?: number;
-  pageCount?: number;
+  manualFiltering?: boolean;
+  manualSorting?: boolean;
+  onGlobalFilterChange?: (value: any) => void;
+  onSortingChange?: OnChangeFn<SortingState>;
+  onPaginationChange?: OnChangeFn<PaginationState>;
+  onView?: (data: any) => void;
+  onEdit?: (data: any) => void;
+  onDelete?: (data: any) => void;
 }
-
-const selectionColumn = {
-  id: 'select',
-  accessorKey: '',
-  header: ({ table }: any) => (
-    <IndeterminateCheckbox
-      className="form-check fs-8 mb-0"
-      {...{
-        checked: table.getIsAllRowsSelected(),
-        indeterminate: table.getIsSomeRowsSelected(),
-        onChange: table.getToggleAllRowsSelectedHandler()
-      }}
-    />
-  ),
-  cell: ({ row }: any) => (
-    <IndeterminateCheckbox
-      className="form-check fs-8 mb-0"
-      {...{
-        checked: row.getIsSelected(),
-        disabled: !row.getCanSelect(),
-        indeterminate: row.getIsSomeSelected(),
-        onChange: row.getToggleSelectedHandler()
-      }}
-    />
-  ),
-  meta: {
-    headerProps: { style: { width: '30px' } }
-  }
-};
 
 const useAdvanceTable = <T,>({
   columns,
   data,
-  selection,
   sortable,
   pagination,
+  manualPagination = false,
+  manualFiltering = false,
+  manualSorting = false,
+  onGlobalFilterChange,
+  onSortingChange,
+  onPaginationChange,
   pageSize,
-  initialState,
-  ...rest
+  pageCount,
+  totalRows,
+  initialState
 }: PropsWithChildren<UseAdvanceTableProps<T>>) => {
   const state = {
     pagination: pagination
@@ -71,19 +59,42 @@ const useAdvanceTable = <T,>({
       : undefined,
     ...initialState
   };
-  const table = useReactTable<T>({
+
+  const handleColumns = () => {
+    return [...columns];
+  };
+
+  const reactProps: TableOptions<T> = {
     data,
-    columns: selection ? [selectionColumn, ...columns] : columns,
+    columns: handleColumns(),
+    pageCount: pageCount,
     enableSorting: sortable,
     getCoreRowModel: getCoreRowModel(),
     getSortedRowModel: getSortedRowModel(),
     getFilteredRowModel: getFilteredRowModel(),
     getPaginationRowModel: getPaginationRowModel(),
-    initialState: state,
-    ...rest
-  });
+    manualPagination: manualPagination,
+    manualFiltering: manualFiltering,
+    manualSorting: manualSorting,
 
-  return table;
+    initialState: state
+  };
+  if (manualPagination) {
+    reactProps.manualPagination = manualPagination;
+    reactProps.onPaginationChange = onPaginationChange;
+  }
+  if (manualFiltering) {
+    reactProps.manualFiltering = manualPagination;
+    reactProps.onGlobalFilterChange = onGlobalFilterChange;
+  }
+  if (manualSorting) {
+    reactProps.manualSorting = manualSorting;
+    reactProps.onSortingChange = onSortingChange;
+  }
+
+  const table = useReactTable<T>(reactProps);
+
+  return { ...table, totalRows };
 };
 
 export default useAdvanceTable;
