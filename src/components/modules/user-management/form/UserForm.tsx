@@ -1,11 +1,11 @@
 import React from 'react';
-import { Col, FloatingLabel, Form, ModalProps, Row } from 'react-bootstrap';
+import { Col, FloatingLabel, Form, Row } from 'react-bootstrap';
 import { useTranslation } from 'react-i18next';
 import { Formik } from 'formik';
 import { TUser } from '@/types/modules/user-management/user';
 import { faEye, faEyeSlash } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { TReactOption } from '@/types/modules';
+import { TModalProps, TReactOption } from '@/types/modules';
 import { UserSchema } from '@/validation/user-management/UserSchema';
 import ModalForm from '@/components/common/custom/ModalForm';
 import { formatDateForInput } from '@/helpers/date';
@@ -14,7 +14,7 @@ export interface UserFormProps {
   formData: TUser;
   onSubmit: (data: TUser) => void;
   onClose: () => void;
-  modal: ModalProps;
+  modal: TModalProps;
   loading?: boolean;
 }
 
@@ -29,10 +29,11 @@ const UserForm = ({
   onClose,
   loading
 }: UserFormProps) => {
-  //React Hooks
+  // React Hooks
   const { t } = useTranslation();
 
   // Use State
+  const isView = modal.type === 'view';
   const [showPassword, setShowPassword] = React.useState(false);
   //   const [roleOption, setRoleOption] = React.useState<TReactOption[]>([]);
   //   const initialValues = React.useMemo<TUserForm>(() => {
@@ -99,8 +100,8 @@ const UserForm = ({
           modal={modal}
           onClose={onClose}
           onSubmit={handleSubmit}
-          type={formData?.id ? 'edit' : 'add'}
-          title={'user'}
+          type={modal.type}
+          title={t('user')}
           disabled={isSubmitting || loading}
           size="lg"
         >
@@ -109,6 +110,7 @@ const UserForm = ({
               <Col xs={12} md={4}>
                 <FloatingLabel label={t('first_name')}>
                   <Form.Control
+                    disabled={isView}
                     id="first_name"
                     type="text"
                     name="first_name"
@@ -133,6 +135,7 @@ const UserForm = ({
               <Col xs={12} md={4}>
                 <FloatingLabel label={t('middle_name')}>
                   <Form.Control
+                    disabled={isView}
                     id="middle_name"
                     type="text"
                     name="middle_name"
@@ -157,6 +160,7 @@ const UserForm = ({
               <Col xs={12} md={4}>
                 <FloatingLabel label={t('last_name')}>
                   <Form.Control
+                    disabled={isView}
                     id="last_name"
                     type="text"
                     name="last_name"
@@ -181,6 +185,7 @@ const UserForm = ({
               <Col xs={12} md={12}>
                 <FloatingLabel label={t('username')}>
                   <Form.Control
+                    disabled={isView}
                     id="username"
                     type="text"
                     name="username"
@@ -203,6 +208,7 @@ const UserForm = ({
               <Col xs={12} md={12}>
                 <FloatingLabel label={t('email')}>
                   <Form.Control
+                    disabled={isView}
                     id="email"
                     type="email"
                     name="email"
@@ -225,6 +231,7 @@ const UserForm = ({
               <Col xs={12}>
                 <FloatingLabel label={t('date_of_birth')}>
                   <Form.Control
+                    disabled={isView}
                     id="date_of_birth"
                     type="date"
                     name="date_of_birth"
@@ -249,6 +256,7 @@ const UserForm = ({
               <Col xs={12}>
                 <FloatingLabel label={t('phone')}>
                   <Form.Control
+                    disabled={isView}
                     id="phone"
                     type="phone"
                     name="phone"
@@ -268,34 +276,36 @@ const UserForm = ({
                 </FloatingLabel>
               </Col>
 
-              <Col xs={12}>
-                <FloatingLabel label={t('password')}>
-                  <Form.Control
-                    id="password"
-                    type={showPassword ? 'text' : 'password'}
-                    name="password"
-                    className={`form-control form-icon-input ${
-                      touched.password && errors.password ? 'is-invalid' : ''
-                    }`}
-                    placeholder={t('password')}
-                    value={values.password || ''}
-                    onBlur={handleBlur}
-                    onChange={handleChange}
-                  />
-                  {touched.password && errors.password && (
-                    <Form.Control.Feedback type="invalid">
-                      {errors.password}
-                    </Form.Control.Feedback>
-                  )}
+              {!isView && (
+                <Col xs={12}>
+                  <FloatingLabel label={t('password')}>
+                    <Form.Control
+                      id="password"
+                      type={showPassword ? 'text' : 'password'}
+                      name="password"
+                      className={`form-control form-icon-input ${
+                        touched.password && errors.password ? 'is-invalid' : ''
+                      }`}
+                      placeholder={t('password')}
+                      value={values.password || ''}
+                      onBlur={handleBlur}
+                      onChange={handleChange}
+                    />
+                    {touched.password && errors.password && (
+                      <Form.Control.Feedback type="invalid">
+                        {errors.password}
+                      </Form.Control.Feedback>
+                    )}
 
-                  <FontAwesomeIcon
-                    onClick={handleClickShowPassword}
-                    style={{ position: 'absolute', right: '4%', top: '50%' }}
-                    icon={showPassword ? faEye : faEyeSlash}
-                    className="text-body fs-9 form-icon"
-                  />
-                </FloatingLabel>
-              </Col>
+                    <FontAwesomeIcon
+                      onClick={handleClickShowPassword}
+                      style={{ position: 'absolute', right: '4%', top: '50%' }}
+                      icon={showPassword ? faEye : faEyeSlash}
+                      className="text-body fs-9 form-icon"
+                    />
+                  </FloatingLabel>
+                </Col>
+              )}
             </Row>
           </Form>
         </ModalForm>

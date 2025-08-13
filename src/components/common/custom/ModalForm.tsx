@@ -33,43 +33,52 @@ const ModalForm = ({
     <Modal size={size} onHide={onClose} {...modal} backdrop={'static'}>
       <Modal.Header className="border-0 ps-4 pe-4 pb-0" closeButton>
         <Modal.Title>
-          {type == 'edit' ? `${t('edit')}` : `${t('add')}`} {`${t(title)}`}
+          {type === 'edit' && `${t('edit')} ${t(title)}`}
+          {type === 'add' && `${t('add')} ${t(title)}`}
+          {type === 'view' && `${t('view')} ${t(title)}`}
         </Modal.Title>
       </Modal.Header>
+
       <Modal.Body className="ps-4 pe-4 pt-0">
         <hr />
         {children}
       </Modal.Body>
-      <Modal.Footer className="border-0 ps-4 pe-4 pb-4">
-        <div className="d-flex justify-content-right gap-3">
-          <Button variant="phoenix-secondary" onClick={onClose}>
-            Discard
-          </Button>
-          <Button
-            type="button"
-            onClick={e => {
-              e.preventDefault();
-              onSubmit();
-            }}
-            variant="primary"
-            className="w-100"
-            disabled={disabled}
-          >
-            {type == 'edit' ? (
-              <>
-                <FontAwesomeIcon icon={faSave} className="me-2" />
-                <span>{t('save')}</span>
-              </>
-            ) : (
-              <>
-                <FontAwesomeIcon icon={faPlus} className="me-2" />
-                <span>{`${t('add')} ${t('new')}`}</span>
-              </>
-            )}
-            <span className="ms-1">{t(title)}</span>
-          </Button>
-        </div>
-      </Modal.Footer>
+
+      {type !== 'view' && (
+        <Modal.Footer className="border-0 ps-4 pe-4 pb-4">
+          <div className="d-flex justify-content-right gap-3">
+            <Button variant="phoenix-secondary" onClick={onClose}>
+              {t('discard')}
+            </Button>
+            <Button
+              type="button"
+              onClick={e => {
+                e.preventDefault();
+                onSubmit();
+              }}
+              variant="primary"
+              className="w-100"
+              disabled={disabled}
+            >
+              {type == 'edit' && (
+                <React.Fragment>
+                  <FontAwesomeIcon icon={faSave} className="me-2" />
+                  <span>{t('save')}</span>
+                  <span className="ms-1">{t(title)}</span>
+                </React.Fragment>
+              )}
+
+              {type == 'add' && (
+                <React.Fragment>
+                  <FontAwesomeIcon icon={faPlus} className="me-2" />
+                  <span>{`${t('add')} ${t('new')}`}</span>
+                  <span className="ms-1">{t(title)}</span>
+                </React.Fragment>
+              )}
+            </Button>
+          </div>
+        </Modal.Footer>
+      )}
     </Modal>
   );
 };

@@ -86,5 +86,7 @@
     "middle_name": "Middle Name",
     "save": "Save",
     "date_of_birth": "Date of Birth",
-    "username": "Username"
+    "username": "Username",
+    "discard": "Discard",
+    "new": "New"
 }

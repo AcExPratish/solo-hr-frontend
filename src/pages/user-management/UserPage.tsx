@@ -46,7 +46,7 @@ const initialLoader: TLoader = {
 };
 
 const UserPage = () => {
-  //React Hooks
+  // React Hooks
   const navigate = useNavigate();
   const { t } = useTranslation();
   const page = t('user');
@@ -58,22 +58,28 @@ const UserPage = () => {
   const [user, setUser] = React.useState<TUser>(initialValues);
   const [modal, setModal] = React.useState<ModalProps>({
     show: false,
-    placement: 'end'
+    placement: 'end',
+    type: ''
   });
 
-  //Custom Hooks
+  // Custom Hooks
   const { users, meta, fetchAllUser, createUser, updateUser, deleteUser } =
     useUserHook();
 
   // Handlers
+  const handleOnView = (data: TUser) => {
+    fetchOneItem(data);
+    setModal({ ...modal, ...{ show: true, type: 'view' } });
+  };
+
   const handleOnAdd = () => {
     setUser(initialValues);
-    setModal({ ...modal, ...{ show: true } });
+    setModal({ ...modal, ...{ show: true, type: 'add' } });
   };
 
   const handleOnEdit = (data: TUser) => {
     fetchOneItem(data);
-    setModal({ ...modal, ...{ show: true } });
+    setModal({ ...modal, ...{ show: true, type: 'edit' } });
   };
 
   const handleOnDelete = (data: TUser) => {
@@ -104,6 +110,7 @@ const UserPage = () => {
     const tempTable: UseAdvanceTableProps<TUser> = {
       data: users,
       columns: userTableColumns({
+        onView: handleOnView,
         onEdit: handleOnEdit,
         onDelete: handleOnDelete
       }),

@@ -1,3 +1,5 @@
+import { ModalProps } from 'react-bootstrap';
+
 export interface TAlert {
   type: 'SUCCESS' | 'ERROR' | 'WARNING';
   message: string | React.ReactNode;
@@ -50,4 +52,8 @@ export interface TValidationError {
 export interface TLoader {
   list?: boolean;
   form?: boolean;
+}
+
+export interface TModalProps extends ModalProps {
+  type?: 'add' | 'edit' | 'view' | string;
 }
