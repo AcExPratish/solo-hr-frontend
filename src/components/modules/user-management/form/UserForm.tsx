@@ -1,5 +1,5 @@
 import React from 'react';
-import { FloatingLabel, Form, ModalProps } from 'react-bootstrap';
+import { Col, FloatingLabel, Form, ModalProps, Row } from 'react-bootstrap';
 import { useTranslation } from 'react-i18next';
 import { Formik } from 'formik';
 import { TUser } from '@/types/modules/user-management/user';
@@ -8,6 +8,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { TReactOption } from '@/types/modules';
 import { UserSchema } from '@/validation/user-management/UserSchema';
 import ModalForm from '@/components/common/custom/ModalForm';
+import { formatDateForInput } from '@/helpers/date';
 
 export interface UserFormProps {
   formData: TUser;
@@ -101,134 +102,201 @@ const UserForm = ({
           type={formData?.id ? 'edit' : 'add'}
           title={'user'}
           disabled={isSubmitting || loading}
+          size="lg"
         >
           <Form noValidate>
-            <FloatingLabel className="mb-3" label={t('first_name')}>
-              <Form.Control
-                id="first_name"
-                type="text"
-                name="first_name"
-                placeholder={t('first_name')}
-                className={`form-control form-icon-input ${
-                  touched.first_name && errors.first_name ? 'is-invalid' : ''
-                }`}
-                value={values.first_name}
-                onBlur={handleBlur}
-                onChange={handleChange}
-              />
-              {touched.first_name && errors.first_name && (
-                <Form.Control.Feedback type="invalid">
-                  {errors.first_name}
-                </Form.Control.Feedback>
-              )}
-            </FloatingLabel>
+            <Row className="g-2 mb-2">
+              <Col xs={12} md={4}>
+                <FloatingLabel label={t('first_name')}>
+                  <Form.Control
+                    id="first_name"
+                    type="text"
+                    name="first_name"
+                    placeholder={t('first_name')}
+                    className={`form-control form-icon-input ${
+                      touched.first_name && errors.first_name
+                        ? 'is-invalid'
+                        : ''
+                    }`}
+                    value={values.first_name || ''}
+                    onBlur={handleBlur}
+                    onChange={handleChange}
+                  />
+                  {touched.first_name && errors.first_name && (
+                    <Form.Control.Feedback type="invalid">
+                      {errors.first_name}
+                    </Form.Control.Feedback>
+                  )}
+                </FloatingLabel>
+              </Col>
 
-            <FloatingLabel className="mb-3" label={t('middle_name')}>
-              <Form.Control
-                id="middle_name"
-                type="text"
-                name="middle_name"
-                placeholder={t('middle_name')}
-                className={`form-control form-icon-input ${
-                  touched.middle_name && errors.middle_name ? 'is-invalid' : ''
-                }`}
-                value={values.middle_name}
-                onBlur={handleBlur}
-                onChange={handleChange}
-              />
-              {touched.middle_name && errors.middle_name && (
-                <Form.Control.Feedback type="invalid">
-                  {errors.middle_name}
-                </Form.Control.Feedback>
-              )}
-            </FloatingLabel>
+              <Col xs={12} md={4}>
+                <FloatingLabel label={t('middle_name')}>
+                  <Form.Control
+                    id="middle_name"
+                    type="text"
+                    name="middle_name"
+                    placeholder={t('middle_name')}
+                    className={`form-control form-icon-input ${
+                      touched.middle_name && errors.middle_name
+                        ? 'is-invalid'
+                        : ''
+                    }`}
+                    value={values.middle_name || ''}
+                    onBlur={handleBlur}
+                    onChange={handleChange}
+                  />
+                  {touched.middle_name && errors.middle_name && (
+                    <Form.Control.Feedback type="invalid">
+                      {errors.middle_name}
+                    </Form.Control.Feedback>
+                  )}
+                </FloatingLabel>
+              </Col>
 
-            <FloatingLabel className="mb-3" label={t('last_name')}>
-              <Form.Control
-                id="last_name"
-                type="text"
-                name="last_name"
-                placeholder={t('last_name')}
-                className={`form-control form-icon-input ${
-                  touched.last_name && errors.last_name ? 'is-invalid' : ''
-                }`}
-                value={values.last_name}
-                onBlur={handleBlur}
-                onChange={handleChange}
-              />
-              {touched.last_name && errors.last_name && (
-                <Form.Control.Feedback type="invalid">
-                  {errors.last_name}
-                </Form.Control.Feedback>
-              )}
-            </FloatingLabel>
+              <Col xs={12} md={4}>
+                <FloatingLabel label={t('last_name')}>
+                  <Form.Control
+                    id="last_name"
+                    type="text"
+                    name="last_name"
+                    placeholder={t('last_name')}
+                    className={`form-control form-icon-input ${
+                      touched.last_name && errors.last_name ? 'is-invalid' : ''
+                    }`}
+                    value={values.last_name || ''}
+                    onBlur={handleBlur}
+                    onChange={handleChange}
+                  />
+                  {touched.last_name && errors.last_name && (
+                    <Form.Control.Feedback type="invalid">
+                      {errors.last_name}
+                    </Form.Control.Feedback>
+                  )}
+                </FloatingLabel>
+              </Col>
+            </Row>
 
-            <FloatingLabel className="mb-3 " label={t('email')}>
-              <Form.Control
-                id="email"
-                type="email"
-                name="email"
-                placeholder={t('email')}
-                className={`form-control form-icon-input ${
-                  touched.email && errors.email ? 'is-invalid' : ''
-                }`}
-                value={values.email || ''}
-                onBlur={handleBlur}
-                onChange={handleChange}
-              />
-              {touched.email && errors.email && (
-                <Form.Control.Feedback type="invalid">
-                  {errors.email}
-                </Form.Control.Feedback>
-              )}
-            </FloatingLabel>
+            <Row className="g-2">
+              <Col xs={12} md={12}>
+                <FloatingLabel label={t('username')}>
+                  <Form.Control
+                    id="username"
+                    type="text"
+                    name="username"
+                    placeholder={t('username')}
+                    className={`form-control form-icon-input ${
+                      touched.username && errors.username ? 'is-invalid' : ''
+                    }`}
+                    value={values.username || ''}
+                    onBlur={handleBlur}
+                    onChange={handleChange}
+                  />
+                  {touched.username && errors.username && (
+                    <Form.Control.Feedback type="invalid">
+                      {errors.username}
+                    </Form.Control.Feedback>
+                  )}
+                </FloatingLabel>
+              </Col>
 
-            <FloatingLabel className="mb-3 " label={t('phone')}>
-              <Form.Control
-                id="phone"
-                type="phone"
-                name="phone"
-                placeholder={t('phone')}
-                className={`form-control form-icon-input ${
-                  touched.phone && errors.phone ? 'is-invalid' : ''
-                }`}
-                value={values.phone ?? ''}
-                onBlur={handleBlur}
-                onChange={handleChange}
-              />
-              {touched.phone && errors.phone && (
-                <Form.Control.Feedback type="invalid">
-                  {errors.phone}
-                </Form.Control.Feedback>
-              )}
-            </FloatingLabel>
+              <Col xs={12} md={12}>
+                <FloatingLabel label={t('email')}>
+                  <Form.Control
+                    id="email"
+                    type="email"
+                    name="email"
+                    placeholder={t('email')}
+                    className={`form-control form-icon-input ${
+                      touched.email && errors.email ? 'is-invalid' : ''
+                    }`}
+                    value={values.email || ''}
+                    onBlur={handleBlur}
+                    onChange={handleChange}
+                  />
+                  {touched.email && errors.email && (
+                    <Form.Control.Feedback type="invalid">
+                      {errors.email}
+                    </Form.Control.Feedback>
+                  )}
+                </FloatingLabel>
+              </Col>
 
-            <FloatingLabel className="mb-3 " label={t('password')}>
-              <Form.Control
-                id="password"
-                type={showPassword ? 'text' : 'password'}
-                name="password"
-                className={`form-control form-icon-input ${
-                  touched.password && errors.password ? 'is-invalid' : ''
-                }`}
-                placeholder={t('password')}
-                value={values.password ?? ''}
-                onBlur={handleBlur}
-                onChange={handleChange}
-              />
-              {touched.password && errors.password && (
-                <Form.Control.Feedback type="invalid">
-                  {errors.password}
-                </Form.Control.Feedback>
-              )}
+              <Col xs={12}>
+                <FloatingLabel label={t('date_of_birth')}>
+                  <Form.Control
+                    id="date_of_birth"
+                    type="date"
+                    name="date_of_birth"
+                    placeholder={t('date_of_birth')}
+                    className={`form-control form-icon-input ${
+                      touched.date_of_birth && errors.date_of_birth
+                        ? 'is-invalid'
+                        : ''
+                    }`}
+                    value={formatDateForInput(values.date_of_birth) || ''}
+                    onBlur={handleBlur}
+                    onChange={handleChange}
+                  />
+                  {touched.date_of_birth && errors.date_of_birth && (
+                    <Form.Control.Feedback type="invalid">
+                      {errors.date_of_birth}
+                    </Form.Control.Feedback>
+                  )}
+                </FloatingLabel>
+              </Col>
 
-              <FontAwesomeIcon
-                onClick={handleClickShowPassword}
-                style={{ position: 'absolute', right: '4%', top: '50%' }}
-                icon={showPassword ? faEye : faEyeSlash}
-                className="text-body fs-9 form-icon"
-              />
-            </FloatingLabel>
+              <Col xs={12}>
+                <FloatingLabel label={t('phone')}>
+                  <Form.Control
+                    id="phone"
+                    type="phone"
+                    name="phone"
+                    placeholder={t('phone')}
+                    className={`form-control form-icon-input ${
+                      touched.phone && errors.phone ? 'is-invalid' : ''
+                    }`}
+                    value={values.phone || ''}
+                    onBlur={handleBlur}
+                    onChange={handleChange}
+                  />
+                  {touched.phone && errors.phone && (
+                    <Form.Control.Feedback type="invalid">
+                      {errors.phone}
+                    </Form.Control.Feedback>
+                  )}
+                </FloatingLabel>
+              </Col>
+
+              <Col xs={12}>
+                <FloatingLabel label={t('password')}>
+                  <Form.Control
+                    id="password"
+                    type={showPassword ? 'text' : 'password'}
+                    name="password"
+                    className={`form-control form-icon-input ${
+                      touched.password && errors.password ? 'is-invalid' : ''
+                    }`}
+                    placeholder={t('password')}
+                    value={values.password || ''}
+                    onBlur={handleBlur}
+                    onChange={handleChange}
+                  />
+                  {touched.password && errors.password && (
+                    <Form.Control.Feedback type="invalid">
+                      {errors.password}
+                    </Form.Control.Feedback>
+                  )}
+
+                  <FontAwesomeIcon
+                    onClick={handleClickShowPassword}
+                    style={{ position: 'absolute', right: '4%', top: '50%' }}
+                    icon={showPassword ? faEye : faEyeSlash}
+                    className="text-body fs-9 form-icon"
+                  />
+                </FloatingLabel>
+              </Col>
+            </Row>
           </Form>
         </ModalForm>
       )}

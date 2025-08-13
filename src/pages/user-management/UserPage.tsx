@@ -37,8 +37,7 @@ const initialValues: TUser = {
   email: '',
   phone: '',
   date_of_birth: '',
-  email_verified_at: '',
-  role_id: ''
+  email_verified_at: ''
 };
 
 const initialLoader: TLoader = {

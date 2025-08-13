@@ -11,12 +11,11 @@ export interface TUser {
   phone?: string;
   date_of_birth?: string;
   email_verified_at?: string;
-  role_id?: string;
   avatar?: string;
   created_at?: string;
   updated_at?: string;
-  created_by?: string;
-  updated_by?: string;
+  created_by_id?: string;
+  updated_by_id?: string;
   deleted_at?: string;
 }
 
