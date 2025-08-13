@@ -4,10 +4,10 @@ import { useTranslation } from 'react-i18next';
 import { Formik } from 'formik';
 import { TUser } from '@/types/modules/user-management/user';
 import { faEye, faEyeSlash } from '@fortawesome/free-solid-svg-icons';
-import ModalForm from '../../../common/custom/ModalForm';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { TReactOption } from '@/types/modules';
 import { UserSchema } from '@/validation/user-management/UserSchema';
+import ModalForm from '@/components/common/custom/ModalForm';
 
 export interface UserFormProps {
   formData: TUser;
@@ -205,7 +205,6 @@ const UserForm = ({
 
             <FloatingLabel className="mb-3 " label={t('password')}>
               <Form.Control
-                autoComplete="on"
                 id="password"
                 type={showPassword ? 'text' : 'password'}
                 name="password"

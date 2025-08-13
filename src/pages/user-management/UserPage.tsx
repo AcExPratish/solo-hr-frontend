@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/no-unused-vars */
 import React from 'react';
 import { TUser, TUserFilter } from '@/types/modules/user-management/user';
 import { useNavigate } from 'react-router-dom';
@@ -95,7 +94,7 @@ const UserPage = () => {
   const handleOnSubmit = (formData: TUser) => {
     setLoader({ form: true });
     if (formData.id) {
-      updateItem(Number(formData.id), formData);
+      updateItem(formData?.id, formData);
     } else {
       createItem(formData);
     }
@@ -154,7 +153,7 @@ const UserPage = () => {
       });
   };
 
-  const updateItem = (id: number, data: TUser) => {
+  const updateItem = (id: string, data: TUser) => {
     setModal({ ...modal, ...{ show: true } });
     updateUser(id, data)
       .then(() => {
@@ -176,7 +175,7 @@ const UserPage = () => {
   const deleteItem = (data: TUser) => {
     setLoader({ list: true });
     if (data?.id) {
-      deleteUser(Number(data?.id))
+      deleteUser(data?.id)
         .then(() => {
           toast.success(
             t('message_success_delete', {

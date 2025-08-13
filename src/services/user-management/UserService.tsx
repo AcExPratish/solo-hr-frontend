@@ -9,7 +9,7 @@ const fetchAll = (params: TUserFilter) => {
   return api.get(`${userEndpoint}?${serializedObject(params)}`);
 };
 
-const fetchOne = (id: number) => {
+const fetchOne = (id: string) => {
   return api.get(`${userEndpoint}/${id}`);
 };
 
@@ -17,11 +17,11 @@ const create = (data: TUser) => {
   return api.post(`${userEndpoint}`, data);
 };
 
-const update = (id: number, data: TUser) => {
+const update = (id: string, data: TUser) => {
   return api.put(`${userEndpoint}/${id}`, data);
 };
 
-const destroy = (id: number) => {
+const destroy = (id: string) => {
   return api.delete(`${userEndpoint}/${id}`);
 };
 

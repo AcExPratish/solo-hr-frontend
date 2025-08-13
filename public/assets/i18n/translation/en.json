@@ -83,5 +83,6 @@
     "form_validation_exact_digits": "{{field}} must be exactly {{digits}} digits long.",
     "first_name": "First Name",
     "last_name": "Last Name",
-    "middle_name": "Middle Name"
+    "middle_name": "Middle Name",
+    "save": "Save"
 }

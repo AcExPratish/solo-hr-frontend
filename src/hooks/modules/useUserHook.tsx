@@ -27,7 +27,7 @@ const useUserHook = () => {
     }
   };
 
-  const fetchOneUser = async (id: number) => {
+  const fetchOneUser = async (id: string) => {
     try {
       const resp = await UserService.fetchOne(id);
       const row = resp?.data?.data || null;
@@ -52,7 +52,7 @@ const useUserHook = () => {
     }
   };
 
-  const updateUser = async (id: number, data: TUser) => {
+  const updateUser = async (id: string, data: TUser) => {
     try {
       const resp = await UserService.update(id, data);
       const row = resp?.data?.data || null;
@@ -64,7 +64,7 @@ const useUserHook = () => {
     }
   };
 
-  const deleteUser = async (id: number) => {
+  const deleteUser = async (id: string) => {
     try {
       const resp = await UserService.destroy(id);
       dispatch(removeOneUser({ id }));
