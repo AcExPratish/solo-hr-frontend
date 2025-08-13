@@ -1,3 +1,5 @@
+import { ModalProps } from 'react-bootstrap';
+
 export interface TAlert {
   type: 'SUCCESS' | 'ERROR' | 'WARNING';
   message: string | React.ReactNode;
@@ -45,4 +47,13 @@ export interface TValidationError {
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   errors?: any;
   onClose?: () => void;
+}
+
+export interface TLoader {
+  list?: boolean;
+  form?: boolean;
+}
+
+export interface TModalProps extends ModalProps {
+  type?: 'add' | 'edit' | 'view' | string;
 }

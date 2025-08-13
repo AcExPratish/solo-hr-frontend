@@ -1,4 +1,4 @@
-import { TUser } from '@/types/modules/user';
+import { TUser } from '@/types/modules/user-management/user';
 import { IconProp } from '@fortawesome/fontawesome-svg-core';
 import {
   faFileCircleExclamation,
@@ -297,4 +297,32 @@ export const getUserFullName = (user: TUser): string => {
   return [user?.first_name, user?.middle_name, user?.last_name]
     .filter(Boolean)
     .join(' ');
+};
+
+export const pageCount = (total: number, size: number) => {
+  if (total === 0 || size === 0) {
+    return 1;
+  }
+
+  const count = Math.ceil(total / size);
+  return count;
+};
+
+// eslint-disable-next-line
+export const removeEmptyValues = (obj: Record<string, any>) => {
+  return Object.fromEntries(
+    Object.entries(obj).filter(
+      ([, value]) =>
+        value !== '' &&
+        value !== null &&
+        value !== undefined &&
+        (typeof value !== 'object' ||
+          (Array.isArray(value) ? value.length : Object.keys(value).length))
+    )
+  );
+};
+
+// eslint-disable-next-line
+export const serializedObject = (obj: any) => {
+  return new URLSearchParams(obj).toString();
 };

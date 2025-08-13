@@ -1,5 +1,5 @@
 import { Nav, Navbar } from 'react-bootstrap';
-import { routes } from 'sitemap';
+import { RouteItems, routes } from 'sitemap';
 import { capitalize } from 'helpers/utils';
 import NavbarVerticalMenu from './NavbarVerticalMenu';
 import {
@@ -11,6 +11,9 @@ import Button from 'components/base/Button';
 import NavbarTopNav from '../navbar-horizontal/NavbarTopNav';
 import { useBreakpoints } from 'providers/BreakpointsProvider';
 import NavbarVerticalCollapseProvider from './NavbarVerticalCollapseProvider';
+import { checkScope } from '@/helpers/auth';
+import React from 'react';
+import { useTranslation } from 'react-i18next';
 
 const NavbarVerical = () => {
   const {
@@ -23,7 +26,36 @@ const NavbarVerical = () => {
     setConfig
   } = useAppContext();
 
+  const { t } = useTranslation();
   const { breakpoints } = useBreakpoints();
+  const mappedRoutes = React.useMemo(() => {
+    let mappedRoutes: RouteItems[] = JSON.parse(JSON.stringify(routes));
+
+    mappedRoutes = mappedRoutes
+      .filter(routeParent =>
+        routeParent.permission ? checkScope(routeParent.permission) : true
+      )
+      .map(route => {
+        route.pages = route.pages
+          .filter(data =>
+            data.permission ? checkScope(data.permission) : true
+          )
+          .map(route2 => {
+            if (route2.pages) {
+              route2.pages = route2.pages?.filter(data =>
+                data.permission ? checkScope(data.permission) : true
+              );
+            } else {
+              route2.pages = undefined;
+            }
+
+            return route2;
+          });
+        return route;
+      });
+
+    return mappedRoutes;
+  }, []);
 
   return (
     <NavbarVerticalCollapseProvider>
@@ -38,12 +70,12 @@ const NavbarVerical = () => {
         <Navbar.Collapse id="navbarVerticalCollapse" in={openNavbarVertical}>
           <div className="navbar-vertical-content">
             <Nav className="flex-column" as="ul" id="navbarVerticalNav">
-              {routes.map(route => (
-                <Nav.Item key={route.label}>
-                  {!route.labelDisabled && (
+              {mappedRoutes?.map(route => (
+                <Nav.Item key={route?.label}>
+                  {!route?.labelDisabled && (
                     <>
                       <p className="navbar-vertical-label">
-                        {capitalize(route.label)}
+                        {capitalize(t(route?.label))}
                       </p>
                       <hr className="navbar-vertical-line" />
                     </>
