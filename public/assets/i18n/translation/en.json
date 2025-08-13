@@ -88,5 +88,7 @@
     "date_of_birth": "Date of Birth",
     "username": "Username",
     "discard": "Discard",
-    "new": "New"
+    "new": "New",
+    "form_validation_past_date": "{{field}} must not be a past date.",
+    "form_validation_password_validation_message": "Password must be at least 8 characters long and contain at least 1 uppercase letter, 1 number, and 1 special character"
 }

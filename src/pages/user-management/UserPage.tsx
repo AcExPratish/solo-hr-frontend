@@ -265,6 +265,7 @@ const UserPage = () => {
         </div>
       </AdvanceTableProvider>
 
+      {/* Modals */}
       <UserForm
         formData={user}
         modal={modal}
