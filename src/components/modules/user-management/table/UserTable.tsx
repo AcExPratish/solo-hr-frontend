@@ -6,7 +6,7 @@ import { TUser } from '@/types/modules/user-management/user';
 import { useTranslation } from 'react-i18next';
 import ActionTableItems from '@/components/common/ActionTableItems';
 import { checkScope } from '@/helpers/auth';
-import { getUserFullName } from '@/helpers/utils';
+import { getUserFirstAndLastName } from '@/helpers/utils';
 
 interface userTableColumnsProps {
   onView?: (data: TUser, show: boolean) => void;
@@ -35,17 +35,16 @@ export const userTableColumns = ({
       }
     },
     {
-      header: `${t('full_name')}`,
+      header: `${t('name')}`,
       accessorKey: 'name',
       cell: original => {
         const { row } = original;
         return (
           <span
-            title={getUserFullName(row?.original) || ''}
+            title={getUserFirstAndLastName(row?.original) || ''}
             className="d-inline-block text-truncate w-100"
-            onClick={() => onView?.(row.original, true)}
           >
-            {getUserFullName(row?.original) || ''}
+            {getUserFirstAndLastName(row?.original) || ''}
           </span>
         );
       },
@@ -84,6 +83,9 @@ export const userTableColumns = ({
         return (
           <ActionTableItems
             data={row}
+            onView={
+              checkScope('users.view') ? () => onView?.(row, true) : undefined
+            }
             onEdit={
               checkScope('users.update') ? () => onEdit?.(row) : undefined
             }

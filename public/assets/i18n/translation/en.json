@@ -79,5 +79,9 @@
     "sn": "SN",
     "select": "Select",
     "list": "List",
-    "not_found_results": "No results found"
+    "not_found_results": "No results found",
+    "form_validation_exact_digits": "{{field}} must be exactly {{digits}} digits long.",
+    "first_name": "First Name",
+    "last_name": "Last Name",
+    "middle_name": "Middle Name"
 }

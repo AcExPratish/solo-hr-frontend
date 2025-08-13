@@ -7,7 +7,7 @@ import useUserHook from '@/hooks/modules/useUserHook';
 import { useTranslation } from 'react-i18next';
 import { checkScope } from '@/helpers/auth';
 import { confirmAlert } from '@/components/common/custom/ConfirmAlert';
-import { getUserFullName, pageCount } from '@/helpers/utils';
+import { getUserFirstAndLastName, pageCount } from '@/helpers/utils';
 import useAdvanceTable, { UseAdvanceTableProps } from '@/hooks/useAdvanceTable';
 import { toast } from 'react-toastify';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
@@ -19,6 +19,7 @@ import { ModalProps } from 'react-bootstrap';
 import UserTable, {
   userTableColumns
 } from '@/components/modules/user-management/table/UserTable';
+import UserForm from '@/components/modules/user-management/form/UserForm';
 
 // Initial values
 const initialFilter: TUserFilter = {
@@ -66,7 +67,7 @@ const UserPage = () => {
   const { users, meta, fetchAllUser, createUser, updateUser, deleteUser } =
     useUserHook();
 
-  // User Handlers
+  // Handlers
   const handleOnAdd = () => {
     setUser(initialValues);
     setModal({ ...modal, ...{ show: true } });
@@ -81,7 +82,7 @@ const UserPage = () => {
     confirmAlert({
       title: `${t('dialog_delete_title')}`,
       message: `${t('dialog_delete_body', {
-        name: getUserFullName(data)
+        name: getUserFirstAndLastName(data)
       })}`
     }).then(resp => {
       if (resp && data) {
@@ -138,7 +139,10 @@ const UserPage = () => {
     createUser(data)
       .then(() => {
         toast.success(
-          t('message_success_create', { page, name: getUserFullName(data) })
+          t('message_success_create', {
+            page,
+            name: getUserFirstAndLastName(data)
+          })
         );
         setUser(initialValues);
         setModal({ ...modal, ...{ show: false } });
@@ -155,7 +159,10 @@ const UserPage = () => {
     updateUser(id, data)
       .then(() => {
         toast.success(
-          t('message_success_update', { page, name: getUserFullName(data) })
+          t('message_success_update', {
+            page,
+            name: getUserFirstAndLastName(data)
+          })
         );
         setModal({ ...modal, ...{ show: false } });
         setLoader({ form: false });
@@ -174,7 +181,7 @@ const UserPage = () => {
           toast.success(
             t('message_success_delete', {
               page,
-              name: getUserFullName(data)
+              name: getUserFirstAndLastName(data)
             })
           );
           setLoader({ list: false });
@@ -253,7 +260,7 @@ const UserPage = () => {
         </div>
       </AdvanceTableProvider>
 
-      {/* <UserForm
+      <UserForm
         formData={user}
         modal={modal}
         onSubmit={values => {
@@ -263,7 +270,7 @@ const UserPage = () => {
           setModal({ ...modal, ...{ show: false } });
         }}
         loading={loader.form}
-      /> */}
+      />
     </React.Fragment>
   );
 };
