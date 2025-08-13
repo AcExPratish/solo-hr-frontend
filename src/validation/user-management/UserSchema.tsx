@@ -75,9 +75,12 @@ export const UserSchema = Yup.object().shape({
         field: t('date_of_birth').toLowerCase()
       })
     )
-    .min(
+    .max(
       todaysDate,
-      t('form_validation_past_date', { field: t('date_of_birth') })
+      t('form_validation_date_before', {
+        from: t('date_of_birth').toLowerCase(),
+        to: todaysDate
+      })
     ),
   phone: Yup.string()
     .required(
@@ -101,5 +104,12 @@ export const UserSchema = Yup.object().shape({
     .matches(
       /^(?=.*[A-Z])(?=.*\d)(?=.*[!@#$%^&*(),.?":{}|<>])[A-Za-z\d!@#$%^&*(),.?":{}|<>]{8,}$/,
       t('form_validation_password_validation_message')
+    )
+    .max(
+      200,
+      t('form_validation_max', {
+        field: t('password').toLowerCase(),
+        max: '200'
+      })
     )
 });
