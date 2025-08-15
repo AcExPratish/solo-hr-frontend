@@ -115,8 +115,8 @@ const UserPage = () => {
         onDelete: handleOnDelete
       }),
       pageSize: filter.limit,
-      pageCount: pageCount(meta.total_rows || 0, filter.limit),
-      totalRows: meta?.total_rows || 0,
+      pageCount: pageCount(meta?.total || 0, filter?.limit),
+      totalRows: meta?.total || 0,
       pagination: true,
       sortable: true,
       manualPagination: true,

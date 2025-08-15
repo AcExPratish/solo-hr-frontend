@@ -8,8 +8,8 @@ interface TCustomPaginationProps {
 }
 
 const CustomPagination = ({ meta, onPageChange }: TCustomPaginationProps) => {
-  const { total_rows, limit } = meta;
-  const totalPages = Math.ceil(Math.max(0, total_rows) / Math.max(1, limit));
+  const { total, limit } = meta;
+  const totalPages = Math.ceil(Math.max(0, total) / Math.max(1, limit));
   const [active, setActive] = React.useState(1);
 
   const handlePageChange = (pageNumber: number) => {

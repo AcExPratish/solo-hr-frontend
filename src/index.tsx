@@ -16,16 +16,14 @@ const root = ReactDOM.createRoot(
 );
 
 root.render(
-  <React.StrictMode>
-    <ReduxProvider store={store}>
-      <AppProvider>
-        <SettingsPanelProvider>
-          <BreakpointsProvider>
-            <RouterProvider router={router} />
-            <ToastMessage />
-          </BreakpointsProvider>
-        </SettingsPanelProvider>
-      </AppProvider>
-    </ReduxProvider>
-  </React.StrictMode>
+  <ReduxProvider store={store}>
+    <AppProvider>
+      <SettingsPanelProvider>
+        <BreakpointsProvider>
+          <RouterProvider router={router} />
+          <ToastMessage />
+        </BreakpointsProvider>
+      </SettingsPanelProvider>
+    </AppProvider>
+  </ReduxProvider>
 );

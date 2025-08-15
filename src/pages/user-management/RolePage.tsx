@@ -32,7 +32,8 @@ const initialValues: TRole = {
 
 const initialFilter: TFilter = {
   page: 1,
-  limit: 10
+  limit: 10,
+  search: ''
 };
 
 const RolePage = () => {
@@ -58,6 +59,7 @@ const RolePage = () => {
     list: false,
     form: false
   });
+  const [searchInput, setSearchInput] = React.useState<string>('');
   const [filter, setFilter] = React.useState<TFilter>(initialFilter);
   const [role, setRole] = React.useState<TRole>(initialValues);
   const [modal, setModal] = React.useState<TModalProps>({
@@ -67,10 +69,6 @@ const RolePage = () => {
   });
 
   // Handlers
-  const handleSearchInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    table.setGlobalFilter(e.target.value || undefined);
-  };
-
   const handleOnView = (data: TRole) => {
     fetchOneItem(data);
     setModal({ ...modal, ...{ show: true, type: 'view' } });
@@ -152,18 +150,16 @@ const RolePage = () => {
   };
 
   const fetchAllItem = () => {
-    if (roles.length <= 0) {
-      setLoader({ list: true });
-      fetchAllRole(filter)
-        .then(() => {
-          setLoader({ list: false });
-        })
-        .catch(e => {
-          console.log(e);
-          toast.error(t('message_failed'));
-          setLoader({ list: false });
-        });
-    }
+    setLoader({ list: true });
+    fetchAllRole(filter)
+      .then(() => {
+        setLoader({ list: false });
+      })
+      .catch(e => {
+        console.error(e);
+        toast.error(t('message_failed'));
+        setLoader({ list: false });
+      });
   };
 
   const fetchAllPermissionItem = () => {
@@ -207,8 +203,8 @@ const RolePage = () => {
         onDelete: handleOnDelete
       }),
       pageSize: filter.limit,
-      pageCount: pageCount(meta.total_rows || 0, filter.limit),
-      totalRows: meta?.total_rows || 0,
+      pageCount: pageCount(meta?.total || 0, filter?.limit),
+      totalRows: meta?.total || 0,
       pagination: true,
       sortable: true,
       manualPagination: true,
@@ -232,10 +228,23 @@ const RolePage = () => {
 
   // Use Effects
   React.useEffect(() => {
+    const handler = setTimeout(() => {
+      setFilter({ ...filter, search: searchInput, page: 1 });
+    }, 300);
+
+    return () => {
+      clearTimeout(handler);
+    };
+  }, [searchInput]);
+
+  React.useEffect(() => {
+    fetchAllItem();
+  }, [JSON.stringify(filter)]);
+
+  React.useEffect(() => {
     if (!checkScope('roles.view')) {
       navigate('/error/403');
     } else {
-      fetchAllItem();
       fetchAllPermissionItem();
     }
   }, []);
@@ -253,12 +262,14 @@ const RolePage = () => {
       </div>
 
       <AdvanceTableProvider {...table}>
-        <div className="mb-4 d-flex justify-content-end">
+        <div className="mb-4 d-flex justify-content-end align-items-center gap-2">
           <SearchBox
-            placeholder={`${t('search')}`}
-            onChange={handleSearchInputChange}
+            value={searchInput}
+            placeholder={`${t('search')} ${t('role')}`}
+            onChange={e => setSearchInput(e.target.value)}
           />
         </div>
+
         <div className="mx-n4 px-4 mx-lg-n6 px-lg-6 bg-body-emphasis border-top border-bottom border-translucent position-relative top-1">
           <RoleTable loader={loader.list} />
         </div>

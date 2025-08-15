@@ -14,7 +14,7 @@ export interface TFilter {
 
 export interface TMeta {
   page: number;
-  total_rows: number;
+  total: number;
   limit: number;
 }
 
