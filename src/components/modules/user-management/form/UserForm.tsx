@@ -75,8 +75,10 @@ const UserForm = ({
       roles: roleIds as string[]
     };
 
-    if (values.password) {
+    if (values.password && values.password.trim() !== '') {
       tempValues.password = values?.password;
+    } else {
+      delete tempValues.password;
     }
 
     onSubmit(tempValues);
