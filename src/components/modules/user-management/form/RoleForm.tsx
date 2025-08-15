@@ -8,6 +8,7 @@ import { TPermission } from '@/types/modules/user-management/permission';
 import usePermissionHook from '@/hooks/modules/user-management/usePermissionHook';
 import { useTranslation } from 'react-i18next';
 import RolePermissionSection from '../RolePermissionSection';
+import { RoleSchema } from '@/validation/user-management/RoleSchema';
 
 interface RoleFormProps {
   formData: TRole;
@@ -110,7 +111,7 @@ const RoleForm = ({
     <Formik
       enableReinitialize
       initialValues={formData}
-      validationSchema={null}
+      validationSchema={RoleSchema}
       onSubmit={handleSubmit}
     >
       {({
@@ -120,11 +121,15 @@ const RoleForm = ({
         handleChange,
         handleBlur,
         handleSubmit,
-        isSubmitting
+        isSubmitting,
+        resetForm
       }) => (
         <ModalForm
           modal={modal}
-          onClose={onClose}
+          onClose={() => {
+            resetForm();
+            onClose();
+          }}
           onSubmit={handleSubmit}
           type={modal?.type}
           title={t('role')}
@@ -132,7 +137,7 @@ const RoleForm = ({
           size="lg"
         >
           <Form noValidate>
-            <FloatingLabel className="mb-3" label="Name">
+            <FloatingLabel className="mb-3" label={t('name')}>
               <Form.Control
                 disabled={modal?.type === 'view'}
                 id="name"

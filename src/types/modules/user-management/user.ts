@@ -1,4 +1,5 @@
 import { TFilter } from '..';
+import { TRole } from './role';
 
 export interface TUser {
   id?: string;
@@ -17,6 +18,7 @@ export interface TUser {
   created_by_id?: string;
   updated_by_id?: string;
   deleted_at?: string;
+  roles?: string[] | TRole[];
 }
 
 export interface TUserFilter extends TFilter {}

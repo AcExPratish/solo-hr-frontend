@@ -19,6 +19,7 @@ import UserTable, {
   userTableColumns
 } from '@/components/modules/user-management/table/UserTable';
 import UserForm from '@/components/modules/user-management/form/UserForm';
+import useRoleHook from '@/hooks/modules/user-management/useRoleHook';
 
 // Initial values
 const initialFilter: TUserFilter = {
@@ -63,8 +64,16 @@ const UserPage = () => {
   });
 
   // Custom Hooks
-  const { users, meta, fetchAllUser, createUser, updateUser, deleteUser } =
-    useUserHook();
+  const {
+    users,
+    meta,
+    fetchAllUser,
+    createUser,
+    updateUser,
+    deleteUser,
+    fetchOneUser
+  } = useUserHook();
+  const { fetchAllRole } = useRoleHook();
 
   // Handlers
   const handleOnView = (data: TUser) => {
@@ -201,7 +210,13 @@ const UserPage = () => {
 
   const fetchOneItem = (row: TUser) => {
     setLoader({ list: true });
-    setUser(row);
+    fetchOneUser(row?.id || '')
+      .then(resp => {
+        setUser(resp);
+      })
+      .catch(e => {
+        console.error(e);
+      });
     setLoader({ list: false });
   };
 
@@ -236,6 +251,13 @@ const UserPage = () => {
   React.useEffect(() => {
     if (!checkScope('users.view')) {
       navigate('/error/403');
+    } else {
+      fetchAllRole({
+        page: 1,
+        limit: 500
+      }).catch(e => {
+        console.error(e);
+      });
     }
   }, []);
 
@@ -272,9 +294,7 @@ const UserPage = () => {
         onSubmit={values => {
           handleOnSubmit(values);
         }}
-        onClose={() => {
-          setModal({ ...modal, ...{ show: false } });
-        }}
+        onClose={() => setModal({ ...modal, ...{ show: false, type: '' } })}
         loading={loader.form}
       />
     </React.Fragment>

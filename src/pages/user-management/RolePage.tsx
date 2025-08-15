@@ -279,7 +279,7 @@ const RolePage = () => {
       <RoleForm
         formData={role}
         onSubmit={handleOnSubmit}
-        onClose={() => setModal({ ...modal, ...{ show: false } })}
+        onClose={() => setModal({ ...modal, ...{ show: false, type: '' } })}
         modal={modal}
         loading={loader.form}
       />

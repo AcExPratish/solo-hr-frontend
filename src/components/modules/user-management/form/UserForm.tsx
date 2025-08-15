@@ -9,6 +9,9 @@ import { TModalProps, TReactOption } from '@/types/modules';
 import { UserSchema } from '@/validation/user-management/UserSchema';
 import ModalForm from '@/components/common/custom/ModalForm';
 import { formatDateForInput } from '@/helpers/date';
+import useRoleHook from '@/hooks/modules/user-management/useRoleHook';
+import ReactGroupSelect from '@/components/base/ReactGroupSelect';
+import { TRole } from '@/types/modules/user-management/role';
 
 export interface UserFormProps {
   formData: TUser;
@@ -19,7 +22,7 @@ export interface UserFormProps {
 }
 
 export interface TUserForm extends TUser {
-  roleSelect?: TReactOption | null;
+  roleOptions?: TReactOption[];
 }
 
 const UserForm = ({
@@ -32,29 +35,27 @@ const UserForm = ({
   // React Hooks
   const { t } = useTranslation();
 
-  // Use State
-  const isView = modal.type === 'view';
-  const [showPassword, setShowPassword] = React.useState(false);
-  //   const [roleOption, setRoleOption] = React.useState<TReactOption[]>([]);
-  //   const initialValues = React.useMemo<TUserForm>(() => {
-  //     let roleSelect = null;
-  //     const options = [].map(data => {
-  //       const option = {
-  //         label: data.name,
-  //         value: data.id
-  //       };
-  //       if (formData.user_role?.id == data.id) {
-  //         roleSelect = option;
-  //       }
-  //       return option;
-  //     });
-  //     setRoleOption(options);
+  // Custom Hooks
+  const { roles } = useRoleHook();
 
-  //     return {
-  //       ...formData,
-  //       roleSelect
-  //     };
-  //   }, [formData, roles, modal]);
+  // Use States
+  const isView = modal.type === 'view';
+  const [showPassword, setShowPassword] = React.useState<boolean>(false);
+  const [roleOption, setRoleOption] = React.useState<TReactOption[]>([]);
+  const initialValues = React.useMemo<TUserForm>(() => {
+    let roleOptions: TReactOption[] = [];
+
+    roleOptions =
+      formData?.roles?.map((data: TRole) => ({
+        label: data?.name || '',
+        value: data?.id || ''
+      })) || [];
+
+    return {
+      ...formData,
+      roleOptions
+    };
+  }, [formData, modal]);
 
   // Handlers
   const handleClickShowPassword = () => {
@@ -63,46 +64,59 @@ const UserForm = ({
 
   // On Submit
   const handleOnSubmit = async (values: TUserForm) => {
-    // const roleId = values.roleSelect?.value as number | null;
+    const roleIds =
+      values?.roleOptions?.map((role: TReactOption) => role?.value) || [];
 
-    // const tempValues: TUser = {
-    //   name: values.name,
-    //   email: values.email,
-    //   phone: values.phone,
-    //   status: values.status,
-    //   id: formData.id,
-    //   role_id: roleId
-    // };
-    // if (values.password) {
-    //   tempValues.password = values.password;
-    // }
-    onSubmit(values);
+    const tempValues: TUser = {
+      ...values,
+      roles: roleIds as string[]
+    };
+
+    if (values.password) {
+      tempValues.password = values?.password;
+    }
+
+    onSubmit(tempValues);
   };
+
+  React.useEffect(() => {
+    setRoleOption(
+      roles?.map((data: TRole) => ({
+        label: data?.name || '',
+        value: data?.id || ''
+      })) || []
+    );
+  }, [roles]);
 
   return (
     <Formik
       key={modal.show ? 'open' : 'closed'}
-      initialValues={formData}
+      initialValues={initialValues}
       enableReinitialize
       validationSchema={UserSchema}
       onSubmit={handleOnSubmit}
     >
       {({
-        isSubmitting,
         values,
         handleBlur,
         handleChange,
         errors,
         touched,
-        handleSubmit
+        handleSubmit,
+        resetForm,
+        setFieldValue,
+        setFieldTouched
       }) => (
         <ModalForm
           modal={modal}
-          onClose={onClose}
+          onClose={() => {
+            resetForm();
+            onClose();
+          }}
           onSubmit={handleSubmit}
           type={modal.type}
           title={t('user')}
-          disabled={isSubmitting || loading}
+          disabled={loading}
           size="lg"
         >
           <Form noValidate className="d-flex flex-column gap-2">
@@ -233,6 +247,22 @@ const UserForm = ({
                 </Form.Control.Feedback>
               )}
             </FloatingLabel>
+
+            <Form.Group>
+              <Form.Label htmlFor="roleSelect">{t('role')}</Form.Label>
+              <ReactGroupSelect
+                options={roleOption}
+                isMulti
+                name="roleOptions"
+                value={values.roleOptions}
+                onBlur={() => setFieldTouched('roleOptions', true)}
+                onChange={options => setFieldValue('roleOptions', options)}
+                placeholder={`${t('select')} ${t('role').toLowerCase()} ....`}
+              />
+              {touched.roleOptions && errors.roleOptions && (
+                <small className="text-danger"> {errors.roleOptions}</small>
+              )}
+            </Form.Group>
 
             <FloatingLabel label={t('phone')}>
               <Form.Control
