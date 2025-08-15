@@ -6,7 +6,10 @@ import { TUser } from '@/types/modules/user-management/user';
 import { faEye, faEyeSlash } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { TModalProps, TReactOption } from '@/types/modules';
-import { UserSchema } from '@/validation/user-management/UserSchema';
+import {
+  UserCreateSchema,
+  UserUpdateSchema
+} from '@/validation/user-management/UserSchema';
 import ModalForm from '@/components/common/custom/ModalForm';
 import { formatDateForInput } from '@/helpers/date';
 import useRoleHook from '@/hooks/modules/user-management/useRoleHook';
@@ -93,7 +96,9 @@ const UserForm = ({
       key={modal.show ? 'open' : 'closed'}
       initialValues={initialValues}
       enableReinitialize
-      validationSchema={UserSchema}
+      validationSchema={
+        modal.type === 'create' ? UserCreateSchema : UserUpdateSchema
+      }
       onSubmit={handleOnSubmit}
     >
       {({
