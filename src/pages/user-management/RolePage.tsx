@@ -252,7 +252,7 @@ const RolePage = () => {
   return (
     <div>
       <div className="d-sm-flex align-items-center justify-content-between mb-4">
-        <h2 className="mb-0">{t('role_list')}</h2>
+        <h2 className="mb-0">{t('roles_and_permissions')}</h2>
         {checkScope('roles.create') && (
           <Button variant="primary" onClick={handleOnAdd}>
             <FontAwesomeIcon icon={faPlus} className="me-2" />

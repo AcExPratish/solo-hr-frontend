@@ -51,7 +51,7 @@ export const routes: RouteItems[] = [
     active: true,
     pages: [
       {
-        name: 'Users List',
+        name: 'Users',
         path: '/user-management/user',
         pathName: 'user',
         permission: 'users.view',
@@ -59,7 +59,7 @@ export const routes: RouteItems[] = [
         active: true
       },
       {
-        name: 'Roles List',
+        name: 'Roles & Permissions',
         path: '/user-management/role',
         pathName: 'role',
         permission: 'roles.view',
