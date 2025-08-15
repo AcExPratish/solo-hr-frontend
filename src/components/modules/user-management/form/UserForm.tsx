@@ -97,7 +97,7 @@ const UserForm = ({
       initialValues={initialValues}
       enableReinitialize
       validationSchema={
-        modal.type === 'create' ? UserCreateSchema : UserUpdateSchema
+        modal.type === 'add' ? UserCreateSchema : UserUpdateSchema
       }
       onSubmit={handleOnSubmit}
     >
