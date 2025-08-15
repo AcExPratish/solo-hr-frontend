@@ -248,23 +248,6 @@ const UserForm = ({
               )}
             </FloatingLabel>
 
-            <Form.Group>
-              <Form.Label htmlFor="roleOptions">{t('role')}</Form.Label>
-              <ReactGroupSelect
-                isDisabled={isView}
-                options={roleOption}
-                isMulti
-                name="roleOptions"
-                value={values.roleOptions}
-                onBlur={() => setFieldTouched('roleOptions', true)}
-                onChange={options => setFieldValue('roleOptions', options)}
-                placeholder={`${t('select')} ${t('role').toLowerCase()} ....`}
-              />
-              {touched.roleOptions && errors.roleOptions && (
-                <small className="text-danger"> {errors.roleOptions}</small>
-              )}
-            </Form.Group>
-
             <FloatingLabel label={t('phone')}>
               <Form.Control
                 disabled={isView}
@@ -314,6 +297,23 @@ const UserForm = ({
                 />
               </FloatingLabel>
             )}
+
+            <Form.Group>
+              <Form.Label htmlFor="roleOptions">{t('role')}</Form.Label>
+              <ReactGroupSelect
+                isDisabled={isView}
+                options={roleOption}
+                isMulti
+                name="roleOptions"
+                value={values.roleOptions}
+                onBlur={() => setFieldTouched('roleOptions', true)}
+                onChange={options => setFieldValue('roleOptions', options)}
+                placeholder={`${t('select')} ${t('role').toLowerCase()} ....`}
+              />
+              {touched.roleOptions && errors.roleOptions && (
+                <small className="text-danger"> {errors.roleOptions}</small>
+              )}
+            </Form.Group>
           </Form>
         </ModalForm>
       )}
