@@ -5,6 +5,7 @@ import {
   getAuthFromLocalStorage,
   removeAuthFromLocalStorage
 } from '@/utils/storage';
+import { encryptData } from '@/helpers/crypto';
 
 interface TAuthState {
   isAuthenticated: boolean;
@@ -50,7 +51,10 @@ const authSlice = createSlice({
     setProfile(state, action) {
       if (action.payload.user) {
         state.user = action.payload.user;
-        localStorage.setItem('user', JSON.stringify(action.payload.user));
+        localStorage.setItem(
+          'user',
+          encryptData(JSON.stringify(action.payload.user))
+        );
       }
     },
 

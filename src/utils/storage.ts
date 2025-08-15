@@ -1,10 +1,12 @@
+import { decryptData, encryptData } from '@/helpers/crypto';
+
 // eslint-disable-next-line
 export const addAuthToLocalStorage = (payload: any) => {
-  localStorage.setItem('token', payload.token);
-  localStorage.setItem('refresh_token', payload.refreshToken);
+  localStorage.setItem('token', encryptData(payload.token));
+  localStorage.setItem('refresh_token', encryptData(payload.refreshToken));
 
-  localStorage.setItem('user', JSON.stringify(payload.user));
-  localStorage.setItem('scopes', JSON.stringify(payload.scopes));
+  localStorage.setItem('user', encryptData(JSON.stringify(payload.user)));
+  localStorage.setItem('scopes', encryptData(JSON.stringify(payload.scopes)));
 };
 
 export const removeAuthFromLocalStorage = () => {
@@ -15,8 +17,8 @@ export const removeAuthFromLocalStorage = () => {
 };
 
 export const getAuthFromLocalStorage = () => {
-  const tempScopes = localStorage.getItem('scopes') || null;
-  const tempUser = localStorage.getItem('user') || null;
+  const tempScopes = decryptData(localStorage.getItem('scopes')) || null;
+  const tempUser = decryptData(localStorage.getItem('user')) || null;
 
   let user = null;
   let scopes = [];
@@ -29,8 +31,8 @@ export const getAuthFromLocalStorage = () => {
     removeAuthFromLocalStorage();
   }
   return {
-    token: localStorage.getItem('token') || '',
-    refresh_token: localStorage.getItem('refresh_token') || '',
+    token: decryptData(localStorage.getItem('token')) || '',
+    refresh_token: decryptData(localStorage.getItem('refresh_token')) || '',
     user,
     scopes
   };

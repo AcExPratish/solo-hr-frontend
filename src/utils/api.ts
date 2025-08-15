@@ -3,6 +3,7 @@ import { getAuthFromLocalStorage, removeAuthFromLocalStorage } from './storage';
 import { confirmExpiredTokenAlert } from '@/components/common/custom/ConfirmExpiredTokenAlert';
 import AuthService from '@/services/AuthService';
 import { apiEndpoint } from '@/helpers/common';
+import { encryptData } from '@/helpers/crypto';
 
 const axiosServices = axios.create({
   baseURL: `${apiEndpoint}`,
@@ -41,8 +42,8 @@ axiosServices.interceptors.response.use(
 
         const token: string = resp?.data?.data?.access_token || '';
         const refreshToken: string = resp?.data?.data?.refresh_token || '';
-        localStorage.setItem('token', token);
-        localStorage.setItem('refresh_token', refreshToken);
+        localStorage.setItem('token', encryptData(token));
+        localStorage.setItem('refresh_token', encryptData(refreshToken));
 
         // Retry the original request with the new token
         originalRequest.headers.Authorization = `Bearer ${token}`;

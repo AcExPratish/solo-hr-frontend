@@ -1,19 +1,22 @@
 import moment from 'moment-timezone';
-
 const timestampFormat = 'YYYY-MM-DD hh:mm';
 const timeFormat = 'hh:mm:ss a';
 const dateFormat = 'YYYY-MM-DD';
 const timestampFormatPeriod = 'MMMM Do, YYYY | hh:mm a';
 const humanTimestampFormatPeriod = 'MMMM Do , YYYY [at] hh:mm a';
+
 export const todayDate = () => {
   return moment().format('YYYY-MM-DD');
 };
+
 export const nextDate = () => {
   return moment().add(1, 'day').format('YYYY-MM-DD');
 };
+
 export const lastMonthDate = () => {
   return moment().subtract(1, 'month').startOf('day').format('YYYY-MM-DD');
 };
+
 export const todayTimestampInUnix = () => {
   return moment().unix();
 };
@@ -23,16 +26,19 @@ export const convertTimestampToDate = timestamp => {
     ? moment(timestamp, timestampFormat).format('YYYY-MM-DD')
     : '';
 };
+
 export const convertTimestampToHumanTimestamp = timestamp => {
   return timestamp
     ? moment.utc(timestamp).format(humanTimestampFormatPeriod)
     : '';
 };
+
 export const convertTimestampToHumanDate = timestamp => {
   return timestamp
     ? moment.utc(timestamp, timestampFormat).format('MMMM Do, YYYY')
     : '';
 };
+
 export const convertTimestampToHumanFromNow = timestamp => {
   return timestamp ? moment.utc(timestamp).fromNow() : '';
 };
@@ -42,8 +48,6 @@ export const convertTimeToHumanTime = timestamp => {
 };
 
 export const isValidDate = date => {
-  // console.log(date)
-  // console.log(moment(date,dateFormat,true).isValid())
   return moment(date, dateFormat, true).isValid();
 };
 
@@ -60,9 +64,11 @@ export const convertTimestampToCustomFormatWithDateAtTime = timestamp => {
     ? moment.utc(timestamp, timestampFormat).format('DD MMM YYYY [at] h:mm A')
     : '';
 };
+
 export const convertTimestampToUnix = timestamp => {
   return timestamp ? moment(timestamp).unix() : '';
 };
+
 export const getTimestampBeforeHourUnix = (hour, timestamp) => {
   return moment.unix(timestamp).subtract(hour, 'hours').unix();
 };
@@ -77,12 +83,15 @@ export const addHoursAndMinutesOnManilaDate = (date, time) => {
 export const convertTimestampToManila = timestamp => {
   return timestamp ? moment.utc(timestamp).format(dateFormat) : '';
 };
+
 export const convertTimestampToTime = timestamp => {
   return timestamp ? moment.utc(timestamp).format(timeFormat) : '';
 };
+
 export const convertTimestamp = timestamp => {
   return timestamp ? moment.utc(timestamp).format(timestampFormatPeriod) : '';
 };
+
 export const convertTimestamp2 = timestamp => {
   return timestamp ? moment.utc(timestamp).format('YYYY-MM-DD hh:mm:ss') : '';
 };
@@ -125,6 +134,7 @@ export const getDaysBefore = days => {
 export const todayValueOf = () => {
   return moment().valueOf();
 };
+
 export const diffInImin = (first, second) => {
   const time1 = moment(first); // Convert to Moment object
   const time2 = moment(second);
@@ -138,6 +148,7 @@ export const convertSecToTime = sec => {
 export const convertToDate = date => {
   return date ? moment(date, timestampFormat).format('YYYY-MM-DD') : '';
 };
+
 export const allDates = (startDate, endDate) => {
   if (!startDate || !endDate) {
     return [];
@@ -151,14 +162,15 @@ export const allDates = (startDate, endDate) => {
   }
   return dateList;
 };
-export const restDayDisableDates = previousDate => {
+
+export const holidayDayDisableDates = previousDate => {
   const start = moment(previousDate).startOf('day');
   const end = moment(previousDate).add(7, 'days').endOf('day');
   return allDates(start, end);
 };
 
 export const diffInDays = (greater, lower) => {
-  const prev = moment(lower, dateFormat); // Convert to Moment object
+  const prev = moment(lower, dateFormat);
   const latest = moment(greater, dateFormat);
 
   return latest.diff(prev, 'days');
