@@ -5,8 +5,8 @@ import { serializedObject } from '../../helpers/utils';
 
 const userEndpoint: string = `${process.env.REACT_APP_API_ENDPOINT}/users`;
 
-const fetchAll = (params: TUserFilter) => {
-  return api.get(`${userEndpoint}?${serializedObject(params)}`);
+const fetchAll = (filters: TUserFilter) => {
+  return api.get(`${userEndpoint}?${serializedObject(filters)}`);
 };
 
 const fetchOne = (id: string) => {

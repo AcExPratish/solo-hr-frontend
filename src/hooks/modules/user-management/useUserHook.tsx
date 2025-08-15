@@ -27,12 +27,12 @@ const useUserHook = () => {
     }
   };
 
-  const fetchOneUser = async (id: string) => {
+  const fetchOneUser = async (id: string): Promise<TUser> => {
     try {
       const resp = await UserService.fetchOne(id);
       const row = resp?.data?.data || null;
       dispatch(getOneUser({ row }));
-      return resp;
+      return row;
     } catch (e) {
       dispatch(getOneUser({ row: null }));
       console.error('fetchOneUser', e);
@@ -40,35 +40,36 @@ const useUserHook = () => {
     }
   };
 
-  const createUser = async (data: TUser) => {
+  const createUser = async (data: TUser): Promise<TUser> => {
     try {
       const resp = await UserService.create(data);
       const row = resp?.data?.data || null;
       dispatch(createOneUser({ row }));
-      return resp;
+      return row;
     } catch (e) {
       console.error('createUser', e);
       throw e;
     }
   };
 
-  const updateUser = async (id: string, data: TUser) => {
+  const updateUser = async (id: string, data: TUser): Promise<TUser> => {
     try {
       const resp = await UserService.update(id, data);
       const row = resp?.data?.data || null;
       dispatch(updateOneUser({ id, row }));
-      return resp;
+      return row;
     } catch (e) {
       console.error('updateUser', e);
       throw e;
     }
   };
 
-  const deleteUser = async (id: string) => {
+  const deleteUser = async (id: string): Promise<TUser> => {
     try {
       const resp = await UserService.destroy(id);
+      const row = resp?.data?.data || null;
       dispatch(removeOneUser({ id }));
-      return resp;
+      return row;
     } catch (e) {
       console.error('deleteUser', e);
       throw e;

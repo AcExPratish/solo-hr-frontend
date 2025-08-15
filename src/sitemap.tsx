@@ -63,7 +63,7 @@ export const routes: RouteItems[] = [
         path: '/user-management/role',
         pathName: 'role',
         permission: 'roles.view',
-        icon: 'list',
+        icon: 'user-plus',
         active: true
       }
     ]

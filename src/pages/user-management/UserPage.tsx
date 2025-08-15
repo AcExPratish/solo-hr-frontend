@@ -2,7 +2,7 @@ import React from 'react';
 import { TUser, TUserFilter } from '@/types/modules/user-management/user';
 import { useNavigate } from 'react-router-dom';
 import { TLoader } from '@/types/modules';
-import useUserHook from '@/hooks/modules/useUserHook';
+import useUserHook from '@/hooks/modules/user-management/useUserHook';
 import { useTranslation } from 'react-i18next';
 import { checkScope } from '@/helpers/auth';
 import { confirmAlert } from '@/components/common/custom/ConfirmAlert';
