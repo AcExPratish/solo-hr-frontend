@@ -95,6 +95,10 @@ export const UserSchema = Yup.object().shape({
         digits: 10
       })
     ),
+  roleOptions: Yup.array().min(
+    1,
+    t('form_validation_mandatory', { field: t('role').toLowerCase() })
+  ),
   password: Yup.string()
     .required(
       t('form_validation_mandatory', {

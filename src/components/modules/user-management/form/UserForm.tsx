@@ -249,8 +249,9 @@ const UserForm = ({
             </FloatingLabel>
 
             <Form.Group>
-              <Form.Label htmlFor="roleSelect">{t('role')}</Form.Label>
+              <Form.Label htmlFor="roleOptions">{t('role')}</Form.Label>
               <ReactGroupSelect
+                isDisabled={isView}
                 options={roleOption}
                 isMulti
                 name="roleOptions"
@@ -299,7 +300,7 @@ const UserForm = ({
                   onBlur={handleBlur}
                   onChange={handleChange}
                 />
-                {touched.password && errors.password && (
+                {errors.password && (
                   <Form.Control.Feedback type="invalid">
                     {errors.password}
                   </Form.Control.Feedback>
