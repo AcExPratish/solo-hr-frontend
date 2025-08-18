@@ -664,3 +664,96 @@ a {
   transform-origin: center;
   animation: pulse-animation 1.2s ease-in-out infinite;
 }
+
+/*------------------------------------------------------
+Start Custom Breadcrumb
+--------------------------------------------------------*/
+.f-breadcrumb.triangle {
+  background-color: transparent;
+  padding: 0;
+  display: flex;
+  list-style: none;
+}
+
+.f-breadcrumb.triangle li {
+  position: relative;
+  padding: 0;
+  margin: 4px 0 4px 4px;
+}
+
+.f-breadcrumb.triangle li:first-of-type > * {
+  padding-right: 1.6em;
+  border-radius: 0 6px 6px 0;
+}
+
+.f-breadcrumb.triangle li:last-of-type {
+  margin-left: 0;
+}
+
+.f-breadcrumb.triangle li > * {
+  position: relative;
+  padding: 12px 2rem 12px 14px;
+  font-size: 13px;
+  color: #2c3f4c;
+  background-color: #d4e5e9;
+  border-color: #d4e5e9;
+  text-decoration: none;
+  display: inline-block;
+}
+
+.f-breadcrumb.triangle li::after,
+.f-breadcrumb.triangle li > *::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  right: 100%;
+  content: '';
+  height: 0;
+  width: 0;
+  border: 22px solid transparent;
+  border-left-width: 0;
+  border-right-width: 20px;
+}
+
+.f-breadcrumb.triangle li > *::after {
+  z-index: 2;
+  border-right-color: inherit;
+}
+
+.f-breadcrumb.triangle li::after {
+  z-index: 1;
+  transform: translateX(-3px);
+  border-right-color: #ffffff;
+  margin: 0;
+}
+
+.f-breadcrumb.triangle li.current > *,
+.f-breadcrumb.triangle li.completed > * {
+  color: #ffffff;
+  background-color: #0aaf32;
+  border-color: #0aaf32;
+  font-weight: 600;
+}
+
+.f-breadcrumb li.current > *,
+.f-breadcrumb li.completed > * {
+  color: #0aaf32;
+  font-weight: 600;
+}
+
+/*------------------------------------------------------
+End Custom Breadcrumb
+--------------------------------------------------------*/
+.accordion-button:not(.collapsed)::after {
+  background-image: url('data:image/svg+xml,%3Csvg%20width%3D%2211%22%20height%3D%226%22%20viewBox%3D%220%200%2011%206%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%3Cpath%20d%3D%22M5.5%205.3625C5.3207%205.3625%205.16133%205.30273%205.0418%205.1832L1.2168%201.3582C0.957812%201.11914%200.957812%200.700781%201.2168%200.461719C1.45586%200.202734%201.87422%200.202734%202.11328%200.461719L5.5%203.82852L8.8668%200.461719C9.10586%200.202734%209.52422%200.202734%209.76328%200.461719C10.0223%200.700781%2010.0223%201.11914%209.76328%201.3582L5.93828%205.1832C5.81875%205.30273%205.65937%205.3625%205.5%205.3625Z%22%20fill%3D%22%23525B75%22%2F%3E%3C%2Fsvg%3E');
+  background-size: cover;
+  width: 20px;
+  height: 10px;
+}
+
+.accordion-button::after {
+  background-image: url('data:image/svg+xml,%3Csvg%20width%3D%2211%22%20height%3D%226%22%20viewBox%3D%220%200%2011%206%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%3Cpath%20d%3D%22M5.5%205.3625C5.3207%205.3625%205.16133%205.30273%205.0418%205.1832L1.2168%201.3582C0.957812%201.11914%200.957812%200.700781%201.2168%200.461719C1.45586%200.202734%201.87422%200.202734%202.11328%200.461719L5.5%203.82852L8.8668%200.461719C9.10586%200.202734%209.52422%200.202734%209.76328%200.461719C10.0223%200.700781%2010.0223%201.11914%209.76328%201.3582L5.93828%205.1832C5.81875%205.30273%205.65937%205.3625%205.5%205.3625Z%22%20fill%3D%22%23525B75%22%2F%3E%3C%2Fsvg%3E');
+  background-size: cover;
+  width: 20px;
+  height: 10px;
+}

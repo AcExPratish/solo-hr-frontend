@@ -10,6 +10,7 @@ import ComingSoon from 'pages/ComingSoon';
 import { AuthRoutes } from './AuthRoutes';
 import AuthGuard from '@/utils/route-guard/AuthGuard';
 import UserManagementRoutes from './UserManagementRoutes';
+import EmployeeManagementRoutes from './EmployeeManagementRoutes';
 
 const routes: RouteObject[] = [
   {
@@ -17,6 +18,7 @@ const routes: RouteObject[] = [
     children: [
       AuthRoutes,
       UserManagementRoutes,
+      EmployeeManagementRoutes,
 
       {
         path: '/',

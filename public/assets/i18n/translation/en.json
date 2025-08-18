@@ -94,5 +94,15 @@
     "select_all": "Select All",
     "select_all_permissions": "Select All Permissions",
     "permission": "Permission",
-    "roles_and_permissions": "Roles & Permissions"
+    "roles_and_permissions": "Roles & Permissions",
+    "account_creation": "Account Creation",
+    "basic_information": "Basic Information",
+    "family_and_emergency_contacts": "Family & Emergency Contacts",
+    "experience_and_education": "Experience & Education",
+    "bank_and_payroll_information": "Bank & Payroll Information",
+    "additional_information": "Additional Information",
+    "documents_and_agreements": "Documents & Agreements",
+    "review_and_submit": "Review & Submit",
+    "reset": "Reset",
+    "submit": "Submit"
 }

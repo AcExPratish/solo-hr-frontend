@@ -1,5 +1,5 @@
 import { IconProp } from '@fortawesome/fontawesome-svg-core';
-import { Icon, UilCube, UilFolder } from '@iconscout/react-unicons';
+import { Icon, UilCube, UilFolder, UilUser } from '@iconscout/react-unicons';
 
 export interface Route {
   name: string;
@@ -39,6 +39,23 @@ export const routes: RouteItems[] = [
         icon: 'pie-chart',
         path: '/dashboard',
         pathName: 'Dashboard',
+        active: true
+      }
+    ]
+  },
+
+  {
+    label: 'Employee Management',
+    icon: UilUser,
+    permission: 'users.view',
+    active: true,
+    pages: [
+      {
+        name: 'Onboarding',
+        path: '/employee-management/onboarding',
+        pathName: 'onboarding',
+        permission: 'users.view',
+        icon: 'book-open',
         active: true
       }
     ]
