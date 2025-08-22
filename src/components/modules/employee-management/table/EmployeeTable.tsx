@@ -96,7 +96,9 @@ export const employeeTableColumns = ({
         const { row } = original;
         return (
           <span className="text-body">
-            {convertTimestampToHumanDate(row?.original?.joining_date)}
+            {convertTimestampToHumanDate(
+              row?.original?.basic_information?.joining_date
+            )}
           </span>
         );
       },

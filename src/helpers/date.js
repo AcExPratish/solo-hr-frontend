@@ -177,5 +177,6 @@ export const diffInDays = (greater, lower) => {
 };
 
 export const formatDateForInput = date => {
+  if (!date) return '';
   return date ? moment(date).format('YYYY-MM-DD') : '';
 };

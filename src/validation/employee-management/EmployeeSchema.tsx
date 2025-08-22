@@ -69,32 +69,34 @@ export const EmployeeCreateSchema = Yup.object().shape({
         max: '200'
       })
     ),
-  date_of_birth: Yup.date()
-    .required(
-      t('form_validation_mandatory', {
-        field: t('date_of_birth').toLowerCase()
-      })
-    )
-    .max(
-      todaysDate,
-      t('form_validation_date_before', {
-        from: t('date_of_birth').toLowerCase(),
-        to: todaysDate
-      })
-    ),
-  joining_date: Yup.date()
-    .required(
-      t('form_validation_mandatory', {
-        field: t('joining_date').toLowerCase()
-      })
-    )
-    .max(
-      todaysDate,
-      t('form_validation_date_before', {
-        from: t('joining_date').toLowerCase(),
-        to: todaysDate
-      })
-    ),
+  basic_information: Yup.object().shape({
+    date_of_birth: Yup.date()
+      .required(
+        t('form_validation_mandatory', {
+          field: t('date_of_birth').toLowerCase()
+        })
+      )
+      .max(
+        todaysDate,
+        t('form_validation_date_before', {
+          from: t('date_of_birth').toLowerCase(),
+          to: todaysDate
+        })
+      ),
+    joining_date: Yup.date()
+      .required(
+        t('form_validation_mandatory', {
+          field: t('joining_date').toLowerCase()
+        })
+      )
+      .max(
+        todaysDate,
+        t('form_validation_date_before', {
+          from: t('joining_date').toLowerCase(),
+          to: todaysDate
+        })
+      )
+  }),
   phone: Yup.string()
     .required(
       t('form_validation_mandatory', {
@@ -106,27 +108,6 @@ export const EmployeeCreateSchema = Yup.object().shape({
       t('form_validation_exact_digits', {
         field: t('phone'),
         digits: 10
-      })
-    ),
-  roleOptions: Yup.array().min(
-    1,
-    t('form_validation_mandatory', { field: t('role').toLowerCase() })
-  ),
-  password: Yup.string()
-    .required(
-      t('form_validation_mandatory', {
-        field: t('password').toLowerCase()
-      })
-    )
-    .matches(
-      /^(?=.*[A-Z])(?=.*\d)(?=.*[!@#$%^&*(),.?":{}|<>])[A-Za-z\d!@#$%^&*(),.?":{}|<>]{8,}$/,
-      t('form_validation_password_validation_message')
-    )
-    .max(
-      200,
-      t('form_validation_max', {
-        field: t('password').toLowerCase(),
-        max: '200'
       })
     )
 });
@@ -195,32 +176,34 @@ export const EmployeeUpdateSchema = Yup.object().shape({
         max: '200'
       })
     ),
-  date_of_birth: Yup.date()
-    .required(
-      t('form_validation_mandatory', {
-        field: t('date_of_birth').toLowerCase()
-      })
-    )
-    .max(
-      todaysDate,
-      t('form_validation_date_before', {
-        from: t('date_of_birth').toLowerCase(),
-        to: todaysDate
-      })
-    ),
-  joining_date: Yup.date()
-    .required(
-      t('form_validation_mandatory', {
-        field: t('joining_date').toLowerCase()
-      })
-    )
-    .max(
-      todaysDate,
-      t('form_validation_date_before', {
-        from: t('joining_date').toLowerCase(),
-        to: todaysDate
-      })
-    ),
+  basic_information: Yup.object().shape({
+    date_of_birth: Yup.date()
+      .required(
+        t('form_validation_mandatory', {
+          field: t('date_of_birth').toLowerCase()
+        })
+      )
+      .max(
+        todaysDate,
+        t('form_validation_date_before', {
+          from: t('date_of_birth').toLowerCase(),
+          to: todaysDate
+        })
+      ),
+    joining_date: Yup.date()
+      .required(
+        t('form_validation_mandatory', {
+          field: t('joining_date').toLowerCase()
+        })
+      )
+      .max(
+        todaysDate,
+        t('form_validation_date_before', {
+          from: t('joining_date').toLowerCase(),
+          to: todaysDate
+        })
+      )
+  }),
   phone: Yup.string()
     .required(
       t('form_validation_mandatory', {
@@ -233,33 +216,5 @@ export const EmployeeUpdateSchema = Yup.object().shape({
         field: t('phone'),
         digits: 10
       })
-    ),
-  roleOptions: Yup.array().min(
-    1,
-    t('form_validation_mandatory', { field: t('role').toLowerCase() })
-  ),
-  password: Yup.string()
-    .transform(v => (v === '' ? undefined : v))
-    .when([], {
-      is: (value: string | undefined) => !!value,
-      then: schema =>
-        schema
-          .required(
-            t('form_validation_mandatory', {
-              field: t('password').toLowerCase()
-            })
-          )
-          .matches(
-            /^(?=.*[A-Z])(?=.*\d)(?=.*[!@#$%^&*(),.?":{}|<>])[A-Za-z\d!@#$%^&*(),.?":{}|<>]{8,}$/,
-            t('form_validation_password_validation_message')
-          )
-          .max(
-            200,
-            t('form_validation_max', {
-              field: t('password').toLowerCase(),
-              max: '200'
-            })
-          ),
-      otherwise: schema => schema.notRequired()
-    })
+    )
 });

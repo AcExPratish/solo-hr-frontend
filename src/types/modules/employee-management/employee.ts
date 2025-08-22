@@ -93,8 +93,6 @@ export interface TEmployeeExperience {
 }
 
 export interface TEmployee extends TUser {
-  joining_date?: string; // might needs to remove this
-  date_of_birth?: string; // might needs to remove this
   basic_information?: TEmployeeBasicInformation;
   emergency_contact?: TEmployeeEmergencyContact[];
   about?: string;

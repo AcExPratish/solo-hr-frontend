@@ -3,8 +3,6 @@ import { Col, FloatingLabel, Form, Row } from 'react-bootstrap';
 import { useTranslation } from 'react-i18next';
 import { Formik } from 'formik';
 import { TUser } from '@/types/modules/user-management/user';
-import { faEye, faEyeSlash } from '@fortawesome/free-solid-svg-icons';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { TModalProps } from '@/types/modules';
 import ModalForm from '@/components/common/custom/ModalForm';
 import { formatDateForInput } from '@/helpers/date';
@@ -13,6 +11,7 @@ import {
   EmployeeCreateSchema,
   EmployeeUpdateSchema
 } from '@/validation/employee-management/EmployeeSchema';
+import { FieldErrorFeedback, getFieldClass } from '@/helpers/formik';
 
 export interface EmployeeFormProps {
   formData: TEmployee;
@@ -34,17 +33,11 @@ const EmployeeForm = ({
 
   // Use States
   const isView = modal.type === 'view';
-  const [showPassword, setShowPassword] = React.useState<boolean>(false);
   const initialValues = React.useMemo<TEmployee>(() => {
     return {
       ...formData
     };
   }, [formData, modal]);
-
-  // Handlers
-  const handleClickShowPassword = () => {
-    setShowPassword(!showPassword);
-  };
 
   // On Submit
   const handleOnSubmit = async (values: TEmployee) => {
@@ -102,20 +95,21 @@ const EmployeeForm = ({
                     type="text"
                     name="first_name"
                     placeholder={t('first_name')}
-                    className={`form-control form-icon-input ${
-                      touched.first_name && errors.first_name
-                        ? 'is-invalid'
-                        : ''
-                    }`}
+                    className={`form-control form-icon-input ${getFieldClass(
+                      touched,
+                      errors,
+                      'first_name'
+                    )}`}
                     value={values.first_name || ''}
                     onBlur={handleBlur}
                     onChange={handleChange}
                   />
-                  {touched.first_name && errors.first_name && (
-                    <Form.Control.Feedback type="invalid">
-                      {errors.first_name}
-                    </Form.Control.Feedback>
-                  )}
+
+                  <FieldErrorFeedback
+                    touched={touched}
+                    errors={errors}
+                    path="first_name"
+                  />
                 </FloatingLabel>
               </Col>
 
@@ -127,20 +121,21 @@ const EmployeeForm = ({
                     type="text"
                     name="middle_name"
                     placeholder={t('middle_name')}
-                    className={`form-control form-icon-input ${
-                      touched.middle_name && errors.middle_name
-                        ? 'is-invalid'
-                        : ''
-                    }`}
+                    className={`form-control form-icon-input ${getFieldClass(
+                      touched,
+                      errors,
+                      'middle_name'
+                    )}`}
                     value={values.middle_name || ''}
                     onBlur={handleBlur}
                     onChange={handleChange}
                   />
-                  {touched.middle_name && errors.middle_name && (
-                    <Form.Control.Feedback type="invalid">
-                      {errors.middle_name}
-                    </Form.Control.Feedback>
-                  )}
+
+                  <FieldErrorFeedback
+                    touched={touched}
+                    errors={errors}
+                    path="middle_name"
+                  />
                 </FloatingLabel>
               </Col>
 
@@ -152,18 +147,21 @@ const EmployeeForm = ({
                     type="text"
                     name="last_name"
                     placeholder={t('last_name')}
-                    className={`form-control form-icon-input ${
-                      touched.last_name && errors.last_name ? 'is-invalid' : ''
-                    }`}
+                    className={`form-control form-icon-input ${getFieldClass(
+                      touched,
+                      errors,
+                      'last_name'
+                    )}`}
                     value={values.last_name || ''}
                     onBlur={handleBlur}
                     onChange={handleChange}
                   />
-                  {touched.last_name && errors.last_name && (
-                    <Form.Control.Feedback type="invalid">
-                      {errors.last_name}
-                    </Form.Control.Feedback>
-                  )}
+
+                  <FieldErrorFeedback
+                    touched={touched}
+                    errors={errors}
+                    path="last_name"
+                  />
                 </FloatingLabel>
               </Col>
 
@@ -175,18 +173,21 @@ const EmployeeForm = ({
                     type="text"
                     name="username"
                     placeholder={t('username')}
-                    className={`form-control form-icon-input ${
-                      touched.username && errors.username ? 'is-invalid' : ''
-                    }`}
+                    className={`form-control form-icon-input ${getFieldClass(
+                      touched,
+                      errors,
+                      'username'
+                    )}`}
                     value={values.username || ''}
                     onBlur={handleBlur}
                     onChange={handleChange}
                   />
-                  {touched.username && errors.username && (
-                    <Form.Control.Feedback type="invalid">
-                      {errors.username}
-                    </Form.Control.Feedback>
-                  )}
+
+                  <FieldErrorFeedback
+                    touched={touched}
+                    errors={errors}
+                    path="username"
+                  />
                 </FloatingLabel>
               </Col>
 
@@ -198,43 +199,81 @@ const EmployeeForm = ({
                     type="email"
                     name="email"
                     placeholder={t('email')}
-                    className={`form-control form-icon-input ${
-                      touched.email && errors.email ? 'is-invalid' : ''
-                    }`}
+                    className={`form-control form-icon-input ${getFieldClass(
+                      touched,
+                      errors,
+                      'email'
+                    )}`}
                     value={values.email || ''}
                     onBlur={handleBlur}
                     onChange={handleChange}
                   />
-                  {touched.email && errors.email && (
-                    <Form.Control.Feedback type="invalid">
-                      {errors.email}
-                    </Form.Control.Feedback>
-                  )}
+
+                  <FieldErrorFeedback
+                    touched={touched}
+                    errors={errors}
+                    path="email"
+                  />
                 </FloatingLabel>
               </Col>
 
-              <Col xs={12}>
+              <Col xs={12} md={6}>
                 <FloatingLabel label={t('date_of_birth')}>
                   <Form.Control
                     disabled={isView}
-                    id="date_of_birth"
+                    id="basic_information.date_of_birth"
                     type="date"
-                    name="date_of_birth"
+                    name="basic_information.date_of_birth"
                     placeholder={t('date_of_birth')}
-                    className={`form-control form-icon-input ${
-                      touched.date_of_birth && errors.date_of_birth
-                        ? 'is-invalid'
-                        : ''
-                    }`}
-                    value={formatDateForInput(values.date_of_birth) || ''}
+                    className={`form-control form-icon-input ${getFieldClass(
+                      touched,
+                      errors,
+                      'basic_information.date_of_birth'
+                    )}`}
+                    value={
+                      formatDateForInput(
+                        values?.basic_information?.date_of_birth
+                      ) || ''
+                    }
                     onBlur={handleBlur}
                     onChange={handleChange}
                   />
-                  {touched.date_of_birth && errors.date_of_birth && (
-                    <Form.Control.Feedback type="invalid">
-                      {errors.date_of_birth}
-                    </Form.Control.Feedback>
-                  )}
+
+                  <FieldErrorFeedback
+                    touched={touched}
+                    errors={errors}
+                    path="basic_information.date_of_birth"
+                  />
+                </FloatingLabel>
+              </Col>
+
+              <Col xs={12} md={6}>
+                <FloatingLabel label={t('joining_date')}>
+                  <Form.Control
+                    disabled={isView}
+                    id="basic_information.joining_date"
+                    type="date"
+                    name="basic_information.joining_date"
+                    placeholder={t('joining_date')}
+                    className={`form-control form-icon-input ${getFieldClass(
+                      touched,
+                      errors,
+                      'basic_information.joining_date'
+                    )}`}
+                    value={
+                      formatDateForInput(
+                        values?.basic_information?.joining_date
+                      ) || ''
+                    }
+                    onBlur={handleBlur}
+                    onChange={handleChange}
+                  />
+
+                  <FieldErrorFeedback
+                    touched={touched}
+                    errors={errors}
+                    path="basic_information.joining_date"
+                  />
                 </FloatingLabel>
               </Col>
 
@@ -246,51 +285,23 @@ const EmployeeForm = ({
                     type="phone"
                     name="phone"
                     placeholder={t('phone')}
-                    className={`form-control form-icon-input ${
-                      touched.phone && errors.phone ? 'is-invalid' : ''
-                    }`}
+                    className={`form-control form-icon-input ${getFieldClass(
+                      touched,
+                      errors,
+                      'phone'
+                    )}`}
                     value={values.phone || ''}
                     onBlur={handleBlur}
                     onChange={handleChange}
                   />
-                  {touched.phone && errors.phone && (
-                    <Form.Control.Feedback type="invalid">
-                      {errors.phone}
-                    </Form.Control.Feedback>
-                  )}
+
+                  <FieldErrorFeedback
+                    touched={touched}
+                    errors={errors}
+                    path="phone"
+                  />
                 </FloatingLabel>
               </Col>
-
-              {!isView && (
-                <Col xs={12}>
-                  <FloatingLabel label={t('password')}>
-                    <Form.Control
-                      id="password"
-                      type={showPassword ? 'text' : 'password'}
-                      name="password"
-                      className={`form-control form-icon-input ${
-                        touched.password && errors.password ? 'is-invalid' : ''
-                      }`}
-                      placeholder={t('password')}
-                      value={values.password || ''}
-                      onBlur={handleBlur}
-                      onChange={handleChange}
-                    />
-                    {errors.password && (
-                      <Form.Control.Feedback type="invalid">
-                        {errors.password}
-                      </Form.Control.Feedback>
-                    )}
-
-                    <FontAwesomeIcon
-                      onClick={handleClickShowPassword}
-                      style={{ position: 'absolute', right: '2%', top: '50%' }}
-                      icon={showPassword ? faEye : faEyeSlash}
-                      className="text-body fs-9 form-icon"
-                    />
-                  </FloatingLabel>
-                </Col>
-              )}
             </Row>
           </Form>
         </ModalForm>

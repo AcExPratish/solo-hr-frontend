@@ -39,8 +39,30 @@ const initialValues: TEmployee = {
   password: '',
   email: '',
   phone: '',
-  date_of_birth: '',
-  email_verified_at: ''
+  email_verified_at: '',
+  basic_information: {
+    date_of_birth: '',
+    gender: '',
+    nationality: '',
+    religion: '',
+    marital_status: '',
+    employment_spouse: '',
+    no_of_children: '',
+    blood_group: '',
+
+    // Employment
+    joining_date: '',
+    department_id: '',
+    designation_id: '',
+
+    // Address
+    province_id: '',
+    district_id: '',
+    city_id: '',
+    address: '',
+    zip_code: '',
+    postal_code: ''
+  }
 };
 
 const initialLoader: TLoader = {
