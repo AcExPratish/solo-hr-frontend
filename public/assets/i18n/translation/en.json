@@ -107,5 +107,6 @@
     "submit": "Submit",
     "employee_list": "Employee List",
     "employee": "Employee",
-    "employee_detail": "Employee Detail"
+    "employee_detail": "Employee Detail",
+    "joining_date": "Joining Date"
 }

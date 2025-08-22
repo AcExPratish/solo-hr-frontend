@@ -82,6 +82,19 @@ export const EmployeeCreateSchema = Yup.object().shape({
         to: todaysDate
       })
     ),
+  joining_date: Yup.date()
+    .required(
+      t('form_validation_mandatory', {
+        field: t('joining_date').toLowerCase()
+      })
+    )
+    .max(
+      todaysDate,
+      t('form_validation_date_before', {
+        from: t('joining_date').toLowerCase(),
+        to: todaysDate
+      })
+    ),
   phone: Yup.string()
     .required(
       t('form_validation_mandatory', {
@@ -192,6 +205,19 @@ export const EmployeeUpdateSchema = Yup.object().shape({
       todaysDate,
       t('form_validation_date_before', {
         from: t('date_of_birth').toLowerCase(),
+        to: todaysDate
+      })
+    ),
+  joining_date: Yup.date()
+    .required(
+      t('form_validation_mandatory', {
+        field: t('joining_date').toLowerCase()
+      })
+    )
+    .max(
+      todaysDate,
+      t('form_validation_date_before', {
+        from: t('joining_date').toLowerCase(),
         to: todaysDate
       })
     ),
