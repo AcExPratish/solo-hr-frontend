@@ -11,7 +11,6 @@ import {
   UserUpdateSchema
 } from '@/validation/user-management/UserSchema';
 import ModalForm from '@/components/common/custom/ModalForm';
-import { formatDateForInput } from '@/helpers/date';
 import useRoleHook from '@/hooks/modules/user-management/useRoleHook';
 import ReactGroupSelect from '@/components/base/ReactGroupSelect';
 import { TRole } from '@/types/modules/user-management/role';
@@ -242,31 +241,6 @@ const UserForm = ({
                   {touched.email && errors.email && (
                     <Form.Control.Feedback type="invalid">
                       {errors.email}
-                    </Form.Control.Feedback>
-                  )}
-                </FloatingLabel>
-              </Col>
-
-              <Col xs={12}>
-                <FloatingLabel label={t('date_of_birth')}>
-                  <Form.Control
-                    disabled={isView}
-                    id="date_of_birth"
-                    type="date"
-                    name="date_of_birth"
-                    placeholder={t('date_of_birth')}
-                    className={`form-control form-icon-input ${
-                      touched.date_of_birth && errors.date_of_birth
-                        ? 'is-invalid'
-                        : ''
-                    }`}
-                    value={formatDateForInput(values.date_of_birth) || ''}
-                    onBlur={handleBlur}
-                    onChange={handleChange}
-                  />
-                  {touched.date_of_birth && errors.date_of_birth && (
-                    <Form.Control.Feedback type="invalid">
-                      {errors.date_of_birth}
                     </Form.Control.Feedback>
                   )}
                 </FloatingLabel>

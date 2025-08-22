@@ -16,12 +16,12 @@ import { ModalProps } from 'react-bootstrap';
 import UserTable, {
   userTableColumns
 } from '@/components/modules/user-management/table/UserTable';
-import UserForm from '@/components/modules/user-management/form/UserForm';
 import {
   TEmployee,
   TEmployeeFilter
 } from '@/types/modules/employee-management/employee';
 import useEmployeeHook from '@/hooks/modules/employee-management/useEmployeeHook';
+import EmployeeForm from '@/components/modules/employee-management/form/EmployeeForm';
 
 // Initial values
 const initialFilter: TEmployeeFilter = {
@@ -283,7 +283,7 @@ const EmployeePage = () => {
       </AdvanceTableProvider>
 
       {/* Modals */}
-      <UserForm
+      <EmployeeForm
         formData={employee}
         modal={modal}
         onSubmit={values => {

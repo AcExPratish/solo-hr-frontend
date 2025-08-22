@@ -1,9 +1,6 @@
 import * as Yup from 'yup';
 import i18next from 'i18next';
-import { todayDate } from '@/helpers/date';
 const t = i18next.t;
-
-const todaysDate = todayDate();
 
 export const UserCreateSchema = Yup.object().shape({
   first_name: Yup.string()
@@ -67,19 +64,6 @@ export const UserCreateSchema = Yup.object().shape({
       t('form_validation_max', {
         field: t('email').toLowerCase(),
         max: '200'
-      })
-    ),
-  date_of_birth: Yup.date()
-    .required(
-      t('form_validation_mandatory', {
-        field: t('date_of_birth').toLowerCase()
-      })
-    )
-    .max(
-      todaysDate,
-      t('form_validation_date_before', {
-        from: t('date_of_birth').toLowerCase(),
-        to: todaysDate
       })
     ),
   phone: Yup.string()
@@ -180,19 +164,6 @@ export const UserUpdateSchema = Yup.object().shape({
       t('form_validation_max', {
         field: t('email').toLowerCase(),
         max: '200'
-      })
-    ),
-  date_of_birth: Yup.date()
-    .required(
-      t('form_validation_mandatory', {
-        field: t('date_of_birth').toLowerCase()
-      })
-    )
-    .max(
-      todaysDate,
-      t('form_validation_date_before', {
-        from: t('date_of_birth').toLowerCase(),
-        to: todaysDate
       })
     ),
   phone: Yup.string()
