@@ -1,7 +1,8 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import { Button } from 'react-bootstrap';
+import { Button, OverlayTrigger, Tooltip } from 'react-bootstrap';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faEdit, faEye, faTrashCan } from '@fortawesome/free-solid-svg-icons';
+import { useTranslation } from 'react-i18next';
 
 interface ActionTableItemsProps {
   data: any;
@@ -16,47 +17,67 @@ const ActionTableItems = ({
   onEdit,
   onDelete
 }: ActionTableItemsProps) => {
+  const { t } = useTranslation();
+
   return (
     <span className="d-flex justify-content-end text-nowrap">
       {onView && (
-        <Button
-          title="View"
-          variant="phoenix-info"
-          onClick={() => {
-            onView?.(data || null);
-          }}
-          className="btn-sm ml-2"
+        <OverlayTrigger
+          placement="top"
+          overlay={<Tooltip id="view-tooltip">{t('view')}</Tooltip>}
         >
-          <FontAwesomeIcon icon={faEye} />
-        </Button>
+          <span>
+            <Button
+              variant="phoenix-info"
+              onClick={() => {
+                onView?.(data || null);
+              }}
+              className="btn-sm ml-2"
+            >
+              <FontAwesomeIcon icon={faEye} />
+            </Button>
+          </span>
+        </OverlayTrigger>
       )}
 
       {onEdit && (
-        <Button
-          title="Edit"
-          variant="phoenix-secondary"
-          className="btn-sm ml-2"
-          onClick={() => {
-            onEdit?.(data || null);
-          }}
-          style={{ marginLeft: '4px' }}
+        <OverlayTrigger
+          placement="top"
+          overlay={<Tooltip id="edit-tooltip">{t('edit')}</Tooltip>}
         >
-          <FontAwesomeIcon icon={faEdit} />
-        </Button>
+          <span>
+            <Button
+              variant="phoenix-secondary"
+              className="btn-sm ml-2"
+              onClick={() => {
+                onEdit?.(data || null);
+              }}
+              style={{ marginLeft: '4px' }}
+            >
+              <FontAwesomeIcon icon={faEdit} />
+            </Button>
+          </span>
+        </OverlayTrigger>
       )}
 
       {onDelete && (
-        <Button
-          variant="phoenix-danger"
-          title="Delete"
-          className=" btn-sm "
-          style={{ marginLeft: '4px' }}
-          onClick={() => {
-            onDelete?.(data || null);
-          }}
+        <OverlayTrigger
+          placement="top"
+          overlay={<Tooltip id="delete-tooltip">{t('delete')}</Tooltip>}
         >
-          <FontAwesomeIcon icon={faTrashCan} />
-        </Button>
+          <span>
+            <Button
+              variant="phoenix-danger"
+              className="btn-sm"
+              style={{ marginLeft: '4px' }}
+              onClick={() => {
+                onDelete?.(data || null);
+              }}
+            >
+              <FontAwesomeIcon icon={faTrashCan} />
+            </Button>
+          </span>
+        </OverlayTrigger>
       )}
     </span>
   );
