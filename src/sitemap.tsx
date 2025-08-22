@@ -47,6 +47,7 @@ export const routes: RouteItems[] = [
   {
     label: 'Employee Management',
     icon: UilUser,
+    // TODO: Add permission for employee management
     permission: 'users.view',
     active: true,
     pages: [

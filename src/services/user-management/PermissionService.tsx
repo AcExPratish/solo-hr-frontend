@@ -1,11 +1,12 @@
-import api from '../../utils/api';
-import { serializedObject } from '../../helpers/utils';
+import api from '@/utils/api';
+import { serializedObject } from '@/helpers/utils';
 import { TFilter } from '@/types/modules';
+import { apiEndpoint } from '@/helpers/common';
 
-const permissionEndpoint: string = `${process.env.REACT_APP_API_ENDPOINT}/permissions`;
+const permissionEndpoint: string = `${apiEndpoint}/permissions`;
 
-const fetchAll = (params: TFilter) => {
-  return api.get(`${permissionEndpoint}?${serializedObject(params)}`);
+const fetchAll = (filters: TFilter) => {
+  return api.get(`${permissionEndpoint}?${serializedObject(filters)}`);
 };
 
 export default {

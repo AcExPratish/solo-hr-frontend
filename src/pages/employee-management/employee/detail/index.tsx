@@ -1,7 +1,9 @@
-import React from 'react';
+import { useParams } from 'react-router-dom';
 
 const EmployeesDetailPage = () => {
-  return <div>EmployeesDetailPage</div>;
+  const { id } = useParams();
+
+  return <div>EmployeesDetailPage {id}</div>;
 };
 
 export default EmployeesDetailPage;

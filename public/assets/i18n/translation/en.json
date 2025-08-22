@@ -104,5 +104,8 @@
     "documents_and_agreements": "Documents & Agreements",
     "review_and_submit": "Review & Submit",
     "reset": "Reset",
-    "submit": "Submit"
+    "submit": "Submit",
+    "employee_list": "Employee List",
+    "employee": "Employee",
+    "employee_detail": "Employee Detail"
 }

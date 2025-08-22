@@ -1,9 +1,9 @@
-import api from '../../utils/api';
+import api from '@/utils/api';
 import { TUser, TUserFilter } from '@/types/modules/user-management/user';
+import { serializedObject } from '@/helpers/utils';
+import { apiEndpoint } from '@/helpers/common';
 
-import { serializedObject } from '../../helpers/utils';
-
-const userEndpoint: string = `${process.env.REACT_APP_API_ENDPOINT}/users`;
+const userEndpoint: string = `${apiEndpoint}/users`;
 
 const fetchAll = (filters: TUserFilter) => {
   return api.get(`${userEndpoint}?${serializedObject(filters)}`);
