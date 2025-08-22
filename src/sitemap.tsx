@@ -51,9 +51,9 @@ export const routes: RouteItems[] = [
     active: true,
     pages: [
       {
-        name: 'Onboarding',
-        path: '/employee-management/onboarding',
-        pathName: 'onboarding',
+        name: 'Employees',
+        path: '/employee-management/employees',
+        pathName: 'employees',
         permission: 'users.view',
         icon: 'book-open',
         active: true

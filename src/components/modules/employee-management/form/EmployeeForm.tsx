@@ -3,7 +3,7 @@ import React from 'react';
 import { Button, Card, Col, FloatingLabel, Form, Row } from 'react-bootstrap';
 import { useTranslation } from 'react-i18next';
 
-const OnboardingCreateAccountForm = () => {
+const EmployeeForm = () => {
   const { t } = useTranslation();
 
   return (
@@ -110,4 +110,4 @@ const OnboardingCreateAccountForm = () => {
   );
 };
 
-export default OnboardingCreateAccountForm;
+export default EmployeeForm;
