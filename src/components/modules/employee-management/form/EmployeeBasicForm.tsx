@@ -13,7 +13,7 @@ import {
 } from '@/validation/employee-management/EmployeeSchema';
 import { FieldErrorFeedback, getFieldClass } from '@/helpers/formik';
 
-export interface EmployeeFormProps {
+export interface EmployeeBasicFormProps {
   formData: TEmployee;
   onSubmit: (data: TEmployee) => void;
   onClose: () => void;
@@ -21,13 +21,13 @@ export interface EmployeeFormProps {
   loading?: boolean;
 }
 
-const EmployeeForm = ({
+const EmployeeBasicForm = ({
   formData,
   modal,
   onSubmit,
   onClose,
   loading
-}: EmployeeFormProps) => {
+}: EmployeeBasicFormProps) => {
   // React Hooks
   const { t } = useTranslation();
 
@@ -310,4 +310,4 @@ const EmployeeForm = ({
   );
 };
 
-export default EmployeeForm;
+export default EmployeeBasicForm;
