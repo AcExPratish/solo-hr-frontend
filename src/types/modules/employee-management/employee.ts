@@ -51,20 +51,20 @@ export interface TEmployeeDocument {
 }
 
 export interface TEmployeeStatutoryInformation {
-  pan?: TEmployeeDocument; // PAN Number
-  cit?: TEmployeeDocument; // Citizen Investment Trust Number
-  ssf?: TEmployeeDocument; // Social Security Number
-  epf?: TEmployeeDocument; // Employee Provident Fund Number
-  nid?: TEmployeeDocument; // National ID Number
-  citizenship?: TEmployeeDocument; // Citizenship Number
+  citizen_investment_trust?: TEmployeeDocument; // Citizen Investment Trust Number
+  social_security_fund?: TEmployeeDocument; // Social Security Number
+  provident_fund?: TEmployeeDocument; // Provident Fund Number
+  police_clearance?: TEmployeeDocument; // Police Clearance Report
+  health_insurance?: TEmployeeDocument; // Health Insurance Number
+  tax_clearance?: TEmployeeDocument; // Tax Clearance Certificate
 }
 
 export interface TEmployeeSupportingDocuments {
+  pan?: TEmployeeDocument; // PAN Number
+  national_id?: TEmployeeDocument; // National ID Number
+  citizenship?: TEmployeeDocument; // Citizenship Number
   passport?: TEmployeeDocument; // Passport Number
-  police_clearance?: TEmployeeDocument; // Police Clearance Report
   driving_license?: TEmployeeDocument; // Driving License Number
-  health_insurance?: TEmployeeDocument; // Health Insurance Number
-  tax_clearance?: TEmployeeDocument; // Tax Clearance Certificate
 }
 
 export interface TFamilyInformation {
