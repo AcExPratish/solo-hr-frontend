@@ -13,9 +13,9 @@ import Button from '@/components/base/Button';
 import SearchBox from '@/components/common/SearchBox';
 import AdvanceTableProvider from '@/providers/AdvanceTableProvider';
 import { ModalProps } from 'react-bootstrap';
-import UserTable, {
-  userTableColumns
-} from '@/components/modules/user-management/table/UserTable';
+import EmployeeTable, {
+  employeeTableColumns
+} from '@/components/modules/employee-management/table/EmployeeTable';
 import {
   TEmployee,
   TEmployeeFilter
@@ -119,7 +119,7 @@ const EmployeePage = () => {
   const mappedTable = () => {
     const tempTable: UseAdvanceTableProps<TEmployee> = {
       data: employees,
-      columns: userTableColumns({
+      columns: employeeTableColumns({
         onView: handleOnView,
         onEdit: handleOnEdit,
         onDelete: handleOnDelete
@@ -278,7 +278,7 @@ const EmployeePage = () => {
         </div>
 
         <div className="mx-n4 px-4 mx-lg-n6 px-lg-6 bg-body-emphasis border-top border-bottom border-translucent position-relative top-1">
-          <UserTable loader={loader.list} />
+          <EmployeeTable loader={loader.list} />
         </div>
       </AdvanceTableProvider>
 

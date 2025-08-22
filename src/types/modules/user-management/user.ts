@@ -10,7 +10,6 @@ export interface TUser {
   password?: string;
   email?: string;
   phone?: string;
-  date_of_birth?: string;
   email_verified_at?: string;
   avatar?: string;
   created_at?: string;

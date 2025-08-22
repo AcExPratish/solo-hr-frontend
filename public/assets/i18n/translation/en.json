@@ -108,5 +108,6 @@
     "employee_list": "Employee List",
     "employee": "Employee",
     "employee_detail": "Employee Detail",
-    "joining_date": "Joining Date"
+    "joining_date": "Joining Date",
+    "emp_id": "Emp ID"
 }

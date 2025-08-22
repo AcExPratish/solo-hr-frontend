@@ -37,7 +37,6 @@ const initialValues: TUser = {
   password: '',
   email: '',
   phone: '',
-  date_of_birth: '',
   email_verified_at: ''
 };
 

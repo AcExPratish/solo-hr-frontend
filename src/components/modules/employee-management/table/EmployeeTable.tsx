@@ -2,34 +2,36 @@ import React from 'react';
 import { ColumnDef } from '@tanstack/react-table';
 import AdvanceTable from 'components/base/AdvanceTable';
 import AdvanceTableFooter from 'components/base/AdvanceTableFooter';
-import { TUser } from '@/types/modules/user-management/user';
 import { useTranslation } from 'react-i18next';
 import ActionTableItems from '@/components/common/ActionTableItems';
 import { checkScope } from '@/helpers/auth';
 import { getUserFirstAndLastName } from '@/helpers/utils';
 import SafeAvatarImage from '@/components/common/SafeAvatarImage';
 import { storageEndpoint } from '@/helpers/common';
+import { TEmployee } from '@/types/modules/employee-management/employee';
+import { convertTimestampToHumanDate } from '@/helpers/date';
+import Badge from '@/components/base/Badge';
 
-interface userTableColumnsProps {
-  onView?: (data: TUser, show: boolean) => void;
-  onEdit?: (data: TUser) => void;
-  onDelete?: (data: TUser) => void;
+interface employeeTableColumnsProps {
+  onView?: (data: TEmployee, show: boolean) => void;
+  onEdit?: (data: TEmployee) => void;
+  onDelete?: (data: TEmployee) => void;
 }
 
-export const userTableColumns = ({
+export const employeeTableColumns = ({
   onView,
   onEdit,
   onDelete
-}: userTableColumnsProps) => {
+}: employeeTableColumnsProps) => {
   // eslint-disable-next-line
   const { t }: { t: any } = useTranslation();
-  const columns: ColumnDef<TUser>[] = [
+  const columns: ColumnDef<TEmployee>[] = [
     {
-      header: `${t('sn')}`,
+      header: `${t('emp_id')}`,
       accessorKey: 'id',
       cell: original => {
         const { row } = original;
-        return <span>{row.index + 1}</span>;
+        return <span>{row?.original?.id}</span>;
       },
       meta: {
         cellProps: { className: 'text-body' },
@@ -72,14 +74,6 @@ export const userTableColumns = ({
       }
     },
     {
-      header: `${t('username')}`,
-      accessorKey: 'username',
-      meta: {
-        cellProps: { className: 'text-body' },
-        headerProps: { style: { width: '15%' }, className: '' }
-      }
-    },
-    {
       header: `${t('email')}`,
       accessorKey: 'email',
       meta: {
@@ -96,11 +90,49 @@ export const userTableColumns = ({
       }
     },
     {
+      header: `${t('joining_date')}`,
+      accessorKey: 'joining_date',
+      cell: original => {
+        const { row } = original;
+        return (
+          <span className="text-body">
+            {convertTimestampToHumanDate(row?.original?.joining_date)}
+          </span>
+        );
+      },
+      meta: {
+        cellProps: { className: 'text-body' },
+        headerProps: { style: { width: '10%' }, className: '' }
+      }
+    },
+    {
+      header: `${t('status')}`,
+      accessorKey: 'status',
+      cell: original => {
+        const { row } = original;
+        return (
+          <span className="text-body">
+            <Badge
+              variant="default"
+              bg={row?.original?.deleted_at ? 'danger' : 'success'}
+            >
+              {row?.original?.deleted_at ? t('inactive') : t('active')}
+            </Badge>
+          </span>
+        );
+      },
+      meta: {
+        cellProps: { className: 'text-body' },
+        headerProps: { style: { width: '5%' }, className: '' }
+      }
+    },
+    {
       header: `Action`,
       id: 'action',
       cell: ({ row: { original } }) => {
         const row = original;
 
+        // TODO: Add permission check for employee management
         return (
           <ActionTableItems
             data={row}
@@ -125,11 +157,11 @@ export const userTableColumns = ({
   return columns;
 };
 
-interface UserTableProps {
+interface EmployeeTableProps {
   loader?: boolean;
 }
 
-const UserTable = ({ loader }: UserTableProps) => {
+const EmployeeTable = ({ loader }: EmployeeTableProps) => {
   return (
     <div className="border-translucent">
       <AdvanceTable
@@ -143,4 +175,4 @@ const UserTable = ({ loader }: UserTableProps) => {
   );
 };
 
-export default UserTable;
+export default EmployeeTable;
