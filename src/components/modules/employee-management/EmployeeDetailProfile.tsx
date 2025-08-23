@@ -135,7 +135,7 @@ const EmployeeDetailProfile = ({
 
           {/* Buttons */}
           <Row className="mt-2">
-            <Col xs={12} md={6} className="px-1">
+            <Col xs={12} md={12} className="px-1">
               <Button
                 variant="subtle-secondary"
                 className="w-100"
@@ -146,12 +146,12 @@ const EmployeeDetailProfile = ({
               </Button>
             </Col>
 
-            <Col xs={12} md={6} className="px-1">
+            {/* <Col xs={12} md={6} className="px-1">
               <Button variant="success" className="w-100">
                 <FontAwesomeIcon icon={faEnvelope} />
                 <span className="ms-2">{t('message')}</span>
               </Button>
-            </Col>
+            </Col> */}
           </Row>
 
           <hr className="my-4 w-100" />
