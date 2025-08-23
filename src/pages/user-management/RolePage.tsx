@@ -243,7 +243,7 @@ const RolePage = () => {
 
   React.useEffect(() => {
     if (!checkScope('roles.view')) {
-      navigate('/error/403');
+      navigate('/errors/403');
     } else {
       fetchAllPermissionItem();
     }

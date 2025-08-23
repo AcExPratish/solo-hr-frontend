@@ -17,8 +17,12 @@ import EmployeeDetailStatutoryInformation from '@/components/modules/employee-ma
 import EmployeeDetailSupportingDocuments from '@/components/modules/employee-management/EmployeeDetailSupportingDocuments';
 import EmployeeDetailEducation from '@/components/modules/employee-management/EmployeeDetailEducation';
 import EmployeeDetailExperience from '@/components/modules/employee-management/EmployeeDetailExperience';
-import { useParams } from 'react-router-dom';
+import {
+  //  useNavigate,
+  useParams
+} from 'react-router-dom';
 import PhoenixLoader from '@/components/common/PhoenixLoader';
+// import { checkScope } from '@/helpers/auth';
 
 // Initial values
 const initialValues: TEmployee = {
@@ -175,6 +179,7 @@ const EmployeeDetailsPage = () => {
   // React Hooks
   const { t } = useTranslation();
   const { employeeId } = useParams();
+  // const navigate = useNavigate();
 
   // Custom Hooks
   const { fetchOneEmployee, updateEmployee } = useEmployeeHook();
@@ -229,8 +234,14 @@ const EmployeeDetailsPage = () => {
 
   React.useEffect(() => {
     //TODO: Add permission check
+    // if (!checkScope('employee_management.employee.view')) {
+    //   navigate('/errors/403');
+    // }
+
     if (employeeId) {
       fetchOneItem(employeeId);
+    } else {
+      setEmployee(initialValues);
     }
   }, [employeeId]);
 

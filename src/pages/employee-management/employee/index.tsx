@@ -274,7 +274,7 @@ const EmployeePage = () => {
   React.useEffect(() => {
     // TODO: Add permission for employee management
     if (!checkScope('users.view')) {
-      navigate('/error/403');
+      navigate('/errors/403');
     }
   }, []);
 

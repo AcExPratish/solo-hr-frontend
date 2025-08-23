@@ -249,7 +249,7 @@ const UserPage = () => {
 
   React.useEffect(() => {
     if (!checkScope('users.view')) {
-      navigate('/error/403');
+      navigate('/errors/403');
     } else {
       fetchAllRole({
         page: 1,
