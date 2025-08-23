@@ -1,5 +1,6 @@
 import * as Yup from 'yup';
 import i18next from 'i18next';
+import { phoneRegex } from '@/helpers/regex';
 const t = i18next.t;
 
 export const UserCreateSchema = Yup.object().shape({
@@ -72,12 +73,9 @@ export const UserCreateSchema = Yup.object().shape({
         field: t('phone').toLowerCase()
       })
     )
-    .length(
-      10,
-      t('form_validation_exact_digits', {
-        field: t('phone').toLowerCase(),
-        digits: 10
-      })
+    .matches(
+      phoneRegex,
+      t('form_validation_phone', { field: t('phone').toLowerCase() })
     ),
   roleOptions: Yup.array().min(
     1,
@@ -172,12 +170,9 @@ export const UserUpdateSchema = Yup.object().shape({
         field: t('phone').toLowerCase()
       })
     )
-    .length(
-      10,
-      t('form_validation_exact_digits', {
-        field: t('phone').toLowerCase(),
-        digits: 10
-      })
+    .matches(
+      phoneRegex,
+      t('form_validation_phone', { field: t('phone').toLowerCase() })
     ),
   roleOptions: Yup.array().min(
     1,

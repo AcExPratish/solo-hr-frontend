@@ -35,7 +35,7 @@
     "form_validation_numeric": "The {{field}} must be numeric.",
     "form_validation_alphanumeric": "The {{field}} must be alphanumeric.",
     "form_validation_invalid_email": "The email seems to be invalid.",
-    "form_validation_phone": "The Phone Number must be exactly 11 digits and numeric only.",
+    "form_validation_phone": "The {{field}} must be exactly 10 digits and numeric only.",
     "form_validation_image": "The image seems to be invalid.",
     "form_validation_exact_digits": "{{field}} must be exactly {{digits}} digits long.",
     "form_validation_date_before": "{{from}} can't be before the {{to}} date.",

@@ -1,7 +1,7 @@
 import React from 'react';
 import { Col, FloatingLabel, Form, Row } from 'react-bootstrap';
 import { useTranslation } from 'react-i18next';
-import { Formik } from 'formik';
+import { Formik, getIn } from 'formik';
 import { TUser } from '@/types/modules/user-management/user';
 import { TModalProps } from '@/types/modules';
 import ModalForm from '@/components/common/custom/ModalForm';
@@ -11,7 +11,6 @@ import {
   EmployeeCreateSchema,
   EmployeeUpdateSchema
 } from '@/validation/employee-management/EmployeeSchema';
-import { FieldErrorFeedback, getFieldClass } from '@/helpers/formik';
 
 export interface EmployeeBasicFormProps {
   formData: TEmployee;
@@ -95,21 +94,21 @@ const EmployeeBasicForm = ({
                     type="text"
                     name="first_name"
                     placeholder={t('first_name')}
-                    className={`form-control form-icon-input ${getFieldClass(
-                      touched,
-                      errors,
-                      'first_name'
-                    )}`}
+                    className={`form-control form-icon-input`}
                     value={values.first_name || ''}
                     onBlur={handleBlur}
                     onChange={handleChange}
+                    isInvalid={Boolean(
+                      getIn(touched, 'first_name') &&
+                        getIn(errors, 'first_name')
+                    )}
                   />
-
-                  <FieldErrorFeedback
-                    touched={touched}
-                    errors={errors}
-                    path="first_name"
-                  />
+                  {getIn(touched, 'first_name') &&
+                    getIn(errors, 'first_name') && (
+                      <Form.Control.Feedback type="invalid">
+                        {getIn(errors, 'first_name')}
+                      </Form.Control.Feedback>
+                    )}
                 </FloatingLabel>
               </Col>
 
@@ -121,21 +120,21 @@ const EmployeeBasicForm = ({
                     type="text"
                     name="middle_name"
                     placeholder={t('middle_name')}
-                    className={`form-control form-icon-input ${getFieldClass(
-                      touched,
-                      errors,
-                      'middle_name'
-                    )}`}
+                    className={`form-control form-icon-input`}
                     value={values.middle_name || ''}
                     onBlur={handleBlur}
                     onChange={handleChange}
+                    isInvalid={Boolean(
+                      getIn(touched, 'middle_name') &&
+                        getIn(errors, 'middle_name')
+                    )}
                   />
-
-                  <FieldErrorFeedback
-                    touched={touched}
-                    errors={errors}
-                    path="middle_name"
-                  />
+                  {getIn(touched, 'middle_name') &&
+                    getIn(errors, 'middle_name') && (
+                      <Form.Control.Feedback type="invalid">
+                        {getIn(errors, 'middle_name')}
+                      </Form.Control.Feedback>
+                    )}
                 </FloatingLabel>
               </Col>
 
@@ -147,21 +146,20 @@ const EmployeeBasicForm = ({
                     type="text"
                     name="last_name"
                     placeholder={t('last_name')}
-                    className={`form-control form-icon-input ${getFieldClass(
-                      touched,
-                      errors,
-                      'last_name'
-                    )}`}
+                    className={`form-control form-icon-input`}
                     value={values.last_name || ''}
                     onBlur={handleBlur}
                     onChange={handleChange}
+                    isInvalid={Boolean(
+                      getIn(touched, 'last_name') && getIn(errors, 'last_name')
+                    )}
                   />
-
-                  <FieldErrorFeedback
-                    touched={touched}
-                    errors={errors}
-                    path="last_name"
-                  />
+                  {getIn(touched, 'last_name') &&
+                    getIn(errors, 'last_name') && (
+                      <Form.Control.Feedback type="invalid">
+                        {getIn(errors, 'last_name')}
+                      </Form.Control.Feedback>
+                    )}
                 </FloatingLabel>
               </Col>
 
@@ -173,21 +171,19 @@ const EmployeeBasicForm = ({
                     type="text"
                     name="username"
                     placeholder={t('username')}
-                    className={`form-control form-icon-input ${getFieldClass(
-                      touched,
-                      errors,
-                      'username'
-                    )}`}
+                    className={`form-control form-icon-input`}
                     value={values.username || ''}
                     onBlur={handleBlur}
                     onChange={handleChange}
+                    isInvalid={Boolean(
+                      getIn(touched, 'username') && getIn(errors, 'username')
+                    )}
                   />
-
-                  <FieldErrorFeedback
-                    touched={touched}
-                    errors={errors}
-                    path="username"
-                  />
+                  {getIn(touched, 'username') && getIn(errors, 'username') && (
+                    <Form.Control.Feedback type="invalid">
+                      {getIn(errors, 'username')}
+                    </Form.Control.Feedback>
+                  )}
                 </FloatingLabel>
               </Col>
 
@@ -199,21 +195,19 @@ const EmployeeBasicForm = ({
                     type="email"
                     name="email"
                     placeholder={t('email')}
-                    className={`form-control form-icon-input ${getFieldClass(
-                      touched,
-                      errors,
-                      'email'
-                    )}`}
+                    className={`form-control form-icon-input`}
                     value={values.email || ''}
                     onBlur={handleBlur}
                     onChange={handleChange}
+                    isInvalid={Boolean(
+                      getIn(touched, 'email') && getIn(errors, 'email')
+                    )}
                   />
-
-                  <FieldErrorFeedback
-                    touched={touched}
-                    errors={errors}
-                    path="email"
-                  />
+                  {getIn(touched, 'email') && getIn(errors, 'email') && (
+                    <Form.Control.Feedback type="invalid">
+                      {getIn(errors, 'email')}
+                    </Form.Control.Feedback>
+                  )}
                 </FloatingLabel>
               </Col>
 
@@ -225,11 +219,7 @@ const EmployeeBasicForm = ({
                     type="date"
                     name="basic_information.date_of_birth"
                     placeholder={t('date_of_birth')}
-                    className={`form-control form-icon-input ${getFieldClass(
-                      touched,
-                      errors,
-                      'basic_information.date_of_birth'
-                    )}`}
+                    className={`form-control form-icon-input`}
                     value={
                       formatDateForInput(
                         values?.basic_information?.date_of_birth
@@ -237,13 +227,17 @@ const EmployeeBasicForm = ({
                     }
                     onBlur={handleBlur}
                     onChange={handleChange}
+                    isInvalid={Boolean(
+                      getIn(touched, 'basic_information.date_of_birth') &&
+                        getIn(errors, 'basic_information.date_of_birth')
+                    )}
                   />
-
-                  <FieldErrorFeedback
-                    touched={touched}
-                    errors={errors}
-                    path="basic_information.date_of_birth"
-                  />
+                  {getIn(touched, 'basic_information.date_of_birth') &&
+                    getIn(errors, 'basic_information.date_of_birth') && (
+                      <Form.Control.Feedback type="invalid">
+                        {getIn(errors, 'basic_information.date_of_birth')}
+                      </Form.Control.Feedback>
+                    )}
                 </FloatingLabel>
               </Col>
 
@@ -255,11 +249,7 @@ const EmployeeBasicForm = ({
                     type="date"
                     name="basic_information.joining_date"
                     placeholder={t('joining_date')}
-                    className={`form-control form-icon-input ${getFieldClass(
-                      touched,
-                      errors,
-                      'basic_information.joining_date'
-                    )}`}
+                    className={`form-control form-icon-input`}
                     value={
                       formatDateForInput(
                         values?.basic_information?.joining_date
@@ -267,13 +257,17 @@ const EmployeeBasicForm = ({
                     }
                     onBlur={handleBlur}
                     onChange={handleChange}
+                    isInvalid={Boolean(
+                      getIn(touched, 'basic_information.joining_date') &&
+                        getIn(errors, 'basic_information.joining_date')
+                    )}
                   />
-
-                  <FieldErrorFeedback
-                    touched={touched}
-                    errors={errors}
-                    path="basic_information.joining_date"
-                  />
+                  {getIn(touched, 'basic_information.joining_date') &&
+                    getIn(errors, 'basic_information.joining_date') && (
+                      <Form.Control.Feedback type="invalid">
+                        {getIn(errors, 'basic_information.joining_date')}
+                      </Form.Control.Feedback>
+                    )}
                 </FloatingLabel>
               </Col>
 
@@ -285,21 +279,19 @@ const EmployeeBasicForm = ({
                     type="phone"
                     name="phone"
                     placeholder={t('phone')}
-                    className={`form-control form-icon-input ${getFieldClass(
-                      touched,
-                      errors,
-                      'phone'
-                    )}`}
+                    className={`form-control form-icon-input`}
                     value={values.phone || ''}
                     onBlur={handleBlur}
                     onChange={handleChange}
+                    isInvalid={Boolean(
+                      getIn(touched, 'phone') && getIn(errors, 'phone')
+                    )}
                   />
-
-                  <FieldErrorFeedback
-                    touched={touched}
-                    errors={errors}
-                    path="phone"
-                  />
+                  {getIn(touched, 'phone') && getIn(errors, 'phone') && (
+                    <Form.Control.Feedback type="invalid">
+                      {getIn(errors, 'phone')}
+                    </Form.Control.Feedback>
+                  )}
                 </FloatingLabel>
               </Col>
             </Row>
