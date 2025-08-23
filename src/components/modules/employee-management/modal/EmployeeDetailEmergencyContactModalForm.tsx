@@ -212,7 +212,7 @@ const EmployeeDetailEmergencyContactModalForm = ({
                         <Button
                           variant="primary"
                           onClick={() => push(emptyContact())}
-                          disabled={values?.emergency_contact?.length === 2}
+                          hidden={values?.emergency_contact?.length === 2}
                         >
                           <FontAwesomeIcon icon={faPlus} />
                           <span className="ms-1">{t('add_contact')}</span>
