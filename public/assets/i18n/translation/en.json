@@ -129,5 +129,11 @@
     "marital_status": "Marital Status",
     "employment_of_spouse": "Employment of Spouse",
     "phone": "Phone",
-    "about_employee": "About Employee"
+    "about_employee": "About Employee",
+    "bank_information": "Bank Information",
+    "family_information": "Family Information",
+    "statutory_information": "Statutory Information",
+    "supporting_documents": "Supporting Documents",
+    "education": "Education",
+    "experience": "Experience"
 }

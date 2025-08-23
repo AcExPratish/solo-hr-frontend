@@ -1,13 +1,5 @@
 import React from 'react';
-import {
-  Container,
-  Row,
-  Col,
-  Card,
-  Badge,
-  Accordion,
-  Nav
-} from 'react-bootstrap';
+import { Container, Row, Col, Card, Badge, Accordion } from 'react-bootstrap';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import {
   faEdit,
@@ -54,16 +46,6 @@ interface Employee {
   emergency_contact: TEmployeeEmergencyContact[];
 }
 
-interface Project {
-  name: string;
-  tasks: number;
-  completed: number;
-  deadline: string;
-  projectLead: string;
-  leadAvatar: string;
-  icon: string;
-}
-
 const employee: Employee = {
   id: 'CLT-0024',
   name: 'Stephan Peralt',
@@ -103,37 +85,15 @@ const employee: Employee = {
   ]
 };
 
-const projects: Project[] = [
-  {
-    name: 'World Health',
-    tasks: 8,
-    completed: 15,
-    deadline: '31 July 2025',
-    projectLead: 'Leona',
-    leadAvatar: 'L',
-    icon: 'W'
-  },
-  {
-    name: 'Hospital Administration',
-    tasks: 8,
-    completed: 15,
-    deadline: '31 July 2025',
-    projectLead: 'Leona',
-    leadAvatar: 'L',
-    icon: 'H'
-  }
-];
-
 const EmployeeDetailsPage: React.FC = () => {
   const { t } = useTranslation();
-  const [activeTab, setActiveTab] = React.useState<string>('projects');
 
   return (
     <Container fluid className="min-vh-100">
       <EmployeeDetailHeader />
       <Row>
         {/* Left Column */}
-        <Col lg={5} className="mb-4">
+        <Col xs={12} lg={5} className="mb-4">
           <Card className="mb-4">
             <div
               className="bg-success position-relative rounded-3"
@@ -358,7 +318,7 @@ const EmployeeDetailsPage: React.FC = () => {
         </Col>
 
         {/* Right Column */}
-        <Col lg={7}>
+        <Col xs={12} lg={7}>
           {/* About Employee */}
           <Accordion
             className="mb-4 bg-white text-black border rounded-1 py-2 border-1 border-gray-200"
@@ -369,16 +329,15 @@ const EmployeeDetailsPage: React.FC = () => {
                 <div className="d-flex align-items-center justify-content-between w-100">
                   <span>{t('about_employee')}</span>
                   <div className="d-flex align-items-center gap-2">
-                    {/* custom end icon */}
                     <FontAwesomeIcon
                       icon={faEdit}
                       size="xs"
                       className="text-muted"
                     />
-                    {/* chevron from bootstrap (we'll handle with css) */}
+
                     <FontAwesomeIcon
                       icon={faChevronDown}
-                      size="xs"
+                      size="sm"
                       className="text-muted acc-chevron"
                     />
                   </div>
@@ -389,129 +348,184 @@ const EmployeeDetailsPage: React.FC = () => {
               </Accordion.Body>
             </Accordion.Item>
           </Accordion>
-          {/* Education and Experience */}
-          <Row className="mb-4">
-            <Col md={6}>
-              <Accordion>
-                <Accordion.Item eventKey="0">
-                  <Accordion.Header>Education Details</Accordion.Header>
-                  <Accordion.Body>
-                    <p className="text-muted">
-                      Education details would go here...
+
+          {/* Bank Information */}
+          <Accordion className="mb-4 bg-white text-black border rounded-1 py-2 border-1 border-gray-200">
+            <Accordion.Item eventKey="bank_information" className="border-0">
+              <Accordion.Header className="px-3">
+                <div className="d-flex align-items-center justify-content-between w-100">
+                  <span>{t('bank_information')}</span>
+                  <div className="d-flex align-items-center gap-2">
+                    <FontAwesomeIcon
+                      icon={faEdit}
+                      size="xs"
+                      className="text-muted"
+                    />
+
+                    <FontAwesomeIcon
+                      icon={faChevronDown}
+                      size="sm"
+                      className="text-muted acc-chevron"
+                    />
+                  </div>
+                </div>
+              </Accordion.Header>
+              <Accordion.Body className="px-3">
+                <p className="text-muted small mb-0">{employee?.about ?? ''}</p>
+              </Accordion.Body>
+            </Accordion.Item>
+          </Accordion>
+
+          {/* Family Information */}
+          <Accordion className="mb-4 bg-white text-black border rounded-1 py-2 border-1 border-gray-200">
+            <Accordion.Item eventKey="family_information" className="border-0">
+              <Accordion.Header className="px-3">
+                <div className="d-flex align-items-center justify-content-between w-100">
+                  <span>{t('family_information')}</span>
+                  <div className="d-flex align-items-center gap-2">
+                    <FontAwesomeIcon
+                      icon={faEdit}
+                      size="xs"
+                      className="text-muted"
+                    />
+
+                    <FontAwesomeIcon
+                      icon={faChevronDown}
+                      size="sm"
+                      className="text-muted acc-chevron"
+                    />
+                  </div>
+                </div>
+              </Accordion.Header>
+              <Accordion.Body className="px-3">
+                <p className="text-muted small mb-0">{employee?.about ?? ''}</p>
+              </Accordion.Body>
+            </Accordion.Item>
+          </Accordion>
+
+          {/* Statutory Information */}
+          <Accordion className="mb-4 bg-white text-black border rounded-1 py-2 border-1 border-gray-200">
+            <Accordion.Item
+              eventKey="statutory_information"
+              className="border-0"
+            >
+              <Accordion.Header className="px-3">
+                <div className="d-flex align-items-center justify-content-between w-100">
+                  <span>{t('statutory_information')}</span>
+                  <div className="d-flex align-items-center gap-2">
+                    <FontAwesomeIcon
+                      icon={faEdit}
+                      size="xs"
+                      className="text-muted"
+                    />
+
+                    <FontAwesomeIcon
+                      icon={faChevronDown}
+                      size="sm"
+                      className="text-muted acc-chevron"
+                    />
+                  </div>
+                </div>
+              </Accordion.Header>
+              <Accordion.Body className="px-3">
+                <p className="text-muted small mb-0">{employee?.about ?? ''}</p>
+              </Accordion.Body>
+            </Accordion.Item>
+          </Accordion>
+
+          {/* Supporting Documents */}
+          <Accordion className="mb-4 bg-white text-black border rounded-1 py-2 border-1 border-gray-200">
+            <Accordion.Item
+              eventKey="supporting_documents"
+              className="border-0"
+            >
+              <Accordion.Header className="px-3">
+                <div className="d-flex align-items-center justify-content-between w-100">
+                  <span>{t('supporting_documents')}</span>
+                  <div className="d-flex align-items-center gap-2">
+                    <FontAwesomeIcon
+                      icon={faEdit}
+                      size="xs"
+                      className="text-muted"
+                    />
+
+                    <FontAwesomeIcon
+                      icon={faChevronDown}
+                      size="sm"
+                      className="text-muted acc-chevron"
+                    />
+                  </div>
+                </div>
+              </Accordion.Header>
+              <Accordion.Body className="px-3">
+                <p className="text-muted small mb-0">{employee?.about ?? ''}</p>
+              </Accordion.Body>
+            </Accordion.Item>
+          </Accordion>
+
+          <Row>
+            {/* Education */}
+            <Col xs={12} md={6}>
+              <Accordion className="mb-4 bg-white text-black border rounded-1 py-2 border-1 border-gray-200">
+                <Accordion.Item eventKey="education" className="border-0">
+                  <Accordion.Header className="px-3">
+                    <div className="d-flex align-items-center justify-content-between w-100">
+                      <span>{t('education')}</span>
+                      <div className="d-flex align-items-center gap-2">
+                        <FontAwesomeIcon
+                          icon={faEdit}
+                          size="xs"
+                          className="text-muted"
+                        />
+
+                        <FontAwesomeIcon
+                          icon={faChevronDown}
+                          size="sm"
+                          className="text-muted acc-chevron"
+                        />
+                      </div>
+                    </div>
+                  </Accordion.Header>
+                  <Accordion.Body className="px-3">
+                    <p className="text-muted small mb-0">
+                      {employee?.about ?? ''}
                     </p>
                   </Accordion.Body>
                 </Accordion.Item>
               </Accordion>
             </Col>
-            <Col md={6}>
-              <Accordion>
-                <Accordion.Item eventKey="0">
-                  <Accordion.Header>Experience</Accordion.Header>
-                  <Accordion.Body>
-                    <p className="text-muted">
-                      Experience details would go here...
+
+            {/* Experience */}
+            <Col xs={12} md={6}>
+              <Accordion className="mb-4 bg-white text-black border rounded-1 py-2 border-1 border-gray-200">
+                <Accordion.Item eventKey="experience" className="border-0">
+                  <Accordion.Header className="px-3">
+                    <div className="d-flex align-items-center justify-content-between w-100">
+                      <span>{t('experience')}</span>
+                      <div className="d-flex align-items-center gap-2">
+                        <FontAwesomeIcon
+                          icon={faEdit}
+                          size="xs"
+                          className="text-muted"
+                        />
+
+                        <FontAwesomeIcon
+                          icon={faChevronDown}
+                          size="sm"
+                          className="text-muted acc-chevron"
+                        />
+                      </div>
+                    </div>
+                  </Accordion.Header>
+                  <Accordion.Body className="px-3">
+                    <p className="text-muted small mb-0">
+                      {employee?.about ?? ''}
                     </p>
                   </Accordion.Body>
                 </Accordion.Item>
               </Accordion>
             </Col>
           </Row>
-          {/* Projects and Assets */}
-          <Card>
-            <Card.Header className="bg-white border-bottom">
-              <Nav variant="tabs" defaultActiveKey="projects">
-                <Nav.Item>
-                  <Nav.Link
-                    eventKey="projects"
-                    className={
-                      activeTab === 'projects'
-                        ? 'text-success border-success'
-                        : ''
-                    }
-                    onClick={() => setActiveTab('projects')}
-                  >
-                    Projects
-                  </Nav.Link>
-                </Nav.Item>
-                <Nav.Item>
-                  <Nav.Link
-                    eventKey="assets"
-                    className={
-                      activeTab === 'assets'
-                        ? 'text-success border-success'
-                        : ''
-                    }
-                    onClick={() => setActiveTab('assets')}
-                  >
-                    Assets
-                  </Nav.Link>
-                </Nav.Item>
-              </Nav>
-            </Card.Header>
-            <Card.Body>
-              {activeTab === 'projects' && (
-                <Row>
-                  {projects.map((project, index) => (
-                    <Col md={6} key={index} className="mb-3">
-                      <Card className="h-100">
-                        <Card.Body>
-                          <div className="d-flex align-items-center mb-3">
-                            <div
-                              className="bg-primary text-white rounded-circle d-flex align-items-center justify-content-center me-3"
-                              style={{ width: '40px', height: '40px' }}
-                            >
-                              {project.icon}
-                            </div>
-                            <div>
-                              <h6 className="mb-1">{project.name}</h6>
-                              <small className="text-muted">
-                                {project.tasks} tasks • {project.completed}{' '}
-                                Completed
-                              </small>
-                            </div>
-                          </div>
-
-                          <Row className="align-items-center">
-                            <Col xs={4} className="small text-muted">
-                              Deadline
-                            </Col>
-                            <Col xs={8} className="small">
-                              {project.deadline}
-                            </Col>
-                          </Row>
-
-                          <Row className="align-items-center mt-2">
-                            <Col xs={4} className="small text-muted">
-                              Project Lead
-                            </Col>
-                            <Col xs={8} className="d-flex align-items-center">
-                              <div
-                                className="bg-danger text-white rounded-circle d-flex align-items-center justify-content-center me-2"
-                                style={{
-                                  width: '24px',
-                                  height: '24px',
-                                  fontSize: '12px'
-                                }}
-                              >
-                                {project.leadAvatar}
-                              </div>
-                              <small>{project.projectLead}</small>
-                            </Col>
-                          </Row>
-                        </Card.Body>
-                      </Card>
-                    </Col>
-                  ))}
-                </Row>
-              )}
-
-              {activeTab === 'assets' && (
-                <p className="text-muted text-center py-4">
-                  Assets information would be displayed here...
-                </p>
-              )}
-            </Card.Body>
-          </Card>
         </Col>
       </Row>
     </Container>
