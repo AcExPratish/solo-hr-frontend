@@ -136,5 +136,13 @@
     "supporting_documents": "Supporting Documents",
     "education": "Education",
     "experience": "Experience",
-    "years_of_experience": "Years of Experience"
+    "years_of_experience": "Years of Experience",
+    "add_contact": "Add Contact",
+    "remove": "Remove",
+    "alternative_phone": "Alternative Phone",
+    "primary_contact_details": "Primary Contact Details",
+    "secondary_contact_details": "Secondary Contact Details",
+    "name": "Name",
+    "relationship": "Relationship",
+    "emergency_contact_details": "Emergency Contact Details"
 }

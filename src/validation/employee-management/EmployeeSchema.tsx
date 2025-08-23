@@ -100,13 +100,13 @@ export const EmployeeCreateSchema = Yup.object().shape({
   phone: Yup.string()
     .required(
       t('form_validation_mandatory', {
-        field: t('phone')
+        field: t('phone').toLowerCase()
       })
     )
     .length(
       10,
       t('form_validation_exact_digits', {
-        field: t('phone'),
+        field: t('phone').toLowerCase(),
         digits: 10
       })
     )
@@ -207,14 +207,52 @@ export const EmployeeUpdateSchema = Yup.object().shape({
   phone: Yup.string()
     .required(
       t('form_validation_mandatory', {
-        field: t('phone')
+        field: t('phone').toLowerCase()
       })
     )
     .length(
       10,
       t('form_validation_exact_digits', {
-        field: t('phone'),
+        field: t('phone').toLowerCase(),
         digits: 10
       })
     )
+});
+
+export const EmergencyContactSchema = Yup.object().shape({
+  emergency_contact: Yup.array().of(
+    Yup.object().shape({
+      name: Yup.string().required(
+        t('form_validation_mandatory', { field: t('name').toLowerCase() })
+      ),
+      relationship: Yup.string().required(
+        t('form_validation_mandatory', {
+          field: t('relationship').toLowerCase()
+        })
+      ),
+      phone_1: Yup.string()
+        .required(
+          t('form_validation_mandatory', {
+            field: t('phone').toLowerCase()
+          })
+        )
+        .length(
+          10,
+          t('form_validation_exact_digits', {
+            field: t('phone').toLowerCase(),
+            digits: 10
+          })
+        ),
+      phone_2: Yup.string()
+        .notRequired()
+        .nullable()
+        .length(
+          10,
+          t('form_validation_exact_digits', {
+            field: t('alternative_phone').toLowerCase(),
+            digits: 10
+          })
+        )
+    })
+  )
 });

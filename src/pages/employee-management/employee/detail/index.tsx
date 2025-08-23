@@ -266,10 +266,7 @@ const EmployeeDetailsPage = () => {
                 />
 
                 {/* Emergency Contact Information */}
-                <EmployeeDetailEmergencyContact
-                  employee={employee}
-                  onEmergencyContactEdit={() => {}}
-                />
+                <EmployeeDetailEmergencyContact employee={employee} />
               </Col>
 
               {/* Right Column */}

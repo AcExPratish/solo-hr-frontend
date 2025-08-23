@@ -69,13 +69,13 @@ export const UserCreateSchema = Yup.object().shape({
   phone: Yup.string()
     .required(
       t('form_validation_mandatory', {
-        field: t('phone')
+        field: t('phone').toLowerCase()
       })
     )
     .length(
       10,
       t('form_validation_exact_digits', {
-        field: t('phone'),
+        field: t('phone').toLowerCase(),
         digits: 10
       })
     ),
@@ -169,13 +169,13 @@ export const UserUpdateSchema = Yup.object().shape({
   phone: Yup.string()
     .required(
       t('form_validation_mandatory', {
-        field: t('phone')
+        field: t('phone').toLowerCase()
       })
     )
     .length(
       10,
       t('form_validation_exact_digits', {
-        field: t('phone'),
+        field: t('phone').toLowerCase(),
         digits: 10
       })
     ),
