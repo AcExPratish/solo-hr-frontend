@@ -2,7 +2,6 @@ import React from 'react';
 import { Container, Row, Col, ModalProps } from 'react-bootstrap';
 import { useTranslation } from 'react-i18next';
 import EmployeeDetailHeader from '@/components/modules/employee-management/EmployeeDetailHeader';
-import { employeeMockData as initialEmployee } from '@/data/mock-data';
 import { getUserFirstAndLastName } from '@/helpers/utils';
 import EmployeeBasicForm from '@/components/modules/employee-management/form/EmployeeBasicForm';
 import { TEmployee } from '@/types/modules/employee-management/employee';
@@ -18,21 +17,175 @@ import EmployeeDetailStatutoryInformation from '@/components/modules/employee-ma
 import EmployeeDetailSupportingDocuments from '@/components/modules/employee-management/EmployeeDetailSupportingDocuments';
 import EmployeeDetailEducation from '@/components/modules/employee-management/EmployeeDetailEducation';
 import EmployeeDetailExperience from '@/components/modules/employee-management/EmployeeDetailExperience';
+import { useParams } from 'react-router-dom';
+import PhoenixLoader from '@/components/common/PhoenixLoader';
+
+// Initial values
+const initialValues: TEmployee = {
+  id: undefined,
+  first_name: '',
+  middle_name: '',
+  last_name: '',
+  email: '',
+  phone: '',
+  avatar: '',
+  basic_information: {
+    date_of_birth: '',
+    gender: '',
+    nationality: '',
+    religion: '',
+    marital_status: '',
+    employment_spouse: '',
+    no_of_children: '',
+    blood_group: '',
+    joining_date: '',
+    department_id: '',
+    designation_id: '',
+    province_id: '',
+    district_id: '',
+    city_id: '',
+    address: '',
+    zip_code: '',
+    postal_code: ''
+  },
+  emergency_contact: [],
+  about: '',
+  bank_information: {
+    id: '',
+    bank_name: '',
+    branch_address: '',
+    account_holder_name: '',
+    account_number: '',
+    account_type: '',
+    swift_code: ''
+  },
+  statutory_information: {
+    citizen_investment_trust: {
+      id: '',
+      id_number: '',
+      issue_date: '',
+      expiry_date: '',
+      issuing_authority: '',
+      file_url: '',
+      verification_status: ''
+    },
+    social_security_fund: {
+      id: '',
+      id_number: '',
+      issue_date: '',
+      expiry_date: '',
+      issuing_authority: '',
+      file_url: '',
+      verification_status: ''
+    },
+    provident_fund: {
+      id: '',
+      id_number: '',
+      issue_date: '',
+      expiry_date: '',
+      issuing_authority: '',
+      file_url: '',
+      verification_status: ''
+    },
+    police_clearance: {
+      id: '',
+      id_number: '',
+      issue_date: '',
+      expiry_date: '',
+      issuing_authority: '',
+      file_url: '',
+      verification_status: ''
+    },
+    health_insurance: {
+      id: '',
+      id_number: '',
+      issue_date: '',
+      expiry_date: '',
+      issuing_authority: '',
+      file_url: '',
+      verification_status: ''
+    },
+    tax_clearance: {
+      id: '',
+      id_number: '',
+      issue_date: '',
+      expiry_date: '',
+      issuing_authority: '',
+      file_url: '',
+      verification_status: ''
+    }
+  },
+  supporting_documents: {
+    pan: {
+      id: '',
+      id_number: '',
+      issue_date: '',
+      expiry_date: '',
+      issuing_authority: '',
+      file_url: '',
+      verification_status: ''
+    },
+    national_id: {
+      id: '',
+      id_number: '',
+      issue_date: '',
+      expiry_date: '',
+      issuing_authority: '',
+      file_url: '',
+      verification_status: ''
+    },
+    citizenship: {
+      id: '',
+      id_number: '',
+      issue_date: '',
+      expiry_date: '',
+      issuing_authority: '',
+      file_url: '',
+      verification_status: ''
+    },
+    passport: {
+      id: '',
+      id_number: '',
+      issue_date: '',
+      expiry_date: '',
+      issuing_authority: '',
+      file_url: '',
+      verification_status: ''
+    },
+    driving_license: {
+      id: '',
+      id_number: '',
+      issue_date: '',
+      expiry_date: '',
+      issuing_authority: '',
+      file_url: '',
+      verification_status: ''
+    }
+  },
+  family_information: [],
+  education: [],
+  experience: []
+};
+
+const intialLoader: TLoader = {
+  list: false
+};
 
 const EmployeeDetailsPage = () => {
   // React Hooks
   const { t } = useTranslation();
+  const { employeeId } = useParams();
 
   // Custom Hooks
-  const { updateEmployee } = useEmployeeHook();
+  const { fetchOneEmployee, updateEmployee } = useEmployeeHook();
 
   // Use States
-  const [loader, setLoader] = React.useState<TLoader>({ form: false });
+  const [loader, setLoader] = React.useState<TLoader>(intialLoader);
   const [basicInfoModal, setBasicInfoModal] = React.useState<ModalProps>({
     show: false,
     placement: 'end'
   });
-  const [employee, setEmployee] = React.useState<TEmployee>(initialEmployee);
+  const [employee, setEmployee] = React.useState<TEmployee>(initialValues);
 
   // Handlers
   const handleOnEditBasicInfo = () => {
@@ -40,126 +193,144 @@ const EmployeeDetailsPage = () => {
   };
 
   const handleOnSubmit = (formData: TEmployee) => {
-    setLoader({ form: true });
-    updateItem(formData?.id ?? '', formData);
-  };
-
-  // API Handlers
-  const fetchOneItem = (row: TEmployee) => {
     setLoader({ list: true });
-    setEmployee(row);
-    setLoader({ list: false });
-  };
-
-  const updateItem = (id: string, data: TEmployee) => {
     setBasicInfoModal({ ...basicInfoModal, ...{ show: true } });
-    updateEmployee(id, data)
+    updateEmployee(formData?.id ?? '', formData)
       .then(() => {
         toast.success(
           t('message_success_update', {
             page: t('profile'),
-            name: getUserFirstAndLastName(data)
+            name: getUserFirstAndLastName(formData)
           })
         );
         setBasicInfoModal({ ...basicInfoModal, ...{ show: false } });
-        setLoader({ form: false });
+        setLoader({ list: false });
       })
       .catch(() => {
-        toast.error(t('message_failed_update'));
-        setLoader({ form: false });
+        toast.error(t('message_failed'));
+        setLoader({ list: false });
+      });
+  };
+
+  // API Handlers
+  const fetchOneItem = (id: string) => {
+    setLoader({ list: true });
+    fetchOneEmployee(id)
+      .then((res: TEmployee) => {
+        setEmployee(res);
+      })
+      .catch(() => {
+        toast.error(t('message_failed'));
+      })
+      .finally(() => {
+        setLoader({ list: false });
       });
   };
 
   React.useEffect(() => {
     //TODO: Add permission check
-    fetchOneItem(initialEmployee);
-  }, [employee]);
+    if (employeeId) {
+      fetchOneItem(employeeId);
+    }
+  }, [employeeId]);
 
   return (
     <React.Fragment>
-      <Container fluid className="min-vh-100">
-        <EmployeeDetailHeader />
-        <Row>
-          {/* Left Column */}
-          <Col xs={12} lg={4} className="mb-4">
-            {/* Employee Detail Profile */}
-            <EmployeeDetailProfile
-              employee={employee}
-              onBasicInfoEdit={handleOnEditBasicInfo}
-            />
+      {loader?.list ? (
+        <PhoenixLoader />
+      ) : (
+        <React.Fragment>
+          <Container fluid className="min-vh-100 p-0">
+            {/* Employee Detail Header */}
+            <EmployeeDetailHeader />
 
-            {/* Emergency Contact Information */}
-            <EmployeeDetailEmergencyContact
-              employee={employee}
-              onEmergencyContactEdit={() => {}}
-            />
-          </Col>
-
-          {/* Right Column */}
-          <Col xs={12} lg={8} className="d-flex flex-column g-0">
-            {/* About Employee */}
-            <EmployeeDetailAboutEmployee
-              employee={employee}
-              onAboutEmployeeEdit={() => {}}
-            />
-
-            {/* Bank Information */}
-            <EmployeeDetailBankInformation
-              employee={employee}
-              onBankInformationEdit={() => {}}
-            />
-
-            {/* Family Information */}
-            <EmployeeDetailFamilyInformation
-              employee={employee}
-              onFamilyInformationEdit={() => {}}
-            />
-
-            {/* Statutory Information */}
-            <EmployeeDetailStatutoryInformation
-              employee={employee}
-              onStatutoryInformationEdit={() => {}}
-            />
-
-            {/* Supporting Documents */}
-            <EmployeeDetailSupportingDocuments
-              employee={employee}
-              onSupportingDocumentsEdit={() => {}}
-            />
-
-            <Row className="gap-0 g-3">
-              {/* Education */}
-              <Col xs={12} md={6}>
-                <EmployeeDetailEducation
+            {/* Employee Detail Content */}
+            <Row>
+              {/* Left Column */}
+              <Col xs={12} lg={4} className="mb-4">
+                {/* Employee Detail Profile */}
+                <EmployeeDetailProfile
                   employee={employee}
-                  onEducationEdit={() => {}}
+                  onBasicInfoEdit={handleOnEditBasicInfo}
+                />
+
+                {/* Emergency Contact Information */}
+                <EmployeeDetailEmergencyContact
+                  employee={employee}
+                  onEmergencyContactEdit={() => {}}
                 />
               </Col>
 
-              {/* Experience */}
-              <Col xs={12} md={6}>
-                <EmployeeDetailExperience
+              {/* Right Column */}
+              <Col xs={12} lg={8} className="d-flex flex-column g-0">
+                {/* About Employee */}
+                <EmployeeDetailAboutEmployee
                   employee={employee}
-                  onExperienceEdit={() => {}}
+                  onAboutEmployeeEdit={() => {}}
                 />
+
+                {/* Bank Information */}
+                <EmployeeDetailBankInformation
+                  employee={employee}
+                  onBankInformationEdit={() => {}}
+                />
+
+                {/* Family Information */}
+                <EmployeeDetailFamilyInformation
+                  employee={employee}
+                  onFamilyInformationEdit={() => {}}
+                />
+
+                {/* Statutory Information */}
+                <EmployeeDetailStatutoryInformation
+                  employee={employee}
+                  onStatutoryInformationEdit={() => {}}
+                />
+
+                {/* Supporting Documents */}
+                <EmployeeDetailSupportingDocuments
+                  employee={employee}
+                  onSupportingDocumentsEdit={() => {}}
+                />
+
+                <Row className="gap-0 g-3">
+                  {/* Education */}
+                  <Col xs={12} md={6}>
+                    <EmployeeDetailEducation
+                      employee={employee}
+                      onEducationEdit={() => {}}
+                    />
+                  </Col>
+
+                  {/* Experience */}
+                  <Col xs={12} md={6}>
+                    <EmployeeDetailExperience
+                      employee={employee}
+                      onExperienceEdit={() => {}}
+                    />
+                  </Col>
+                </Row>
               </Col>
             </Row>
-          </Col>
-        </Row>
-      </Container>
+          </Container>
 
-      {/* Modals */}
-      <EmployeeBasicForm
-        formData={employee}
-        modal={basicInfoModal}
-        onSubmit={values => {
-          handleOnSubmit(values);
-        }}
-        onClose={() =>
-          setBasicInfoModal({ ...basicInfoModal, ...{ show: false, type: '' } })
-        }
-        loading={loader.form}
-      />
+          {/* Modals */}
+          <EmployeeBasicForm
+            formData={employee}
+            modal={basicInfoModal}
+            onSubmit={values => {
+              handleOnSubmit(values);
+            }}
+            onClose={() =>
+              setBasicInfoModal({
+                ...basicInfoModal,
+                ...{ show: false, type: '' }
+              })
+            }
+            loading={loader.list}
+          />
+        </React.Fragment>
+      )}
     </React.Fragment>
   );
 };

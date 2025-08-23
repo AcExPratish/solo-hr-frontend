@@ -11,6 +11,7 @@ import {
   TEmployeeFilter
 } from '@/types/modules/employee-management/employee';
 import EmployeeService from '@/services/employee-management/EmployeeService';
+import { employeeMockData } from '@/data/mock-data';
 
 const useEmployeeHook = () => {
   const dispatch = useDispatch();
@@ -34,8 +35,13 @@ const useEmployeeHook = () => {
 
   const fetchOneEmployee = async (id: string): Promise<TEmployee> => {
     try {
-      const resp = await EmployeeService.fetchOne(id);
-      const row = resp?.data?.data || null;
+      await new Promise(resolve => {
+        console.log('fetchOneEmployee', id);
+        setTimeout(resolve, 500);
+      });
+      // const resp = await EmployeeService.fetchOne(id);
+      // const row = resp?.data?.data || null;
+      const row = employeeMockData;
       dispatch(getOneEmployee({ row }));
       return row;
     } catch (e) {
