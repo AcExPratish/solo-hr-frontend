@@ -8,7 +8,7 @@ import {
   ModalProps,
   FloatingLabel
 } from 'react-bootstrap';
-import { Formik, FieldArray } from 'formik';
+import { Formik, FieldArray, getIn } from 'formik';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faPlus, faSave, faTrash } from '@fortawesome/free-solid-svg-icons';
 import {
@@ -57,40 +57,28 @@ const EmployeeDetailEmergencyContactModalForm = ({
         }}
         enableReinitialize
       >
-        {({ values, errors, handleChange, handleBlur, handleSubmit }) => (
+        {({
+          values,
+          errors,
+          handleChange,
+          handleBlur,
+          handleSubmit,
+          touched
+        }) => (
           <Form noValidate onSubmit={handleSubmit}>
             <Modal.Body className="ps-4 pe-4 pt-0">
+              <hr />
+
               <FieldArray name="emergency_contact">
                 {({ push, remove }) => (
                   <div>
-                    <div className="d-flex justify-content-end my-2">
-                      <Button
-                        variant="primary"
-                        onClick={() => push(emptyContact())}
-                        disabled={values?.emergency_contact?.length === 2}
-                      >
-                        <FontAwesomeIcon icon={faPlus} />
-                        <span className="ms-1">{t('add_contact')}</span>
-                      </Button>
-                    </div>
-
                     <Stack gap={4}>
                       {values?.emergency_contact?.map((data, index: number) => {
-                        // Formik Validation Paths
+                        // Formik Paths
                         const namePath = `emergency_contact.${index}.name`;
                         const relationshipPath = `emergency_contact.${index}.relationship`;
                         const phone1Path = `emergency_contact.${index}.phone_1`;
                         const phone2Path = `emergency_contact.${index}.phone_2`;
-
-                        // Formik Error Validation
-                        const nameError = (errors as TEmployee)
-                          ?.emergency_contact?.[index]?.name;
-                        const relationshipError = (errors as TEmployee)
-                          ?.emergency_contact?.[index]?.relationship;
-                        const phone1Error = (errors as TEmployee)
-                          ?.emergency_contact?.[index]?.phone_1;
-                        const phone2Error = (errors as TEmployee)
-                          ?.emergency_contact?.[index]?.phone_2;
 
                         return (
                           <div key={index}>
@@ -111,15 +99,18 @@ const EmployeeDetailEmergencyContactModalForm = ({
                                     value={data.name || ''}
                                     onChange={handleChange}
                                     onBlur={handleBlur}
-                                    isInvalid={Boolean(nameError)}
+                                    isInvalid={Boolean(
+                                      getIn(touched, namePath) &&
+                                        getIn(errors, namePath)
+                                    )}
                                     className={`form-control form-icon-input`}
                                   />
-
-                                  {nameError && (
-                                    <Form.Control.Feedback type="invalid">
-                                      {nameError}
-                                    </Form.Control.Feedback>
-                                  )}
+                                  {getIn(touched, namePath) &&
+                                    getIn(errors, namePath) && (
+                                      <Form.Control.Feedback type="invalid">
+                                        {getIn(errors, namePath)}
+                                      </Form.Control.Feedback>
+                                    )}
                                 </FloatingLabel>
                               </Col>
 
@@ -134,15 +125,18 @@ const EmployeeDetailEmergencyContactModalForm = ({
                                     value={data.relationship || ''}
                                     onChange={handleChange}
                                     onBlur={handleBlur}
-                                    isInvalid={Boolean(relationshipError)}
+                                    isInvalid={Boolean(
+                                      getIn(touched, relationshipPath) &&
+                                        getIn(errors, relationshipPath)
+                                    )}
                                     className={`form-control form-icon-input`}
                                   />
-
-                                  {relationshipError && (
-                                    <Form.Control.Feedback type="invalid">
-                                      {relationshipError}
-                                    </Form.Control.Feedback>
-                                  )}
+                                  {getIn(touched, relationshipPath) &&
+                                    getIn(errors, relationshipPath) && (
+                                      <Form.Control.Feedback type="invalid">
+                                        {getIn(errors, relationshipPath)}
+                                      </Form.Control.Feedback>
+                                    )}
                                 </FloatingLabel>
                               </Col>
 
@@ -157,15 +151,18 @@ const EmployeeDetailEmergencyContactModalForm = ({
                                     value={data.phone_1 || ''}
                                     onChange={handleChange}
                                     onBlur={handleBlur}
-                                    isInvalid={Boolean(phone1Error)}
+                                    isInvalid={Boolean(
+                                      getIn(touched, phone1Path) &&
+                                        getIn(errors, phone1Path)
+                                    )}
                                     className={`form-control form-icon-input`}
                                   />
-
-                                  {phone1Error && (
-                                    <Form.Control.Feedback type="invalid">
-                                      {phone1Error}
-                                    </Form.Control.Feedback>
-                                  )}
+                                  {getIn(touched, phone1Path) &&
+                                    getIn(errors, phone1Path) && (
+                                      <Form.Control.Feedback type="invalid">
+                                        {getIn(errors, phone1Path)}
+                                      </Form.Control.Feedback>
+                                    )}
                                 </FloatingLabel>
                               </Col>
 
@@ -180,34 +177,47 @@ const EmployeeDetailEmergencyContactModalForm = ({
                                     value={data.phone_2 || ''}
                                     onChange={handleChange}
                                     onBlur={handleBlur}
-                                    isInvalid={Boolean(phone2Error)}
+                                    isInvalid={Boolean(
+                                      getIn(touched, phone2Path) &&
+                                        getIn(errors, phone2Path)
+                                    )}
                                     className={`form-control form-icon-input`}
                                   />
-
-                                  {phone2Error && (
-                                    <Form.Control.Feedback type="invalid">
-                                      {phone2Error}
-                                    </Form.Control.Feedback>
-                                  )}
+                                  {getIn(touched, phone2Path) &&
+                                    getIn(errors, phone2Path) && (
+                                      <Form.Control.Feedback type="invalid">
+                                        {getIn(errors, phone2Path)}
+                                      </Form.Control.Feedback>
+                                    )}
                                 </FloatingLabel>
                               </Col>
                             </Row>
 
                             <div className="d-flex justify-content-end mt-3">
                               <Button
-                                variant="phoenix-secondary"
+                                variant="phoenix-danger"
                                 onClick={() => remove(index)}
                                 disabled={
                                   values?.emergency_contact?.length === 1
                                 }
                               >
                                 <FontAwesomeIcon icon={faTrash} />
-                                <span className="ms-1">{t('remove')}</span>
                               </Button>
                             </div>
                           </div>
                         );
                       })}
+
+                      <div className="d-flex justify-content-start my-2">
+                        <Button
+                          variant="primary"
+                          onClick={() => push(emptyContact())}
+                          disabled={values?.emergency_contact?.length === 2}
+                        >
+                          <FontAwesomeIcon icon={faPlus} />
+                          <span className="ms-1">{t('add_contact')}</span>
+                        </Button>
+                      </div>
                     </Stack>
                   </div>
                 )}
