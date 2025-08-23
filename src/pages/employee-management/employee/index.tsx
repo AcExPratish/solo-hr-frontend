@@ -76,7 +76,7 @@ const EmployeePage = () => {
   const { t } = useTranslation();
   const page = t('employee');
 
-  // User States
+  // Use States
   const [loader, setLoader] = React.useState<TLoader>(initialLoader);
   const [filter, setFilter] = React.useState<TEmployeeFilter>(initialFilter);
   const [searchInput, setSearchInput] = React.useState<string>('');

@@ -1,3 +1,4 @@
+import { TEmployeeExperience } from '@/types/modules/employee-management/employee';
 import { TUser } from '@/types/modules/user-management/user';
 import { IconProp } from '@fortawesome/fontawesome-svg-core';
 import {
@@ -325,4 +326,28 @@ export const removeEmptyValues = (obj: Record<string, any>) => {
 // eslint-disable-next-line
 export const serializedObject = (obj: any) => {
   return new URLSearchParams(obj).toString();
+};
+
+export const calculateTotalExperience = (
+  experiences: TEmployeeExperience[]
+) => {
+  if (!experiences) return { years: 0, months: 0 };
+
+  let totalMonths = 0;
+  const today = new Date();
+
+  experiences?.forEach(exp => {
+    const start = new Date(exp?.start_date ?? '');
+    const end = exp?.end_date ? new Date(exp?.end_date ?? '') : today;
+
+    const years = end?.getFullYear() - start?.getFullYear();
+    const months = end?.getMonth() - start?.getMonth();
+
+    totalMonths += years * 12 + months;
+  });
+
+  const years = Math.floor(totalMonths / 12);
+  const months = totalMonths % 12;
+
+  return { years, months };
 };

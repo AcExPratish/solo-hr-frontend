@@ -26,6 +26,7 @@ export interface TEmployeeBasicInformation {
 }
 
 export interface TEmployeeEmergencyContact {
+  id?: string;
   name?: string;
   relationship?: string;
   phone_1?: string;
@@ -33,6 +34,7 @@ export interface TEmployeeEmergencyContact {
 }
 
 export interface TEmployeeBankInformation {
+  id?: string;
   bank_name?: string;
   branch_address?: string;
   account_holder_name?: string;
@@ -42,6 +44,7 @@ export interface TEmployeeBankInformation {
 }
 
 export interface TEmployeeDocument {
+  id?: string;
   id_number?: string;
   issue_date?: string;
   expiry_date?: string; // If applicable
@@ -68,6 +71,7 @@ export interface TEmployeeSupportingDocuments {
 }
 
 export interface TFamilyInformation {
+  id?: string;
   name?: string;
   relationship?: string;
   phone_1?: string;
@@ -76,6 +80,7 @@ export interface TFamilyInformation {
 }
 
 export interface TEmployeeEducation {
+  id?: string;
   institution_name?: string;
   course?: string;
   start_date?: string;
@@ -85,6 +90,7 @@ export interface TEmployeeEducation {
 }
 
 export interface TEmployeeExperience {
+  id?: string;
   company_name?: string;
   designation?: string;
   start_date?: string;

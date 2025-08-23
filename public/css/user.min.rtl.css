@@ -733,6 +733,14 @@ End Custom Breadcrumb
   transform: rotate(-180deg);
 }
 
+.hover-text-success:hover {
+  color: #0aaf32 !important;
+}
+
+.hover-text-danger:hover {
+  color: #d61b2b !important;
+}
+
 .dh-tree__block {
   padding: 0.6rem 1.6rem;
   position: relative;

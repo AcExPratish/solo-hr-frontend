@@ -180,3 +180,8 @@ export const formatDateForInput = date => {
   if (!date) return '';
   return date ? moment(date).format('YYYY-MM-DD') : '';
 };
+
+export const formatDateForDisplay = date => {
+  if (!date) return '';
+  return date ? moment(date).format('DD MMM YYYY') : '';
+};

@@ -40,3 +40,25 @@ export const genderOptions = [
     value: '2'
   }
 ];
+
+export const maritalStatusOptions = [
+  {
+    label: 'Single',
+    value: '0'
+  },
+  {
+    label: 'Married',
+    value: '1'
+  }
+];
+
+export const employmentSpouseOptions = [
+  {
+    label: 'No',
+    value: '0'
+  },
+  {
+    label: 'Yes',
+    value: '1'
+  }
+];
