@@ -721,6 +721,18 @@ End Custom Breadcrumb
   height: 10px;
 }
 
+.accordion-button::after {
+  display: none !important;
+}
+
+.acc-chevron {
+  transition: transform 0.2s ease;
+}
+
+.accordion-button:not(.collapsed) .acc-chevron {
+  transform: rotate(-180deg);
+}
+
 .dh-tree__block {
   padding: 0.6rem 1.6rem;
   position: relative;

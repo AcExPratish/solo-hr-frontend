@@ -11,7 +11,6 @@
     "invalid_credentials": "Invalid credentials",
     "message_success_login": "Login successful",
     "message_success_logout": "Logout successful",
-  
     "send": "Send",
     "reset_new_password": "Reset new password",
     "reset_new_password_description": "Type your new password",
@@ -21,7 +20,6 @@
     "message_success_forgot_password": "Reset link sent to your email",
     "message_error_forgot_password": "Failed to send reset link",
     "message_success_reset_password": "Password reset successful",
-  
     "message_failed": "Something Went Wrong.",
     "message_failed_create": "Failed to create",
     "message_failed_delete": "Failed to delete",
@@ -31,7 +29,6 @@
     "message_success_create": "{{page}} created. {{name}}",
     "message_success_delete": "{{page}} deleted. {{name}}",
     "message_success_update": "{{page}} update. {{name}}",
-  
     "form_validation_mandatory": "The {{field}} field is required.",
     "form_validation_max": "The {{field}} must not be greater than {{max}}.",
     "form_validation_min": "The {{field}} must not be less than {{min}}.",
@@ -45,12 +42,10 @@
     "form_validation_time_before": "{{end}} time can't be before the {{start}} time.",
     "form_validation_past_date": "{{field}} must not be a past date.",
     "form_validation_password_validation_message": "Password must be at least 8 characters long and contain at least 1 uppercase letter, 1 number, and 1 special character.",
-  
     "active": "Active",
     "inactive": "Inactive",
     "success": "Success",
     "failed": "Failed",
-  
     "save_changes": "Save Changes",
     "save": "Save",
     "cancel": "Cancel",
@@ -68,10 +63,8 @@
     "select_all_permissions": "Select All Permissions",
     "reset": "Reset",
     "submit": "Submit",
-  
     "dialog_delete_title": "Delete",
     "dialog_delete_body": "Are you sure want to remove {{name}}?",
-  
     "dashboard": "Dashboard",
     "apps": "Apps",
     "management": "Management",
@@ -82,7 +75,6 @@
     "employee_detail": "Employee Detail",
     "roles_and_permissions": "Roles & Permissions",
     "account_creation": "Account Creation",
-  
     "basic_information": "Basic Information",
     "family_and_emergency_contacts": "Family & Emergency Contacts",
     "experience_and_education": "Experience & Education",
@@ -90,7 +82,6 @@
     "additional_information": "Additional Information",
     "documents_and_agreements": "Documents & Agreements",
     "review_and_submit": "Review & Submit",
-  
     "emp_id": "Emp ID",
     "full_name": "Full Name",
     "first_name": "First Name",
@@ -103,7 +94,6 @@
     "date_of_birth": "Date of Birth",
     "joining_date": "Joining Date",
     "password": "Password",
-  
     "cookies": "Cookies",
     "privacy_policy": "Privacy Policy",
     "terms_of_service": "Terms of Service",
@@ -112,15 +102,32 @@
     "list": "List",
     "not_found_results": "No results found",
     "new": "New",
-  
     "clock_in": "Clock In",
     "clock_out": "Clock Out",
     "clock_in_success": "Clock in successful",
     "clock_out_success": "Clock out successful",
-  
     "user": "User",
     "role": "Role",
     "permission": "Permission",
-    "action": "Action"
-  }
-  
+    "action": "Action",
+    "bank_and_statutory": "Bank & Statutory",
+    "employee_details": "Employee Details",
+    "edit_info": "Edit Info",
+    "message": "Message",
+    "personal_information": "Personal Information",
+    "emergency_contact_number": "Emergency Contact Number",
+    "primary": "Primary",
+    "secondary": "Secondary",
+    "department": "Department",
+    "date_of_join": "Date of Join",
+    "report_office": "Report Office",
+    "gender": "Gender",
+    "birthday": "Birthday",
+    "address": "Address",
+    "nationality": "Nationality",
+    "religion": "Religion",
+    "marital_status": "Marital Status",
+    "employment_of_spouse": "Employment of Spouse",
+    "phone": "Phone",
+    "about_employee": "About Employee"
+}

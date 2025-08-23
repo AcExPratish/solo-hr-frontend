@@ -30470,7 +30470,7 @@ html:not(.navbar-vertical-collapsed) .navbar-vertical.navbar-expand-xs .navbar-v
   font-weight: 700;
 }
 .accordion-button.collapsed {
-  color: var(--phoenix-primary);
+  color: #000000;
 }
 
 .accordion-item {

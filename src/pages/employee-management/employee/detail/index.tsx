@@ -1,17 +1,15 @@
-import React, { useState } from 'react';
+import React from 'react';
 import {
   Container,
   Row,
   Col,
   Card,
-  Button,
   Badge,
   Accordion,
   Nav
 } from 'react-bootstrap';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import {
-  faArrowLeft,
   faEdit,
   faEnvelope,
   faPhone,
@@ -19,17 +17,17 @@ import {
   faMapMarker,
   faUser,
   faIdCard,
-  faPassport,
   faGlobe,
   faChurch,
   faHeart,
   faBriefcase,
-  faChild,
-  faEllipsisV
+  faChevronDown
 } from '@fortawesome/free-solid-svg-icons';
-import { useNavigate } from 'react-router-dom';
-import { IconProp } from '@fortawesome/fontawesome-svg-core';
 import { useTranslation } from 'react-i18next';
+import EmployeeDetailHeader from '@/components/modules/employee-management/EmployeeDetailHeader';
+import { InfoRow } from '@/components/common/InfoRow';
+import Button from '@/components/base/Button';
+import { TEmployeeEmergencyContact } from '@/types/modules/employee-management/employee';
 
 interface Employee {
   id: string;
@@ -53,6 +51,7 @@ interface Employee {
   employmentOfSpouse: string;
   noOfChildren: number;
   about: string;
+  emergency_contact: TEmployeeEmergencyContact[];
 }
 
 interface Project {
@@ -65,107 +64,80 @@ interface Project {
   icon: string;
 }
 
-const EmployeeDetailsPage: React.FC = () => {
-  const { t } = useTranslation();
-  const navigate = useNavigate();
-
-  const [activeTab, setActiveTab] = useState<string>('projects');
-
-  const employee: Employee = {
-    id: 'CLT-0024',
-    name: 'Stephan Peralt',
-    position: 'Software Developer',
-    experience: '10+ years of Experience',
-    clientId: 'CLT-0024',
-    team: 'UI/UX Design',
-    dateOfJoin: '1st Jan 2023',
-    reportOffice: 'Doglas Martini',
-    phone: '(163) 2459 315',
-    email: 'peralt12@example.com',
-    gender: 'Male',
-    birthday: '24th July 2000',
-    address: '1861 Bayonne Ave, Manchester, NJ, 08759',
-    passportNo: 'QRET4566F-GRT',
-    passportExpDate: '15 May 2029',
-    nationality: 'Indian',
-    religion: 'Christianity',
-    maritalStatus: 'Yes',
-    employmentOfSpouse: 'No',
-    noOfChildren: 2,
-    about:
-      'As an award winning designer, I deliver exceptional quality work and bring value to your brand! With 10 years of experience and 350+ projects completed worldwide with satisfied customers, I developed the 360° brand approach, which helped me to create numerous brands that are relevant, meaningful and loved.'
-  };
-
-  const projects: Project[] = [
+const employee: Employee = {
+  id: 'CLT-0024',
+  name: 'Stephan Peralt',
+  position: 'Software Developer',
+  experience: '10+ years of Experience',
+  clientId: 'CLT-0024',
+  team: 'UI/UX Design',
+  dateOfJoin: '1st Jan 2023',
+  reportOffice: 'Doglas Martini',
+  phone: '(163) 2459 315',
+  email: 'peralt12@example.com',
+  gender: 'Male',
+  birthday: '24th July 2000',
+  address: '1861 Bayonne Ave, Manchester, NJ, 08759',
+  passportNo: 'QRET4566F-GRT',
+  passportExpDate: '15 May 2029',
+  nationality: 'Indian',
+  religion: 'Christianity',
+  maritalStatus: 'Yes',
+  employmentOfSpouse: 'No',
+  noOfChildren: 2,
+  about:
+    'As an award winning designer, I deliver exceptional quality work and bring value to your brand! With 10 years of experience and 350+ projects completed worldwide with satisfied customers, I developed the 360° brand approach, which helped me to create numerous brands that are relevant, meaningful and loved.',
+  emergency_contact: [
     {
-      name: 'World Health',
-      tasks: 8,
-      completed: 15,
-      deadline: '31 July 2025',
-      projectLead: 'Leona',
-      leadAvatar: 'L',
-      icon: 'W'
+      name: 'John Doe',
+      relationship: 'Father',
+      phone_1: '9882827282',
+      phone_2: '9882827282'
     },
     {
-      name: 'Hospital Administration',
-      tasks: 8,
-      completed: 15,
-      deadline: '31 July 2025',
-      projectLead: 'Leona',
-      leadAvatar: 'L',
-      icon: 'H'
+      name: 'Jane Doe',
+      relationship: 'Mother',
+      phone_1: '9882827281',
+      phone_2: '9882827281'
     }
-  ];
+  ]
+};
 
-  const InfoRow: React.FC<{
-    icon: IconProp;
-    label: string;
-    value: string;
-    isLink?: boolean;
-  }> = ({ icon, label, value, isLink = false }) => (
-    <Row className="mb-2 align-items-center">
-      <Col xs={1}>
-        <FontAwesomeIcon icon={icon} className="text-muted" size="sm" />
-      </Col>
-      <Col xs={4} className="text-muted small">
-        {label}
-      </Col>
-      <Col xs={7} className={`small ${isLink ? 'text-primary' : ''}`}>
-        {value}
-      </Col>
-    </Row>
-  );
+const projects: Project[] = [
+  {
+    name: 'World Health',
+    tasks: 8,
+    completed: 15,
+    deadline: '31 July 2025',
+    projectLead: 'Leona',
+    leadAvatar: 'L',
+    icon: 'W'
+  },
+  {
+    name: 'Hospital Administration',
+    tasks: 8,
+    completed: 15,
+    deadline: '31 July 2025',
+    projectLead: 'Leona',
+    leadAvatar: 'L',
+    icon: 'H'
+  }
+];
+
+const EmployeeDetailsPage: React.FC = () => {
+  const { t } = useTranslation();
+  const [activeTab, setActiveTab] = React.useState<string>('projects');
 
   return (
     <Container fluid className="min-vh-100">
-      {/* Header */}
-      <Row className="mb-4">
-        <Col>
-          <Button
-            variant="link"
-            className="p-0 text-dark"
-            onClick={() => navigate(-1)}
-          >
-            <FontAwesomeIcon icon={faArrowLeft} className="me-2" />
-            {t('employee_details')}
-          </Button>
-        </Col>
-        <Col xs="auto">
-          <Button variant="success" size="sm">
-            <FontAwesomeIcon icon={faEllipsisV} className="me-2" />
-            {t('bank_and_statutory')}
-          </Button>
-        </Col>
-      </Row>
-
+      <EmployeeDetailHeader />
       <Row>
         {/* Left Column */}
-        <Col lg={4} className="mb-4">
-          {/* Profile Card */}
+        <Col lg={5} className="mb-4">
           <Card className="mb-4">
             <div
-              className="bg-success"
-              style={{ height: '120px', position: 'relative' }}
+              className="bg-success position-relative rounded-3"
+              style={{ height: '120px' }}
             >
               <div
                 className="position-absolute bg-white rounded-circle d-flex align-items-center justify-content-center"
@@ -185,164 +157,238 @@ const EmployeeDetailsPage: React.FC = () => {
                 />
               </div>
             </div>
+
             <Card.Body className="text-center pt-5">
-              <h5 className="mb-1">{employee.name}</h5>
-              <Badge bg="success" className="me-2">
-                <FontAwesomeIcon icon={faUser} className="me-1" />
-                {employee.position}
-              </Badge>
-              <Badge bg="light" text="dark">
-                {employee.experience}
-              </Badge>
+              {/* Name and Position */}
+              <Row className="d-flex align-items-center justify-content-center gap-2 mt-3">
+                <Col xs={12}>
+                  <h5 className="mb-1">{employee?.name ?? ''}</h5>
+                </Col>
+
+                <Col xs={12}>
+                  <Badge bg="success" className="me-2">
+                    <FontAwesomeIcon icon={faUser} className="me-1" />
+                    {employee?.position ?? ''}
+                  </Badge>
+                  <Badge bg="light" text="dark">
+                    {employee?.experience ?? ''}
+                  </Badge>
+                </Col>
+              </Row>
+
+              {/* Info Rows */}
+              <Row className="mt-4">
+                <Col xs={12}>
+                  <InfoRow
+                    icon={faIdCard}
+                    label={t('emp_id')}
+                    value={employee?.id ?? ''}
+                  />
+                  <InfoRow
+                    icon={faUser}
+                    label={t('department')}
+                    value={employee?.team ?? ''}
+                  />
+                  <InfoRow
+                    icon={faCalendar}
+                    label={t('date_of_join')}
+                    value={employee?.dateOfJoin ?? ''}
+                  />
+                  <InfoRow
+                    icon={faBriefcase}
+                    label={t('report_office')}
+                    value={employee?.reportOffice ?? ''}
+                  />
+                </Col>
+              </Row>
+
+              {/* Buttons */}
+              <Row className="mt-2">
+                <Col xs={12} md={6} className="px-1">
+                  <Button variant="subtle-secondary" className="w-100">
+                    <FontAwesomeIcon icon={faEdit} />
+                    <span className="ms-2">{t('edit_info')}</span>
+                  </Button>
+                </Col>
+
+                <Col xs={12} md={6} className="px-1">
+                  <Button variant="success" className="w-100">
+                    <FontAwesomeIcon icon={faEnvelope} />
+                    <span className="ms-2">{t('message')}</span>
+                  </Button>
+                </Col>
+              </Row>
+
+              <hr className="my-4 w-100" />
+
+              {/* Basic Information */}
+              <Row className="gap-2">
+                <Col
+                  xs={12}
+                  className="d-flex align-items-center justify-content-between"
+                >
+                  <h6 className="mb-0">{t('basic_information')}</h6>
+                  <FontAwesomeIcon
+                    icon={faEdit}
+                    size="xs"
+                    className="cursor-pointer"
+                  />
+                </Col>
+
+                <Col xs={12}>
+                  <InfoRow
+                    icon={faPhone}
+                    label={t('phone')}
+                    value={employee.phone}
+                  />
+                  <InfoRow
+                    icon={faEnvelope}
+                    label={t('email')}
+                    value={employee.email}
+                    isLink
+                  />
+                  <InfoRow
+                    icon={faUser}
+                    label={t('gender')}
+                    value={employee.gender}
+                  />
+                  <InfoRow
+                    icon={faCalendar}
+                    label={t('birthday')}
+                    value={employee.birthday}
+                  />
+                  <InfoRow
+                    icon={faMapMarker}
+                    label={t('address')}
+                    value={employee.address}
+                  />
+                </Col>
+              </Row>
+
+              <hr className="my-4 w-100" />
+
+              {/* Personal Information */}
+              <Row className="gap-2">
+                <Col
+                  xs={12}
+                  className="d-flex align-items-center justify-content-between"
+                >
+                  <h6 className="mb-0">{t('personal_information')}</h6>
+                  <FontAwesomeIcon
+                    icon={faEdit}
+                    size="xs"
+                    className="cursor-pointer"
+                  />
+                </Col>
+
+                <Col xs={12}>
+                  <InfoRow
+                    icon={faGlobe}
+                    label={t('nationality')}
+                    value={employee?.nationality ?? ''}
+                  />
+                  <InfoRow
+                    icon={faChurch}
+                    label={t('religion')}
+                    value={employee?.religion ?? ''}
+                  />
+                  <InfoRow
+                    icon={faHeart}
+                    label={t('marital_status')}
+                    value={employee?.maritalStatus ?? ''}
+                  />
+                  <InfoRow
+                    icon={faBriefcase}
+                    label={t('employment_of_spouse')}
+                    value={employee?.employmentOfSpouse ?? ''}
+                  />
+                </Col>
+              </Row>
             </Card.Body>
           </Card>
 
-          {/* Basic Info */}
-          <Card className="mb-4">
-            <Card.Body>
-              <InfoRow
-                icon={faIdCard}
-                label="Client ID"
-                value={employee.clientId}
+          <Row className="mb-2 px-2">
+            <Col
+              xs={12}
+              className="d-flex align-items-center justify-content-between"
+            >
+              <h6 className="mb-0">{t('emergency_contact_number')}</h6>
+              <FontAwesomeIcon
+                icon={faEdit}
+                size="xs"
+                className="cursor-pointer"
               />
-              <InfoRow icon={faUser} label="Team" value={employee.team} />
-              <InfoRow
-                icon={faCalendar}
-                label="Date Of Join"
-                value={employee.dateOfJoin}
-              />
-              <InfoRow
-                icon={faBriefcase}
-                label="Report Office"
-                value={employee.reportOffice}
-              />
-            </Card.Body>
-          </Card>
-
-          {/* Action Buttons */}
-          <Row className="mb-4">
-            <Col>
-              <Button variant="dark" className="w-100">
-                <FontAwesomeIcon icon={faEdit} className="me-2" />
-                Edit Info
-              </Button>
-            </Col>
-            <Col>
-              <Button variant="success" className="w-100">
-                <FontAwesomeIcon icon={faEnvelope} className="me-2" />
-                Message
-              </Button>
             </Col>
           </Row>
 
-          {/* Basic Information */}
           <Card className="mb-4">
-            <Card.Header className="bg-white border-bottom">
-              <h6 className="mb-0">Basic Information</h6>
-            </Card.Header>
-            <Card.Body>
-              <InfoRow icon={faPhone} label="Phone" value={employee.phone} />
-              <InfoRow
-                icon={faEnvelope}
-                label="Email"
-                value={employee.email}
-                isLink
-              />
-              <InfoRow icon={faUser} label="Gender" value={employee.gender} />
-              <InfoRow
-                icon={faCalendar}
-                label="Birthday"
-                value={employee.birthday}
-              />
-              <InfoRow
-                icon={faMapMarker}
-                label="Address"
-                value={employee.address}
-              />
-            </Card.Body>
-          </Card>
+            <Card.Body className="text-center pt-5">
+              {/* Basic Information */}
+              <Row className="gap-4">
+                {employee?.emergency_contact?.map((data, index: number) => (
+                  <Col
+                    key={index}
+                    xs={12}
+                    className={`d-flex align-items-center justify-content-between ${
+                      index !== (employee?.emergency_contact?.length ?? 0) - 1
+                        ? 'border-bottom pb-4'
+                        : ''
+                    }`}
+                  >
+                    <div className="d-flex flex-column align-items-start gap-2">
+                      <h6 className="text-muted">{data?.name ?? ''}</h6>
+                      <div className="text-muted small">
+                        {data?.relationship ?? ''}
+                      </div>
+                    </div>
 
-          {/* Personal Information */}
-          <Card>
-            <Card.Header className="bg-white border-bottom">
-              <h6 className="mb-0">Personal Information</h6>
-            </Card.Header>
-            <Card.Body>
-              <InfoRow
-                icon={faPassport}
-                label="Passport No"
-                value={employee.passportNo}
-              />
-              <InfoRow
-                icon={faCalendar}
-                label="Passport Exp Date"
-                value={employee.passportExpDate}
-              />
-              <InfoRow
-                icon={faGlobe}
-                label="Nationality"
-                value={employee.nationality}
-              />
-              <InfoRow
-                icon={faChurch}
-                label="Religion"
-                value={employee.religion}
-              />
-              <InfoRow
-                icon={faHeart}
-                label="Marital status"
-                value={employee.maritalStatus}
-              />
-              <InfoRow
-                icon={faBriefcase}
-                label="Employment of spouse"
-                value={employee.employmentOfSpouse}
-              />
-              <InfoRow
-                icon={faChild}
-                label="No. of children"
-                value={employee.noOfChildren.toString()}
-              />
+                    <div className="d-flex flex-column align-items-end gap-2">
+                      <div className="text-muted small">
+                        {data?.phone_1 ?? ''}
+                      </div>
+                      <div className="text-muted small">
+                        {data?.phone_2 ?? ''}
+                      </div>
+                    </div>
+                  </Col>
+                ))}
+              </Row>
             </Card.Body>
           </Card>
         </Col>
 
         {/* Right Column */}
-        <Col lg={8}>
+        <Col lg={7}>
           {/* About Employee */}
-          <Accordion className="mb-4" defaultActiveKey="0">
-            <Accordion.Item eventKey="0">
-              <Accordion.Header>About Employee</Accordion.Header>
-              <Accordion.Body>
-                <p className="text-muted mb-0">{employee.about}</p>
+          <Accordion
+            className="mb-4 bg-white text-black border rounded-1 py-2 border-1 border-gray-200"
+            defaultActiveKey="about"
+          >
+            <Accordion.Item eventKey="about" className="border-0">
+              <Accordion.Header className="px-3">
+                <div className="d-flex align-items-center justify-content-between w-100">
+                  <span>{t('about_employee')}</span>
+                  <div className="d-flex align-items-center gap-2">
+                    {/* custom end icon */}
+                    <FontAwesomeIcon
+                      icon={faEdit}
+                      size="xs"
+                      className="text-muted"
+                    />
+                    {/* chevron from bootstrap (we'll handle with css) */}
+                    <FontAwesomeIcon
+                      icon={faChevronDown}
+                      size="xs"
+                      className="text-muted acc-chevron"
+                    />
+                  </div>
+                </div>
+              </Accordion.Header>
+              <Accordion.Body className="px-3">
+                <p className="text-muted small mb-0">{employee?.about ?? ''}</p>
               </Accordion.Body>
             </Accordion.Item>
           </Accordion>
-
-          {/* Bank Information */}
-          <Accordion className="mb-4">
-            <Accordion.Item eventKey="0">
-              <Accordion.Header>Bank Information</Accordion.Header>
-              <Accordion.Body>
-                <p className="text-muted">
-                  Bank information details would go here...
-                </p>
-              </Accordion.Body>
-            </Accordion.Item>
-          </Accordion>
-
-          {/* Family Information */}
-          <Accordion className="mb-4">
-            <Accordion.Item eventKey="0">
-              <Accordion.Header>Family Information</Accordion.Header>
-              <Accordion.Body>
-                <p className="text-muted">
-                  Family information details would go here...
-                </p>
-              </Accordion.Body>
-            </Accordion.Item>
-          </Accordion>
-
           {/* Education and Experience */}
           <Row className="mb-4">
             <Col md={6}>
@@ -370,7 +416,6 @@ const EmployeeDetailsPage: React.FC = () => {
               </Accordion>
             </Col>
           </Row>
-
           {/* Projects and Assets */}
           <Card>
             <Card.Header className="bg-white border-bottom">
