@@ -21,7 +21,7 @@ import {
   TEmployeeFilter
 } from '@/types/modules/employee-management/employee';
 import useEmployeeHook from '@/hooks/modules/employee-management/useEmployeeHook';
-import EmployeeBasicInfoModalForm from '@/components/modules/employee-management/modal/EmployeeBasicInfoModalForm';
+import EmployeeBasicInfoForm from '@/components/modules/employee-management/form/EmployeeBasicInfoForm';
 
 // Initial values
 const initialFilter: TEmployeeFilter = {
@@ -305,7 +305,7 @@ const EmployeePage = () => {
       </AdvanceTableProvider>
 
       {/* Modals */}
-      <EmployeeBasicInfoModalForm
+      <EmployeeBasicInfoForm
         formData={employee}
         modal={modal}
         onSubmit={values => {

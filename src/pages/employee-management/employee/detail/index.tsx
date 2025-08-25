@@ -3,7 +3,7 @@ import { Container, Row, Col } from 'react-bootstrap';
 import { useTranslation } from 'react-i18next';
 import EmployeeDetailHeader from '@/components/modules/employee-management/EmployeeDetailHeader';
 import { getUserFirstAndLastName } from '@/helpers/utils';
-import EmployeeBasicInfoModalForm from '@/components/modules/employee-management/modal/EmployeeBasicInfoModalForm';
+import EmployeeBasicInfoForm from '@/components/modules/employee-management/form/EmployeeBasicInfoForm';
 import {
   TEmployee,
   TEmployeeFormType
@@ -24,9 +24,9 @@ import {
   useParams
 } from 'react-router-dom';
 import PhoenixLoader from '@/components/common/PhoenixLoader';
-import EmployeePersonalInfoModalForm from '@/components/modules/employee-management/modal/EmployeePersonalInfoModalForm';
-import EmployeeAboutEmployeeModalForm from '@/components/modules/employee-management/modal/EmployeeAboutEmployeeModalForm';
-import EmployeeDetailEmergencyContactModalForm from '@/components/modules/employee-management/modal/EmployeeDetailEmergencyContactModalForm';
+import EmployeePersonalInfoForm from '@/components/modules/employee-management/form/EmployeePersonalInfoForm';
+import EmployeeAboutEmployeeForm from '@/components/modules/employee-management/form/EmployeeAboutEmployeeForm';
+import EmployeeDetailEmergencyContactForm from '@/components/modules/employee-management/form/EmployeeDetailEmergencyContactForm';
 import EmployeeDetailEmergencyContact from '@/components/modules/employee-management/EmployeeDetailEmergencyContact';
 // import { checkScope } from '@/helpers/auth';
 
@@ -379,7 +379,7 @@ const EmployeeDetailsPage = () => {
           </Container>
 
           {/* Modals */}
-          <EmployeeBasicInfoModalForm
+          <EmployeeBasicInfoForm
             formData={employee}
             modal={basicInfoModal}
             onSubmit={values => {
@@ -394,7 +394,7 @@ const EmployeeDetailsPage = () => {
             loading={loader.list}
           />
 
-          <EmployeePersonalInfoModalForm
+          <EmployeePersonalInfoForm
             formData={employee}
             modal={personalInfoModal}
             onSubmit={values => {
@@ -409,7 +409,7 @@ const EmployeeDetailsPage = () => {
             loading={loader.list}
           />
 
-          <EmployeeDetailEmergencyContactModalForm
+          <EmployeeDetailEmergencyContactForm
             formData={employee}
             modal={emergencyContactModal}
             onSubmit={values => {
@@ -424,7 +424,7 @@ const EmployeeDetailsPage = () => {
             loading={loader.list}
           />
 
-          <EmployeeAboutEmployeeModalForm
+          <EmployeeAboutEmployeeForm
             formData={employee}
             modal={aboutEmployeeModal}
             onSubmit={values => {

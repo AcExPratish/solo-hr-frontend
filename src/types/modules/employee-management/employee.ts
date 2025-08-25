@@ -102,7 +102,8 @@ export interface TEmployeeExperience {
 export type TEmployeeFormType =
   | 'basic-info'
   | 'personal-info'
-  | 'about-employee';
+  | 'about-employee'
+  | 'emergency-contact';
 
 export interface TEmployee extends TUser {
   basic_information?: TEmployeeBasicInformation;

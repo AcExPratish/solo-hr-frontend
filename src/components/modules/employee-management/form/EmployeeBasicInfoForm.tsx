@@ -10,7 +10,7 @@ import { EmployeeBasicSchema } from '@/validation/employee-management/EmployeeSc
 import ReactGroupSelect from '@/components/base/ReactGroupSelect';
 import { genderOptions } from '@/data';
 
-export interface EmployeeBasicInfoModalFormProps {
+export interface EmployeeBasicInfoFormProps {
   formData: TEmployee;
   onSubmit: (data: TEmployee) => void;
   onClose: () => void;
@@ -18,13 +18,13 @@ export interface EmployeeBasicInfoModalFormProps {
   loading?: boolean;
 }
 
-const EmployeeBasicInfoModalForm = ({
+const EmployeeBasicInfoForm = ({
   formData: initialValues,
   modal,
   onSubmit,
   onClose,
   loading
-}: EmployeeBasicInfoModalFormProps) => {
+}: EmployeeBasicInfoFormProps) => {
   // React Hooks
   const { t } = useTranslation();
 
@@ -64,7 +64,7 @@ const EmployeeBasicInfoModalForm = ({
           onSubmit={handleSubmit}
           type={modal.type}
           title={t('basic_information')}
-          disabled={loading}
+          disabled={loading || isView}
           size="lg"
         >
           <Form noValidate className="d-flex flex-column">
@@ -487,4 +487,4 @@ const EmployeeBasicInfoModalForm = ({
   );
 };
 
-export default EmployeeBasicInfoModalForm;
+export default EmployeeBasicInfoForm;

@@ -1,13 +1,5 @@
 import React from 'react';
-import {
-  Modal,
-  Form,
-  Row,
-  Col,
-  Stack,
-  ModalProps,
-  FloatingLabel
-} from 'react-bootstrap';
+import { Modal, Form, Row, Col, Stack, FloatingLabel } from 'react-bootstrap';
 import { Formik, FieldArray, getIn } from 'formik';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faPlus, faSave, faTrash } from '@fortawesome/free-solid-svg-icons';
@@ -18,9 +10,10 @@ import {
 import { useTranslation } from 'react-i18next';
 import { EmergencyContactSchema } from '@/validation/employee-management/EmployeeSchema';
 import Button from '@/components/base/Button';
+import { TModalProps } from '@/types/modules';
 
-interface EmployeeDetailEmergencyContactModalFormProps {
-  modal: ModalProps;
+interface EmployeeDetailEmergencyContactFormProps {
+  modal: TModalProps;
   onClose: () => void;
   onSubmit: (values: TEmployee) => void;
   formData: TEmployee;
@@ -35,15 +28,23 @@ const emptyContact = (): TEmployeeEmergencyContact => ({
   phone_2: ''
 });
 
-const EmployeeDetailEmergencyContactModalForm = ({
+const EmployeeDetailEmergencyContactForm = ({
   modal,
   onClose,
   onSubmit,
   formData,
   loading
-}: EmployeeDetailEmergencyContactModalFormProps) => {
+}: EmployeeDetailEmergencyContactFormProps) => {
   // React Hooks
   const { t } = useTranslation();
+
+  // Use States
+  const isView = modal.type === 'view';
+
+  // On Submit
+  const handleOnSubmit = async (values: TEmployee) => {
+    onSubmit({ ...values, form_type: 'emergency-contact' });
+  };
 
   return (
     <Modal size="lg" onHide={onClose} {...modal} backdrop={'static'}>
@@ -54,9 +55,7 @@ const EmployeeDetailEmergencyContactModalForm = ({
       <Formik
         initialValues={formData}
         validationSchema={EmergencyContactSchema}
-        onSubmit={values => {
-          onSubmit(values);
-        }}
+        onSubmit={handleOnSubmit}
         enableReinitialize
       >
         {({
@@ -96,6 +95,7 @@ const EmployeeDetailEmergencyContactModalForm = ({
                                   label={t('name')}
                                 >
                                   <Form.Control
+                                    disabled={isView}
                                     id={namePath}
                                     name={namePath}
                                     value={data.name || ''}
@@ -122,6 +122,7 @@ const EmployeeDetailEmergencyContactModalForm = ({
                                   label={t('name')}
                                 >
                                   <Form.Control
+                                    disabled={isView}
                                     id={relationshipPath}
                                     name={relationshipPath}
                                     value={data.relationship || ''}
@@ -148,6 +149,7 @@ const EmployeeDetailEmergencyContactModalForm = ({
                                   label={t('phone')}
                                 >
                                   <Form.Control
+                                    disabled={isView}
                                     id={phone1Path}
                                     name={phone1Path}
                                     value={data.phone_1 || ''}
@@ -174,6 +176,7 @@ const EmployeeDetailEmergencyContactModalForm = ({
                                   label={t('alternative_phone')}
                                 >
                                   <Form.Control
+                                    disabled={isView}
                                     id={phone2Path}
                                     name={phone2Path}
                                     value={data.phone_2 || ''}
@@ -212,6 +215,7 @@ const EmployeeDetailEmergencyContactModalForm = ({
 
                       <div className="d-flex justify-content-start my-2">
                         <Button
+                          disabled={isView}
                           variant="primary"
                           onClick={() => push(emptyContact())}
                           hidden={values?.emergency_contact?.length === 2}
@@ -230,7 +234,11 @@ const EmployeeDetailEmergencyContactModalForm = ({
               <Button variant="phoenix-secondary" onClick={onClose}>
                 {t('cancel')}
               </Button>
-              <Button type="submit" variant="primary" disabled={loading}>
+              <Button
+                type="submit"
+                variant="primary"
+                disabled={loading || isView}
+              >
                 <FontAwesomeIcon icon={faSave} className="me-2" />
                 <span>{t('save')}</span>
               </Button>
@@ -242,4 +250,4 @@ const EmployeeDetailEmergencyContactModalForm = ({
   );
 };
 
-export default EmployeeDetailEmergencyContactModalForm;
+export default EmployeeDetailEmergencyContactForm;

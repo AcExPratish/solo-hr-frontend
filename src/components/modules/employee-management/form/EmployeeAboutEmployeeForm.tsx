@@ -7,7 +7,7 @@ import ModalForm from '@/components/common/custom/ModalForm';
 import { TEmployee } from '@/types/modules/employee-management/employee';
 import { EmployeeAboutEmployeeSchema } from '@/validation/employee-management/EmployeeSchema';
 
-export interface EmployeeAboutEmployeeModalFormProps {
+export interface EmployeeAboutEmployeeFormProps {
   formData: TEmployee;
   onSubmit: (data: TEmployee) => void;
   onClose: () => void;
@@ -15,13 +15,13 @@ export interface EmployeeAboutEmployeeModalFormProps {
   loading?: boolean;
 }
 
-const EmployeeAboutEmployeeModalForm = ({
+const EmployeeAboutEmployeeForm = ({
   formData: initialValues,
   modal,
   onSubmit,
   onClose,
   loading
-}: EmployeeAboutEmployeeModalFormProps) => {
+}: EmployeeAboutEmployeeFormProps) => {
   // React Hooks
   const { t } = useTranslation();
 
@@ -59,7 +59,7 @@ const EmployeeAboutEmployeeModalForm = ({
           onSubmit={handleSubmit}
           type={modal.type}
           title={t('about_employee')}
-          disabled={loading}
+          disabled={loading || isView}
           size="lg"
         >
           <Form noValidate className="d-flex flex-column">
@@ -99,4 +99,4 @@ const EmployeeAboutEmployeeModalForm = ({
   );
 };
 
-export default EmployeeAboutEmployeeModalForm;
+export default EmployeeAboutEmployeeForm;
