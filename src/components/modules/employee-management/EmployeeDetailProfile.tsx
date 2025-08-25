@@ -82,7 +82,7 @@ const EmployeeDetailProfile = ({
 
             <Col
               xs={12}
-              className="d-flex flex-column flex-sm-row align-items-center justify-content-center"
+              className="d-flex flex-column flex-sm-row flex-wrap align-items-center justify-content-center"
             >
               <Badge bg="success" className="me-2">
                 <FontAwesomeIcon icon={faUser} className="me-1" />

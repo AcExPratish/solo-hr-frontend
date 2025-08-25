@@ -2,7 +2,6 @@ import React from 'react';
 import { Col, FloatingLabel, Form, Row } from 'react-bootstrap';
 import { useTranslation } from 'react-i18next';
 import { Formik, getIn } from 'formik';
-import { TUser } from '@/types/modules/user-management/user';
 import { TModalProps, TReactOption } from '@/types/modules';
 import ModalForm from '@/components/common/custom/ModalForm';
 import { formatDateForInput } from '@/helpers/date';
@@ -35,19 +34,26 @@ const EmployeeBasicForm = ({
 
   // Use States
   const isView = modal.type === 'view';
+  const [genderOption] = React.useState<TReactOption[]>(genderOptionsData);
   const initialValues = React.useMemo<TEmployeeForm>(() => {
-    const genderOptions = genderOptionsData;
-
     return {
-      ...formData,
-      genderOptions
+      ...formData
     };
   }, [formData, modal]);
 
   // On Submit
-  const handleOnSubmit = async (values: TEmployee) => {
-    const tempValues: TUser = {
-      ...values
+  const handleOnSubmit = async (values: TEmployeeForm) => {
+    const genderId = values?.genderOptions?.find(
+      (gender: TReactOption) =>
+        gender?.value === values?.basic_information?.gender
+    )?.value;
+
+    const tempValues: TEmployee = {
+      ...values,
+      basic_information: {
+        ...values?.basic_information,
+        gender: genderId as string
+      }
     };
 
     onSubmit(tempValues);
@@ -242,14 +248,24 @@ const EmployeeBasicForm = ({
                   </Form.Label>
                   <ReactGroupSelect
                     isDisabled={isView}
-                    options={genderOptionsData}
+                    options={genderOption}
                     name="basic_information.gender"
-                    value={values?.basic_information?.gender}
+                    value={
+                      genderOptionsData.find(
+                        (option: TReactOption) =>
+                          option?.value === values?.basic_information?.gender
+                      ) ?? null
+                    }
                     onBlur={() =>
                       setFieldTouched('basic_information.gender', true)
                     }
-                    onChange={options =>
-                      setFieldValue('basic_information.gender', options)
+                    onChange={option =>
+                      setFieldValue(
+                        'basic_information.gender',
+                        // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+                        //@ts-expect-error
+                        option?.value
+                      )
                     }
                     placeholder={`${t('select')} ${t(
                       'gender'
