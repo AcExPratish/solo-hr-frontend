@@ -156,5 +156,7 @@
     "account_holder_name": "Account Holder Name",
     "account_number": "Account Number",
     "account_type": "Account Type",
-    "swift_code": "Swift Code"
+    "swift_code": "Swift Code",
+    "family_member_details": "Family Member Details",
+    "add_family_member": "Add Family Member"
 }

@@ -71,13 +71,12 @@ export interface TEmployeeSupportingDocuments {
   driving_license?: TEmployeeDocument; // Driving License Number
 }
 
-export interface TFamilyInformation {
+export interface TEmployeeFamilyInformation {
   id?: string;
   name?: string;
   relationship?: string;
   phone_1?: string;
   phone_2?: string;
-  email?: string;
 }
 
 export interface TEmployeeEducation {
@@ -100,11 +99,12 @@ export interface TEmployeeExperience {
 }
 
 export type TEmployeeFormType =
-  | 'basic-info'
-  | 'personal-info'
-  | 'about-employee'
-  | 'emergency-contact'
-  | 'bank-information';
+  | 'basic_info'
+  | 'personal_info'
+  | 'about_employee'
+  | 'emergency_contact'
+  | 'bank_information'
+  | 'family_information';
 
 export interface TEmployee extends TUser {
   basic_information?: TEmployeeBasicInformation;
@@ -112,7 +112,7 @@ export interface TEmployee extends TUser {
   bank_information?: TEmployeeBankInformation;
   statutory_information?: TEmployeeStatutoryInformation;
   supporting_documents?: TEmployeeSupportingDocuments;
-  family_information?: TFamilyInformation[];
+  family_information?: TEmployeeFamilyInformation[];
   education?: TEmployeeEducation[];
   experience?: TEmployeeExperience[];
 

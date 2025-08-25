@@ -33,7 +33,7 @@ const EmployeeBasicInfoForm = ({
 
   // On Submit
   const handleOnSubmit = async (values: TEmployee) => {
-    onSubmit({ ...values, form_type: 'basic-info' });
+    onSubmit({ ...values, form_type: 'basic_info' });
   };
 
   return (

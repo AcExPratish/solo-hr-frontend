@@ -31,7 +31,7 @@ const EmployeePersonalInfoForm = ({
 
   // On Submit
   const handleOnSubmit = async (values: TEmployee) => {
-    onSubmit({ ...values, form_type: 'personal-info' });
+    onSubmit({ ...values, form_type: 'personal_info' });
   };
 
   return (

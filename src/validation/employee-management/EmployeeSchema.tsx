@@ -238,3 +238,37 @@ export const EmployeeBankInformationSchema = Yup.object().shape({
       )
   })
 });
+
+export const EmployeeFamilyInformationSchema = Yup.object().shape({
+  family_information: Yup.array().of(
+    Yup.object().shape({
+      name: Yup.string().required(
+        t('form_validation_mandatory', { field: t('name').toLowerCase() })
+      ),
+      relationship: Yup.string().required(
+        t('form_validation_mandatory', {
+          field: t('relationship').toLowerCase()
+        })
+      ),
+      phone_1: Yup.string()
+        .required(
+          t('form_validation_mandatory', {
+            field: t('phone').toLowerCase()
+          })
+        )
+        .matches(
+          phoneRegex,
+          t('form_validation_phone', { field: t('phone').toLowerCase() })
+        ),
+      phone_2: Yup.string()
+        .notRequired()
+        .nullable()
+        .matches(
+          phoneRegex,
+          t('form_validation_phone', {
+            field: t('alternative_phone').toLowerCase()
+          })
+        )
+    })
+  )
+});

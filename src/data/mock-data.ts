@@ -179,16 +179,14 @@ export const employeeMockData: TEmployee = {
       name: 'Jane Doe',
       relationship: 'Wife',
       phone_1: '+9779811111111',
-      phone_2: '+9779822222222',
-      email: 'jane@example.com'
+      phone_2: '+9779822222222'
     },
     {
       id: 'fi002',
       name: 'Sophia Doe',
       relationship: 'Daughter',
       phone_1: undefined,
-      phone_2: undefined,
-      email: 'sophia@example.com'
+      phone_2: undefined
     }
   ],
 

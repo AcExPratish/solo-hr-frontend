@@ -30,7 +30,7 @@ const EmployeeBankInformationForm = ({
 
   // On Submit
   const handleOnSubmit = async (values: TEmployee) => {
-    onSubmit({ ...values, form_type: 'bank-information' });
+    onSubmit({ ...values, form_type: 'bank_information' });
   };
 
   return (

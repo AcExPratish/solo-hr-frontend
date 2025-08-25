@@ -26,9 +26,10 @@ import {
 import PhoenixLoader from '@/components/common/PhoenixLoader';
 import EmployeePersonalInfoForm from '@/components/modules/employee-management/form/EmployeePersonalInfoForm';
 import EmployeeAboutEmployeeForm from '@/components/modules/employee-management/form/EmployeeAboutEmployeeForm';
-import EmployeeDetailEmergencyContactForm from '@/components/modules/employee-management/form/EmployeeDetailEmergencyContactForm';
-import EmployeeDetailEmergencyContact from '@/components/modules/employee-management/EmployeeDetailEmergencyContact';
 import EmployeeBankInformationForm from '@/components/modules/employee-management/form/EmployeeBankInformationForm';
+import EmployeeEmergencyContactForm from '@/components/modules/employee-management/form/EmployeeEmergencyContactForm';
+import EmployeeDetailEmergencyContact from '@/components/modules/employee-management/EmployeeDetailEmergencyContact';
+import EmployeeFamilyInformationForm from '@/components/modules/employee-management/form/EmployeeFamilyInformationForm';
 // import { checkScope } from '@/helpers/auth';
 
 // Initial values
@@ -218,6 +219,11 @@ const EmployeeDetailsPage = () => {
       show: false,
       placement: 'end'
     });
+  const [familyInformationModal, setFamilyInformationModal] =
+    React.useState<TModalProps>({
+      show: false,
+      placement: 'end'
+    });
   const [employee, setEmployee] = React.useState<TEmployee>(initialValues);
 
   // Handlers
@@ -253,18 +259,30 @@ const EmployeeDetailsPage = () => {
     });
   };
 
+  const handleOnEditFamilyInformation = () => {
+    setFamilyInformationModal({
+      ...familyInformationModal,
+      ...{ show: true, type: 'edit' }
+    });
+  };
+
   const handleFormTypeModal = (formType: TEmployeeFormType, show: boolean) => {
-    if (formType === 'basic-info') {
+    if (formType === 'basic_info') {
       setBasicInfoModal({ ...basicInfoModal, ...{ show } });
-    } else if (formType === 'personal-info') {
+    } else if (formType === 'personal_info') {
       setPersonalInfoModal({ ...personalInfoModal, ...{ show } });
-    } else if (formType === 'emergency-contact') {
+    } else if (formType === 'emergency_contact') {
       setEmergencyContactModal({ ...emergencyContactModal, ...{ show } });
-    } else if (formType === 'about-employee') {
+    } else if (formType === 'about_employee') {
       setAboutEmployeeModal({ ...aboutEmployeeModal, ...{ show } });
-    } else if (formType === 'bank-information') {
+    } else if (formType === 'bank_information') {
       setBankInformationModal({
         ...bankInformationModal,
+        ...{ show }
+      });
+    } else if (formType === 'family_information') {
+      setFamilyInformationModal({
+        ...familyInformationModal,
         ...{ show }
       });
     }
@@ -272,7 +290,7 @@ const EmployeeDetailsPage = () => {
 
   const handleOnSubmit = (formData: TEmployee) => {
     setLoader({ list: true });
-    handleFormTypeModal(formData?.form_type || 'basic-info', true);
+    handleFormTypeModal(formData?.form_type || 'basic_info', true);
 
     updateEmployee(formData?.id ?? '', formData)
       .then(() => {
@@ -282,7 +300,7 @@ const EmployeeDetailsPage = () => {
             name: getUserFirstAndLastName(formData)
           })
         );
-        handleFormTypeModal(formData?.form_type || 'basic-info', false);
+        handleFormTypeModal(formData?.form_type || 'basic_info', false);
         setLoader({ list: false });
       })
       .catch(() => {
@@ -364,7 +382,7 @@ const EmployeeDetailsPage = () => {
                 {/* Family Information */}
                 <EmployeeDetailFamilyInformation
                   employee={employee}
-                  onFamilyInformationEdit={() => {}}
+                  onFamilyInformationEdit={handleOnEditFamilyInformation}
                 />
 
                 {/* Statutory Information */}
@@ -431,7 +449,7 @@ const EmployeeDetailsPage = () => {
             loading={loader.list}
           />
 
-          <EmployeeDetailEmergencyContactForm
+          <EmployeeEmergencyContactForm
             formData={employee}
             modal={emergencyContactModal}
             onSubmit={values => {
@@ -470,6 +488,21 @@ const EmployeeDetailsPage = () => {
             onClose={() =>
               setBankInformationModal({
                 ...bankInformationModal,
+                ...{ show: false, type: '' }
+              })
+            }
+            loading={loader.list}
+          />
+
+          <EmployeeFamilyInformationForm
+            formData={employee}
+            modal={familyInformationModal}
+            onSubmit={values => {
+              handleOnSubmit(values);
+            }}
+            onClose={() =>
+              setFamilyInformationModal({
+                ...familyInformationModal,
                 ...{ show: false, type: '' }
               })
             }

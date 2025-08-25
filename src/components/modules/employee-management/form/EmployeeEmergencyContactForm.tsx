@@ -12,7 +12,7 @@ import { EmergencyContactSchema } from '@/validation/employee-management/Employe
 import Button from '@/components/base/Button';
 import { TModalProps } from '@/types/modules';
 
-interface EmployeeDetailEmergencyContactFormProps {
+interface EmployeeEmergencyContactFormProps {
   modal: TModalProps;
   onClose: () => void;
   onSubmit: (values: TEmployee) => void;
@@ -28,13 +28,13 @@ const emptyContact = (): TEmployeeEmergencyContact => ({
   phone_2: ''
 });
 
-const EmployeeDetailEmergencyContactForm = ({
+const EmployeeEmergencyContactForm = ({
   modal,
   onClose,
   onSubmit,
   formData,
   loading
-}: EmployeeDetailEmergencyContactFormProps) => {
+}: EmployeeEmergencyContactFormProps) => {
   // React Hooks
   const { t } = useTranslation();
 
@@ -43,7 +43,7 @@ const EmployeeDetailEmergencyContactForm = ({
 
   // On Submit
   const handleOnSubmit = async (values: TEmployee) => {
-    onSubmit({ ...values, form_type: 'emergency-contact' });
+    onSubmit({ ...values, form_type: 'emergency_contact' });
   };
 
   return (
@@ -250,4 +250,4 @@ const EmployeeDetailEmergencyContactForm = ({
   );
 };
 
-export default EmployeeDetailEmergencyContactForm;
+export default EmployeeEmergencyContactForm;

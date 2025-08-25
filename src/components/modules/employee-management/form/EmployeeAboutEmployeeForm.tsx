@@ -30,7 +30,7 @@ const EmployeeAboutEmployeeForm = ({
 
   // On Submit
   const handleOnSubmit = async (values: TEmployee) => {
-    onSubmit({ ...values, form_type: 'about-employee' });
+    onSubmit({ ...values, form_type: 'about_employee' });
   };
 
   return (
