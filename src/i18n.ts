@@ -7,8 +7,8 @@ import Cookies from 'universal-cookie';
 const cookies = new Cookies();
 const fallbackLng = ['en'];
 const initLang = cookies.get('i18next') || 'en';
-i18n
 
+i18n
   .use(Backend)
   .use(LanguageDetector)
   .use(initReactI18next)
