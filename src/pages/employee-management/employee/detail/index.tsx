@@ -12,7 +12,6 @@ import { TLoader, TModalProps } from '@/types/modules';
 import { toast } from 'react-toastify';
 import useEmployeeHook from '@/hooks/modules/employee-management/useEmployeeHook';
 import EmployeeDetailProfile from '@/components/modules/employee-management/EmployeeDetailProfile';
-import EmployeeDetailEmergencyContact from '@/components/modules/employee-management/EmployeeDetailEmergencyContact';
 import EmployeeDetailAboutEmployee from '@/components/modules/employee-management/EmployeeDetailAboutEmployee';
 import EmployeeDetailBankInformation from '@/components/modules/employee-management/EmployeeDetailBankInformation';
 import EmployeeDetailFamilyInformation from '@/components/modules/employee-management/EmployeeDetailFamilyInformation';
@@ -27,6 +26,8 @@ import {
 import PhoenixLoader from '@/components/common/PhoenixLoader';
 import EmployeePersonalInfoModalForm from '@/components/modules/employee-management/modal/EmployeePersonalInfoModalForm';
 import EmployeeAboutEmployeeModalForm from '@/components/modules/employee-management/modal/EmployeeAboutEmployeeModalForm';
+import EmployeeDetailEmergencyContactModalForm from '@/components/modules/employee-management/modal/EmployeeDetailEmergencyContactModalForm';
+import EmployeeDetailEmergencyContact from '@/components/modules/employee-management/EmployeeDetailEmergencyContact';
 // import { checkScope } from '@/helpers/auth';
 
 // Initial values
@@ -201,6 +202,11 @@ const EmployeeDetailsPage = () => {
       placement: 'end'
     }
   );
+  const [emergencyContactModal, setEmergencyContactModal] =
+    React.useState<TModalProps>({
+      show: false,
+      placement: 'end'
+    });
   const [aboutEmployeeModal, setAboutEmployeeModal] =
     React.useState<TModalProps>({
       show: false,
@@ -216,6 +222,13 @@ const EmployeeDetailsPage = () => {
   const handleOnEditPersonalInfo = () => {
     setPersonalInfoModal({
       ...personalInfoModal,
+      ...{ show: true, type: 'edit' }
+    });
+  };
+
+  const handleOnEditEmergencyContact = () => {
+    setEmergencyContactModal({
+      ...emergencyContactModal,
       ...{ show: true, type: 'edit' }
     });
   };
@@ -306,7 +319,10 @@ const EmployeeDetailsPage = () => {
                 />
 
                 {/* Emergency Contact Information */}
-                <EmployeeDetailEmergencyContact employee={employee} />
+                <EmployeeDetailEmergencyContact
+                  employee={employee}
+                  onEmergencyContactEdit={handleOnEditEmergencyContact}
+                />
               </Col>
 
               {/* Right Column */}
@@ -387,6 +403,21 @@ const EmployeeDetailsPage = () => {
             onClose={() =>
               setPersonalInfoModal({
                 ...personalInfoModal,
+                ...{ show: false, type: '' }
+              })
+            }
+            loading={loader.list}
+          />
+
+          <EmployeeDetailEmergencyContactModalForm
+            formData={employee}
+            modal={emergencyContactModal}
+            onSubmit={values => {
+              handleOnSubmit(values);
+            }}
+            onClose={() =>
+              setEmergencyContactModal({
+                ...emergencyContactModal,
                 ...{ show: false, type: '' }
               })
             }

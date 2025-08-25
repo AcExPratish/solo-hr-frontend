@@ -1,35 +1,21 @@
 import React from 'react';
 import { faEdit } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { Card, Col, ModalProps, Row } from 'react-bootstrap';
+import { Card, Col, Row } from 'react-bootstrap';
 import { useTranslation } from 'react-i18next';
 import { TEmployee } from '@/types/modules/employee-management/employee';
-import EmployeeDetailEmergencyContactModalForm from './modal/EmployeeDetailEmergencyContactModalForm';
 
 interface TEmployeeDetailEmergencyContactProps {
   employee: TEmployee;
+  onEmergencyContactEdit: () => void;
 }
 
 const EmployeeDetailEmergencyContact = ({
-  employee
+  employee,
+  onEmergencyContactEdit
 }: TEmployeeDetailEmergencyContactProps) => {
   // React Hooks
   const { t } = useTranslation();
-
-  // Use States
-  const [emergencyContactModal, setEmergencyContactModal] =
-    React.useState<ModalProps>({
-      show: false,
-      placement: 'end'
-    });
-
-  // Handlers
-  const handleOnEditEmergencyContact = () => {
-    setEmergencyContactModal({
-      ...emergencyContactModal,
-      show: true
-    });
-  };
 
   return (
     <React.Fragment>
@@ -43,7 +29,10 @@ const EmployeeDetailEmergencyContact = ({
             icon={faEdit}
             size="xs"
             className="cursor-pointer hover-text-success"
-            onClick={handleOnEditEmergencyContact}
+            onClick={(e: React.MouseEvent<SVGSVGElement>) => {
+              e.stopPropagation();
+              onEmergencyContactEdit();
+            }}
           />
         </Col>
       </Row>
@@ -77,15 +66,6 @@ const EmployeeDetailEmergencyContact = ({
           </Row>
         </Card.Body>
       </Card>
-
-      <EmployeeDetailEmergencyContactModalForm
-        formData={employee}
-        modal={emergencyContactModal}
-        onClose={() =>
-          setEmergencyContactModal({ ...emergencyContactModal, show: false })
-        }
-        onSubmit={() => {}}
-      />
     </React.Fragment>
   );
 };

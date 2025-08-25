@@ -19,11 +19,12 @@ import { useTranslation } from 'react-i18next';
 import { EmergencyContactSchema } from '@/validation/employee-management/EmployeeSchema';
 import Button from '@/components/base/Button';
 
-interface EmergencyContactsModalProps {
+interface EmployeeDetailEmergencyContactModalFormProps {
   modal: ModalProps;
   onClose: () => void;
   onSubmit: (values: TEmployee) => void;
   formData: TEmployee;
+  loading?: boolean;
 }
 
 const emptyContact = (): TEmployeeEmergencyContact => ({
@@ -38,8 +39,9 @@ const EmployeeDetailEmergencyContactModalForm = ({
   modal,
   onClose,
   onSubmit,
-  formData
-}: EmergencyContactsModalProps) => {
+  formData,
+  loading
+}: EmployeeDetailEmergencyContactModalFormProps) => {
   // React Hooks
   const { t } = useTranslation();
 
@@ -228,7 +230,7 @@ const EmployeeDetailEmergencyContactModalForm = ({
               <Button variant="phoenix-secondary" onClick={onClose}>
                 {t('cancel')}
               </Button>
-              <Button type="submit" variant="primary">
+              <Button type="submit" variant="primary" disabled={loading}>
                 <FontAwesomeIcon icon={faSave} className="me-2" />
                 <span>{t('save')}</span>
               </Button>
