@@ -150,5 +150,11 @@
     "no_of_children": "No of Children",
     "blood_group": "Blood Group",
     "yes": "Yes",
-    "no": "No"
+    "no": "No",
+    "bank_name": "Bank Name",
+    "branch_address": "Branch Address",
+    "account_holder_name": "Account Holder Name",
+    "account_number": "Account Number",
+    "account_type": "Account Type",
+    "swift_code": "Swift Code"
 }

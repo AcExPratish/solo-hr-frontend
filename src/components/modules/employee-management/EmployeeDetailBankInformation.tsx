@@ -1,9 +1,14 @@
 import React from 'react';
-import { Accordion } from 'react-bootstrap';
-import { TEmployee } from '@/types/modules/employee-management/employee';
+import { Accordion, Col, Row } from 'react-bootstrap';
+import {
+  TEmployee,
+  TEmployeeBankInformation
+} from '@/types/modules/employee-management/employee';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faChevronDown, faEdit } from '@fortawesome/free-solid-svg-icons';
 import { useTranslation } from 'react-i18next';
+import { bankInformationOptions } from '@/data/employee';
+import { TReactOption } from '@/types/modules';
 
 interface EmployeeDetailBankInformationProps {
   employee: TEmployee;
@@ -42,9 +47,27 @@ const EmployeeDetailBankInformation = ({
           </div>
         </Accordion.Header>
         <Accordion.Body className="px-3">
-          <p className="text-muted small mb-0">
-            {employee?.basic_information?.about ?? ''}
-          </p>
+          <Row>
+            {bankInformationOptions?.map(
+              (option: TReactOption, index: number) => (
+                <Col
+                  key={index}
+                  xs={12}
+                  md={2}
+                  className="d-flex flex-column gap-1"
+                >
+                  <span className="text-muted fw-semibold small">
+                    {t(option?.value as string)}
+                  </span>
+                  <h6 className="small">
+                    {employee?.bank_information?.[
+                      option?.value as keyof TEmployeeBankInformation
+                    ] ?? ''}
+                  </h6>
+                </Col>
+              )
+            )}
+          </Row>
         </Accordion.Body>
       </Accordion.Item>
     </Accordion>

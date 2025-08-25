@@ -163,3 +163,78 @@ export const EmployeeAboutEmployeeSchema = Yup.object().shape({
       )
   })
 });
+
+export const EmployeeBankInformationSchema = Yup.object().shape({
+  bank_information: Yup.object().shape({
+    bank_name: Yup.string()
+      .required(
+        t('form_validation_mandatory', { field: t('bank_name').toLowerCase() })
+      )
+      .max(
+        250,
+        t('form_validation_max', {
+          field: t('bank_name').toLowerCase(),
+          max: '250'
+        })
+      ),
+    branch_address: Yup.string()
+      .required(
+        t('form_validation_mandatory', {
+          field: t('branch_address').toLowerCase()
+        })
+      )
+      .max(
+        250,
+        t('form_validation_max', {
+          field: t('branch_address').toLowerCase(),
+          max: '250'
+        })
+      ),
+    account_holder_name: Yup.string()
+      .required(
+        t('form_validation_mandatory', {
+          field: t('account_holder_name').toLowerCase()
+        })
+      )
+      .max(
+        250,
+        t('form_validation_max', {
+          field: t('account_holder_name').toLowerCase(),
+          max: '250'
+        })
+      ),
+    account_number: Yup.string()
+      .required(
+        t('form_validation_mandatory', {
+          field: t('account_number').toLowerCase()
+        })
+      )
+      .max(
+        50,
+        t('form_validation_max', {
+          field: t('account_number').toLowerCase(),
+          max: '50'
+        })
+      ),
+    account_type: Yup.string()
+      .notRequired()
+      .nullable()
+      .max(
+        50,
+        t('form_validation_max', {
+          field: t('account_type').toLowerCase(),
+          max: '50'
+        })
+      ),
+    swift_code: Yup.string()
+      .notRequired()
+      .nullable()
+      .max(
+        50,
+        t('form_validation_max', {
+          field: t('swift_code').toLowerCase(),
+          max: '50'
+        })
+      )
+  })
+});

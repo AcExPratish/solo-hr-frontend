@@ -28,6 +28,7 @@ import EmployeePersonalInfoForm from '@/components/modules/employee-management/f
 import EmployeeAboutEmployeeForm from '@/components/modules/employee-management/form/EmployeeAboutEmployeeForm';
 import EmployeeDetailEmergencyContactForm from '@/components/modules/employee-management/form/EmployeeDetailEmergencyContactForm';
 import EmployeeDetailEmergencyContact from '@/components/modules/employee-management/EmployeeDetailEmergencyContact';
+import EmployeeBankInformationForm from '@/components/modules/employee-management/form/EmployeeBankInformationForm';
 // import { checkScope } from '@/helpers/auth';
 
 // Initial values
@@ -212,6 +213,11 @@ const EmployeeDetailsPage = () => {
       show: false,
       placement: 'end'
     });
+  const [bankInformationModal, setBankInformationModal] =
+    React.useState<TModalProps>({
+      show: false,
+      placement: 'end'
+    });
   const [employee, setEmployee] = React.useState<TEmployee>(initialValues);
 
   // Handlers
@@ -240,6 +246,13 @@ const EmployeeDetailsPage = () => {
     });
   };
 
+  const handleOnEditBankInformation = () => {
+    setBankInformationModal({
+      ...bankInformationModal,
+      ...{ show: true, type: 'edit' }
+    });
+  };
+
   const handleFormTypeModal = (formType: TEmployeeFormType, show: boolean) => {
     if (formType === 'basic-info') {
       setBasicInfoModal({ ...basicInfoModal, ...{ show } });
@@ -249,6 +262,11 @@ const EmployeeDetailsPage = () => {
       setEmergencyContactModal({ ...emergencyContactModal, ...{ show } });
     } else if (formType === 'about-employee') {
       setAboutEmployeeModal({ ...aboutEmployeeModal, ...{ show } });
+    } else if (formType === 'bank-information') {
+      setBankInformationModal({
+        ...bankInformationModal,
+        ...{ show }
+      });
     }
   };
 
@@ -340,7 +358,7 @@ const EmployeeDetailsPage = () => {
                 {/* Bank Information */}
                 <EmployeeDetailBankInformation
                   employee={employee}
-                  onBankInformationEdit={() => {}}
+                  onBankInformationEdit={handleOnEditBankInformation}
                 />
 
                 {/* Family Information */}
@@ -437,6 +455,21 @@ const EmployeeDetailsPage = () => {
             onClose={() =>
               setAboutEmployeeModal({
                 ...aboutEmployeeModal,
+                ...{ show: false, type: '' }
+              })
+            }
+            loading={loader.list}
+          />
+
+          <EmployeeBankInformationForm
+            formData={employee}
+            modal={bankInformationModal}
+            onSubmit={values => {
+              handleOnSubmit(values);
+            }}
+            onClose={() =>
+              setBankInformationModal({
+                ...bankInformationModal,
                 ...{ show: false, type: '' }
               })
             }
