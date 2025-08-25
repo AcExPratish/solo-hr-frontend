@@ -254,8 +254,8 @@ const EmployeeDetailsPage = () => {
 
   const handleOnSubmit = (formData: TEmployee) => {
     setLoader({ list: true });
-
     handleFormTypeModal(formData?.form_type || 'basic-info', true);
+
     updateEmployee(formData?.id ?? '', formData)
       .then(() => {
         toast.success(
