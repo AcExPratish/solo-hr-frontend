@@ -148,3 +148,18 @@ export const EmergencyContactSchema = Yup.object().shape({
     })
   )
 });
+
+export const EmployeeAboutEmployeeSchema = Yup.object().shape({
+  basic_information: Yup.object().shape({
+    about: Yup.string()
+      .notRequired()
+      .nullable()
+      .max(
+        250,
+        t('form_validation_max', {
+          field: t('about').toLowerCase(),
+          max: '250'
+        })
+      )
+  })
+});

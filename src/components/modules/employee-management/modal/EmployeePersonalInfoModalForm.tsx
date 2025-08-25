@@ -8,7 +8,7 @@ import { TEmployee } from '@/types/modules/employee-management/employee';
 import ReactGroupSelect from '@/components/base/ReactGroupSelect';
 import { bloodGroupOptions, maritalStatusOptions } from '@/data';
 
-export interface EmployeePersonalInfoFormProps {
+export interface EmployeePersonalInfoModalFormProps {
   formData: TEmployee;
   onSubmit: (data: TEmployee) => void;
   onClose: () => void;
@@ -16,27 +16,22 @@ export interface EmployeePersonalInfoFormProps {
   loading?: boolean;
 }
 
-const EmployeePersonalInfoForm = ({
-  formData,
+const EmployeePersonalInfoModalForm = ({
+  formData: initialValues,
   modal,
   onSubmit,
   onClose,
   loading
-}: EmployeePersonalInfoFormProps) => {
+}: EmployeePersonalInfoModalFormProps) => {
   // React Hooks
   const { t } = useTranslation();
 
   // Use States
   const isView = modal.type === 'view';
-  const initialValues = React.useMemo<TEmployee>(() => {
-    return {
-      ...formData
-    };
-  }, [formData, modal]);
 
   // On Submit
   const handleOnSubmit = async (values: TEmployee) => {
-    onSubmit(values);
+    onSubmit({ ...values, form_type: 'personal-info' });
   };
 
   return (
@@ -67,7 +62,7 @@ const EmployeePersonalInfoForm = ({
           }}
           onSubmit={handleSubmit}
           type={modal.type}
-          title={t('employee')}
+          title={t('personal_information')}
           disabled={loading}
           size="lg"
         >
@@ -272,4 +267,4 @@ const EmployeePersonalInfoForm = ({
   );
 };
 
-export default EmployeePersonalInfoForm;
+export default EmployeePersonalInfoModalForm;

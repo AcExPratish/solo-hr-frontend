@@ -42,7 +42,9 @@ const EmployeeDetailFamilyInformation = ({
           </div>
         </Accordion.Header>
         <Accordion.Body className="px-3">
-          <p className="text-muted small mb-0">{employee?.about ?? ''}</p>
+          <p className="text-muted small mb-0">
+            {employee?.basic_information?.about ?? ''}
+          </p>
         </Accordion.Body>
       </Accordion.Item>
     </Accordion>

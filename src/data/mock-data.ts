@@ -36,7 +36,9 @@ export const employeeMockData: TEmployee = {
     city: 'KTM-01',
     address: 'Baneshwor, Kathmandu',
     zip_code: '44600',
-    postal_code: '44601'
+    postal_code: '44601',
+    about:
+      'Experienced software engineer with a strong background in full-stack development, project management, and cross-team collaboration.'
   },
 
   emergency_contact: [
@@ -55,9 +57,6 @@ export const employeeMockData: TEmployee = {
       phone_2: undefined
     }
   ],
-
-  about:
-    'Experienced software engineer with a strong background in full-stack development, project management, and cross-team collaboration.',
 
   bank_information: {
     id: 'bi001',

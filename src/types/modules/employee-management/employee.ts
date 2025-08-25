@@ -10,6 +10,7 @@ export interface TEmployeeBasicInformation {
   employment_of_spouse?: string;
   no_of_children?: string;
   blood_group?: string;
+  about?: string;
 
   // Employment
   joining_date?: string;
@@ -98,12 +99,14 @@ export interface TEmployeeExperience {
   is_current?: boolean; // true if the experience is currently ongoing
 }
 
-export type TEmployeeFormType = 'basic-info' | 'personal-info';
+export type TEmployeeFormType =
+  | 'basic-info'
+  | 'personal-info'
+  | 'about-employee';
 
 export interface TEmployee extends TUser {
   basic_information?: TEmployeeBasicInformation;
   emergency_contact?: TEmployeeEmergencyContact[];
-  about?: string;
   bank_information?: TEmployeeBankInformation;
   statutory_information?: TEmployeeStatutoryInformation;
   supporting_documents?: TEmployeeSupportingDocuments;

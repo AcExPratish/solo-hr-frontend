@@ -10,7 +10,7 @@ import { EmployeeBasicSchema } from '@/validation/employee-management/EmployeeSc
 import ReactGroupSelect from '@/components/base/ReactGroupSelect';
 import { genderOptions } from '@/data';
 
-export interface EmployeeBasicFormProps {
+export interface EmployeeBasicInfoModalFormProps {
   formData: TEmployee;
   onSubmit: (data: TEmployee) => void;
   onClose: () => void;
@@ -18,27 +18,22 @@ export interface EmployeeBasicFormProps {
   loading?: boolean;
 }
 
-const EmployeeBasicForm = ({
-  formData,
+const EmployeeBasicInfoModalForm = ({
+  formData: initialValues,
   modal,
   onSubmit,
   onClose,
   loading
-}: EmployeeBasicFormProps) => {
+}: EmployeeBasicInfoModalFormProps) => {
   // React Hooks
   const { t } = useTranslation();
 
   // Use States
   const isView = modal.type === 'view';
-  const initialValues = React.useMemo<TEmployee>(() => {
-    return {
-      ...formData
-    };
-  }, [formData, modal]);
 
   // On Submit
   const handleOnSubmit = async (values: TEmployee) => {
-    onSubmit(values);
+    onSubmit({ ...values, form_type: 'basic-info' });
   };
 
   return (
@@ -68,7 +63,7 @@ const EmployeeBasicForm = ({
           }}
           onSubmit={handleSubmit}
           type={modal.type}
-          title={t('employee')}
+          title={t('basic_information')}
           disabled={loading}
           size="lg"
         >
@@ -492,4 +487,4 @@ const EmployeeBasicForm = ({
   );
 };
 
-export default EmployeeBasicForm;
+export default EmployeeBasicInfoModalForm;

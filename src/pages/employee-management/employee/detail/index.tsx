@@ -1,14 +1,14 @@
 import React from 'react';
-import { Container, Row, Col, ModalProps } from 'react-bootstrap';
+import { Container, Row, Col } from 'react-bootstrap';
 import { useTranslation } from 'react-i18next';
 import EmployeeDetailHeader from '@/components/modules/employee-management/EmployeeDetailHeader';
 import { getUserFirstAndLastName } from '@/helpers/utils';
-import EmployeeBasicForm from '@/components/modules/employee-management/form/EmployeeBasicForm';
+import EmployeeBasicInfoModalForm from '@/components/modules/employee-management/modal/EmployeeBasicInfoModalForm';
 import {
   TEmployee,
   TEmployeeFormType
 } from '@/types/modules/employee-management/employee';
-import { TLoader } from '@/types/modules';
+import { TLoader, TModalProps } from '@/types/modules';
 import { toast } from 'react-toastify';
 import useEmployeeHook from '@/hooks/modules/employee-management/useEmployeeHook';
 import EmployeeDetailProfile from '@/components/modules/employee-management/EmployeeDetailProfile';
@@ -25,7 +25,8 @@ import {
   useParams
 } from 'react-router-dom';
 import PhoenixLoader from '@/components/common/PhoenixLoader';
-import EmployeePersonalInfoForm from '@/components/modules/employee-management/form/EmployeePersonalInfoForm';
+import EmployeePersonalInfoModalForm from '@/components/modules/employee-management/modal/EmployeePersonalInfoModalForm';
+import EmployeeAboutEmployeeModalForm from '@/components/modules/employee-management/modal/EmployeeAboutEmployeeModalForm';
 // import { checkScope } from '@/helpers/auth';
 
 // Initial values
@@ -43,7 +44,7 @@ const initialValues: TEmployee = {
     nationality: '',
     religion: '',
     marital_status: '',
-    employment_of_spouse: 'Yes',
+    employment_of_spouse: '',
     no_of_children: '',
     blood_group: '',
     joining_date: '',
@@ -54,10 +55,10 @@ const initialValues: TEmployee = {
     city: '',
     address: '',
     zip_code: '',
-    postal_code: ''
+    postal_code: '',
+    about: ''
   },
   emergency_contact: [],
-  about: '',
   bank_information: {
     id: '',
     bank_name: '',
@@ -190,14 +191,21 @@ const EmployeeDetailsPage = () => {
 
   // Use States
   const [loader, setLoader] = React.useState<TLoader>(intialLoader);
-  const [basicInfoModal, setBasicInfoModal] = React.useState<ModalProps>({
+  const [basicInfoModal, setBasicInfoModal] = React.useState<TModalProps>({
     show: false,
     placement: 'end'
   });
-  const [personalInfoModal, setPersonalInfoModal] = React.useState<ModalProps>({
-    show: false,
-    placement: 'end'
-  });
+  const [personalInfoModal, setPersonalInfoModal] = React.useState<TModalProps>(
+    {
+      show: false,
+      placement: 'end'
+    }
+  );
+  const [aboutEmployeeModal, setAboutEmployeeModal] =
+    React.useState<TModalProps>({
+      show: false,
+      placement: 'end'
+    });
   const [employee, setEmployee] = React.useState<TEmployee>(initialValues);
 
   // Handlers
@@ -208,6 +216,13 @@ const EmployeeDetailsPage = () => {
   const handleOnEditPersonalInfo = () => {
     setPersonalInfoModal({
       ...personalInfoModal,
+      ...{ show: true, type: 'edit' }
+    });
+  };
+
+  const handleOnEditAboutEmployee = () => {
+    setAboutEmployeeModal({
+      ...aboutEmployeeModal,
       ...{ show: true, type: 'edit' }
     });
   };
@@ -299,7 +314,7 @@ const EmployeeDetailsPage = () => {
                 {/* About Employee */}
                 <EmployeeDetailAboutEmployee
                   employee={employee}
-                  onAboutEmployeeEdit={() => {}}
+                  onAboutEmployeeEdit={handleOnEditAboutEmployee}
                 />
 
                 {/* Bank Information */}
@@ -348,7 +363,7 @@ const EmployeeDetailsPage = () => {
           </Container>
 
           {/* Modals */}
-          <EmployeeBasicForm
+          <EmployeeBasicInfoModalForm
             formData={employee}
             modal={basicInfoModal}
             onSubmit={values => {
@@ -363,7 +378,7 @@ const EmployeeDetailsPage = () => {
             loading={loader.list}
           />
 
-          <EmployeePersonalInfoForm
+          <EmployeePersonalInfoModalForm
             formData={employee}
             modal={personalInfoModal}
             onSubmit={values => {
@@ -372,6 +387,21 @@ const EmployeeDetailsPage = () => {
             onClose={() =>
               setPersonalInfoModal({
                 ...personalInfoModal,
+                ...{ show: false, type: '' }
+              })
+            }
+            loading={loader.list}
+          />
+
+          <EmployeeAboutEmployeeModalForm
+            formData={employee}
+            modal={aboutEmployeeModal}
+            onSubmit={values => {
+              handleOnSubmit(values);
+            }}
+            onClose={() =>
+              setAboutEmployeeModal({
+                ...aboutEmployeeModal,
                 ...{ show: false, type: '' }
               })
             }
