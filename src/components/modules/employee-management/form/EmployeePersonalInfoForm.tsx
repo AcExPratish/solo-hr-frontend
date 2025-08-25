@@ -7,6 +7,7 @@ import ModalForm from '@/components/common/custom/ModalForm';
 import { TEmployee } from '@/types/modules/employee-management/employee';
 import ReactGroupSelect from '@/components/base/ReactGroupSelect';
 import { bloodGroupOptions, maritalStatusOptions } from '@/data';
+import { EmployeePersonalInfoSchema } from '@/validation/employee-management/EmployeeSchema';
 
 export interface EmployeePersonalInfoFormProps {
   formData: TEmployee;
@@ -39,8 +40,7 @@ const EmployeePersonalInfoForm = ({
       key={modal.show ? 'open' : 'closed'}
       initialValues={initialValues}
       enableReinitialize
-      //TODO: Add Validation Schema
-      validationSchema={null}
+      validationSchema={EmployeePersonalInfoSchema}
       onSubmit={handleOnSubmit}
     >
       {({

@@ -6,7 +6,7 @@ import { TModalProps, TReactOption } from '@/types/modules';
 import ModalForm from '@/components/common/custom/ModalForm';
 import { formatDateForInput } from '@/helpers/date';
 import { TEmployee } from '@/types/modules/employee-management/employee';
-import { EmployeeBasicSchema } from '@/validation/employee-management/EmployeeSchema';
+import { EmployeeBasicInfoSchema } from '@/validation/employee-management/EmployeeSchema';
 import ReactGroupSelect from '@/components/base/ReactGroupSelect';
 import { genderOptions } from '@/data';
 
@@ -41,7 +41,7 @@ const EmployeeBasicInfoForm = ({
       key={modal.show ? 'open' : 'closed'}
       initialValues={initialValues}
       enableReinitialize
-      validationSchema={EmployeeBasicSchema}
+      validationSchema={EmployeeBasicInfoSchema}
       onSubmit={handleOnSubmit}
     >
       {({

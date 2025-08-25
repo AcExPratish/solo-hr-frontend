@@ -30,6 +30,7 @@
     "message_success_delete": "{{page}} deleted. {{name}}",
     "message_success_update": "{{page}} update. {{name}}",
     "form_validation_mandatory": "The {{field}} field is required.",
+    "form_validation_positive": "The {{field}} must be a positive number.",
     "form_validation_max": "The {{field}} must not be greater than {{max}}.",
     "form_validation_min": "The {{field}} must not be less than {{min}}.",
     "form_validation_numeric": "The {{field}} must be numeric.",

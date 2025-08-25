@@ -1,12 +1,12 @@
 import * as Yup from 'yup';
 import i18next from 'i18next';
 import { todayDate } from '@/helpers/date';
-import { phoneRegex } from '@/helpers/regex';
+import { phoneRegex, positiveNumberRegexWithZero } from '@/helpers/regex';
 const t = i18next.t;
 
 const todaysDate = todayDate();
 
-export const EmployeeBasicSchema = Yup.object().shape({
+export const EmployeeBasicInfoSchema = Yup.object().shape({
   first_name: Yup.string()
     .required(
       t('form_validation_mandatory', {
@@ -113,6 +113,70 @@ export const EmployeeBasicSchema = Yup.object().shape({
       phoneRegex,
       t('form_validation_phone', { field: t('phone').toLowerCase() })
     )
+});
+
+export const EmployeePersonalInfoSchema = Yup.object().shape({
+  basic_information: Yup.object().shape({
+    nationality: Yup.string()
+      .notRequired()
+      .nullable()
+      .max(
+        50,
+        t('form_validation_max', {
+          field: t('nationality').toLowerCase(),
+          max: '50'
+        })
+      ),
+    religion: Yup.string()
+      .notRequired()
+      .nullable()
+      .max(
+        50,
+        t('form_validation_max', {
+          field: t('religion').toLowerCase(),
+          max: '50'
+        })
+      ),
+    blood_group: Yup.string()
+      .notRequired()
+      .nullable()
+      .max(
+        4,
+        t('form_validation_max', {
+          field: t('blood_group').toLowerCase(),
+          max: '4'
+        })
+      ),
+    marital_status: Yup.string()
+      .notRequired()
+      .nullable()
+      .max(
+        4,
+        t('form_validation_max', {
+          field: t('marital_status').toLowerCase(),
+          max: '4'
+        })
+      ),
+    employment_of_spouse: Yup.string()
+      .notRequired()
+      .nullable()
+      .max(
+        50,
+        t('form_validation_max', {
+          field: t('employment_of_spouse').toLowerCase(),
+          max: '50'
+        })
+      ),
+    no_of_children: Yup.string()
+      .notRequired()
+      .nullable()
+      .matches(
+        positiveNumberRegexWithZero,
+        t('form_validation_positive', {
+          field: t('no_of_children').toLowerCase()
+        })
+      )
+  })
 });
 
 export const EmergencyContactSchema = Yup.object().shape({
