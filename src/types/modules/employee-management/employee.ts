@@ -17,9 +17,9 @@ export interface TEmployeeBasicInformation {
   designation_id?: string;
 
   // Address
-  province_id?: string;
-  district_id?: string;
-  city_id?: string;
+  province?: string;
+  district?: string;
+  city?: string;
   address?: string;
   zip_code?: string;
   postal_code?: string;

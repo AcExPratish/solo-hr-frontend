@@ -3,14 +3,13 @@ import { Col, FloatingLabel, Form, Row } from 'react-bootstrap';
 import { useTranslation } from 'react-i18next';
 import { Formik, getIn } from 'formik';
 import { TUser } from '@/types/modules/user-management/user';
-import { TModalProps } from '@/types/modules';
+import { TModalProps, TReactOption } from '@/types/modules';
 import ModalForm from '@/components/common/custom/ModalForm';
 import { formatDateForInput } from '@/helpers/date';
 import { TEmployee } from '@/types/modules/employee-management/employee';
-import {
-  EmployeeCreateSchema,
-  EmployeeUpdateSchema
-} from '@/validation/employee-management/EmployeeSchema';
+import { EmployeeBasicSchema } from '@/validation/employee-management/EmployeeSchema';
+import ReactGroupSelect from '@/components/base/ReactGroupSelect';
+import { genderOptions as genderOptionsData } from '@/data';
 
 export interface EmployeeBasicFormProps {
   formData: TEmployee;
@@ -18,6 +17,10 @@ export interface EmployeeBasicFormProps {
   onClose: () => void;
   modal: TModalProps;
   loading?: boolean;
+}
+
+export interface TEmployeeForm extends TEmployee {
+  genderOptions?: TReactOption[];
 }
 
 const EmployeeBasicForm = ({
@@ -32,9 +35,12 @@ const EmployeeBasicForm = ({
 
   // Use States
   const isView = modal.type === 'view';
-  const initialValues = React.useMemo<TEmployee>(() => {
+  const initialValues = React.useMemo<TEmployeeForm>(() => {
+    const genderOptions = genderOptionsData;
+
     return {
-      ...formData
+      ...formData,
+      genderOptions
     };
   }, [formData, modal]);
 
@@ -44,12 +50,6 @@ const EmployeeBasicForm = ({
       ...values
     };
 
-    if (values.password && values.password.trim() !== '') {
-      tempValues.password = values?.password;
-    } else {
-      delete tempValues.password;
-    }
-
     onSubmit(tempValues);
   };
 
@@ -58,9 +58,7 @@ const EmployeeBasicForm = ({
       key={modal.show ? 'open' : 'closed'}
       initialValues={initialValues}
       enableReinitialize
-      validationSchema={
-        modal.type === 'add' ? EmployeeCreateSchema : EmployeeUpdateSchema
-      }
+      validationSchema={EmployeeBasicSchema}
       onSubmit={handleOnSubmit}
     >
       {({
@@ -70,7 +68,9 @@ const EmployeeBasicForm = ({
         errors,
         touched,
         handleSubmit,
-        resetForm
+        resetForm,
+        setFieldValue,
+        setFieldTouched
       }) => (
         <ModalForm
           modal={modal}
@@ -211,6 +211,59 @@ const EmployeeBasicForm = ({
                 </FloatingLabel>
               </Col>
 
+              <Col xs={12}>
+                <FloatingLabel label={t('phone')}>
+                  <Form.Control
+                    disabled={isView}
+                    id="phone"
+                    type="phone"
+                    name="phone"
+                    placeholder={t('phone')}
+                    className={`form-control form-icon-input`}
+                    value={values.phone || ''}
+                    onBlur={handleBlur}
+                    onChange={handleChange}
+                    isInvalid={Boolean(
+                      getIn(touched, 'phone') && getIn(errors, 'phone')
+                    )}
+                  />
+                  {getIn(touched, 'phone') && getIn(errors, 'phone') && (
+                    <Form.Control.Feedback type="invalid">
+                      {getIn(errors, 'phone')}
+                    </Form.Control.Feedback>
+                  )}
+                </FloatingLabel>
+              </Col>
+
+              <Col xs={12}>
+                <Form.Group>
+                  <Form.Label htmlFor="genderOptions" className="ps-0">
+                    {t('gender')}
+                  </Form.Label>
+                  <ReactGroupSelect
+                    isDisabled={isView}
+                    options={genderOptionsData}
+                    name="basic_information.gender"
+                    value={values?.basic_information?.gender}
+                    onBlur={() =>
+                      setFieldTouched('basic_information.gender', true)
+                    }
+                    onChange={options =>
+                      setFieldValue('basic_information.gender', options)
+                    }
+                    placeholder={`${t('select')} ${t(
+                      'gender'
+                    ).toLowerCase()} ....`}
+                  />
+                  {getIn(touched, 'basic_information.gender') &&
+                    getIn(errors, 'basic_information.gender') && (
+                      <small className="text-danger">
+                        {getIn(errors, 'basic_information.gender')}
+                      </small>
+                    )}
+                </Form.Group>
+              </Col>
+
               <Col xs={12} md={6}>
                 <FloatingLabel label={t('date_of_birth')}>
                   <Form.Control
@@ -271,27 +324,166 @@ const EmployeeBasicForm = ({
                 </FloatingLabel>
               </Col>
 
+              <hr className="my-4" />
+
+              {/* Address */}
               <Col xs={12}>
-                <FloatingLabel label={t('phone')}>
+                <h5>{t('address')}</h5>
+              </Col>
+
+              <Col xs={12} md={4}>
+                <FloatingLabel label={t('province')}>
                   <Form.Control
                     disabled={isView}
-                    id="phone"
-                    type="phone"
-                    name="phone"
-                    placeholder={t('phone')}
+                    id="basic_information.province"
+                    type="text"
+                    name="basic_information.province"
+                    placeholder={t('province')}
                     className={`form-control form-icon-input`}
-                    value={values.phone || ''}
+                    value={values?.basic_information?.province || ''}
                     onBlur={handleBlur}
                     onChange={handleChange}
                     isInvalid={Boolean(
-                      getIn(touched, 'phone') && getIn(errors, 'phone')
+                      getIn(touched, 'basic_information.province') &&
+                        getIn(errors, 'basic_information.province')
                     )}
                   />
-                  {getIn(touched, 'phone') && getIn(errors, 'phone') && (
-                    <Form.Control.Feedback type="invalid">
-                      {getIn(errors, 'phone')}
-                    </Form.Control.Feedback>
-                  )}
+                  {getIn(touched, 'basic_information.province') &&
+                    getIn(errors, 'basic_information.province') && (
+                      <Form.Control.Feedback type="invalid">
+                        {getIn(errors, 'basic_information.province')}
+                      </Form.Control.Feedback>
+                    )}
+                </FloatingLabel>
+              </Col>
+
+              <Col xs={12} md={4}>
+                <FloatingLabel label={t('district')}>
+                  <Form.Control
+                    disabled={isView}
+                    id="basic_information.district"
+                    type="text"
+                    name="basic_information.district"
+                    placeholder={t('district')}
+                    className={`form-control form-icon-input`}
+                    value={values?.basic_information?.district || ''}
+                    onBlur={handleBlur}
+                    onChange={handleChange}
+                    isInvalid={Boolean(
+                      getIn(touched, 'basic_information.district') &&
+                        getIn(errors, 'basic_information.district')
+                    )}
+                  />
+                  {getIn(touched, 'basic_information.district') &&
+                    getIn(errors, 'basic_information.district') && (
+                      <Form.Control.Feedback type="invalid">
+                        {getIn(errors, 'basic_information.district')}
+                      </Form.Control.Feedback>
+                    )}
+                </FloatingLabel>
+              </Col>
+
+              <Col xs={12} md={4}>
+                <FloatingLabel label={t('city')}>
+                  <Form.Control
+                    disabled={isView}
+                    id="basic_information.city"
+                    type="text"
+                    name="basic_information.city"
+                    placeholder={t('city')}
+                    className={`form-control form-icon-input`}
+                    value={values?.basic_information?.city || ''}
+                    onBlur={handleBlur}
+                    onChange={handleChange}
+                    isInvalid={Boolean(
+                      getIn(touched, 'basic_information.city') &&
+                        getIn(errors, 'basic_information.city')
+                    )}
+                  />
+                  {getIn(touched, 'basic_information.city') &&
+                    getIn(errors, 'basic_information.city') && (
+                      <Form.Control.Feedback type="invalid">
+                        {getIn(errors, 'basic_information.city')}
+                      </Form.Control.Feedback>
+                    )}
+                </FloatingLabel>
+              </Col>
+
+              <Col xs={12}>
+                <FloatingLabel label={t('address')}>
+                  <Form.Control
+                    disabled={isView}
+                    id="basic_information.address"
+                    type="text"
+                    name="basic_information.address"
+                    placeholder={t('address')}
+                    className={`form-control form-icon-input`}
+                    value={values?.basic_information?.address || ''}
+                    onBlur={handleBlur}
+                    onChange={handleChange}
+                    isInvalid={Boolean(
+                      getIn(touched, 'basic_information.address') &&
+                        getIn(errors, 'basic_information.address')
+                    )}
+                  />
+                  {getIn(touched, 'basic_information.address') &&
+                    getIn(errors, 'basic_information.address') && (
+                      <Form.Control.Feedback type="invalid">
+                        {getIn(errors, 'basic_information.address')}
+                      </Form.Control.Feedback>
+                    )}
+                </FloatingLabel>
+              </Col>
+
+              <Col xs={12} md={6}>
+                <FloatingLabel label={t('zip_code')}>
+                  <Form.Control
+                    disabled={isView}
+                    id="basic_information.zip_code"
+                    type="text"
+                    name="basic_information.zip_code"
+                    placeholder={t('zip_code')}
+                    className={`form-control form-icon-input`}
+                    value={values?.basic_information?.zip_code || ''}
+                    onBlur={handleBlur}
+                    onChange={handleChange}
+                    isInvalid={Boolean(
+                      getIn(touched, 'basic_information.zip_code') &&
+                        getIn(errors, 'basic_information.zip_code')
+                    )}
+                  />
+                  {getIn(touched, 'basic_information.zip_code') &&
+                    getIn(errors, 'basic_information.zip_code') && (
+                      <Form.Control.Feedback type="invalid">
+                        {getIn(errors, 'basic_information.zip_code')}
+                      </Form.Control.Feedback>
+                    )}
+                </FloatingLabel>
+              </Col>
+
+              <Col xs={12} md={6}>
+                <FloatingLabel label={t('postal_code')}>
+                  <Form.Control
+                    disabled={isView}
+                    id="basic_information.postal_code"
+                    type="text"
+                    name="basic_information.postal_code"
+                    placeholder={t('postal_code')}
+                    className={`form-control form-icon-input`}
+                    value={values?.basic_information?.postal_code || ''}
+                    onBlur={handleBlur}
+                    onChange={handleChange}
+                    isInvalid={Boolean(
+                      getIn(touched, 'basic_information.postal_code') &&
+                        getIn(errors, 'basic_information.postal_code')
+                    )}
+                  />
+                  {getIn(touched, 'basic_information.postal_code') &&
+                    getIn(errors, 'basic_information.postal_code') && (
+                      <Form.Control.Feedback type="invalid">
+                        {getIn(errors, 'basic_information.postal_code')}
+                      </Form.Control.Feedback>
+                    )}
                 </FloatingLabel>
               </Col>
             </Row>

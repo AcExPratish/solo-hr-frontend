@@ -56,9 +56,9 @@ const initialValues: TEmployee = {
     designation_id: '',
 
     // Address
-    province_id: '',
-    district_id: '',
-    city_id: '',
+    province: '',
+    district: '',
+    city: '',
     address: '',
     zip_code: '',
     postal_code: ''

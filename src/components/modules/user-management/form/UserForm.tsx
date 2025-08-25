@@ -302,7 +302,9 @@ const UserForm = ({
 
               <Col xs={12} className="mt-0">
                 <Form.Group>
-                  <Form.Label htmlFor="roleOptions">{t('role')}</Form.Label>
+                  <Form.Label htmlFor="roleOptions" className="ps-0">
+                    {t('role')}
+                  </Form.Label>
                   <ReactGroupSelect
                     isDisabled={isView}
                     options={roleOption}

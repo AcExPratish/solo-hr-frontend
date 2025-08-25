@@ -31,9 +31,9 @@ export const employeeMockData: TEmployee = {
     joining_date: '2020-02-01',
     department_id: 'dep101',
     designation_id: 'des205',
-    province_id: '3',
-    district_id: 'Kathmandu',
-    city_id: 'KTM-01',
+    province: 'Bagmati',
+    district: 'Kathmandu',
+    city: 'KTM-01',
     address: 'Baneshwor, Kathmandu',
     zip_code: '44600',
     postal_code: '44601'

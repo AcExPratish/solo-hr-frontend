@@ -144,5 +144,7 @@
     "secondary_contact_details": "Secondary Contact Details",
     "name": "Name",
     "relationship": "Relationship",
-    "emergency_contact_details": "Emergency Contact Details"
+    "emergency_contact_details": "Emergency Contact Details",
+    "zip_code": "Zip Code",
+    "postal_code": "Postal Code"
 }

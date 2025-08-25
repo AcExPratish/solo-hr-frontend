@@ -31,6 +31,7 @@ const ReactGroupSelect = ({ ...rest }: StateManagerProps) => {
   const customStyles: StylesConfig = {
     control: (base, state) => ({
       ...base,
+      padding: 11.5,
       backgroundColor: state.isDisabled
         ? 'rgba(239, 242, 246, 1) !important'
         : 'white'
