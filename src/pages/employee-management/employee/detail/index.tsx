@@ -245,6 +245,10 @@ const EmployeeDetailsPage = () => {
       setBasicInfoModal({ ...basicInfoModal, ...{ show } });
     } else if (formType === 'personal-info') {
       setPersonalInfoModal({ ...personalInfoModal, ...{ show } });
+    } else if (formType === 'emergency-contact') {
+      setEmergencyContactModal({ ...emergencyContactModal, ...{ show } });
+    } else if (formType === 'about-employee') {
+      setAboutEmployeeModal({ ...aboutEmployeeModal, ...{ show } });
     }
   };
 
