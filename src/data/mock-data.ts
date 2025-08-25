@@ -25,7 +25,7 @@ export const employeeMockData: TEmployee = {
     nationality: 'Nepali',
     religion: 'Hindu',
     marital_status: '1',
-    employment_spouse: '0',
+    employment_of_spouse: 'Yes',
     no_of_children: '2',
     blood_group: 'O+',
     joining_date: '2020-02-01',

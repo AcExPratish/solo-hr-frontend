@@ -13,7 +13,7 @@ const ReactGroupSelect = ({ ...rest }: StateManagerProps) => {
   const CustomOption = (props: any) => {
     return (
       <components.Option {...props}>
-        <div style={{ marginLeft: props.data.level * 10 }}>
+        <div style={{ marginLeft: Number(props.data.level || 0) * 10 }}>
           {props.data.label}
         </div>
       </components.Option>
@@ -31,7 +31,7 @@ const ReactGroupSelect = ({ ...rest }: StateManagerProps) => {
   const customStyles: StylesConfig = {
     control: (base, state) => ({
       ...base,
-      padding: 11.5,
+      padding: 9,
       backgroundColor: state.isDisabled
         ? 'rgba(239, 242, 246, 1) !important'
         : 'white'

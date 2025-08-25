@@ -52,13 +52,37 @@ export const maritalStatusOptions = [
   }
 ];
 
-export const employmentSpouseOptions = [
+export const bloodGroupOptions = [
   {
-    label: 'No',
-    value: '0'
+    label: 'A+',
+    value: 'A+'
   },
   {
-    label: 'Yes',
-    value: '1'
+    label: 'A-',
+    value: 'A-'
+  },
+  {
+    label: 'B+',
+    value: 'B+'
+  },
+  {
+    label: 'B-',
+    value: 'B-'
+  },
+  {
+    label: 'AB+',
+    value: 'AB+'
+  },
+  {
+    label: 'AB-',
+    value: 'AB-'
+  },
+  {
+    label: 'O+',
+    value: 'O+'
+  },
+  {
+    label: 'O-',
+    value: 'O-'
   }
 ];

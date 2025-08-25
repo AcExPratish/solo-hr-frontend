@@ -8,7 +8,7 @@ import { formatDateForInput } from '@/helpers/date';
 import { TEmployee } from '@/types/modules/employee-management/employee';
 import { EmployeeBasicSchema } from '@/validation/employee-management/EmployeeSchema';
 import ReactGroupSelect from '@/components/base/ReactGroupSelect';
-import { genderOptions as genderOptionsData } from '@/data';
+import { genderOptions } from '@/data';
 
 export interface EmployeeBasicFormProps {
   formData: TEmployee;
@@ -16,10 +16,6 @@ export interface EmployeeBasicFormProps {
   onClose: () => void;
   modal: TModalProps;
   loading?: boolean;
-}
-
-export interface TEmployeeForm extends TEmployee {
-  genderOptions?: TReactOption[];
 }
 
 const EmployeeBasicForm = ({
@@ -34,29 +30,15 @@ const EmployeeBasicForm = ({
 
   // Use States
   const isView = modal.type === 'view';
-  const [genderOption] = React.useState<TReactOption[]>(genderOptionsData);
-  const initialValues = React.useMemo<TEmployeeForm>(() => {
+  const initialValues = React.useMemo<TEmployee>(() => {
     return {
       ...formData
     };
   }, [formData, modal]);
 
   // On Submit
-  const handleOnSubmit = async (values: TEmployeeForm) => {
-    const genderId = values?.genderOptions?.find(
-      (gender: TReactOption) =>
-        gender?.value === values?.basic_information?.gender
-    )?.value;
-
-    const tempValues: TEmployee = {
-      ...values,
-      basic_information: {
-        ...values?.basic_information,
-        gender: genderId as string
-      }
-    };
-
-    onSubmit(tempValues);
+  const handleOnSubmit = async (values: TEmployee) => {
+    onSubmit(values);
   };
 
   return (
@@ -248,10 +230,10 @@ const EmployeeBasicForm = ({
                   </Form.Label>
                   <ReactGroupSelect
                     isDisabled={isView}
-                    options={genderOption}
+                    options={genderOptions}
                     name="basic_information.gender"
                     value={
-                      genderOptionsData.find(
+                      genderOptions?.find(
                         (option: TReactOption) =>
                           option?.value === values?.basic_information?.gender
                       ) ?? null

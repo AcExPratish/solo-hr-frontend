@@ -26,21 +26,19 @@ import { InfoRow } from '@/components/common/InfoRow';
 import { formatDateForDisplay } from '@/helpers/date';
 import SafeAvatarImage from '@/components/common/SafeAvatarImage';
 import { storageEndpoint } from '@/helpers/common';
-import {
-  employmentSpouseOptions,
-  genderOptions,
-  maritalStatusOptions
-} from '@/data';
+import { genderOptions, maritalStatusOptions } from '@/data';
 import Button from '@/components/base/Button';
 
 interface TEmployeeDetailProfileProps {
   employee: TEmployee;
   onBasicInfoEdit: () => void;
+  onPersonalInfoEdit: () => void;
 }
 
 const EmployeeDetailProfile = ({
   employee,
-  onBasicInfoEdit
+  onBasicInfoEdit,
+  onPersonalInfoEdit
 }: TEmployeeDetailProfileProps) => {
   const { t } = useTranslation();
   return (
@@ -221,7 +219,7 @@ const EmployeeDetailProfile = ({
                 icon={faEdit}
                 size="xs"
                 className="cursor-pointer hover-text-success"
-                onClick={onBasicInfoEdit}
+                onClick={onPersonalInfoEdit}
               />
             </Col>
 
@@ -250,13 +248,7 @@ const EmployeeDetailProfile = ({
               <InfoRow
                 icon={faBriefcase}
                 label={t('employment_of_spouse')}
-                value={
-                  employmentSpouseOptions?.find(
-                    employmentSpouse =>
-                      employmentSpouse?.value ===
-                      employee?.basic_information?.employment_spouse
-                  )?.label ?? ''
-                }
+                value={employee?.basic_information?.employment_of_spouse ?? ''}
               />
             </Col>
           </Row>

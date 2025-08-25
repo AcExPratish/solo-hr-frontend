@@ -46,7 +46,7 @@ const initialValues: TEmployee = {
     nationality: '',
     religion: '',
     marital_status: '',
-    employment_spouse: '',
+    employment_of_spouse: 'Yes',
     no_of_children: '',
     blood_group: '',
 

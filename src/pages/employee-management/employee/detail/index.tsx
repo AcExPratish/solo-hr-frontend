@@ -4,7 +4,10 @@ import { useTranslation } from 'react-i18next';
 import EmployeeDetailHeader from '@/components/modules/employee-management/EmployeeDetailHeader';
 import { getUserFirstAndLastName } from '@/helpers/utils';
 import EmployeeBasicForm from '@/components/modules/employee-management/form/EmployeeBasicForm';
-import { TEmployee } from '@/types/modules/employee-management/employee';
+import {
+  TEmployee,
+  TEmployeeFormType
+} from '@/types/modules/employee-management/employee';
 import { TLoader } from '@/types/modules';
 import { toast } from 'react-toastify';
 import useEmployeeHook from '@/hooks/modules/employee-management/useEmployeeHook';
@@ -22,6 +25,7 @@ import {
   useParams
 } from 'react-router-dom';
 import PhoenixLoader from '@/components/common/PhoenixLoader';
+import EmployeePersonalInfoForm from '@/components/modules/employee-management/form/EmployeePersonalInfoForm';
 // import { checkScope } from '@/helpers/auth';
 
 // Initial values
@@ -39,7 +43,7 @@ const initialValues: TEmployee = {
     nationality: '',
     religion: '',
     marital_status: '',
-    employment_spouse: '',
+    employment_of_spouse: 'Yes',
     no_of_children: '',
     blood_group: '',
     joining_date: '',
@@ -190,6 +194,10 @@ const EmployeeDetailsPage = () => {
     show: false,
     placement: 'end'
   });
+  const [personalInfoModal, setPersonalInfoModal] = React.useState<ModalProps>({
+    show: false,
+    placement: 'end'
+  });
   const [employee, setEmployee] = React.useState<TEmployee>(initialValues);
 
   // Handlers
@@ -197,9 +205,25 @@ const EmployeeDetailsPage = () => {
     setBasicInfoModal({ ...basicInfoModal, ...{ show: true, type: 'edit' } });
   };
 
+  const handleOnEditPersonalInfo = () => {
+    setPersonalInfoModal({
+      ...personalInfoModal,
+      ...{ show: true, type: 'edit' }
+    });
+  };
+
+  const handleFormTypeModal = (formType: TEmployeeFormType, show: boolean) => {
+    if (formType === 'basic-info') {
+      setBasicInfoModal({ ...basicInfoModal, ...{ show } });
+    } else if (formType === 'personal-info') {
+      setPersonalInfoModal({ ...personalInfoModal, ...{ show } });
+    }
+  };
+
   const handleOnSubmit = (formData: TEmployee) => {
     setLoader({ list: true });
-    setBasicInfoModal({ ...basicInfoModal, ...{ show: true } });
+
+    handleFormTypeModal(formData?.form_type || 'basic-info', true);
     updateEmployee(formData?.id ?? '', formData)
       .then(() => {
         toast.success(
@@ -208,7 +232,7 @@ const EmployeeDetailsPage = () => {
             name: getUserFirstAndLastName(formData)
           })
         );
-        setBasicInfoModal({ ...basicInfoModal, ...{ show: false } });
+        handleFormTypeModal(formData?.form_type || 'basic-info', false);
         setLoader({ list: false });
       })
       .catch(() => {
@@ -263,6 +287,7 @@ const EmployeeDetailsPage = () => {
                 <EmployeeDetailProfile
                   employee={employee}
                   onBasicInfoEdit={handleOnEditBasicInfo}
+                  onPersonalInfoEdit={handleOnEditPersonalInfo}
                 />
 
                 {/* Emergency Contact Information */}
@@ -332,6 +357,21 @@ const EmployeeDetailsPage = () => {
             onClose={() =>
               setBasicInfoModal({
                 ...basicInfoModal,
+                ...{ show: false, type: '' }
+              })
+            }
+            loading={loader.list}
+          />
+
+          <EmployeePersonalInfoForm
+            formData={employee}
+            modal={personalInfoModal}
+            onSubmit={values => {
+              handleOnSubmit(values);
+            }}
+            onClose={() =>
+              setPersonalInfoModal({
+                ...personalInfoModal,
                 ...{ show: false, type: '' }
               })
             }
