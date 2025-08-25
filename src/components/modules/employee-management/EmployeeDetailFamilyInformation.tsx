@@ -1,5 +1,5 @@
 import React from 'react';
-import { Accordion } from 'react-bootstrap';
+import { Accordion, Col, Row } from 'react-bootstrap';
 import { TEmployee } from '@/types/modules/employee-management/employee';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faChevronDown, faEdit } from '@fortawesome/free-solid-svg-icons';
@@ -42,9 +42,41 @@ const EmployeeDetailFamilyInformation = ({
           </div>
         </Accordion.Header>
         <Accordion.Body className="px-3">
-          <p className="text-muted small mb-0">
-            {employee?.basic_information?.about ?? ''}
-          </p>
+          <Row className="d-flex flex-column gap-2">
+            {/* Table Header */}
+            <Row className="d-flex flex-wrap gap-1 w-100">
+              <Col xs={12} md={2} className="text-muted fw-semibold small">
+                {t('name')}
+              </Col>
+              <Col xs={12} md={2} className="text-muted fw-semibold small">
+                {t('relationship')}
+              </Col>
+              <Col xs={12} md={2} className="text-muted fw-semibold small">
+                {t('phone')}
+              </Col>
+              <Col xs={12} md={2} className="text-muted fw-semibold small">
+                {t('alternative_phone')}
+              </Col>
+            </Row>
+
+            {/* Table Body */}
+            {employee?.family_information?.map((data, index: number) => (
+              <Row key={index} className="d-flex flex-wrap gap-1">
+                <Col xs={12} md={2}>
+                  <h6 className="small">{data?.name ?? ''}</h6>
+                </Col>
+                <Col xs={12} md={2}>
+                  <h6 className="small">{data?.relationship ?? ''}</h6>
+                </Col>
+                <Col xs={12} md={2}>
+                  <h6 className="small">{data?.phone_1 ?? ''}</h6>
+                </Col>
+                <Col xs={12} md={2}>
+                  <h6 className="small">{data?.phone_2 ?? ''}</h6>
+                </Col>
+              </Row>
+            ))}
+          </Row>
         </Accordion.Body>
       </Accordion.Item>
     </Accordion>

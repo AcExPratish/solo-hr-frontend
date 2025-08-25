@@ -54,7 +54,7 @@ const EmployeeDetailBankInformation = ({
                   key={index}
                   xs={12}
                   md={2}
-                  className="d-flex flex-column gap-1"
+                  className="d-flex flex-column flex-wrap gap-1"
                 >
                   <span className="text-muted fw-semibold small">
                     {t(option?.value as string)}
