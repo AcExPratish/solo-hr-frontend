@@ -119,7 +119,7 @@ const EmployeeEmergencyContactForm = ({
                               <Col md={6}>
                                 <FloatingLabel
                                   className="mb-2"
-                                  label={t('name')}
+                                  label={t('relationship')}
                                 >
                                   <Form.Control
                                     disabled={isView}
