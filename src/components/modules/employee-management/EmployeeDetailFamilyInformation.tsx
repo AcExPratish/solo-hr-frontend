@@ -44,34 +44,34 @@ const EmployeeDetailFamilyInformation = ({
         <Accordion.Body className="px-3">
           <Row className="d-flex flex-column gap-2">
             {/* Table Header */}
-            <Row className="d-flex flex-wrap gap-1 w-100">
-              <Col xs={12} md={2} className="text-muted fw-semibold small">
+            <Row>
+              <Col xs={3} className="text-muted fw-semibold small">
                 {t('name')}
               </Col>
-              <Col xs={12} md={2} className="text-muted fw-semibold small">
+              <Col xs={3} className="text-muted fw-semibold small">
                 {t('relationship')}
               </Col>
-              <Col xs={12} md={2} className="text-muted fw-semibold small">
+              <Col xs={3} className="text-muted fw-semibold small">
                 {t('phone')}
               </Col>
-              <Col xs={12} md={2} className="text-muted fw-semibold small">
+              <Col xs={3} className="text-muted fw-semibold small">
                 {t('alternative_phone')}
               </Col>
             </Row>
 
             {/* Table Body */}
             {employee?.family_information?.map((data, index: number) => (
-              <Row key={index} className="d-flex flex-wrap gap-1">
-                <Col xs={12} md={2}>
+              <Row key={index}>
+                <Col xs={3}>
                   <h6 className="small">{data?.name ?? ''}</h6>
                 </Col>
-                <Col xs={12} md={2}>
+                <Col xs={3}>
                   <h6 className="small">{data?.relationship ?? ''}</h6>
                 </Col>
-                <Col xs={12} md={2}>
+                <Col xs={3}>
                   <h6 className="small">{data?.phone_1 ?? ''}</h6>
                 </Col>
-                <Col xs={12} md={2}>
+                <Col xs={3}>
                   <h6 className="small">{data?.phone_2 ?? ''}</h6>
                 </Col>
               </Row>

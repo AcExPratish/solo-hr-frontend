@@ -47,15 +47,10 @@ const EmployeeDetailBankInformation = ({
           </div>
         </Accordion.Header>
         <Accordion.Body className="px-3">
-          <Row>
+          <Row className="d-flex flex-wrap gap-3 gap-md-0">
             {bankInformationOptions?.map(
               (option: TReactOption, index: number) => (
-                <Col
-                  key={index}
-                  xs={12}
-                  md={2}
-                  className="d-flex flex-column flex-wrap gap-1"
-                >
+                <Col key={index} xs={12} md={2} className="d-flex flex-column">
                   <span className="text-muted fw-semibold small">
                     {t(option?.value as string)}
                   </span>
