@@ -34,9 +34,8 @@ const MainLayout = () => {
           <Outlet />
         </AlertMessageProvider>
         <Footer className={classNames(footerClass, 'position-absolute')} />
+        <ToastMessage />
       </div>
-
-      <ToastMessage />
     </Container>
   );
 };
