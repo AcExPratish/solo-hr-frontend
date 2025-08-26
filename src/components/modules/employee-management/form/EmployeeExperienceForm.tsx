@@ -252,7 +252,7 @@ const EmployeeExperienceForm = ({
                           onClick={() => push(emptyContact())}
                         >
                           <FontAwesomeIcon icon={faPlus} />
-                          <span className="ms-1">{t('add_education')}</span>
+                          <span className="ms-1">{t('add_experience')}</span>
                         </Button>
                       </div>
                     </Stack>

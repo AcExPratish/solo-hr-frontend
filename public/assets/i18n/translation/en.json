@@ -170,5 +170,6 @@
     "end_date": "End Date",
     "is_current": "Is Current",
     "company_name": "Company Name",
-    "designation": "Designation"
+    "designation": "Designation",
+    "add_experience": "Add Experience"
 }
