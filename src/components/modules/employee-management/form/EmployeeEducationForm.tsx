@@ -163,7 +163,10 @@ const EmployeeEducationForm = ({
                                       ) || ''
                                     }
                                     onBlur={handleBlur}
-                                    onChange={handleChange}
+                                    onChange={e => {
+                                      setFieldValue(endDatePath, '');
+                                      handleChange(e);
+                                    }}
                                     isInvalid={Boolean(
                                       getIn(touched, startDatePath) &&
                                         getIn(errors, startDatePath)

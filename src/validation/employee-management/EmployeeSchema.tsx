@@ -367,9 +367,39 @@ export const EmployeeEducationSchema = Yup.object().shape({
       start_date: Yup.date().required(
         t('form_validation_mandatory', { field: t('start_date').toLowerCase() })
       ),
-      end_date: Yup.date().required(
-        t('form_validation_mandatory', { field: t('end_date').toLowerCase() })
-      ),
+      end_date: Yup.date()
+        .nullable()
+        .when('is_current', {
+          is: false,
+          then: schema =>
+            schema
+              .required(
+                t('form_validation_mandatory', {
+                  field: t('end_date').toLowerCase()
+                })
+              )
+              .test(
+                'end_after_start',
+                t('form_validation_min_date', {
+                  field: t('end_date').toLowerCase(),
+                  minField: t('start_date').toLowerCase()
+                }),
+                function (value) {
+                  const { start_date } = this.parent;
+                  if (!value || !start_date) return true;
+                  return new Date(value) >= new Date(start_date);
+                }
+              ),
+          otherwise: schema =>
+            schema.test(
+              'must-be-empty-if-current',
+              t('form_validation_must_be_empty', {
+                field: t('end_date').toLowerCase(),
+                condition: t('is_current').toLowerCase()
+              }),
+              value => !value
+            )
+        }),
       is_current: Yup.boolean().required(
         t('form_validation_mandatory', { field: t('is_current').toLowerCase() })
       ),
