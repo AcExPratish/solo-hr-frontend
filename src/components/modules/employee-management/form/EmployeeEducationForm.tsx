@@ -11,6 +11,7 @@ import { useTranslation } from 'react-i18next';
 import Button from '@/components/base/Button';
 import { TModalProps } from '@/types/modules';
 import { formatDateForInput } from '@/helpers/date';
+import { EmployeeEducationSchema } from '@/validation/employee-management/EmployeeSchema';
 
 interface EmployeeEducationFormProps {
   modal: TModalProps;
@@ -56,7 +57,7 @@ const EmployeeEducationForm = ({
 
       <Formik
         initialValues={formData}
-        validationSchema={null}
+        validationSchema={EmployeeEducationSchema}
         onSubmit={handleOnSubmit}
         enableReinitialize
       >

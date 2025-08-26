@@ -336,3 +336,53 @@ export const EmployeeFamilyInformationSchema = Yup.object().shape({
     })
   )
 });
+
+export const EmployeeEducationSchema = Yup.object().shape({
+  education: Yup.array().of(
+    Yup.object().shape({
+      institution_name: Yup.string()
+        .required(
+          t('form_validation_mandatory', {
+            field: t('institution_name').toLowerCase()
+          })
+        )
+        .max(
+          250,
+          t('form_validation_max', {
+            field: t('institution_name').toLowerCase(),
+            max: '250'
+          })
+        ),
+      course: Yup.string()
+        .required(
+          t('form_validation_mandatory', { field: t('course').toLowerCase() })
+        )
+        .max(
+          250,
+          t('form_validation_max', {
+            field: t('course').toLowerCase(),
+            max: '250'
+          })
+        ),
+      start_date: Yup.date().required(
+        t('form_validation_mandatory', { field: t('start_date').toLowerCase() })
+      ),
+      end_date: Yup.date().required(
+        t('form_validation_mandatory', { field: t('end_date').toLowerCase() })
+      ),
+      is_current: Yup.boolean().required(
+        t('form_validation_mandatory', { field: t('is_current').toLowerCase() })
+      ),
+      percentage_or_gpa: Yup.string()
+        .notRequired()
+        .nullable()
+        .max(
+          10,
+          t('form_validation_max', {
+            field: t('percentage_or_gpa').toLowerCase(),
+            max: '10'
+          })
+        )
+    })
+  )
+});
