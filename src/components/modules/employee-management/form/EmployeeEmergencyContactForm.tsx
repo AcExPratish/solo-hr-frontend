@@ -49,7 +49,9 @@ const EmployeeEmergencyContactForm = ({
   return (
     <Modal size="lg" onHide={onClose} {...modal} backdrop={'static'}>
       <Modal.Header className="border-0 ps-4 pe-4 pb-0" closeButton>
-        <Modal.Title>{t('emergency_contact_details')}</Modal.Title>
+        <Modal.Title>{`${t(modal?.type || '')} ${t(
+          'emergency_contact_number'
+        )}`}</Modal.Title>
       </Modal.Header>
 
       <Formik

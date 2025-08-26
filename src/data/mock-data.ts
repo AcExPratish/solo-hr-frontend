@@ -205,7 +205,7 @@ export const employeeMockData: TEmployee = {
       institution_name: 'Kathmandu University',
       course: 'MSc Information Technology',
       start_date: '2013-01-01',
-      end_date: '2015-01-01',
+      end_date: '2015-02-14',
       is_current: false,
       percentage_or_gpa: '3.8 GPA'
     }

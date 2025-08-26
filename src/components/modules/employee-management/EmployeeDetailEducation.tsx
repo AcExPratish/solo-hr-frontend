@@ -4,7 +4,7 @@ import { TEmployee } from '@/types/modules/employee-management/employee';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faChevronDown, faEdit } from '@fortawesome/free-solid-svg-icons';
 import { useTranslation } from 'react-i18next';
-import { extractYear } from '@/helpers/date';
+import { convertToMonAbbrevDate } from '@/helpers/date';
 
 interface EmployeeDetailEducationProps {
   employee: TEmployee;
@@ -64,7 +64,7 @@ const EmployeeDetailEducation = ({
               <Col xs={12} md={6}>
                 <div className="d-flex align-items-center gap-1 justify-content-end">
                   <span className="text-muted fw-semibold small">
-                    {extractYear(data?.start_date)}
+                    {convertToMonAbbrevDate(data?.start_date)}
                   </span>
 
                   {data?.is_current && (
@@ -75,7 +75,7 @@ const EmployeeDetailEducation = ({
 
                   {!data?.is_current && data?.end_date && (
                     <span className="text-muted fw-semibold small">
-                      {` - ${extractYear(data?.end_date)}`}
+                      {` - ${convertToMonAbbrevDate(data?.end_date)}`}
                     </span>
                   )}
                 </div>

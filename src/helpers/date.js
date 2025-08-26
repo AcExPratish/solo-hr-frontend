@@ -190,3 +190,8 @@ export const extractYear = date => {
   if (!date) return '';
   return date ? moment(date).format('YYYY') : '';
 };
+
+export const convertToMonAbbrevDate = date => {
+  if (!date) return '';
+  return date ? moment(date).format('MMM D, YYYY') : '';
+};

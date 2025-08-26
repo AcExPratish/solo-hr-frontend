@@ -52,7 +52,9 @@ const EmployeeEducationForm = ({
   return (
     <Modal size="lg" onHide={onClose} {...modal} backdrop={'static'}>
       <Modal.Header className="border-0 ps-4 pe-4 pb-0" closeButton>
-        <Modal.Title>{t('education_information')}</Modal.Title>
+        <Modal.Title>{`${t(modal?.type || '')} ${t(
+          'education_information'
+        )}`}</Modal.Title>
       </Modal.Header>
 
       <Formik
