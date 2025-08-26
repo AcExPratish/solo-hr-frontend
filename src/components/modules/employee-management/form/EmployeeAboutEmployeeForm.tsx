@@ -59,7 +59,7 @@ const EmployeeAboutEmployeeForm = ({
           onSubmit={handleSubmit}
           type={modal.type}
           title={t('about_employee')}
-          disabled={loading || isView}
+          disabled={isView || loading}
           size="lg"
         >
           <Form noValidate className="d-flex flex-column">

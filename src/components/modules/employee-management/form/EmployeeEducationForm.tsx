@@ -272,7 +272,7 @@ const EmployeeEducationForm = ({
 
                       <div className="d-flex justify-content-start my-2">
                         <Button
-                          disabled={isView}
+                          disabled={isView || loading}
                           variant="primary"
                           onClick={() => push(emptyContact())}
                         >
@@ -293,7 +293,7 @@ const EmployeeEducationForm = ({
               <Button
                 type="submit"
                 variant="primary"
-                disabled={loading || isView}
+                disabled={isView || loading}
               >
                 <FontAwesomeIcon icon={faSave} className="me-2" />
                 <span>{t('save')}</span>

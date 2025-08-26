@@ -215,7 +215,7 @@ const EmployeeEmergencyContactForm = ({
 
                       <div className="d-flex justify-content-start my-2">
                         <Button
-                          disabled={isView}
+                          disabled={isView || loading}
                           variant="primary"
                           onClick={() => push(emptyContact())}
                           hidden={values?.emergency_contact?.length === 2}
@@ -237,7 +237,7 @@ const EmployeeEmergencyContactForm = ({
               <Button
                 type="submit"
                 variant="primary"
-                disabled={loading || isView}
+                disabled={isView || loading}
               >
                 <FontAwesomeIcon icon={faSave} className="me-2" />
                 <span>{t('save')}</span>

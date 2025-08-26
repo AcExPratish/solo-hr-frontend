@@ -59,7 +59,7 @@ const EmployeeBankInformationForm = ({
           onSubmit={handleSubmit}
           type={modal.type}
           title={t('bank_information')}
-          disabled={loading || isView}
+          disabled={isView || loading}
           size="lg"
         >
           <Form noValidate className="d-flex flex-column">

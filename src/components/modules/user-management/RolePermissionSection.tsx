@@ -28,6 +28,7 @@ const RolePermissionSection = ({
   const { t } = useTranslation();
 
   // Use States
+  const isView = modal?.type === 'view';
   const sectionAllChecked =
     items?.length > 0 && items?.every(p => !!p?.checked);
   const sectionSomeChecked =
@@ -45,7 +46,7 @@ const RolePermissionSection = ({
       <div className="d-flex align-items-center justify-content-between mb-2">
         <div className="fw-semibold">{toTitle(group)}</div>
         <Form.Check
-          disabled={modal?.type === 'view'}
+          disabled={isView}
           type="checkbox"
           id={`select-all-${group}`}
           label={t('select_all')}
@@ -59,7 +60,7 @@ const RolePermissionSection = ({
         const [, action = p?.code] = (p?.code || '')?.split('.') || [];
         return (
           <Form.Check
-            disabled={modal?.type === 'view'}
+            disabled={isView}
             key={p?.id}
             type="checkbox"
             label={`${toTitle(action)} — ${p?.description}`}

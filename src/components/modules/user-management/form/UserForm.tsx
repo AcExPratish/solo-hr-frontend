@@ -120,9 +120,9 @@ const UserForm = ({
             onClose();
           }}
           onSubmit={handleSubmit}
-          type={modal.type}
+          type={modal?.type}
           title={t('user')}
-          disabled={loading}
+          disabled={isView || loading}
           size="lg"
         >
           <Form noValidate className="d-flex flex-column">

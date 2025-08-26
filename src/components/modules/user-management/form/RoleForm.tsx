@@ -36,6 +36,7 @@ const RoleForm = ({
   const { permissions: allPermissions } = usePermissionHook();
 
   // Use State
+  const isView = modal?.type === 'view';
   const [permissions, setPermissions] = React.useState<TPermissionForm[]>([]);
   const selectAllRef = React.useRef<HTMLInputElement | null>(null);
 
@@ -121,7 +122,6 @@ const RoleForm = ({
         handleChange,
         handleBlur,
         handleSubmit,
-        isSubmitting,
         resetForm
       }) => (
         <ModalForm
@@ -133,13 +133,13 @@ const RoleForm = ({
           onSubmit={handleSubmit}
           type={modal?.type}
           title={t('role')}
-          disabled={isSubmitting || loading}
+          disabled={isView || loading}
           size="lg"
         >
           <Form noValidate>
             <FloatingLabel className="mb-3" label={t('name')}>
               <Form.Control
-                disabled={modal?.type === 'view'}
+                disabled={isView}
                 id="name"
                 name="name"
                 type="text"
@@ -165,7 +165,7 @@ const RoleForm = ({
               onChange={e => handleToggleAll(e.currentTarget.checked)}
               ref={selectAllRef}
               className="mb-3"
-              disabled={permissions?.length === 0 || modal.type === 'view'}
+              disabled={permissions?.length === 0 || isView}
             />
 
             {Object?.entries(groupedPermissions)?.map(
