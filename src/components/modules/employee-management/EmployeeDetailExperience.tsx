@@ -5,6 +5,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faChevronDown, faEdit } from '@fortawesome/free-solid-svg-icons';
 import { useTranslation } from 'react-i18next';
 import { convertToMonAbbrevDate } from '@/helpers/date';
+import Badge from '@/components/base/Badge';
 
 interface EmployeeDetailExperienceProps {
   employee: TEmployee;
@@ -57,7 +58,12 @@ const EmployeeDetailExperience = ({
                   <span className="text-muted fw-semibold small">
                     {data?.company_name ?? ''}
                   </span>
-                  <h6 className="small">{data?.designation ?? ''}</h6>
+                  <Badge
+                    variant="tag"
+                    className="bg-success-subtle text-success-emphasis"
+                  >
+                    {data?.designation ?? ''}
+                  </Badge>
                 </div>
               </Col>
 
