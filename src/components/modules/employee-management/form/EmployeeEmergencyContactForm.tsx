@@ -8,7 +8,7 @@ import {
   TEmployeeEmergencyContact
 } from '@/types/modules/employee-management/employee';
 import { useTranslation } from 'react-i18next';
-import { EmergencyContactSchema } from '@/validation/employee-management/EmployeeSchema';
+import { EmployeeEmergencyContactSchema } from '@/validation/employee-management/EmployeeSchema';
 import Button from '@/components/base/Button';
 import { TModalProps } from '@/types/modules';
 
@@ -54,7 +54,7 @@ const EmployeeEmergencyContactForm = ({
 
       <Formik
         initialValues={formData}
-        validationSchema={EmergencyContactSchema}
+        validationSchema={EmployeeEmergencyContactSchema}
         onSubmit={handleOnSubmit}
         enableReinitialize
       >

@@ -1,9 +1,10 @@
 import React from 'react';
-import { Accordion } from 'react-bootstrap';
+import { Accordion, Col, Row } from 'react-bootstrap';
 import { TEmployee } from '@/types/modules/employee-management/employee';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faChevronDown, faEdit } from '@fortawesome/free-solid-svg-icons';
 import { useTranslation } from 'react-i18next';
+import { extractYear } from '@/helpers/date';
 
 interface EmployeeDetailEducationProps {
   employee: TEmployee;
@@ -42,9 +43,45 @@ const EmployeeDetailEducation = ({
           </div>
         </Accordion.Header>
         <Accordion.Body className="px-3">
-          <p className="text-muted small mb-0">
-            {employee?.basic_information?.about ?? ''}
-          </p>
+          {employee?.education?.map((data, index: number) => (
+            <Row
+              key={index}
+              className="d-flex align-items-center justify-content-between pb-3"
+            >
+              <Col
+                xs={12}
+                md={6}
+                className="d-flex flex-row flex-md-column align-items-start justify-content-between"
+              >
+                <div className="d-flex flex-column gap-1">
+                  <span className="text-muted fw-semibold small">
+                    {data?.institution_name ?? ''}
+                  </span>
+                  <h6 className="small">{data?.course ?? ''}</h6>
+                </div>
+              </Col>
+
+              <Col xs={12} md={6}>
+                <div className="d-flex align-items-center gap-1 justify-content-end">
+                  <span className="text-muted fw-semibold small">
+                    {extractYear(data?.start_date)}
+                  </span>
+
+                  {data?.is_current && (
+                    <span className="text-muted fw-semibold small">
+                      {` - ${t('present')}`}
+                    </span>
+                  )}
+
+                  {!data?.is_current && data?.end_date && (
+                    <span className="text-muted fw-semibold small">
+                      {` - ${extractYear(data?.end_date)}`}
+                    </span>
+                  )}
+                </div>
+              </Col>
+            </Row>
+          ))}
         </Accordion.Body>
       </Accordion.Item>
     </Accordion>

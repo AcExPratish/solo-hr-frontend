@@ -159,5 +159,13 @@
     "account_type": "Account Type",
     "swift_code": "Swift Code",
     "family_member_details": "Family Member Details",
-    "add_family_member": "Add Family Member"
+    "add_family_member": "Add Family Member",
+    "add_education": "Add Education",
+    "institution_name": "Institution Name",
+    "course": "Course",
+    "percentage_or_gpa": "Percentage or GPA",
+    "education_details": "Education Details",
+    "start_date": "Start Date",
+    "end_date": "End Date",
+    "is_current": "Is Current"
 }

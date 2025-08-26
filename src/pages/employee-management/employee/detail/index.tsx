@@ -30,6 +30,7 @@ import EmployeeBankInformationForm from '@/components/modules/employee-managemen
 import EmployeeEmergencyContactForm from '@/components/modules/employee-management/form/EmployeeEmergencyContactForm';
 import EmployeeDetailEmergencyContact from '@/components/modules/employee-management/EmployeeDetailEmergencyContact';
 import EmployeeFamilyInformationForm from '@/components/modules/employee-management/form/EmployeeFamilyInformationForm';
+import EmployeeEducationForm from '@/components/modules/employee-management/form/EmployeeEducationForm';
 // import { checkScope } from '@/helpers/auth';
 
 // Initial values
@@ -224,6 +225,10 @@ const EmployeeDetailsPage = () => {
       show: false,
       placement: 'end'
     });
+  const [educationModal, setEducationModal] = React.useState<TModalProps>({
+    show: false,
+    placement: 'end'
+  });
   const [employee, setEmployee] = React.useState<TEmployee>(initialValues);
 
   // Handlers
@@ -266,6 +271,13 @@ const EmployeeDetailsPage = () => {
     });
   };
 
+  const handleOnEditEducation = () => {
+    setEducationModal({
+      ...educationModal,
+      ...{ show: true, type: 'edit' }
+    });
+  };
+
   const handleFormTypeModal = (formType: TEmployeeFormType, show: boolean) => {
     if (formType === 'basic_info') {
       setBasicInfoModal({ ...basicInfoModal, ...{ show } });
@@ -285,6 +297,8 @@ const EmployeeDetailsPage = () => {
         ...familyInformationModal,
         ...{ show }
       });
+    } else if (formType === 'education') {
+      setEducationModal({ ...educationModal, ...{ show } });
     }
   };
 
@@ -402,7 +416,7 @@ const EmployeeDetailsPage = () => {
                   <Col xs={12} md={6}>
                     <EmployeeDetailEducation
                       employee={employee}
-                      onEducationEdit={() => {}}
+                      onEducationEdit={handleOnEditEducation}
                     />
                   </Col>
 
@@ -503,6 +517,21 @@ const EmployeeDetailsPage = () => {
             onClose={() =>
               setFamilyInformationModal({
                 ...familyInformationModal,
+                ...{ show: false, type: '' }
+              })
+            }
+            loading={loader.list}
+          />
+
+          <EmployeeEducationForm
+            formData={employee}
+            modal={educationModal}
+            onSubmit={values => {
+              handleOnSubmit(values);
+            }}
+            onClose={() =>
+              setEducationModal({
+                ...educationModal,
                 ...{ show: false, type: '' }
               })
             }

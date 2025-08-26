@@ -179,7 +179,7 @@ export const EmployeePersonalInfoSchema = Yup.object().shape({
   })
 });
 
-export const EmergencyContactSchema = Yup.object().shape({
+export const EmployeeEmergencyContactSchema = Yup.object().shape({
   emergency_contact: Yup.array().of(
     Yup.object().shape({
       name: Yup.string().required(
