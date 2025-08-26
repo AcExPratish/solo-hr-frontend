@@ -164,8 +164,11 @@
     "institution_name": "Institution Name",
     "course": "Course",
     "percentage_or_gpa": "Percentage or GPA",
-    "education_details": "Education Details",
+    "education_information": "Education Information",
+    "experience_information": "Experience Information",
     "start_date": "Start Date",
     "end_date": "End Date",
-    "is_current": "Is Current"
+    "is_current": "Is Current",
+    "company_name": "Company Name",
+    "designation": "Designation"
 }

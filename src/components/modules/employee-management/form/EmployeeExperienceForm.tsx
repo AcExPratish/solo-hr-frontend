@@ -5,15 +5,15 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faPlus, faSave, faTrash } from '@fortawesome/free-solid-svg-icons';
 import {
   TEmployee,
-  TEmployeeEducation
+  TEmployeeExperience
 } from '@/types/modules/employee-management/employee';
 import { useTranslation } from 'react-i18next';
 import Button from '@/components/base/Button';
 import { TModalProps } from '@/types/modules';
 import { formatDateForInput } from '@/helpers/date';
-import { EmployeeEducationSchema } from '@/validation/employee-management/EmployeeSchema';
+import { EmployeeExperienceSchema } from '@/validation/employee-management/EmployeeSchema';
 
-interface EmployeeEducationFormProps {
+interface EmployeeExperienceFormProps {
   modal: TModalProps;
   onClose: () => void;
   onSubmit: (values: TEmployee) => void;
@@ -21,23 +21,22 @@ interface EmployeeEducationFormProps {
   loading?: boolean;
 }
 
-const emptyContact = (): TEmployeeEducation => ({
+const emptyContact = (): TEmployeeExperience => ({
   id: undefined,
-  institution_name: '',
-  course: '',
+  company_name: '',
+  designation: '',
   start_date: '',
   end_date: '',
-  is_current: false,
-  percentage_or_gpa: ''
+  is_current: false
 });
 
-const EmployeeEducationForm = ({
+const EmployeeExperienceForm = ({
   modal,
   onClose,
   onSubmit,
   formData,
   loading
-}: EmployeeEducationFormProps) => {
+}: EmployeeExperienceFormProps) => {
   // React Hooks
   const { t } = useTranslation();
 
@@ -46,18 +45,18 @@ const EmployeeEducationForm = ({
 
   // On Submit
   const handleOnSubmit = async (values: TEmployee) => {
-    onSubmit({ ...values, form_type: 'education' });
+    onSubmit({ ...values, form_type: 'experience' });
   };
 
   return (
     <Modal size="lg" onHide={onClose} {...modal} backdrop={'static'}>
       <Modal.Header className="border-0 ps-4 pe-4 pb-0" closeButton>
-        <Modal.Title>{t('education_information')}</Modal.Title>
+        <Modal.Title>{t('experience_information')}</Modal.Title>
       </Modal.Header>
 
       <Formik
         initialValues={formData}
-        validationSchema={EmployeeEducationSchema}
+        validationSchema={EmployeeExperienceSchema}
         onSubmit={handleOnSubmit}
         enableReinitialize
       >
@@ -74,48 +73,47 @@ const EmployeeEducationForm = ({
             <Modal.Body className="ps-4 pe-4 pt-0">
               <hr />
 
-              <FieldArray name="education">
+              <FieldArray name="experience">
                 {({ push, remove }) => (
                   <div>
                     <Stack gap={4}>
-                      {values?.education?.map((data, index: number) => {
+                      {values?.experience?.map((data, index: number) => {
                         // Formik Paths
-                        const institutionNamePath = `education.${index}.institution_name`;
-                        const coursePath = `education.${index}.course`;
-                        const startDatePath = `education.${index}.start_date`;
-                        const endDatePath = `education.${index}.end_date`;
-                        const isCurrentPath = `education.${index}.is_current`;
-                        const percentageOrGpaPath = `education.${index}.percentage_or_gpa`;
+                        const companyNamePath = `experience.${index}.company_name`;
+                        const designationPath = `experience.${index}.designation`;
+                        const startDatePath = `experience.${index}.start_date`;
+                        const endDatePath = `experience.${index}.end_date`;
+                        const isCurrentPath = `experience.${index}.is_current`;
 
                         return (
                           <div key={index}>
                             <h5 className="d-flex justify-content-start mb-3">
-                              {`${index + 1}. ${t('education_information')}`}
+                              {`${index + 1}. ${t('experience_information')}`}
                             </h5>
 
                             <Row className="g-2">
                               <Col md={12}>
                                 <FloatingLabel
                                   className="mb-2"
-                                  label={t('institution_name')}
+                                  label={t('company_name')}
                                 >
                                   <Form.Control
                                     disabled={isView}
-                                    id={institutionNamePath}
-                                    name={institutionNamePath}
-                                    value={data.institution_name || ''}
+                                    id={companyNamePath}
+                                    name={companyNamePath}
+                                    value={data.company_name || ''}
                                     onChange={handleChange}
                                     onBlur={handleBlur}
                                     isInvalid={Boolean(
-                                      getIn(touched, institutionNamePath) &&
-                                        getIn(errors, institutionNamePath)
+                                      getIn(touched, companyNamePath) &&
+                                        getIn(errors, companyNamePath)
                                     )}
                                     className={`form-control form-icon-input`}
                                   />
-                                  {getIn(touched, institutionNamePath) &&
-                                    getIn(errors, institutionNamePath) && (
+                                  {getIn(touched, companyNamePath) &&
+                                    getIn(errors, companyNamePath) && (
                                       <Form.Control.Feedback type="invalid">
-                                        {getIn(errors, institutionNamePath)}
+                                        {getIn(errors, companyNamePath)}
                                       </Form.Control.Feedback>
                                     )}
                                 </FloatingLabel>
@@ -124,31 +122,31 @@ const EmployeeEducationForm = ({
                               <Col md={12}>
                                 <FloatingLabel
                                   className="mb-2"
-                                  label={t('course')}
+                                  label={t('designation')}
                                 >
                                   <Form.Control
                                     disabled={isView}
-                                    id={coursePath}
-                                    name={coursePath}
-                                    value={data.course || ''}
+                                    id={designationPath}
+                                    name={designationPath}
+                                    value={data.designation || ''}
                                     onChange={handleChange}
                                     onBlur={handleBlur}
                                     isInvalid={Boolean(
-                                      getIn(touched, coursePath) &&
-                                        getIn(errors, coursePath)
+                                      getIn(touched, designationPath) &&
+                                        getIn(errors, designationPath)
                                     )}
                                     className={`form-control form-icon-input`}
                                   />
-                                  {getIn(touched, coursePath) &&
-                                    getIn(errors, coursePath) && (
+                                  {getIn(touched, designationPath) &&
+                                    getIn(errors, designationPath) && (
                                       <Form.Control.Feedback type="invalid">
-                                        {getIn(errors, coursePath)}
+                                        {getIn(errors, designationPath)}
                                       </Form.Control.Feedback>
                                     )}
                                 </FloatingLabel>
                               </Col>
 
-                              <Col md={4}>
+                              <Col md={6}>
                                 <FloatingLabel label={t('start_date')}>
                                   <Form.Control
                                     disabled={isView}
@@ -181,7 +179,7 @@ const EmployeeEducationForm = ({
                                 </FloatingLabel>
                               </Col>
 
-                              <Col md={4}>
+                              <Col md={6}>
                                 <FloatingLabel label={t('end_date')}>
                                   <Form.Control
                                     disabled={isView}
@@ -209,33 +207,6 @@ const EmployeeEducationForm = ({
                                     getIn(errors, endDatePath) && (
                                       <Form.Control.Feedback type="invalid">
                                         {getIn(errors, endDatePath)}
-                                      </Form.Control.Feedback>
-                                    )}
-                                </FloatingLabel>
-                              </Col>
-
-                              <Col md={4}>
-                                <FloatingLabel
-                                  className="mb-2"
-                                  label={t('percentage_or_gpa')}
-                                >
-                                  <Form.Control
-                                    disabled={isView}
-                                    id={percentageOrGpaPath}
-                                    name={percentageOrGpaPath}
-                                    value={data.percentage_or_gpa || ''}
-                                    onChange={handleChange}
-                                    onBlur={handleBlur}
-                                    isInvalid={Boolean(
-                                      getIn(touched, percentageOrGpaPath) &&
-                                        getIn(errors, percentageOrGpaPath)
-                                    )}
-                                    className={`form-control form-icon-input`}
-                                  />
-                                  {getIn(touched, percentageOrGpaPath) &&
-                                    getIn(errors, percentageOrGpaPath) && (
-                                      <Form.Control.Feedback type="invalid">
-                                        {getIn(errors, percentageOrGpaPath)}
                                       </Form.Control.Feedback>
                                     )}
                                 </FloatingLabel>
@@ -310,4 +281,4 @@ const EmployeeEducationForm = ({
   );
 };
 
-export default EmployeeEducationForm;
+export default EmployeeExperienceForm;

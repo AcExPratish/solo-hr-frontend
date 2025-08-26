@@ -31,6 +31,7 @@ import EmployeeEmergencyContactForm from '@/components/modules/employee-manageme
 import EmployeeDetailEmergencyContact from '@/components/modules/employee-management/EmployeeDetailEmergencyContact';
 import EmployeeFamilyInformationForm from '@/components/modules/employee-management/form/EmployeeFamilyInformationForm';
 import EmployeeEducationForm from '@/components/modules/employee-management/form/EmployeeEducationForm';
+import EmployeeExperienceForm from '@/components/modules/employee-management/form/EmployeeExperienceForm';
 // import { checkScope } from '@/helpers/auth';
 
 // Initial values
@@ -229,6 +230,10 @@ const EmployeeDetailsPage = () => {
     show: false,
     placement: 'end'
   });
+  const [experienceModal, setExperienceModal] = React.useState<TModalProps>({
+    show: false,
+    placement: 'end'
+  });
   const [employee, setEmployee] = React.useState<TEmployee>(initialValues);
 
   // Handlers
@@ -278,6 +283,13 @@ const EmployeeDetailsPage = () => {
     });
   };
 
+  const handleOnEditExperience = () => {
+    setExperienceModal({
+      ...experienceModal,
+      ...{ show: true, type: 'edit' }
+    });
+  };
+
   const handleFormTypeModal = (formType: TEmployeeFormType, show: boolean) => {
     if (formType === 'basic_info') {
       setBasicInfoModal({ ...basicInfoModal, ...{ show } });
@@ -299,6 +311,8 @@ const EmployeeDetailsPage = () => {
       });
     } else if (formType === 'education') {
       setEducationModal({ ...educationModal, ...{ show } });
+    } else if (formType === 'experience') {
+      setExperienceModal({ ...experienceModal, ...{ show } });
     }
   };
 
@@ -424,7 +438,7 @@ const EmployeeDetailsPage = () => {
                   <Col xs={12} md={6}>
                     <EmployeeDetailExperience
                       employee={employee}
-                      onExperienceEdit={() => {}}
+                      onExperienceEdit={handleOnEditExperience}
                     />
                   </Col>
                 </Row>
@@ -532,6 +546,21 @@ const EmployeeDetailsPage = () => {
             onClose={() =>
               setEducationModal({
                 ...educationModal,
+                ...{ show: false, type: '' }
+              })
+            }
+            loading={loader.list}
+          />
+
+          <EmployeeExperienceForm
+            formData={employee}
+            modal={experienceModal}
+            onSubmit={values => {
+              handleOnSubmit(values);
+            }}
+            onClose={() =>
+              setExperienceModal({
+                ...experienceModal,
                 ...{ show: false, type: '' }
               })
             }
