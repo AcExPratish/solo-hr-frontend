@@ -11,7 +11,6 @@ import ReactGroupSelect from '@/components/base/ReactGroupSelect';
 import { genderOptions } from '@/data';
 import CustomAvatarHandler from '@/components/common/custom/CustomAvatarHandler';
 import { isImageFile } from '@/helpers/utils';
-import CustomImageHandler from '@/components/common/custom/CustomImageHandler';
 
 export interface EmployeeBasicInfoFormProps {
   formData: TEmployee;
@@ -99,22 +98,6 @@ const EmployeeBasicInfoForm = ({
                     errors={errors}
                     touched={touched}
                     onBlur={() => setFieldTouched('avatar', true)}
-                  />
-                </Col>
-
-                <Col xs={12}>
-                  <CustomImageHandler
-                    label={t('upload_image')}
-                    currentImage={values?.avatar ?? null}
-                    onImageChange={handleImageChange}
-                    onImageDelete={handleImageDelete}
-                    isImageFile={isImageFile}
-                    showDeleteButton={true}
-                    fieldName="avatar"
-                    errors={errors}
-                    touched={touched}
-                    onBlur={() => setFieldTouched('avatar', true)}
-                    avatarSize="4xl"
                   />
                 </Col>
 
