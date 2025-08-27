@@ -40,32 +40,25 @@ const CustomAvatarHandler = ({
   touched,
   onBlur
 }: CustomAvatarHandlerProps) => {
+  // React Hooks
   const { t } = useTranslation();
+
+  // Use States
   const [selectedImage, setSelectedImage] = React.useState<string | null>(null);
   const [selectedImageError, setSelectedImageError] =
     React.useState<boolean>(false);
-  const fileInputRef = React.useRef<HTMLInputElement>(null);
-
-  React.useEffect(() => {
-    if (currentImage) {
-      if (typeof currentImage === 'string') {
-        setSelectedImage(currentImage);
-      } else if (currentImage instanceof File) {
-        const objectUrl = URL.createObjectURL(currentImage);
-        setSelectedImage(objectUrl);
-
-        return () => URL.revokeObjectURL(objectUrl);
-      }
-    } else {
-      setSelectedImage(null);
-    }
-  }, [currentImage]);
-
   const validationError =
     fieldName && errors && touched
       ? getIn(touched, fieldName) && getIn(errors, fieldName)
       : null;
+  const hasError = selectedImageError || validationError;
+  const errorMessage =
+    validationError || (selectedImageError ? t('form_validation_image') : null);
 
+  // Use Refs
+  const fileInputRef = React.useRef<HTMLInputElement>(null);
+
+  // Handlers
   const handleUploadClick = () => {
     if (disabled) return;
     fileInputRef.current?.click();
@@ -110,9 +103,21 @@ const CustomAvatarHandler = ({
     }
   };
 
-  const hasError = selectedImageError || validationError;
-  const errorMessage =
-    validationError || (selectedImageError ? t('form_validation_image') : null);
+  // Use Effects
+  React.useEffect(() => {
+    if (currentImage) {
+      if (typeof currentImage === 'string') {
+        setSelectedImage(currentImage);
+      } else if (currentImage instanceof File) {
+        const objectUrl = URL.createObjectURL(currentImage);
+        setSelectedImage(objectUrl);
+
+        return () => URL.revokeObjectURL(objectUrl);
+      }
+    } else {
+      setSelectedImage(null);
+    }
+  }, [currentImage]);
 
   return (
     <React.Fragment>
@@ -121,12 +126,12 @@ const CustomAvatarHandler = ({
           hasError ? 'border border-danger' : ''
         } ${className}`}
       >
-        {/* Avatar image */}
+        {/* Avatar Image */}
         <div className="me-2">
           <SafeAvatarImage src={selectedImage || undefined} size={avatarSize} />
         </div>
 
-        {/* Hidden file input */}
+        {/* Hidden File Input */}
         <input
           ref={fileInputRef}
           type="file"
@@ -136,7 +141,7 @@ const CustomAvatarHandler = ({
           disabled={disabled}
         />
 
-        {/* Avatar change buttons */}
+        {/* Avatar Change Buttons */}
         <div className="d-flex flex-column flex-wrap align-items-start gap-1 ms-2">
           <h6 className="fs-9">{label}</h6>
           <span className="text-muted small">
@@ -165,7 +170,7 @@ const CustomAvatarHandler = ({
         </div>
       </div>
 
-      {/* Error message - displays both local and validation errors */}
+      {/* Error Message - Displays both local and validation errors */}
       {hasError && <p className="text-danger mt-2">{errorMessage}</p>}
     </React.Fragment>
   );
