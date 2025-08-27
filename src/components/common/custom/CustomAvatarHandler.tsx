@@ -138,7 +138,7 @@ const CustomAvatarHandler = ({
         <input
           ref={fileInputRef}
           type="file"
-          accept="image/jpeg, image/png, image/jpg"
+          accept={IMAGE_ACCEPTED_TYPES.join(',')}
           onChange={handleFileInputChange}
           style={{ display: 'none' }}
           disabled={disabled}
