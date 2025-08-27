@@ -5,7 +5,7 @@ import { phoneRegex, positiveNumberRegexWithZero } from '@/helpers/regex';
 const t = i18next.t;
 
 const todaysDate = todayDate();
-export const IMAGE_MAX_SIZE = 5 * 1024 * 1024; // 5MB
+export const IMAGE_MAX_SIZE = 5.1 * 1024 * 1024; // 5.1MB
 export const IMAGE_ACCEPTED_TYPES = [
   'image/jpeg',
   'image/png',

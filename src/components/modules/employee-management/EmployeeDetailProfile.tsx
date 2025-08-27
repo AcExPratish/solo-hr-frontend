@@ -24,10 +24,11 @@ import {
 import { calculateTotalExperience } from '@/helpers/utils';
 import { InfoRow } from '@/components/common/InfoRow';
 import { formatDateForDisplay } from '@/helpers/date';
-import SafeAvatarImage from '@/components/common/SafeAvatarImage';
+import SafeImage from '@/components/common/SafeImage';
 import { storageEndpoint } from '@/helpers/common';
 import { genderOptions, maritalStatusOptions } from '@/data';
 import Button from '@/components/base/Button';
+import avatar from 'assets/img/team/40x40/avatar.webp';
 
 interface TEmployeeDetailProfileProps {
   employee: TEmployee;
@@ -59,12 +60,13 @@ const EmployeeDetailProfile = ({
               border: '4px solid white'
             }}
           >
-            <SafeAvatarImage
+            <SafeImage
               size="xl"
               className="text-success"
               src={
                 employee?.avatar ? `${storageEndpoint}/${employee?.avatar}` : ''
               }
+              errorImage={avatar}
             />
           </div>
         </div>

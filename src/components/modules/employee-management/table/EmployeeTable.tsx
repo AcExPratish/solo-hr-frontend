@@ -6,11 +6,12 @@ import { useTranslation } from 'react-i18next';
 import ActionTableItems from '@/components/common/ActionTableItems';
 import { checkScope } from '@/helpers/auth';
 import { getUserFirstAndLastName } from '@/helpers/utils';
-import SafeAvatarImage from '@/components/common/SafeAvatarImage';
+import SafeImage from '@/components/common/SafeImage';
 import { storageEndpoint } from '@/helpers/common';
 import { TEmployee } from '@/types/modules/employee-management/employee';
 import { convertTimestampToHumanDate } from '@/helpers/date';
 import Badge from '@/components/base/Badge';
+import avatar from 'assets/img/team/40x40/avatar.webp';
 
 interface employeeTableColumnsProps {
   onView?: (data: TEmployee, show: boolean) => void;
@@ -48,7 +49,7 @@ export const employeeTableColumns = ({
             title={getUserFirstAndLastName(row?.original) || ''}
             className="d-flex align-items-center justify-content-start text-truncate w-100"
           >
-            <SafeAvatarImage
+            <SafeImage
               src={
                 row?.original?.avatar
                   ? `${storageEndpoint}/${row?.original?.avatar}`
@@ -56,6 +57,7 @@ export const employeeTableColumns = ({
               }
               className="me-2"
               size={'l'}
+              errorImage={avatar}
             />
             <span className="fs-9 fw-semibold">
               {getUserFirstAndLastName(row?.original) || ''}

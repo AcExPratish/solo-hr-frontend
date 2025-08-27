@@ -7,8 +7,9 @@ import { useTranslation } from 'react-i18next';
 import ActionTableItems from '@/components/common/ActionTableItems';
 import { checkScope } from '@/helpers/auth';
 import { getUserFirstAndLastName } from '@/helpers/utils';
-import SafeAvatarImage from '@/components/common/SafeAvatarImage';
+import SafeImage from '@/components/common/SafeImage';
 import { storageEndpoint } from '@/helpers/common';
+import avatar from 'assets/img/team/40x40/avatar.webp';
 
 interface userTableColumnsProps {
   onView?: (data: TUser, show: boolean) => void;
@@ -46,7 +47,7 @@ export const userTableColumns = ({
             title={getUserFirstAndLastName(row?.original) || ''}
             className="d-flex align-items-center justify-content-start text-truncate w-100"
           >
-            <SafeAvatarImage
+            <SafeImage
               src={
                 row?.original?.avatar
                   ? `${storageEndpoint}/${row?.original?.avatar}`
@@ -54,6 +55,7 @@ export const userTableColumns = ({
               }
               className="me-2"
               size={'l'}
+              errorImage={avatar}
             />
             <span className="fs-9 fw-semibold">
               {getUserFirstAndLastName(row?.original) || ''}

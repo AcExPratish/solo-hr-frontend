@@ -741,6 +741,78 @@ End Custom Breadcrumb
   color: #d61b2b !important;
 }
 
+/*------------------------------------------------------
+Start Avatar Hover
+--------------------------------------------------------*/
+.avatar-hover-wrapper {
+  position: relative;
+  display: inline-block;
+}
+
+.avatar-overlay {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(0, 0, 0, 0.6);
+  opacity: 0;
+  transition: opacity 160ms ease-in-out;
+  cursor: pointer;
+}
+
+.avatar-hover-wrapper:hover .avatar-overlay {
+  opacity: 1;
+}
+
+.avatar-overlay .fa-icon {
+  font-size: 1.5rem;
+  color: #fff;
+}
+
+/*------------------------------------------------------
+End Avatar Hover
+--------------------------------------------------------*/
+/*------------------------------------------------------
+Start Lightbox Overlay
+--------------------------------------------------------*/
+.lightbox-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.9);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 2000;
+  padding: 16px;
+}
+
+.lightbox-inner {
+  position: relative;
+  max-width: 100vw;
+  max-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.lightbox-img {
+  width: 50vw;
+  height: 50vh;
+  max-width: 60vw;
+  max-height: 60vh;
+  aspect-ratio: 16/9;
+  object-fit: contain;
+  border-radius: 12px;
+  background: #fff;
+  box-shadow: 0 12px 40px rgba(0, 0, 0, 0.35);
+  transition: transform 120ms ease;
+  will-change: transform;
+}
+
+/*------------------------------------------------------
+End Lightbox Overlay
+--------------------------------------------------------*/
 .dh-tree__block {
   padding: 0.6rem 1.6rem;
   position: relative;

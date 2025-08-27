@@ -174,7 +174,10 @@
     "add_experience": "Add Experience",
     "present": "Present",
     "upload_profile_image": "Upload Profile Image",
-    "upload_profile_image_description": "Image should be below 5 mb",
+    "upload_image_description": "Image should be below 5 mb",
     "form_validation_image_size": "Image size should be below 5 mb",
-    "form_validation_image_type": "Image type should be jpeg, png, or jpg"
+    "form_validation_image_type": "Image type should be jpeg, png, or jpg",
+    "preview": "Preview",
+    "image_not_available": "Image not available",
+    "upload_image": "Upload Image"
 }
