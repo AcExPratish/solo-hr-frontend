@@ -46,18 +46,14 @@ const CustomAvatarHandler = ({
     React.useState<boolean>(false);
   const fileInputRef = React.useRef<HTMLInputElement>(null);
 
-  // Convert currentImage to displayable URL
   React.useEffect(() => {
     if (currentImage) {
       if (typeof currentImage === 'string') {
-        // It's already a URL
         setSelectedImage(currentImage);
       } else if (currentImage instanceof File) {
-        // It's a File object, create object URL
         const objectUrl = URL.createObjectURL(currentImage);
         setSelectedImage(objectUrl);
 
-        // Clean up the object URL when component unmounts or image changes
         return () => URL.revokeObjectURL(objectUrl);
       }
     } else {
@@ -65,7 +61,6 @@ const CustomAvatarHandler = ({
     }
   }, [currentImage]);
 
-  // Get validation error from parent (Formik)
   const validationError =
     fieldName && errors && touched
       ? getIn(touched, fieldName) && getIn(errors, fieldName)
@@ -78,10 +73,8 @@ const CustomAvatarHandler = ({
 
   const handleImageChange = (file: File) => {
     if (file) {
-      // Don't create object URL here since useEffect will handle it
       onImageChange(file);
 
-      // Mark field as touched for validation
       if (onBlur) {
         onBlur();
       }
@@ -92,7 +85,6 @@ const CustomAvatarHandler = ({
     if (disabled) return;
     onImageDelete();
 
-    // Mark field as touched for validation
     if (onBlur) {
       onBlur();
     }
@@ -111,7 +103,6 @@ const CustomAvatarHandler = ({
         e.target.value = '';
       } else {
         setSelectedImageError(true);
-        // Mark field as touched when there's an error
         if (onBlur) {
           onBlur();
         }
@@ -119,7 +110,6 @@ const CustomAvatarHandler = ({
     }
   };
 
-  // Determine if there's any error (local or from validation)
   const hasError = selectedImageError || validationError;
   const errorMessage =
     validationError || (selectedImageError ? t('form_validation_image') : null);
