@@ -9,7 +9,7 @@ import { TEmployee } from '@/types/modules/employee-management/employee';
 import { EmployeeBasicInfoSchema } from '@/validation/employee-management/EmployeeSchema';
 import ReactGroupSelect from '@/components/base/ReactGroupSelect';
 import { genderOptions } from '@/data';
-import CustomAvatarChange from '@/components/common/custom/CustomAvatarChange';
+import CustomAvatarHandler from '@/components/common/custom/CustomAvatarHandler';
 import { isImageFile } from '@/helpers/utils';
 
 export interface EmployeeBasicInfoFormProps {
@@ -81,13 +81,17 @@ const EmployeeBasicInfoForm = ({
             <Form noValidate className="d-flex flex-column">
               <Row className="g-2">
                 <Col xs={12}>
-                  <CustomAvatarChange
+                  <CustomAvatarHandler
                     label={t('upload_profile_image')}
                     currentImage={values?.avatar ?? null}
                     onImageChange={handleImageChange}
                     onImageDelete={handleImageDelete}
                     isImageFile={isImageFile}
                     showDeleteButton={true}
+                    fieldName="avatar"
+                    errors={errors}
+                    touched={touched}
+                    onBlur={() => setFieldTouched('avatar', true)}
                   />
                 </Col>
 

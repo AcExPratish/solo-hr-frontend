@@ -1,11 +1,13 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import React from 'react';
 import SafeAvatarImage, { Size } from '../SafeAvatarImage';
 import { useTranslation } from 'react-i18next';
 import Badge from '@/components/base/Badge';
+import { getIn } from 'formik';
 
-interface AvatarChangeProps {
+interface CustomAvatarHandlerProps {
   label: string;
-  currentImage: string | null;
+  currentImage: string | File | null;
   onImageChange: (file: File) => void;
   onImageDelete: () => void;
   isImageFile?: (file: File) => boolean;
@@ -13,13 +15,17 @@ interface AvatarChangeProps {
   className?: string;
   disabled?: boolean;
   showDeleteButton?: boolean;
+  fieldName?: string;
+  errors?: any;
+  touched?: any;
+  onBlur?: () => void;
 }
 
 const defaultIsImageFile = (file: File): boolean => {
   return file.type.startsWith('image/');
 };
 
-const AvatarChange = ({
+const CustomAvatarHandler = ({
   label = 'Upload New Photo',
   currentImage = null,
   onImageChange,
@@ -28,15 +34,42 @@ const AvatarChange = ({
   avatarSize = '3xl',
   className = '',
   disabled = false,
-  showDeleteButton = true
-}: AvatarChangeProps) => {
+  showDeleteButton = true,
+  fieldName = 'avatar',
+  errors,
+  touched,
+  onBlur
+}: CustomAvatarHandlerProps) => {
   const { t } = useTranslation();
-  const [selectedImage, setSelectedImage] = React.useState<string | null>(
-    currentImage
-  );
+  const [selectedImage, setSelectedImage] = React.useState<string | null>(null);
   const [selectedImageError, setSelectedImageError] =
     React.useState<boolean>(false);
   const fileInputRef = React.useRef<HTMLInputElement>(null);
+
+  // Convert currentImage to displayable URL
+  React.useEffect(() => {
+    if (currentImage) {
+      if (typeof currentImage === 'string') {
+        // It's already a URL
+        setSelectedImage(currentImage);
+      } else if (currentImage instanceof File) {
+        // It's a File object, create object URL
+        const objectUrl = URL.createObjectURL(currentImage);
+        setSelectedImage(objectUrl);
+
+        // Clean up the object URL when component unmounts or image changes
+        return () => URL.revokeObjectURL(objectUrl);
+      }
+    } else {
+      setSelectedImage(null);
+    }
+  }, [currentImage]);
+
+  // Get validation error from parent (Formik)
+  const validationError =
+    fieldName && errors && touched
+      ? getIn(touched, fieldName) && getIn(errors, fieldName)
+      : null;
 
   const handleUploadClick = () => {
     if (disabled) return;
@@ -45,17 +78,24 @@ const AvatarChange = ({
 
   const handleImageChange = (file: File) => {
     if (file) {
-      const preview = URL.createObjectURL(file);
-      setSelectedImage(preview);
+      // Don't create object URL here since useEffect will handle it
       onImageChange(file);
+
+      // Mark field as touched for validation
+      if (onBlur) {
+        onBlur();
+      }
     }
   };
 
   const handleDeleteImage = () => {
     if (disabled) return;
-    setSelectedImage(null);
-    setSelectedImageError(false);
     onImageDelete();
+
+    // Mark field as touched for validation
+    if (onBlur) {
+      onBlur();
+    }
 
     if (fileInputRef.current) {
       fileInputRef.current.value = '';
@@ -71,18 +111,25 @@ const AvatarChange = ({
         e.target.value = '';
       } else {
         setSelectedImageError(true);
+        // Mark field as touched when there's an error
+        if (onBlur) {
+          onBlur();
+        }
       }
     }
   };
 
-  React.useEffect(() => {
-    setSelectedImage(currentImage);
-  }, [currentImage]);
+  // Determine if there's any error (local or from validation)
+  const hasError = selectedImageError || validationError;
+  const errorMessage =
+    validationError || (selectedImageError ? t('form_validation_image') : null);
 
   return (
     <React.Fragment>
       <div
-        className={`d-flex align-items-center gap-1 mb-2 bg-gray-100 p-4 w-100 rounded-3 ${className}`}
+        className={`d-flex align-items-center gap-1 mb-2 bg-gray-100 p-4 w-100 rounded-3 ${
+          hasError ? 'border border-danger' : ''
+        } ${className}`}
       >
         {/* Avatar image */}
         <div className="me-2">
@@ -128,12 +175,10 @@ const AvatarChange = ({
         </div>
       </div>
 
-      {/* Image error message */}
-      {selectedImageError && (
-        <p className="text-danger mt-2">{t('form_validation_image')}</p>
-      )}
+      {/* Error message - displays both local and validation errors */}
+      {hasError && <p className="text-danger mt-2">{errorMessage}</p>}
     </React.Fragment>
   );
 };
 
-export default AvatarChange;
+export default CustomAvatarHandler;
