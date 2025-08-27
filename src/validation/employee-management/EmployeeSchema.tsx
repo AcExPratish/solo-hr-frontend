@@ -5,8 +5,12 @@ import { phoneRegex, positiveNumberRegexWithZero } from '@/helpers/regex';
 const t = i18next.t;
 
 const todaysDate = todayDate();
-const IMAGE_MAX_SIZE = 5 * 1024 * 1024; // 5MB
-const IMAGE_ACCEPTED_TYPES = ['image/jpeg', 'image/png', 'image/jpg'] as const;
+export const IMAGE_MAX_SIZE = 5 * 1024 * 1024; // 5MB
+export const IMAGE_ACCEPTED_TYPES = [
+  'image/jpeg',
+  'image/png',
+  'image/jpg'
+] as const;
 
 export const EmployeeBasicInfoSchema = Yup.object().shape({
   avatar: Yup.mixed<File | string>()

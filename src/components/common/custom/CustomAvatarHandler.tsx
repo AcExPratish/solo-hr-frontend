@@ -4,6 +4,7 @@ import SafeAvatarImage, { Size } from '../SafeAvatarImage';
 import { useTranslation } from 'react-i18next';
 import Badge from '@/components/base/Badge';
 import { getIn } from 'formik';
+import { IMAGE_ACCEPTED_TYPES } from '@/validation/employee-management/EmployeeSchema';
 
 interface CustomAvatarHandlerProps {
   label: string;
@@ -22,7 +23,9 @@ interface CustomAvatarHandlerProps {
 }
 
 const defaultIsImageFile = (file: File): boolean => {
-  return file.type.startsWith('image/');
+  return IMAGE_ACCEPTED_TYPES.includes(
+    file.type as (typeof IMAGE_ACCEPTED_TYPES)[number]
+  );
 };
 
 const CustomAvatarHandler = ({
