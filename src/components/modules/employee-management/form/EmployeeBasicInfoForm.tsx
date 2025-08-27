@@ -55,14 +55,20 @@ const EmployeeBasicInfoForm = ({
         handleSubmit,
         resetForm,
         setFieldValue,
-        setFieldTouched
+        setFieldTouched,
+        validateField,
+        setFieldError
       }) => {
-        const handleImageChange = (file: File) => {
+        const handleImageChange = async (file: File) => {
+          await setFieldValue('avatar', file, false);
           setFieldValue('avatar', file);
+          await validateField('avatar');
         };
 
-        const handleImageDelete = () => {
-          setFieldValue('avatar', null);
+        const handleImageDelete = async () => {
+          await setFieldValue('avatar', null, false);
+          setFieldTouched('avatar', false);
+          setFieldError('avatar', undefined);
         };
 
         return (
