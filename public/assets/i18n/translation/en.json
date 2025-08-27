@@ -172,5 +172,7 @@
     "company_name": "Company Name",
     "designation": "Designation",
     "add_experience": "Add Experience",
-    "present": "Present"
+    "present": "Present",
+    "upload_profile_image": "Upload Profile Image",
+    "upload_profile_image_description": "Image should be below 4 mb"
 }
