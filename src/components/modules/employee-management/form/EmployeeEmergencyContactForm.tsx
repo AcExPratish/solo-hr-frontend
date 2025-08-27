@@ -43,7 +43,12 @@ const EmployeeEmergencyContactForm = ({
 
   // On Submit
   const handleOnSubmit = async (values: TEmployee) => {
-    onSubmit({ ...values, form_type: 'emergency_contact' });
+    const { id, emergency_contact } = values;
+    onSubmit({
+      id,
+      emergency_contact,
+      form_type: 'emergency_contact'
+    });
   };
 
   return (

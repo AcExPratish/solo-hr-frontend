@@ -35,7 +35,32 @@ const EmployeeBasicInfoForm = ({
 
   // On Submit
   const handleOnSubmit = async (values: TEmployee) => {
-    onSubmit({ ...values, form_type: 'basic_info' });
+    const {
+      id,
+      username,
+      first_name,
+      middle_name,
+      last_name,
+      password,
+      email,
+      phone,
+      avatar,
+      basic_information
+    } = values;
+
+    onSubmit({
+      id,
+      username,
+      first_name,
+      middle_name,
+      last_name,
+      password,
+      email,
+      phone,
+      avatar,
+      basic_information,
+      form_type: 'basic_info'
+    });
   };
 
   return (

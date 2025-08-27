@@ -32,7 +32,19 @@ const EmployeePersonalInfoForm = ({
 
   // On Submit
   const handleOnSubmit = async (values: TEmployee) => {
-    onSubmit({ ...values, form_type: 'personal_info' });
+    const { id } = values;
+    onSubmit({
+      id,
+      basic_information: {
+        nationality: values?.basic_information?.nationality,
+        religion: values?.basic_information?.religion,
+        blood_group: values?.basic_information?.blood_group,
+        marital_status: values?.basic_information?.marital_status,
+        employment_of_spouse: values?.basic_information?.employment_of_spouse,
+        no_of_children: values?.basic_information?.no_of_children
+      },
+      form_type: 'personal_info'
+    });
   };
 
   return (

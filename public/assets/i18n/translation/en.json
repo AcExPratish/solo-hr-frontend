@@ -179,5 +179,10 @@
     "form_validation_image_type": "Image type should be jpeg, png, or jpg",
     "preview": "Preview",
     "image_not_available": "Image not available",
-    "upload_image": "Upload Image"
+    "upload_image": "Upload Image",
+    "province": "Province",
+    "district": "District",
+    "city": "City",
+    "profile": "Profile",
+    "about": "About"
 }
