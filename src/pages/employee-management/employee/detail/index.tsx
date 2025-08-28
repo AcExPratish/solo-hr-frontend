@@ -19,10 +19,7 @@ import EmployeeDetailStatutoryInformation from '@/components/modules/employee-ma
 import EmployeeDetailSupportingDocuments from '@/components/modules/employee-management/EmployeeDetailSupportingDocuments';
 import EmployeeDetailEducation from '@/components/modules/employee-management/EmployeeDetailEducation';
 import EmployeeDetailExperience from '@/components/modules/employee-management/EmployeeDetailExperience';
-import {
-  //  useNavigate,
-  useParams
-} from 'react-router-dom';
+import { useParams } from 'react-router-dom';
 import PhoenixLoader from '@/components/common/PhoenixLoader';
 import EmployeePersonalInfoForm from '@/components/modules/employee-management/form/EmployeePersonalInfoForm';
 import EmployeeAboutEmployeeForm from '@/components/modules/employee-management/form/EmployeeAboutEmployeeForm';
@@ -34,9 +31,8 @@ import EmployeeEducationForm from '@/components/modules/employee-management/form
 import EmployeeExperienceForm from '@/components/modules/employee-management/form/EmployeeExperienceForm';
 import EmployeeStatutoryInformationForm from '@/components/modules/employee-management/form/EmployeeStatutoryInformationForm';
 import EmployeeSupportingDocumentsForm from '@/components/modules/employee-management/form/EmployeeSupportingDocumentsForm';
-// import { checkScope } from '@/helpers/auth';
 
-// Initial values
+// Initial Values
 const initialValues: TEmployee = {
   id: undefined,
   first_name: '',
@@ -183,178 +179,82 @@ const initialValues: TEmployee = {
   experience: []
 };
 
-const intialLoader: TLoader = {
-  list: false
+const initialLoader: TLoader = { list: false };
+
+// Modal Configs
+const modalConfigs: Array<{
+  type: TEmployeeFormType;
+  Component: React.ComponentType<{
+    formData: TEmployee;
+    modal: TModalProps;
+    onSubmit: (values: TEmployee) => void;
+    onClose: () => void;
+    loading?: boolean;
+  }>;
+}> = [
+  { type: 'basic_info', Component: EmployeeBasicInfoForm },
+  { type: 'personal_info', Component: EmployeePersonalInfoForm },
+  { type: 'emergency_contact', Component: EmployeeEmergencyContactForm },
+  { type: 'about_employee', Component: EmployeeAboutEmployeeForm },
+  { type: 'bank_information', Component: EmployeeBankInformationForm },
+  { type: 'family_information', Component: EmployeeFamilyInformationForm },
+  { type: 'education', Component: EmployeeEducationForm },
+  { type: 'experience', Component: EmployeeExperienceForm },
+  {
+    type: 'statutory_information',
+    Component: EmployeeStatutoryInformationForm
+  },
+  { type: 'supporting_documents', Component: EmployeeSupportingDocumentsForm }
+];
+
+// Modal State
+type ModalState = Record<TEmployeeFormType, TModalProps>;
+
+// Default Modal State
+const defaultModalState: ModalState = {
+  basic_info: { show: false, placement: 'end' },
+  personal_info: { show: false, placement: 'end' },
+  emergency_contact: { show: false, placement: 'end' },
+  about_employee: { show: false, placement: 'end' },
+  bank_information: { show: false, placement: 'end' },
+  family_information: { show: false, placement: 'end' },
+  statutory_information: { show: false, placement: 'end' },
+  supporting_documents: { show: false, placement: 'end' },
+  education: { show: false, placement: 'end' },
+  experience: { show: false, placement: 'end' }
 };
 
 const EmployeeDetailsPage = () => {
   // React Hooks
   const { t } = useTranslation();
   const { employeeId } = useParams();
-  // const navigate = useNavigate();
 
   // Custom Hooks
   const { fetchOneEmployee, updateEmployee } = useEmployeeHook();
 
   // Use States
-  const [loader, setLoader] = React.useState<TLoader>(intialLoader);
-  const [basicInfoModal, setBasicInfoModal] = React.useState<TModalProps>({
-    show: false,
-    placement: 'end'
-  });
-  const [personalInfoModal, setPersonalInfoModal] = React.useState<TModalProps>(
-    {
-      show: false,
-      placement: 'end'
-    }
-  );
-  const [emergencyContactModal, setEmergencyContactModal] =
-    React.useState<TModalProps>({
-      show: false,
-      placement: 'end'
-    });
-  const [aboutEmployeeModal, setAboutEmployeeModal] =
-    React.useState<TModalProps>({
-      show: false,
-      placement: 'end'
-    });
-  const [bankInformationModal, setBankInformationModal] =
-    React.useState<TModalProps>({
-      show: false,
-      placement: 'end'
-    });
-  const [familyInformationModal, setFamilyInformationModal] =
-    React.useState<TModalProps>({
-      show: false,
-      placement: 'end'
-    });
-  const [statutoryInformationModal, setStatutoryInformationModal] =
-    React.useState<TModalProps>({
-      show: false,
-      placement: 'end'
-    });
-  const [supportingDocumentsModal, setSupportingDocumentsModal] =
-    React.useState<TModalProps>({
-      show: false,
-      placement: 'end'
-    });
-  const [educationModal, setEducationModal] = React.useState<TModalProps>({
-    show: false,
-    placement: 'end'
-  });
-  const [experienceModal, setExperienceModal] = React.useState<TModalProps>({
-    show: false,
-    placement: 'end'
-  });
+  const [loader, setLoader] = React.useState<TLoader>(initialLoader);
+  const [modals, setModals] = React.useState<ModalState>(defaultModalState);
   const [employee, setEmployee] = React.useState<TEmployee>(initialValues);
 
   // Handlers
-  const handleOnEditBasicInfo = () => {
-    setBasicInfoModal({ ...basicInfoModal, ...{ show: true, type: 'edit' } });
-  };
+  const handleOnEdit = (type: TEmployeeFormType) => () => openModal(type);
 
-  const handleOnEditPersonalInfo = () => {
-    setPersonalInfoModal({
-      ...personalInfoModal,
-      ...{ show: true, type: 'edit' }
-    });
-  };
+  // Modal Helpers
+  const openModal = (type: TEmployeeFormType, extra?: Partial<TModalProps>) =>
+    setModals(s => ({
+      ...s,
+      [type]: { ...s[type], show: true, type: 'edit', ...extra }
+    }));
 
-  const handleOnEditEmergencyContact = () => {
-    setEmergencyContactModal({
-      ...emergencyContactModal,
-      ...{ show: true, type: 'edit' }
-    });
-  };
+  const closeModal = (type: TEmployeeFormType) =>
+    setModals(s => ({ ...s, [type]: { ...s[type], show: false, type: '' } }));
 
-  const handleOnEditAboutEmployee = () => {
-    setAboutEmployeeModal({
-      ...aboutEmployeeModal,
-      ...{ show: true, type: 'edit' }
-    });
-  };
-
-  const handleOnEditBankInformation = () => {
-    setBankInformationModal({
-      ...bankInformationModal,
-      ...{ show: true, type: 'edit' }
-    });
-  };
-
-  const handleOnEditFamilyInformation = () => {
-    setFamilyInformationModal({
-      ...familyInformationModal,
-      ...{ show: true, type: 'edit' }
-    });
-  };
-
-  const handleOnEditStatutoryInformation = () => {
-    setStatutoryInformationModal({
-      ...statutoryInformationModal,
-      ...{ show: true, type: 'edit' }
-    });
-  };
-
-  const handleOnEditEducation = () => {
-    setEducationModal({
-      ...educationModal,
-      ...{ show: true, type: 'edit' }
-    });
-  };
-
-  const handleOnEditExperience = () => {
-    setExperienceModal({
-      ...experienceModal,
-      ...{ show: true, type: 'edit' }
-    });
-  };
-
-  const handleOnEditSupportingDocuments = () => {
-    setSupportingDocumentsModal({
-      ...supportingDocumentsModal,
-      ...{ show: true, type: 'edit' }
-    });
-  };
-
-  const handleFormTypeModal = (formType: TEmployeeFormType, show: boolean) => {
-    if (formType === 'basic_info') {
-      setBasicInfoModal({ ...basicInfoModal, ...{ show } });
-    } else if (formType === 'personal_info') {
-      setPersonalInfoModal({ ...personalInfoModal, ...{ show } });
-    } else if (formType === 'emergency_contact') {
-      setEmergencyContactModal({ ...emergencyContactModal, ...{ show } });
-    } else if (formType === 'about_employee') {
-      setAboutEmployeeModal({ ...aboutEmployeeModal, ...{ show } });
-    } else if (formType === 'bank_information') {
-      setBankInformationModal({
-        ...bankInformationModal,
-        ...{ show }
-      });
-    } else if (formType === 'family_information') {
-      setFamilyInformationModal({
-        ...familyInformationModal,
-        ...{ show }
-      });
-    } else if (formType === 'education') {
-      setEducationModal({ ...educationModal, ...{ show } });
-    } else if (formType === 'experience') {
-      setExperienceModal({ ...experienceModal, ...{ show } });
-    } else if (formType === 'statutory_information') {
-      setStatutoryInformationModal({
-        ...statutoryInformationModal,
-        ...{ show }
-      });
-    } else if (formType === 'supporting_documents') {
-      setSupportingDocumentsModal({
-        ...supportingDocumentsModal,
-        ...{ show }
-      });
-    }
-  };
-
+  // On Submit
   const handleOnSubmit = (formData: TEmployee) => {
+    const formType = (formData?.form_type || 'basic_info') as TEmployeeFormType;
     setLoader({ list: true });
-    handleFormTypeModal(formData?.form_type as TEmployeeFormType, true);
+    openModal(formType);
 
     updateEmployee(formData?.id as string, formData)
       .then(() => {
@@ -364,117 +264,95 @@ const EmployeeDetailsPage = () => {
             name: getUserFirstAndLastName(formData)
           })
         );
-        handleFormTypeModal(formData?.form_type || 'basic_info', false);
-        setLoader({ list: false });
+        closeModal(formType);
       })
       .catch(() => {
         toast.error(t('message_failed'));
-        setLoader({ list: false });
-      });
+      })
+      .finally(() => setLoader({ list: false }));
   };
 
   // API Handlers
   const fetchOneItem = (id: string) => {
     setLoader({ list: true });
     fetchOneEmployee(id)
-      .then((res: TEmployee) => {
-        setEmployee(res);
-      })
-      .catch(() => {
-        toast.error(t('message_failed'));
-      })
-      .finally(() => {
-        setLoader({ list: false });
-      });
+      .then((res: TEmployee) => setEmployee(res))
+      .catch(() => toast.error(t('message_failed')))
+      .finally(() => setLoader({ list: false }));
   };
 
   React.useEffect(() => {
-    //TODO: Add permission check
-    // if (!checkScope('employee_management.employee.view')) {
-    //   navigate('/errors/403');
-    // }
-
-    if (employeeId) {
-      fetchOneItem(employeeId);
-    } else {
-      setEmployee(initialValues);
-    }
+    if (employeeId) fetchOneItem(employeeId);
+    else setEmployee(initialValues);
   }, [employeeId]);
 
   return (
-    <React.Fragment>
-      {loader?.list ? (
+    <>
+      {loader.list ? (
         <PhoenixLoader />
       ) : (
-        <React.Fragment>
+        <>
           <Container fluid className="min-vh-100 p-0">
-            {/* Employee Detail Header */}
             <EmployeeDetailHeader />
 
-            {/* Employee Detail Content */}
             <Row>
-              {/* Left Column */}
+              {/* left */}
               <Col xs={12} lg={4} className="mb-4">
-                {/* Employee Detail Profile */}
                 <EmployeeDetailProfile
                   employee={employee}
-                  onBasicInfoEdit={handleOnEditBasicInfo}
-                  onPersonalInfoEdit={handleOnEditPersonalInfo}
+                  onBasicInfoEdit={handleOnEdit('basic_info')}
+                  onPersonalInfoEdit={handleOnEdit('personal_info')}
                 />
 
-                {/* Emergency Contact Information */}
                 <EmployeeDetailEmergencyContact
                   employee={employee}
-                  onEmergencyContactEdit={handleOnEditEmergencyContact}
+                  onEmergencyContactEdit={handleOnEdit('emergency_contact')}
                 />
               </Col>
 
-              {/* Right Column */}
+              {/* right */}
               <Col xs={12} lg={8} className="d-flex flex-column g-0">
-                {/* About Employee */}
                 <EmployeeDetailAboutEmployee
                   employee={employee}
-                  onAboutEmployeeEdit={handleOnEditAboutEmployee}
+                  onAboutEmployeeEdit={handleOnEdit('about_employee')}
                 />
 
-                {/* Bank Information */}
                 <EmployeeDetailBankInformation
                   employee={employee}
-                  onBankInformationEdit={handleOnEditBankInformation}
+                  onBankInformationEdit={handleOnEdit('bank_information')}
                 />
 
-                {/* Family Information */}
                 <EmployeeDetailFamilyInformation
                   employee={employee}
-                  onFamilyInformationEdit={handleOnEditFamilyInformation}
+                  onFamilyInformationEdit={handleOnEdit('family_information')}
                 />
 
-                {/* Statutory Information */}
                 <EmployeeDetailStatutoryInformation
                   employee={employee}
-                  onStatutoryInformationEdit={handleOnEditStatutoryInformation}
+                  onStatutoryInformationEdit={handleOnEdit(
+                    'statutory_information'
+                  )}
                 />
 
-                {/* Supporting Documents */}
                 <EmployeeDetailSupportingDocuments
                   employee={employee}
-                  onSupportingDocumentsEdit={handleOnEditSupportingDocuments}
+                  onSupportingDocumentsEdit={handleOnEdit(
+                    'supporting_documents'
+                  )}
                 />
 
                 <Row className="gap-0 g-3">
-                  {/* Education */}
                   <Col xs={12} md={6}>
                     <EmployeeDetailEducation
                       employee={employee}
-                      onEducationEdit={handleOnEditEducation}
+                      onEducationEdit={handleOnEdit('education')}
                     />
                   </Col>
 
-                  {/* Experience */}
                   <Col xs={12} md={6}>
                     <EmployeeDetailExperience
                       employee={employee}
-                      onExperienceEdit={handleOnEditExperience}
+                      onExperienceEdit={handleOnEdit('experience')}
                     />
                   </Col>
                 </Row>
@@ -482,159 +360,20 @@ const EmployeeDetailsPage = () => {
             </Row>
           </Container>
 
-          {/* Modals */}
-          <EmployeeBasicInfoForm
-            formData={employee}
-            modal={basicInfoModal}
-            onSubmit={values => {
-              handleOnSubmit(values);
-            }}
-            onClose={() =>
-              setBasicInfoModal({
-                ...basicInfoModal,
-                ...{ show: false, type: '' }
-              })
-            }
-            loading={loader.list}
-          />
-
-          <EmployeePersonalInfoForm
-            formData={employee}
-            modal={personalInfoModal}
-            onSubmit={values => {
-              handleOnSubmit(values);
-            }}
-            onClose={() =>
-              setPersonalInfoModal({
-                ...personalInfoModal,
-                ...{ show: false, type: '' }
-              })
-            }
-            loading={loader.list}
-          />
-
-          <EmployeeEmergencyContactForm
-            formData={employee}
-            modal={emergencyContactModal}
-            onSubmit={values => {
-              handleOnSubmit(values);
-            }}
-            onClose={() =>
-              setEmergencyContactModal({
-                ...emergencyContactModal,
-                ...{ show: false, type: '' }
-              })
-            }
-            loading={loader.list}
-          />
-
-          <EmployeeAboutEmployeeForm
-            formData={employee}
-            modal={aboutEmployeeModal}
-            onSubmit={values => {
-              handleOnSubmit(values);
-            }}
-            onClose={() =>
-              setAboutEmployeeModal({
-                ...aboutEmployeeModal,
-                ...{ show: false, type: '' }
-              })
-            }
-            loading={loader.list}
-          />
-
-          <EmployeeBankInformationForm
-            formData={employee}
-            modal={bankInformationModal}
-            onSubmit={values => {
-              handleOnSubmit(values);
-            }}
-            onClose={() =>
-              setBankInformationModal({
-                ...bankInformationModal,
-                ...{ show: false, type: '' }
-              })
-            }
-            loading={loader.list}
-          />
-
-          <EmployeeFamilyInformationForm
-            formData={employee}
-            modal={familyInformationModal}
-            onSubmit={values => {
-              handleOnSubmit(values);
-            }}
-            onClose={() =>
-              setFamilyInformationModal({
-                ...familyInformationModal,
-                ...{ show: false, type: '' }
-              })
-            }
-            loading={loader.list}
-          />
-
-          <EmployeeStatutoryInformationForm
-            formData={employee}
-            modal={statutoryInformationModal}
-            onSubmit={values => {
-              handleOnSubmit(values);
-            }}
-            onClose={() =>
-              setStatutoryInformationModal({
-                ...statutoryInformationModal,
-                ...{ show: false, type: '' }
-              })
-            }
-            loading={loader.list}
-          />
-
-          <EmployeeSupportingDocumentsForm
-            formData={employee}
-            modal={supportingDocumentsModal}
-            onSubmit={values => {
-              handleOnSubmit(values);
-            }}
-            onClose={() =>
-              setSupportingDocumentsModal({
-                ...supportingDocumentsModal,
-                ...{ show: false, type: '' }
-              })
-            }
-            loading={loader.list}
-          />
-
-          <EmployeeEducationForm
-            formData={employee}
-            modal={educationModal}
-            onSubmit={values => {
-              handleOnSubmit(values);
-            }}
-            onClose={() =>
-              setEducationModal({
-                ...educationModal,
-                ...{ show: false, type: '' }
-              })
-            }
-            loading={loader.list}
-          />
-
-          <EmployeeExperienceForm
-            formData={employee}
-            modal={experienceModal}
-            onSubmit={values => {
-              handleOnSubmit(values);
-            }}
-            onClose={() =>
-              setExperienceModal({
-                ...experienceModal,
-                ...{ show: false, type: '' }
-              })
-            }
-            loading={loader.list}
-          />
-        </React.Fragment>
+          {/* modals rendered from config */}
+          {modalConfigs?.map(({ type, Component }) => (
+            <Component
+              key={type}
+              formData={employee}
+              modal={modals[type]}
+              onSubmit={handleOnSubmit}
+              onClose={() => closeModal(type)}
+              loading={loader.list}
+            />
+          ))}
+        </>
       )}
-    </React.Fragment>
+    </>
   );
 };
 

@@ -190,5 +190,19 @@
     "provident_fund": "Provident Fund",
     "police_clearance": "Police Clearance",
     "health_insurance": "Health Insurance",
-    "tax_clearance": "Tax Clearance"
+    "tax_clearance": "Tax Clearance",
+    "pan": "PAN",
+    "national_id": "National ID",
+    "citizenship": "Citizenship",
+    "passport": "Passport",
+    "driving_license": "Driving License",
+    "id_number": "ID Number",
+    "issue_date": "Issue Date",
+    "expiry_date": "Expiry Date",
+    "issuing_authority": "Issuing Authority",
+    "verification_status": "Verification Status",
+    "verified": "Verified",
+    "pending": "Pending",
+    "rejected": "Rejected",
+    "status": "Status"
 }
