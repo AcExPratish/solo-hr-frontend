@@ -184,5 +184,11 @@
     "district": "District",
     "city": "City",
     "profile": "Profile",
-    "about": "About"
+    "about": "About",
+    "citizen_investment_trust": "Citizen Investment Trust",
+    "social_security_fund": "Social Security Fund",
+    "provident_fund": "Provident Fund",
+    "police_clearance": "Police Clearance",
+    "health_insurance": "Health Insurance",
+    "tax_clearance": "Tax Clearance"
 }

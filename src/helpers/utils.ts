@@ -1,5 +1,6 @@
 import { TEmployeeExperience } from '@/types/modules/employee-management/employee';
 import { TUser } from '@/types/modules/user-management/user';
+import { IMAGE_ACCEPTED_TYPES } from '@/data';
 import { IconProp } from '@fortawesome/fontawesome-svg-core';
 import {
   faFileCircleExclamation,
@@ -200,14 +201,9 @@ export const getFileExtension = (fileName: string, separator = '.') =>
   fileName.split(separator).pop() || 'unknown';
 
 export const isImageFile = (file: File) => {
-  const imageMimeTypes = [
-    'image/jpeg',
-    'image/png',
-    'image/gif',
-    'image/bmp',
-    'image/webp'
-  ];
-  return imageMimeTypes.includes(file.type);
+  return IMAGE_ACCEPTED_TYPES.includes(
+    file.type as (typeof IMAGE_ACCEPTED_TYPES)[number]
+  );
 };
 
 export const convertFileToAttachment = (file: File) => ({

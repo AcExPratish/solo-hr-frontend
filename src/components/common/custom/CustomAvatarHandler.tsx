@@ -4,8 +4,8 @@ import SafeImage, { Size } from '../SafeImage';
 import { useTranslation } from 'react-i18next';
 import Badge from '@/components/base/Badge';
 import { getIn } from 'formik';
-import { IMAGE_ACCEPTED_TYPES } from '@/validation/employee-management/EmployeeSchema';
 import avatar from 'assets/img/team/40x40/avatar.webp';
+import { IMAGE_ACCEPTED_TYPES } from '@/data';
 
 interface CustomAvatarHandlerProps {
   label: string;

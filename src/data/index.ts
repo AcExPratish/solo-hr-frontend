@@ -1,3 +1,10 @@
+export const IMAGE_MAX_SIZE = 5.1 * 1024 * 1024; // 5.1MB
+export const IMAGE_ACCEPTED_TYPES = [
+  'image/jpeg',
+  'image/png',
+  'image/jpg'
+] as const;
+
 export const profileDropdownNavItems = [
   {
     label: 'Profile',
@@ -84,5 +91,50 @@ export const bloodGroupOptions = [
   {
     label: 'O-',
     value: 'O-'
+  }
+];
+
+export const statutoryInformationOptions = [
+  {
+    labelKey: 'citizen_investment_trust',
+    value: 'citizen_investment_trust'
+  },
+  {
+    labelKey: 'social_security_fund',
+    value: 'social_security_fund'
+  },
+  {
+    labelKey: 'provident_fund',
+    value: 'provident_fund'
+  },
+  {
+    labelKey: 'police_clearance',
+    value: 'police_clearance'
+  },
+  {
+    labelKey: 'health_insurance',
+    value: 'health_insurance'
+  },
+  {
+    labelKey: 'tax_clearance',
+    value: 'tax_clearance'
+  }
+];
+
+export const verificationStatusOptions = [
+  {
+    label: 'Verified',
+    value: 'verified',
+    color: 'text-success'
+  },
+  {
+    label: 'Rejected',
+    value: 'rejected',
+    color: 'text-danger'
+  },
+  {
+    label: 'Pending',
+    value: 'pending',
+    color: 'text-warning'
   }
 ];

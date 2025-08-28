@@ -2,31 +2,13 @@ import * as Yup from 'yup';
 import i18next from 'i18next';
 import { todayDate } from '@/helpers/date';
 import { phoneRegex, positiveNumberRegexWithZero } from '@/helpers/regex';
+import { imageValidatorSchema } from '@/validation';
 const t = i18next.t;
 
 const todaysDate = todayDate();
-export const IMAGE_MAX_SIZE = 5.1 * 1024 * 1024; // 5.1MB
-export const IMAGE_ACCEPTED_TYPES = [
-  'image/jpeg',
-  'image/png',
-  'image/jpg'
-] as const;
 
 export const EmployeeBasicInfoSchema = Yup.object().shape({
-  avatar: Yup.mixed<File | string>()
-    .nullable()
-    .notRequired()
-    .transform((val, orig) => (orig === '' ? null : val))
-    .test('fileSize', t('form_validation_image_size'), v => {
-      if (!(v instanceof File)) return true;
-      return v.size <= IMAGE_MAX_SIZE;
-    })
-    .test('fileType', t('form_validation_image_type'), v => {
-      if (!(v instanceof File)) return true;
-      return IMAGE_ACCEPTED_TYPES.includes(
-        v.type as (typeof IMAGE_ACCEPTED_TYPES)[number]
-      );
-    }),
+  avatar: imageValidatorSchema,
   first_name: Yup.string()
     .required(
       t('form_validation_mandatory', {

@@ -4,10 +4,10 @@ import SafeImage, { Size } from '../SafeImage';
 import { useTranslation } from 'react-i18next';
 import Badge from '@/components/base/Badge';
 import { getIn } from 'formik';
-import { IMAGE_ACCEPTED_TYPES } from '@/validation/employee-management/EmployeeSchema';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faEye } from '@fortawesome/free-solid-svg-icons';
 import imageNotAvailable from '@/assets/img/image-not-available.png';
+import { IMAGE_ACCEPTED_TYPES } from '@/data';
 
 interface CustomImageHandlerProps {
   label: string;

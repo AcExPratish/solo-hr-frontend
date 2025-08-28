@@ -32,6 +32,7 @@ import EmployeeDetailEmergencyContact from '@/components/modules/employee-manage
 import EmployeeFamilyInformationForm from '@/components/modules/employee-management/form/EmployeeFamilyInformationForm';
 import EmployeeEducationForm from '@/components/modules/employee-management/form/EmployeeEducationForm';
 import EmployeeExperienceForm from '@/components/modules/employee-management/form/EmployeeExperienceForm';
+import EmployeeStatutoryInformationForm from '@/components/modules/employee-management/form/EmployeeStatutoryInformationForm';
 // import { checkScope } from '@/helpers/auth';
 
 // Initial values
@@ -80,8 +81,8 @@ const initialValues: TEmployee = {
       issue_date: '',
       expiry_date: '',
       issuing_authority: '',
-      file_url: '',
-      verification_status: ''
+      image: '',
+      verification_status: 'pending'
     },
     social_security_fund: {
       id: '',
@@ -89,8 +90,8 @@ const initialValues: TEmployee = {
       issue_date: '',
       expiry_date: '',
       issuing_authority: '',
-      file_url: '',
-      verification_status: ''
+      image: '',
+      verification_status: 'pending'
     },
     provident_fund: {
       id: '',
@@ -98,8 +99,8 @@ const initialValues: TEmployee = {
       issue_date: '',
       expiry_date: '',
       issuing_authority: '',
-      file_url: '',
-      verification_status: ''
+      image: '',
+      verification_status: 'pending'
     },
     police_clearance: {
       id: '',
@@ -107,8 +108,8 @@ const initialValues: TEmployee = {
       issue_date: '',
       expiry_date: '',
       issuing_authority: '',
-      file_url: '',
-      verification_status: ''
+      image: '',
+      verification_status: 'pending'
     },
     health_insurance: {
       id: '',
@@ -116,8 +117,8 @@ const initialValues: TEmployee = {
       issue_date: '',
       expiry_date: '',
       issuing_authority: '',
-      file_url: '',
-      verification_status: ''
+      image: '',
+      verification_status: 'pending'
     },
     tax_clearance: {
       id: '',
@@ -125,8 +126,8 @@ const initialValues: TEmployee = {
       issue_date: '',
       expiry_date: '',
       issuing_authority: '',
-      file_url: '',
-      verification_status: ''
+      image: '',
+      verification_status: 'pending'
     }
   },
   supporting_documents: {
@@ -136,8 +137,8 @@ const initialValues: TEmployee = {
       issue_date: '',
       expiry_date: '',
       issuing_authority: '',
-      file_url: '',
-      verification_status: ''
+      image: '',
+      verification_status: 'pending'
     },
     national_id: {
       id: '',
@@ -145,8 +146,8 @@ const initialValues: TEmployee = {
       issue_date: '',
       expiry_date: '',
       issuing_authority: '',
-      file_url: '',
-      verification_status: ''
+      image: '',
+      verification_status: 'pending'
     },
     citizenship: {
       id: '',
@@ -154,8 +155,8 @@ const initialValues: TEmployee = {
       issue_date: '',
       expiry_date: '',
       issuing_authority: '',
-      file_url: '',
-      verification_status: ''
+      image: '',
+      verification_status: 'pending'
     },
     passport: {
       id: '',
@@ -163,8 +164,8 @@ const initialValues: TEmployee = {
       issue_date: '',
       expiry_date: '',
       issuing_authority: '',
-      file_url: '',
-      verification_status: ''
+      image: '',
+      verification_status: 'pending'
     },
     driving_license: {
       id: '',
@@ -172,8 +173,8 @@ const initialValues: TEmployee = {
       issue_date: '',
       expiry_date: '',
       issuing_authority: '',
-      file_url: '',
-      verification_status: ''
+      image: '',
+      verification_status: 'pending'
     }
   },
   family_information: [],
@@ -222,6 +223,11 @@ const EmployeeDetailsPage = () => {
       placement: 'end'
     });
   const [familyInformationModal, setFamilyInformationModal] =
+    React.useState<TModalProps>({
+      show: false,
+      placement: 'end'
+    });
+  const [statutoryInformationModal, setStatutoryInformationModal] =
     React.useState<TModalProps>({
       show: false,
       placement: 'end'
@@ -276,6 +282,13 @@ const EmployeeDetailsPage = () => {
     });
   };
 
+  const handleOnEditStatutoryInformation = () => {
+    setStatutoryInformationModal({
+      ...statutoryInformationModal,
+      ...{ show: true, type: 'edit' }
+    });
+  };
+
   const handleOnEditEducation = () => {
     setEducationModal({
       ...educationModal,
@@ -313,6 +326,11 @@ const EmployeeDetailsPage = () => {
       setEducationModal({ ...educationModal, ...{ show } });
     } else if (formType === 'experience') {
       setExperienceModal({ ...experienceModal, ...{ show } });
+    } else if (formType === 'statutory_information') {
+      setStatutoryInformationModal({
+        ...statutoryInformationModal,
+        ...{ show }
+      });
     }
   };
 
@@ -416,7 +434,7 @@ const EmployeeDetailsPage = () => {
                 {/* Statutory Information */}
                 <EmployeeDetailStatutoryInformation
                   employee={employee}
-                  onStatutoryInformationEdit={() => {}}
+                  onStatutoryInformationEdit={handleOnEditStatutoryInformation}
                 />
 
                 {/* Supporting Documents */}
@@ -531,6 +549,21 @@ const EmployeeDetailsPage = () => {
             onClose={() =>
               setFamilyInformationModal({
                 ...familyInformationModal,
+                ...{ show: false, type: '' }
+              })
+            }
+            loading={loader.list}
+          />
+
+          <EmployeeStatutoryInformationForm
+            formData={employee}
+            modal={statutoryInformationModal}
+            onSubmit={values => {
+              handleOnSubmit(values);
+            }}
+            onClose={() =>
+              setStatutoryInformationModal({
+                ...statutoryInformationModal,
                 ...{ show: false, type: '' }
               })
             }

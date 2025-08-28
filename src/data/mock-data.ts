@@ -75,8 +75,8 @@ export const employeeMockData: TEmployee = {
       issue_date: '2019-01-01',
       expiry_date: '2029-01-01',
       issuing_authority: 'CIT Office',
-      file_url: '/docs/cit_certificate.pdf',
-      verification_status: 'Verified'
+      image: '/docs/cit_certificate.pdf',
+      verification_status: 'rejected'
     },
     social_security_fund: {
       id: 'si001',
@@ -84,8 +84,8 @@ export const employeeMockData: TEmployee = {
       issue_date: '2018-06-01',
       expiry_date: '2028-06-01',
       issuing_authority: 'SSF Office',
-      file_url: '/docs/ssf_card.pdf',
-      verification_status: 'Verified'
+      image: '/docs/ssf_card.pdf',
+      verification_status: 'pending'
     },
     provident_fund: {
       id: 'si001',
@@ -93,8 +93,8 @@ export const employeeMockData: TEmployee = {
       issue_date: '2020-05-01',
       expiry_date: '2030-05-01',
       issuing_authority: 'EPF Nepal',
-      file_url: '/docs/pf.pdf',
-      verification_status: 'Verified'
+      image: '/docs/pf.pdf',
+      verification_status: 'pending'
     },
     police_clearance: {
       id: 'si001',
@@ -102,8 +102,8 @@ export const employeeMockData: TEmployee = {
       issue_date: '2022-02-01',
       expiry_date: '2025-02-01',
       issuing_authority: 'Kathmandu Police',
-      file_url: '/docs/police_clearance.pdf',
-      verification_status: 'Verified'
+      image: '/docs/police_clearance.pdf',
+      verification_status: 'verified'
     },
     health_insurance: {
       id: 'si001',
@@ -111,8 +111,8 @@ export const employeeMockData: TEmployee = {
       issue_date: '2021-03-15',
       expiry_date: '2026-03-15',
       issuing_authority: 'Nepal Health Board',
-      file_url: '/docs/health_insurance.pdf',
-      verification_status: 'Verified'
+      image: '/docs/health_insurance.pdf',
+      verification_status: 'verified'
     },
     tax_clearance: {
       id: 'si001',
@@ -120,8 +120,8 @@ export const employeeMockData: TEmployee = {
       issue_date: '2023-04-01',
       expiry_date: '2024-04-01',
       issuing_authority: 'IRD Nepal',
-      file_url: '/docs/tax_clearance.pdf',
-      verification_status: 'Verified'
+      image: '/docs/tax_clearance.pdf',
+      verification_status: 'verified'
     }
   },
 
@@ -132,8 +132,8 @@ export const employeeMockData: TEmployee = {
       issue_date: '2017-05-01',
       expiry_date: '2027-05-01',
       issuing_authority: 'IRD Nepal',
-      file_url: '/docs/pan.pdf',
-      verification_status: 'Verified'
+      image: '/docs/pan.pdf',
+      verification_status: 'verified'
     },
     national_id: {
       id: 'sd002',
@@ -141,8 +141,8 @@ export const employeeMockData: TEmployee = {
       issue_date: '2019-07-01',
       expiry_date: '2029-07-01',
       issuing_authority: 'Home Ministry',
-      file_url: '/docs/nid.pdf',
-      verification_status: 'Verified'
+      image: '/docs/nid.pdf',
+      verification_status: 'verified'
     },
     citizenship: {
       id: 'sd003',
@@ -150,8 +150,8 @@ export const employeeMockData: TEmployee = {
       issue_date: '2008-01-01',
       expiry_date: undefined,
       issuing_authority: 'Kathmandu District Office',
-      file_url: '/docs/citizenship.pdf',
-      verification_status: 'Verified'
+      image: '/docs/citizenship.pdf',
+      verification_status: 'verified'
     },
     passport: {
       id: 'sd004',
@@ -159,8 +159,8 @@ export const employeeMockData: TEmployee = {
       issue_date: '2021-10-01',
       expiry_date: '2031-10-01',
       issuing_authority: 'Passport Department',
-      file_url: '/docs/passport.pdf',
-      verification_status: 'Verified'
+      image: '/docs/passport.pdf',
+      verification_status: 'verified'
     },
     driving_license: {
       id: 'sd005',
@@ -168,8 +168,8 @@ export const employeeMockData: TEmployee = {
       issue_date: '2015-08-01',
       expiry_date: '2025-08-01',
       issuing_authority: 'DoTM Nepal',
-      file_url: '/docs/driving_license.pdf',
-      verification_status: 'Verified'
+      image: '/docs/driving_license.pdf',
+      verification_status: 'verified'
     }
   },
 

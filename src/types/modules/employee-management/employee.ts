@@ -44,14 +44,19 @@ export interface TEmployeeBankInformation {
   swift_code?: string;
 }
 
+export type TEmployeeDocumentVerificationStatus =
+  | 'verified'
+  | 'pending'
+  | 'rejected';
+
 export interface TEmployeeDocument {
   id?: string;
   id_number?: string;
   issue_date?: string;
   expiry_date?: string; // If applicable
   issuing_authority?: string; //e.g: Police Station, Passport Office, etc.
-  file_url?: string; // Scanned / Digital Copy
-  verification_status?: string; // Pending, Verified, Rejected
+  image?: string; // Scanned / Digital Copy
+  verification_status?: TEmployeeDocumentVerificationStatus;
 }
 
 export interface TEmployeeStatutoryInformation {
