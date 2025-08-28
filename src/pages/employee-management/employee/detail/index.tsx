@@ -33,6 +33,7 @@ import EmployeeFamilyInformationForm from '@/components/modules/employee-managem
 import EmployeeEducationForm from '@/components/modules/employee-management/form/EmployeeEducationForm';
 import EmployeeExperienceForm from '@/components/modules/employee-management/form/EmployeeExperienceForm';
 import EmployeeStatutoryInformationForm from '@/components/modules/employee-management/form/EmployeeStatutoryInformationForm';
+import EmployeeSupportingDocumentsForm from '@/components/modules/employee-management/form/EmployeeSupportingDocumentsForm';
 // import { checkScope } from '@/helpers/auth';
 
 // Initial values
@@ -232,6 +233,11 @@ const EmployeeDetailsPage = () => {
       show: false,
       placement: 'end'
     });
+  const [supportingDocumentsModal, setSupportingDocumentsModal] =
+    React.useState<TModalProps>({
+      show: false,
+      placement: 'end'
+    });
   const [educationModal, setEducationModal] = React.useState<TModalProps>({
     show: false,
     placement: 'end'
@@ -303,6 +309,13 @@ const EmployeeDetailsPage = () => {
     });
   };
 
+  const handleOnEditSupportingDocuments = () => {
+    setSupportingDocumentsModal({
+      ...supportingDocumentsModal,
+      ...{ show: true, type: 'edit' }
+    });
+  };
+
   const handleFormTypeModal = (formType: TEmployeeFormType, show: boolean) => {
     if (formType === 'basic_info') {
       setBasicInfoModal({ ...basicInfoModal, ...{ show } });
@@ -329,6 +342,11 @@ const EmployeeDetailsPage = () => {
     } else if (formType === 'statutory_information') {
       setStatutoryInformationModal({
         ...statutoryInformationModal,
+        ...{ show }
+      });
+    } else if (formType === 'supporting_documents') {
+      setSupportingDocumentsModal({
+        ...supportingDocumentsModal,
         ...{ show }
       });
     }
@@ -440,7 +458,7 @@ const EmployeeDetailsPage = () => {
                 {/* Supporting Documents */}
                 <EmployeeDetailSupportingDocuments
                   employee={employee}
-                  onSupportingDocumentsEdit={() => {}}
+                  onSupportingDocumentsEdit={handleOnEditSupportingDocuments}
                 />
 
                 <Row className="gap-0 g-3">
@@ -564,6 +582,21 @@ const EmployeeDetailsPage = () => {
             onClose={() =>
               setStatutoryInformationModal({
                 ...statutoryInformationModal,
+                ...{ show: false, type: '' }
+              })
+            }
+            loading={loader.list}
+          />
+
+          <EmployeeSupportingDocumentsForm
+            formData={employee}
+            modal={supportingDocumentsModal}
+            onSubmit={values => {
+              handleOnSubmit(values);
+            }}
+            onClose={() =>
+              setSupportingDocumentsModal({
+                ...supportingDocumentsModal,
                 ...{ show: false, type: '' }
               })
             }

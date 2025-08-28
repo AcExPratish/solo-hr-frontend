@@ -121,6 +121,29 @@ export const statutoryInformationOptions = [
   }
 ];
 
+export const supportingDocumentsOptions = [
+  {
+    labelKey: 'pan',
+    value: 'pan'
+  },
+  {
+    labelKey: 'national_id',
+    value: 'national_id'
+  },
+  {
+    labelKey: 'citizenship',
+    value: 'citizenship'
+  },
+  {
+    labelKey: 'passport',
+    value: 'passport'
+  },
+  {
+    labelKey: 'driving_license',
+    value: 'driving_license'
+  }
+];
+
 export const verificationStatusOptions = [
   {
     label: 'Verified',
@@ -135,6 +158,6 @@ export const verificationStatusOptions = [
   {
     label: 'Pending',
     value: 'pending',
-    color: 'text-warning'
+    color: 'text-muted'
   }
 ];
