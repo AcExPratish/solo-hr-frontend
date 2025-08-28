@@ -72,6 +72,11 @@ export interface TEmployeeDocument {
   verification_status?: TEmployeeDocumentVerificationStatus;
 }
 
+// For Frontend Only
+export interface TEmployeeDocumentList extends TEmployeeDocument {
+  document_name?: TEmployeeDocumentName;
+}
+
 export interface TEmployeeStatutoryInformation {
   citizen_investment_trust?: TEmployeeDocument; // Citizen Investment Trust Number
   social_security_fund?: TEmployeeDocument; // Social Security Number

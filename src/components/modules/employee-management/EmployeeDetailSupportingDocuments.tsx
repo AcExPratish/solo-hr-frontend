@@ -1,9 +1,18 @@
 import React from 'react';
 import { Accordion } from 'react-bootstrap';
-import { TEmployee } from '@/types/modules/employee-management/employee';
+import {
+  TEmployee,
+  TEmployeeDocumentList,
+  TEmployeeDocumentName
+} from '@/types/modules/employee-management/employee';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faChevronDown, faEdit } from '@fortawesome/free-solid-svg-icons';
 import { useTranslation } from 'react-i18next';
+import EmployeeDetailTable, {
+  employeeDocumentTableColumns
+} from './table/EmployeeDetailTable';
+import AdvanceTableProvider from '@/providers/AdvanceTableProvider';
+import useAdvanceTable, { UseAdvanceTableProps } from '@/hooks/useAdvanceTable';
 
 interface EmployeeDetailSupportingDocumentsProps {
   employee: TEmployee;
@@ -14,7 +23,29 @@ const EmployeeDetailSupportingDocuments = ({
   employee,
   onSupportingDocumentsEdit
 }: EmployeeDetailSupportingDocumentsProps) => {
+  // React Hooks
   const { t } = useTranslation();
+
+  // Use Memos
+  const supportingDocumentsData = React.useMemo(() => {
+    return Object.entries(employee?.supporting_documents ?? {})?.map(
+      ([key, data]) => ({
+        ...data,
+        document_name: key as TEmployeeDocumentName
+      })
+    );
+  }, [employee]);
+
+  // Table
+  const mappedTable = () => {
+    const tempTable: UseAdvanceTableProps<TEmployeeDocumentList> = {
+      data: supportingDocumentsData || [],
+      columns: employeeDocumentTableColumns(),
+      sortable: true
+    };
+    return tempTable;
+  };
+  const table = useAdvanceTable(mappedTable());
 
   return (
     <Accordion className="mb-4 bg-white text-black border rounded-1 py-2 border-1 border-gray-200">
@@ -41,10 +72,13 @@ const EmployeeDetailSupportingDocuments = ({
             </div>
           </div>
         </Accordion.Header>
+
         <Accordion.Body className="px-3">
-          <p className="text-muted small mb-0">
-            {employee?.basic_information?.about ?? ''}
-          </p>
+          <AdvanceTableProvider {...table}>
+            <div>
+              <EmployeeDetailTable loader={false} />
+            </div>
+          </AdvanceTableProvider>
         </Accordion.Body>
       </Accordion.Item>
     </Accordion>

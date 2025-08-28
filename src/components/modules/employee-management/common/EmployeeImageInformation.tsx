@@ -21,6 +21,7 @@ const EmployeeImageInformation = ({
   isView
 }: EmployeeImageInformationProps) => {
   const { t } = useTranslation();
+
   const {
     values,
     touched,
@@ -40,9 +41,9 @@ const EmployeeImageInformation = ({
   };
 
   const handleImageDelete = async () => {
-    await setFieldValue('avatar', null, false);
-    setFieldTouched('avatar', false);
-    setFieldError('avatar', undefined);
+    await setFieldValue(`${name}.image`, null, false);
+    setFieldTouched(`${name}.image`, false);
+    setFieldError(`${name}.image`, undefined);
   };
 
   return (

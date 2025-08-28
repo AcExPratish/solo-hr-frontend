@@ -173,7 +173,7 @@ const EmployeePage = () => {
   // API Handlers
   const createItem = (data: TEmployee) => {
     setModal({ ...modal, ...{ show: true } });
-    createEmployee(data)
+    createEmployee(data, 'basic_info')
       .then(() => {
         toast.success(
           t('message_success_create', {
@@ -193,7 +193,7 @@ const EmployeePage = () => {
 
   const updateItem = (id: string, data: TEmployee) => {
     setModal({ ...modal, ...{ show: true } });
-    updateEmployee(id, data)
+    updateEmployee(id, 'basic_info', data)
       .then(() => {
         toast.success(
           t('message_success_update', {

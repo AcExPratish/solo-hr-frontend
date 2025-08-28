@@ -17,3 +17,29 @@ export const imageValidatorSchema = Yup.mixed<File | string>()
       v.type as (typeof IMAGE_ACCEPTED_TYPES)[number]
     );
   });
+
+export const employeeDocumentSchema = Yup.object().shape({
+  id_number: Yup.string()
+    .nullable()
+    .notRequired()
+    .max(
+      200,
+      t('form_validation_max', {
+        field: t('id_number').toLowerCase(),
+        max: 200
+      })
+    ),
+  issue_date: Yup.date().nullable().notRequired(),
+  expiry_date: Yup.date().nullable().notRequired(),
+  issuing_authority: Yup.string()
+    .nullable()
+    .notRequired()
+    .max(
+      200,
+      t('form_validation_max', {
+        field: t('id_number').toLowerCase(),
+        max: 200
+      })
+    ),
+  image: imageValidatorSchema
+});

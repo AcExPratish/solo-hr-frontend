@@ -204,5 +204,6 @@
     "verified": "Verified",
     "pending": "Pending",
     "rejected": "Rejected",
-    "status": "Status"
+    "status": "Status",
+    "document_name": "Document Name"
 }

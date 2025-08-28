@@ -252,11 +252,11 @@ const EmployeeDetailsPage = () => {
 
   // On Submit
   const handleOnSubmit = (formData: TEmployee) => {
-    const formType = (formData?.form_type || 'basic_info') as TEmployeeFormType;
+    const formType = formData?.form_type as TEmployeeFormType;
     setLoader({ list: true });
     openModal(formType);
 
-    updateEmployee(formData?.id as string, formData)
+    updateEmployee(formData?.id as string, formType, formData)
       .then(() => {
         toast.success(
           t('message_success_update', {

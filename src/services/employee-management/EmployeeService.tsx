@@ -3,7 +3,8 @@ import { serializedObject } from '@/helpers/utils';
 import { apiEndpoint } from '@/helpers/common';
 import {
   TEmployee,
-  TEmployeeFilter
+  TEmployeeFilter,
+  TEmployeeFormType
 } from '@/types/modules/employee-management/employee';
 
 const employeeEndpoint: string = `${apiEndpoint}/employees`;
@@ -16,12 +17,12 @@ const fetchOne = (id: string) => {
   return api.get(`${employeeEndpoint}/${id}`);
 };
 
-const create = (data: TEmployee) => {
-  return api.post(`${employeeEndpoint}`, data);
+const create = (data: TEmployee, slug: TEmployeeFormType) => {
+  return api.post(`${employeeEndpoint}/${slug}`, data);
 };
 
-const update = (id: string, data: TEmployee) => {
-  return api.put(`${employeeEndpoint}/${id}`, data);
+const update = (id: string, slug: TEmployeeFormType, data: TEmployee) => {
+  return api.put(`${employeeEndpoint}/${id}/${slug}`, data);
 };
 
 const destroy = (id: string) => {

@@ -2,7 +2,7 @@ import * as Yup from 'yup';
 import i18next from 'i18next';
 import { todayDate } from '@/helpers/date';
 import { phoneRegex, positiveNumberRegexWithZero } from '@/helpers/regex';
-import { imageValidatorSchema } from '@/validation';
+import { employeeDocumentSchema, imageValidatorSchema } from '..';
 const t = i18next.t;
 
 const todaysDate = todayDate();
@@ -337,6 +337,27 @@ export const EmployeeFamilyInformationSchema = Yup.object().shape({
         )
     })
   )
+});
+
+export const EmployeeStatutoryInformationSchema = Yup.object().shape({
+  statutory_information: Yup.object().shape({
+    citizen_investment_trust: employeeDocumentSchema,
+    social_security_fund: employeeDocumentSchema,
+    provident_fund: employeeDocumentSchema,
+    police_clearance: employeeDocumentSchema,
+    health_insurance: employeeDocumentSchema,
+    tax_clearance: employeeDocumentSchema
+  })
+});
+
+export const EmployeeSupportingDocumentsSchema = Yup.object().shape({
+  supporting_documents: Yup.object().shape({
+    pan: employeeDocumentSchema,
+    national_id: employeeDocumentSchema,
+    citizenship: employeeDocumentSchema,
+    passport: employeeDocumentSchema,
+    driving_license: employeeDocumentSchema
+  })
 });
 
 export const EmployeeEducationSchema = Yup.object().shape({

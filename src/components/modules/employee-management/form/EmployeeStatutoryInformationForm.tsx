@@ -5,7 +5,7 @@ import { Formik } from 'formik';
 import { TModalProps } from '@/types/modules';
 import ModalForm from '@/components/common/custom/ModalForm';
 import { TEmployee } from '@/types/modules/employee-management/employee';
-import { EmployeeBankInformationSchema } from '@/validation/employee-management/EmployeeSchema';
+import { EmployeeStatutoryInformationSchema } from '@/validation/employee-management/EmployeeSchema';
 import EmployeeImageInformation from '../common/EmployeeImageInformation';
 import { statutoryInformationOptions } from '@/data';
 
@@ -45,7 +45,7 @@ const EmployeeStatutoryInformationForm = ({
       key={modal.show ? 'open' : 'closed'}
       initialValues={initialValues}
       enableReinitialize
-      validationSchema={EmployeeBankInformationSchema}
+      validationSchema={EmployeeStatutoryInformationSchema}
       onSubmit={handleOnSubmit}
     >
       {({ handleSubmit, resetForm }) => (

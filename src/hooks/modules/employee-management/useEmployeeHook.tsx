@@ -8,7 +8,8 @@ import {
 } from '@/store/reducers/employee-management/employeeSlice';
 import {
   TEmployee,
-  TEmployeeFilter
+  TEmployeeFilter,
+  TEmployeeFormType
 } from '@/types/modules/employee-management/employee';
 import EmployeeService from '@/services/employee-management/EmployeeService';
 import { employeeMockData } from '@/data/mock-data';
@@ -51,9 +52,12 @@ const useEmployeeHook = () => {
     }
   };
 
-  const createEmployee = async (data: TEmployee): Promise<TEmployee> => {
+  const createEmployee = async (
+    data: TEmployee,
+    slug: TEmployeeFormType
+  ): Promise<TEmployee> => {
     try {
-      const resp = await EmployeeService.create(data);
+      const resp = await EmployeeService.create(data, slug);
       const row = resp?.data?.data || null;
       dispatch(createOneEmployee({ row }));
       return row;
@@ -65,10 +69,11 @@ const useEmployeeHook = () => {
 
   const updateEmployee = async (
     id: string,
+    slug: TEmployeeFormType,
     data: TEmployee
   ): Promise<TEmployee> => {
     try {
-      const resp = await EmployeeService.update(id, data);
+      const resp = await EmployeeService.update(id, slug, data);
       const row = resp?.data?.data || null;
       dispatch(updateOneEmployee({ id, row }));
       return row;
