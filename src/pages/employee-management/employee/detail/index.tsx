@@ -181,7 +181,7 @@ const initialValues: TEmployee = {
 
 const initialLoader: TLoader = { list: false };
 
-// Modal Configs
+// Default Modal State
 const modalConfigs: Array<{
   type: TEmployeeFormType;
   Component: React.ComponentType<{
@@ -210,7 +210,7 @@ const modalConfigs: Array<{
 // Modal State
 type ModalState = Record<TEmployeeFormType, TModalProps>;
 
-// Default Modal State
+// Modal Configs
 const defaultModalState: ModalState = {
   basic_info: { show: false, placement: 'end' },
   personal_info: { show: false, placement: 'end' },
@@ -281,6 +281,7 @@ const EmployeeDetailsPage = () => {
       .finally(() => setLoader({ list: false }));
   };
 
+  // Use Effects
   React.useEffect(() => {
     if (employeeId) fetchOneItem(employeeId);
     else setEmployee(initialValues);
@@ -360,7 +361,7 @@ const EmployeeDetailsPage = () => {
             </Row>
           </Container>
 
-          {/* modals rendered from config */}
+          {/* Modals Rendered from Config */}
           {modalConfigs?.map(({ type, Component }) => (
             <Component
               key={type}
