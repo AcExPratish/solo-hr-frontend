@@ -65,8 +65,8 @@ const EmployeeSupportingDocumentsForm = ({
             {supportingDocumentsOptions?.map((item, index: number) => (
               <EmployeeImageInformation
                 key={index}
-                title={item.labelKey}
-                name={`supporting_documents.${item.value}`}
+                title={item?.labelKey}
+                name={`supporting_documents.${item?.value}`}
                 isView={isView}
               />
             ))}

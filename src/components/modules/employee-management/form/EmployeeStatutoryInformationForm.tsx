@@ -65,8 +65,8 @@ const EmployeeStatutoryInformationForm = ({
             {statutoryInformationOptions?.map((item, index: number) => (
               <EmployeeImageInformation
                 key={index}
-                title={item.labelKey}
-                name={`statutory_information.${item.value}`}
+                title={item?.labelKey}
+                name={`statutory_information.${item?.value}`}
                 isView={isView}
               />
             ))}

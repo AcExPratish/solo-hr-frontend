@@ -49,6 +49,19 @@ export type TEmployeeDocumentVerificationStatus =
   | 'pending'
   | 'rejected';
 
+export type TEmployeeDocumentName =
+  | 'citizen_investment_trust'
+  | 'social_security_fund'
+  | 'provident_fund'
+  | 'police_clearance'
+  | 'health_insurance'
+  | 'tax_clearance'
+  | 'pan'
+  | 'national_id'
+  | 'citizenship'
+  | 'passport'
+  | 'driving_license';
+
 export interface TEmployeeDocument {
   id?: string;
   id_number?: string;
