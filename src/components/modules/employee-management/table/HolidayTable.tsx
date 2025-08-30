@@ -7,6 +7,7 @@ import ActionTableItems from '@/components/common/ActionTableItems';
 import { checkScope } from '@/helpers/auth';
 import { THoliday } from '@/types/modules/employee-management/holiday';
 import { convertToMonAbbrevDate } from '@/helpers/date';
+import Badge from '@/components/base/Badge';
 
 interface HolidayTableColumnsProps {
   onView?: (data: THoliday, show: boolean) => void;
@@ -99,11 +100,26 @@ export const holidayTableColumns = ({
       }
     },
     {
+      header: `${t('status')}`,
+      accessorKey: 'status',
+      meta: {
+        cellProps: { className: 'text-body' },
+        headerProps: { style: { width: '15%' }, className: '' }
+      },
+      cell: original => {
+        const { row } = original;
+        return (
+          <Badge bg={row?.original?.status ? 'success' : 'danger'}>
+            {row?.original?.status ? t('active') : t('inactive')}
+          </Badge>
+        );
+      }
+    },
+    {
       header: `Action`,
       id: 'action',
       cell: ({ row: { original } }) => {
         const row = original;
-
         return (
           <ActionTableItems
             data={row}
