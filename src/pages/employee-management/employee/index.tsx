@@ -32,7 +32,6 @@ const initialFilter: TEmployeeFilter = {
 
 const initialValues: TEmployee = {
   id: '',
-  username: '',
   first_name: '',
   middle_name: '',
   last_name: '',

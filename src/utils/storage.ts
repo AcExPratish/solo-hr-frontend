@@ -4,7 +4,10 @@ import { decryptData, encryptData } from '@/helpers/crypto';
 export const addAuthToLocalStorage = (payload: any) => {
   localStorage.setItem('token', encryptData(payload.token));
   localStorage.setItem('refresh_token', encryptData(payload.refreshToken));
+};
 
+// eslint-disable-next-line
+export const addUserAndScopesToLocalStorage = (payload: any) => {
   localStorage.setItem('user', encryptData(JSON.stringify(payload.user)));
   localStorage.setItem('scopes', encryptData(JSON.stringify(payload.scopes)));
 };

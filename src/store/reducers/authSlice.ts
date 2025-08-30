@@ -2,6 +2,7 @@ import { createSlice } from '@reduxjs/toolkit';
 import { TAuthUser } from '@/types/modules/auth';
 import {
   addAuthToLocalStorage,
+  addUserAndScopesToLocalStorage,
   getAuthFromLocalStorage,
   removeAuthFromLocalStorage
 } from '@/utils/storage';
@@ -37,14 +38,22 @@ const authSlice = createSlice({
   initialState,
   reducers: {
     setLogin(state, action) {
-      if (action.payload.user && action.payload.token) {
+      if (action.payload.token) {
+        state.isAuthenticated = true;
+        state.isAuthLoading = false;
+        state.token = action.payload.token;
+        state.refreshToken = action.payload.refreshToken;
+        addAuthToLocalStorage(action.payload);
+      }
+    },
+
+    setUserAndScopes(state, action) {
+      if (action.payload.user) {
         state.isAuthenticated = true;
         state.isAuthLoading = false;
         state.user = action.payload.user;
-        state.token = action.payload.token;
-        state.refreshToken = action.payload.refreshToken;
         state.scopes = action.payload.scopes;
-        addAuthToLocalStorage(action.payload);
+        addUserAndScopesToLocalStorage(action.payload);
       }
     },
 
@@ -78,6 +87,7 @@ const authSlice = createSlice({
 
 export const {
   setLogin,
+  setUserAndScopes,
   setLogout,
   setProfile,
   setAuthLoading,

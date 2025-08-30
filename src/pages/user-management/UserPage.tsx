@@ -30,7 +30,6 @@ const initialFilter: TUserFilter = {
 
 const initialValues: TUser = {
   id: '',
-  username: '',
   first_name: '',
   middle_name: '',
   last_name: '',

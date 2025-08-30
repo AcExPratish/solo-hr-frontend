@@ -201,29 +201,6 @@ const UserForm = ({
               </Col>
 
               <Col xs={12}>
-                <FloatingLabel label={t('username')}>
-                  <Form.Control
-                    disabled={isView}
-                    id="username"
-                    type="text"
-                    name="username"
-                    placeholder={t('username')}
-                    className={`form-control form-icon-input ${
-                      touched.username && errors.username ? 'is-invalid' : ''
-                    }`}
-                    value={values.username || ''}
-                    onBlur={handleBlur}
-                    onChange={handleChange}
-                  />
-                  {touched.username && errors.username && (
-                    <Form.Control.Feedback type="invalid">
-                      {errors.username}
-                    </Form.Control.Feedback>
-                  )}
-                </FloatingLabel>
-              </Col>
-
-              <Col xs={12}>
                 <FloatingLabel label={t('email')}>
                   <Form.Control
                     disabled={isView}
