@@ -30,8 +30,8 @@ const changePassword = (data: TChangePassword) => {
   return api.post(`${authEndpoint}/myProfile/changePassword`, data);
 };
 
-const fetchUserProfile = () => {
-  return api.get(`${authEndpoint}/get`);
+const fetchMe = () => {
+  return api.get(`${authEndpoint}/me`);
 };
 
 const updateProfile = (data: TAuthUser) => {
@@ -82,7 +82,7 @@ const AuthService = {
   forgotPassword,
   resetPassword,
   updateProfile,
-  fetchUserProfile,
+  fetchMe,
   refreshToken,
   changePassword
 };

@@ -3,7 +3,8 @@ import {
   setLogin,
   setLogout,
   setProfile,
-  setAuthInitialized
+  setAuthInitialized,
+  setUserAndScopes
 } from '../../store/reducers/authSlice';
 import {
   TAuthUser,
@@ -24,17 +25,30 @@ const useAuthHook = () => {
     const resp = await AuthService.login(data);
     const token: string = resp?.data?.data?.access_token || '';
     const refreshToken: string = resp?.data?.data?.refresh_token || '';
-    const user: TAuthUser = resp?.data?.data?.user || null;
-    const scopes = resp?.data?.data?.scopes || [];
     dispatch(
       setLogin({
-        user,
         token,
-        refreshToken,
-        scopes
+        refreshToken
       })
     );
     // window.location.reload();
+  };
+
+  const fetchMe = async () => {
+    try {
+      const resp = await AuthService.fetchMe();
+      const user: TAuthUser = resp?.data?.data?.user || null;
+      const scopes = resp?.data?.data?.scopes || [];
+      dispatch(
+        setUserAndScopes({
+          user,
+          scopes
+        })
+      );
+    } catch (e: unknown) {
+      console.error('Fetch Me:', e);
+      throw e;
+    }
   };
 
   const logout = async () => {
@@ -88,6 +102,7 @@ const useAuthHook = () => {
     isAuthLoading,
     user,
     login,
+    fetchMe,
     logout,
     updateProfile,
     forgotPassword,
