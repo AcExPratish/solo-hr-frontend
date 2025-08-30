@@ -74,14 +74,6 @@ export const userTableColumns = ({
       }
     },
     {
-      header: `${t('username')}`,
-      accessorKey: 'username',
-      meta: {
-        cellProps: { className: 'text-body' },
-        headerProps: { style: { width: '15%' }, className: '' }
-      }
-    },
-    {
       header: `${t('email')}`,
       accessorKey: 'email',
       meta: {

@@ -2,7 +2,6 @@ import { TEmployee } from '@/types/modules/employee-management/employee';
 
 export const employeeMockData: TEmployee = {
   id: 'u001',
-  username: 'jdoe',
   first_name: 'John',
   middle_name: 'Michael',
   last_name: 'Doe',

@@ -40,19 +40,6 @@ export const UserCreateSchema = Yup.object().shape({
         max: '200'
       })
     ),
-  username: Yup.string()
-    .required(
-      t('form_validation_mandatory', {
-        field: t('username')
-      })
-    )
-    .max(
-      200,
-      t('form_validation_max', {
-        field: t('username'),
-        max: '200'
-      })
-    ),
   email: Yup.string()
     .required(
       t('form_validation_mandatory', {
@@ -131,19 +118,6 @@ export const UserUpdateSchema = Yup.object().shape({
       200,
       t('form_validation_max', {
         field: t('last_name'),
-        max: '200'
-      })
-    ),
-  username: Yup.string()
-    .required(
-      t('form_validation_mandatory', {
-        field: t('username')
-      })
-    )
-    .max(
-      200,
-      t('form_validation_max', {
-        field: t('username'),
         max: '200'
       })
     ),

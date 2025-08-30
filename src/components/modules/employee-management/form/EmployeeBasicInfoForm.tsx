@@ -37,7 +37,6 @@ const EmployeeBasicInfoForm = ({
   const handleOnSubmit = async (values: TEmployee) => {
     const {
       id,
-      username,
       first_name,
       middle_name,
       last_name,
@@ -50,7 +49,6 @@ const EmployeeBasicInfoForm = ({
 
     onSubmit({
       id,
-      username,
       first_name,
       middle_name,
       last_name,
@@ -199,31 +197,6 @@ const EmployeeBasicInfoForm = ({
                       getIn(errors, 'last_name') && (
                         <Form.Control.Feedback type="invalid">
                           {getIn(errors, 'last_name')}
-                        </Form.Control.Feedback>
-                      )}
-                  </FloatingLabel>
-                </Col>
-
-                <Col xs={12}>
-                  <FloatingLabel label={t('username')}>
-                    <Form.Control
-                      disabled={isView}
-                      id="username"
-                      type="text"
-                      name="username"
-                      placeholder={t('username')}
-                      className={`form-control form-icon-input`}
-                      value={values.username || ''}
-                      onBlur={handleBlur}
-                      onChange={handleChange}
-                      isInvalid={Boolean(
-                        getIn(touched, 'username') && getIn(errors, 'username')
-                      )}
-                    />
-                    {getIn(touched, 'username') &&
-                      getIn(errors, 'username') && (
-                        <Form.Control.Feedback type="invalid">
-                          {getIn(errors, 'username')}
                         </Form.Control.Feedback>
                       )}
                   </FloatingLabel>
