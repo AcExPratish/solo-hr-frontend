@@ -1,12 +1,14 @@
 import React from 'react';
 import { Col, FloatingLabel, Form, Row } from 'react-bootstrap';
 import { useTranslation } from 'react-i18next';
-import { TModalProps } from '@/types/modules';
+import { TModalProps, TReactOption } from '@/types/modules';
 import ModalForm from '@/components/common/custom/ModalForm';
 import { THoliday } from '@/types/modules/employee-management/holiday';
 import { Formik, getIn } from 'formik';
 import { formatDateForInput } from '@/helpers/date';
 import { HolidaySchema } from '@/validation/employee-management/HolidaySchema';
+import ReactGroupSelect from '@/components/base/ReactGroupSelect';
+import { statusOptions } from '@/data';
 
 export interface HolidayFormProps {
   formData: THoliday;
@@ -54,7 +56,9 @@ const HolidayForm = ({
         errors,
         touched,
         handleSubmit,
-        resetForm
+        resetForm,
+        setFieldTouched,
+        setFieldValue
       }) => (
         <ModalForm
           modal={modal}
@@ -139,6 +143,42 @@ const HolidayForm = ({
                       </Form.Control.Feedback>
                     )}
                 </FloatingLabel>
+              </Col>
+
+              <Col xs={12}>
+                <Form.Group>
+                  <Form.Label htmlFor="status" className="ps-0">
+                    {t('status')}
+                  </Form.Label>
+                  <ReactGroupSelect
+                    isDisabled={isView}
+                    options={statusOptions}
+                    name="status"
+                    value={
+                      statusOptions?.find(
+                        // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+                        //@ts-expect-error
+                        (option: TReactOption) =>
+                          option?.value === values?.status
+                      ) ?? null
+                    }
+                    onBlur={() => setFieldTouched('status', true)}
+                    onChange={option =>
+                      setFieldValue(
+                        'status',
+                        // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+                        //@ts-expect-error
+                        option?.value
+                      )
+                    }
+                    placeholder={`${t('select')} ${t('status')} ....`}
+                  />
+                  {getIn(touched, 'status') && getIn(errors, 'status') && (
+                    <small className="text-danger">
+                      {getIn(errors, 'status')}
+                    </small>
+                  )}
+                </Form.Group>
               </Col>
             </Row>
           </Form>
