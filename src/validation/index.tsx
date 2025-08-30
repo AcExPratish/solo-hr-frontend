@@ -25,7 +25,7 @@ export const employeeDocumentSchema = Yup.object().shape({
     .max(
       200,
       t('form_validation_max', {
-        field: t('id_number').toLowerCase(),
+        field: t('id_number'),
         max: 200
       })
     ),
@@ -37,7 +37,7 @@ export const employeeDocumentSchema = Yup.object().shape({
     .max(
       200,
       t('form_validation_max', {
-        field: t('id_number').toLowerCase(),
+        field: t('id_number'),
         max: 200
       })
     ),

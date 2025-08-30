@@ -53,10 +53,20 @@ export const routes: RouteItems[] = [
     pages: [
       {
         name: 'Employees',
-        path: '/employee-management/employees',
-        pathName: 'employees',
+        path: '/employee-management/employee',
+        pathName: 'employee',
+        // TODO: Add permission for employee management
         permission: 'users.view',
         icon: 'book-open',
+        active: true
+      },
+      {
+        name: 'Holiday',
+        path: '/employee-management/holiday',
+        pathName: 'holiday',
+        // TODO: Add permission for employee management
+        permission: 'users.view',
+        icon: 'calendar',
         active: true
       }
     ]

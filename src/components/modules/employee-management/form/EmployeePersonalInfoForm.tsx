@@ -159,9 +159,7 @@ const EmployeePersonalInfoForm = ({
                         option?.value
                       )
                     }
-                    placeholder={`${t('select')} ${t(
-                      'blood_group'
-                    ).toLowerCase()} ....`}
+                    placeholder={`${t('select')} ${t('blood_group')} ....`}
                   />
                   {getIn(touched, 'basic_information.blood_group') &&
                     getIn(errors, 'basic_information.blood_group') && (
@@ -199,9 +197,7 @@ const EmployeePersonalInfoForm = ({
                         option?.value
                       )
                     }
-                    placeholder={`${t('select')} ${t(
-                      'marital_status'
-                    ).toLowerCase()} ....`}
+                    placeholder={`${t('select')} ${t('marital_status')} ....`}
                   />
                   {getIn(touched, 'basic_information.marital_status') &&
                     getIn(errors, 'basic_information.marital_status') && (

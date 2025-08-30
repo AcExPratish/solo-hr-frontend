@@ -12,13 +12,13 @@ export const EmployeeBasicInfoSchema = Yup.object().shape({
   first_name: Yup.string()
     .required(
       t('form_validation_mandatory', {
-        field: t('first_name').toLowerCase()
+        field: t('first_name')
       })
     )
     .max(
       200,
       t('form_validation_max', {
-        field: t('first_name').toLowerCase(),
+        field: t('first_name'),
         max: '200'
       })
     ),
@@ -28,47 +28,47 @@ export const EmployeeBasicInfoSchema = Yup.object().shape({
     .max(
       200,
       t('form_validation_max', {
-        field: t('middle_name').toLowerCase(),
+        field: t('middle_name'),
         max: '200'
       })
     ),
   last_name: Yup.string()
     .required(
       t('form_validation_mandatory', {
-        field: t('last_name').toLowerCase()
+        field: t('last_name')
       })
     )
     .max(
       200,
       t('form_validation_max', {
-        field: t('last_name').toLowerCase(),
+        field: t('last_name'),
         max: '200'
       })
     ),
   username: Yup.string()
     .required(
       t('form_validation_mandatory', {
-        field: t('username').toLowerCase()
+        field: t('username')
       })
     )
     .max(
       200,
       t('form_validation_max', {
-        field: t('username').toLowerCase(),
+        field: t('username'),
         max: '200'
       })
     ),
   email: Yup.string()
     .required(
       t('form_validation_mandatory', {
-        field: t('email').toLowerCase()
+        field: t('email')
       })
     )
     .email(t('form_validation_invalid_email'))
     .max(
       200,
       t('form_validation_max', {
-        field: t('email').toLowerCase(),
+        field: t('email'),
         max: '200'
       })
     ),
@@ -76,45 +76,42 @@ export const EmployeeBasicInfoSchema = Yup.object().shape({
     date_of_birth: Yup.date()
       .required(
         t('form_validation_mandatory', {
-          field: t('date_of_birth').toLowerCase()
+          field: t('date_of_birth')
         })
       )
       .max(
         todaysDate,
         t('form_validation_date_before', {
-          from: t('date_of_birth').toLowerCase(),
+          from: t('date_of_birth'),
           to: todaysDate
         })
       ),
     joining_date: Yup.date()
       .required(
         t('form_validation_mandatory', {
-          field: t('joining_date').toLowerCase()
+          field: t('joining_date')
         })
       )
       .max(
         todaysDate,
         t('form_validation_date_before', {
-          from: t('joining_date').toLowerCase(),
+          from: t('joining_date'),
           to: todaysDate
         })
       ),
     gender: Yup.string().required(
       t('form_validation_mandatory', {
-        field: t('gender').toLowerCase()
+        field: t('gender')
       })
     )
   }),
   phone: Yup.string()
     .required(
       t('form_validation_mandatory', {
-        field: t('phone').toLowerCase()
+        field: t('phone')
       })
     )
-    .matches(
-      phoneRegex,
-      t('form_validation_phone', { field: t('phone').toLowerCase() })
-    )
+    .matches(phoneRegex, t('form_validation_phone', { field: t('phone') }))
 });
 
 export const EmployeePersonalInfoSchema = Yup.object().shape({
@@ -125,7 +122,7 @@ export const EmployeePersonalInfoSchema = Yup.object().shape({
       .max(
         50,
         t('form_validation_max', {
-          field: t('nationality').toLowerCase(),
+          field: t('nationality'),
           max: '50'
         })
       ),
@@ -135,7 +132,7 @@ export const EmployeePersonalInfoSchema = Yup.object().shape({
       .max(
         50,
         t('form_validation_max', {
-          field: t('religion').toLowerCase(),
+          field: t('religion'),
           max: '50'
         })
       ),
@@ -145,7 +142,7 @@ export const EmployeePersonalInfoSchema = Yup.object().shape({
       .max(
         4,
         t('form_validation_max', {
-          field: t('blood_group').toLowerCase(),
+          field: t('blood_group'),
           max: '4'
         })
       ),
@@ -155,7 +152,7 @@ export const EmployeePersonalInfoSchema = Yup.object().shape({
       .max(
         4,
         t('form_validation_max', {
-          field: t('marital_status').toLowerCase(),
+          field: t('marital_status'),
           max: '4'
         })
       ),
@@ -165,7 +162,7 @@ export const EmployeePersonalInfoSchema = Yup.object().shape({
       .max(
         50,
         t('form_validation_max', {
-          field: t('employment_of_spouse').toLowerCase(),
+          field: t('employment_of_spouse'),
           max: '50'
         })
       ),
@@ -175,7 +172,7 @@ export const EmployeePersonalInfoSchema = Yup.object().shape({
       .matches(
         positiveNumberRegexWithZero,
         t('form_validation_positive', {
-          field: t('no_of_children').toLowerCase()
+          field: t('no_of_children')
         })
       )
   })
@@ -185,30 +182,27 @@ export const EmployeeEmergencyContactSchema = Yup.object().shape({
   emergency_contact: Yup.array().of(
     Yup.object().shape({
       name: Yup.string().required(
-        t('form_validation_mandatory', { field: t('name').toLowerCase() })
+        t('form_validation_mandatory', { field: t('name') })
       ),
       relationship: Yup.string().required(
         t('form_validation_mandatory', {
-          field: t('relationship').toLowerCase()
+          field: t('relationship')
         })
       ),
       phone_1: Yup.string()
         .required(
           t('form_validation_mandatory', {
-            field: t('phone').toLowerCase()
+            field: t('phone')
           })
         )
-        .matches(
-          phoneRegex,
-          t('form_validation_phone', { field: t('phone').toLowerCase() })
-        ),
+        .matches(phoneRegex, t('form_validation_phone', { field: t('phone') })),
       phone_2: Yup.string()
         .notRequired()
         .nullable()
         .matches(
           phoneRegex,
           t('form_validation_phone', {
-            field: t('alternative_phone').toLowerCase()
+            field: t('alternative_phone')
           })
         )
     })
@@ -223,7 +217,7 @@ export const EmployeeAboutEmployeeSchema = Yup.object().shape({
       .max(
         250,
         t('form_validation_max', {
-          field: t('about').toLowerCase(),
+          field: t('about'),
           max: '250'
         })
       )
@@ -233,52 +227,50 @@ export const EmployeeAboutEmployeeSchema = Yup.object().shape({
 export const EmployeeBankInformationSchema = Yup.object().shape({
   bank_information: Yup.object().shape({
     bank_name: Yup.string()
-      .required(
-        t('form_validation_mandatory', { field: t('bank_name').toLowerCase() })
-      )
+      .required(t('form_validation_mandatory', { field: t('bank_name') }))
       .max(
         250,
         t('form_validation_max', {
-          field: t('bank_name').toLowerCase(),
+          field: t('bank_name'),
           max: '250'
         })
       ),
     branch_address: Yup.string()
       .required(
         t('form_validation_mandatory', {
-          field: t('branch_address').toLowerCase()
+          field: t('branch_address')
         })
       )
       .max(
         250,
         t('form_validation_max', {
-          field: t('branch_address').toLowerCase(),
+          field: t('branch_address'),
           max: '250'
         })
       ),
     account_holder_name: Yup.string()
       .required(
         t('form_validation_mandatory', {
-          field: t('account_holder_name').toLowerCase()
+          field: t('account_holder_name')
         })
       )
       .max(
         250,
         t('form_validation_max', {
-          field: t('account_holder_name').toLowerCase(),
+          field: t('account_holder_name'),
           max: '250'
         })
       ),
     account_number: Yup.string()
       .required(
         t('form_validation_mandatory', {
-          field: t('account_number').toLowerCase()
+          field: t('account_number')
         })
       )
       .max(
         50,
         t('form_validation_max', {
-          field: t('account_number').toLowerCase(),
+          field: t('account_number'),
           max: '50'
         })
       ),
@@ -288,7 +280,7 @@ export const EmployeeBankInformationSchema = Yup.object().shape({
       .max(
         50,
         t('form_validation_max', {
-          field: t('account_type').toLowerCase(),
+          field: t('account_type'),
           max: '50'
         })
       ),
@@ -298,7 +290,7 @@ export const EmployeeBankInformationSchema = Yup.object().shape({
       .max(
         50,
         t('form_validation_max', {
-          field: t('swift_code').toLowerCase(),
+          field: t('swift_code'),
           max: '50'
         })
       )
@@ -309,30 +301,27 @@ export const EmployeeFamilyInformationSchema = Yup.object().shape({
   family_information: Yup.array().of(
     Yup.object().shape({
       name: Yup.string().required(
-        t('form_validation_mandatory', { field: t('name').toLowerCase() })
+        t('form_validation_mandatory', { field: t('name') })
       ),
       relationship: Yup.string().required(
         t('form_validation_mandatory', {
-          field: t('relationship').toLowerCase()
+          field: t('relationship')
         })
       ),
       phone_1: Yup.string()
         .required(
           t('form_validation_mandatory', {
-            field: t('phone').toLowerCase()
+            field: t('phone')
           })
         )
-        .matches(
-          phoneRegex,
-          t('form_validation_phone', { field: t('phone').toLowerCase() })
-        ),
+        .matches(phoneRegex, t('form_validation_phone', { field: t('phone') })),
       phone_2: Yup.string()
         .notRequired()
         .nullable()
         .matches(
           phoneRegex,
           t('form_validation_phone', {
-            field: t('alternative_phone').toLowerCase()
+            field: t('alternative_phone')
           })
         )
     })
@@ -366,29 +355,27 @@ export const EmployeeEducationSchema = Yup.object().shape({
       institution_name: Yup.string()
         .required(
           t('form_validation_mandatory', {
-            field: t('institution_name').toLowerCase()
+            field: t('institution_name')
           })
         )
         .max(
           250,
           t('form_validation_max', {
-            field: t('institution_name').toLowerCase(),
+            field: t('institution_name'),
             max: '250'
           })
         ),
       course: Yup.string()
-        .required(
-          t('form_validation_mandatory', { field: t('course').toLowerCase() })
-        )
+        .required(t('form_validation_mandatory', { field: t('course') }))
         .max(
           250,
           t('form_validation_max', {
-            field: t('course').toLowerCase(),
+            field: t('course'),
             max: '250'
           })
         ),
       start_date: Yup.date().required(
-        t('form_validation_mandatory', { field: t('start_date').toLowerCase() })
+        t('form_validation_mandatory', { field: t('start_date') })
       ),
       end_date: Yup.date()
         .nullable()
@@ -398,14 +385,14 @@ export const EmployeeEducationSchema = Yup.object().shape({
             schema
               .required(
                 t('form_validation_mandatory', {
-                  field: t('end_date').toLowerCase()
+                  field: t('end_date')
                 })
               )
               .test(
                 'end_after_start',
                 t('form_validation_min_date', {
-                  field: t('end_date').toLowerCase(),
-                  minField: t('start_date').toLowerCase()
+                  field: t('end_date'),
+                  minField: t('start_date')
                 }),
                 function (value) {
                   const { start_date } = this.parent;
@@ -417,14 +404,14 @@ export const EmployeeEducationSchema = Yup.object().shape({
             schema.test(
               'must-be-empty-if-current',
               t('form_validation_must_be_empty', {
-                field: t('end_date').toLowerCase(),
-                condition: t('is_current').toLowerCase()
+                field: t('end_date'),
+                condition: t('is_current')
               }),
               value => !value
             )
         }),
       is_current: Yup.boolean().required(
-        t('form_validation_mandatory', { field: t('is_current').toLowerCase() })
+        t('form_validation_mandatory', { field: t('is_current') })
       ),
       percentage_or_gpa: Yup.string()
         .notRequired()
@@ -432,7 +419,7 @@ export const EmployeeEducationSchema = Yup.object().shape({
         .max(
           10,
           t('form_validation_max', {
-            field: t('percentage_or_gpa').toLowerCase(),
+            field: t('percentage_or_gpa'),
             max: '10'
           })
         )
@@ -446,31 +433,31 @@ export const EmployeeExperienceSchema = Yup.object().shape({
       company_name: Yup.string()
         .required(
           t('form_validation_mandatory', {
-            field: t('company_name').toLowerCase()
+            field: t('company_name')
           })
         )
         .max(
           250,
           t('form_validation_max', {
-            field: t('company_name').toLowerCase(),
+            field: t('company_name'),
             max: '250'
           })
         ),
       designation: Yup.string()
         .required(
           t('form_validation_mandatory', {
-            field: t('designation').toLowerCase()
+            field: t('designation')
           })
         )
         .max(
           250,
           t('form_validation_max', {
-            field: t('designation').toLowerCase(),
+            field: t('designation'),
             max: '250'
           })
         ),
       start_date: Yup.date().required(
-        t('form_validation_mandatory', { field: t('start_date').toLowerCase() })
+        t('form_validation_mandatory', { field: t('start_date') })
       ),
       end_date: Yup.date()
         .nullable()
@@ -480,14 +467,14 @@ export const EmployeeExperienceSchema = Yup.object().shape({
             schema
               .required(
                 t('form_validation_mandatory', {
-                  field: t('end_date').toLowerCase()
+                  field: t('end_date')
                 })
               )
               .test(
                 'end_after_start',
                 t('form_validation_min_date', {
-                  field: t('end_date').toLowerCase(),
-                  minField: t('start_date').toLowerCase()
+                  field: t('end_date'),
+                  minField: t('start_date')
                 }),
                 function (value) {
                   const { start_date } = this.parent;
@@ -499,14 +486,14 @@ export const EmployeeExperienceSchema = Yup.object().shape({
             schema.test(
               'must-be-empty-if-current',
               t('form_validation_must_be_empty', {
-                field: t('end_date').toLowerCase(),
-                condition: t('is_current').toLowerCase()
+                field: t('end_date'),
+                condition: t('is_current')
               }),
               value => !value
             )
         }),
       is_current: Yup.boolean().required(
-        t('form_validation_mandatory', { field: t('is_current').toLowerCase() })
+        t('form_validation_mandatory', { field: t('is_current') })
       )
     })
   )

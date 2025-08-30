@@ -6,13 +6,13 @@ export const RoleSchema = Yup.object().shape({
   name: Yup.string()
     .required(
       t('form_validation_mandatory', {
-        field: t('name').toLowerCase()
+        field: t('name')
       })
     )
     .max(
       200,
       t('form_validation_max', {
-        field: t('name').toLowerCase(),
+        field: t('name'),
         max: '200'
       })
     )

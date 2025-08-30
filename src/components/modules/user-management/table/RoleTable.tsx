@@ -55,7 +55,7 @@ export const roleTableColumns = ({
             maxWidth: '100px'
           }
         },
-        headerProps: { style: { width: '5%' }, className: '' }
+        headerProps: { style: { width: '15%' }, className: '' }
       }
     },
     {
@@ -67,7 +67,7 @@ export const roleTableColumns = ({
       },
       meta: {
         cellProps: { className: 'text-body' },
-        headerProps: { style: { width: '12%' }, className: '' }
+        headerProps: { style: { width: '15%' }, className: '' }
       }
     },
     {
