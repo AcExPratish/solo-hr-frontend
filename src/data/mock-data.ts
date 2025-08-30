@@ -277,3 +277,17 @@ export const teamMockData = [
     description: 'HR Department'
   }
 ];
+
+export const holidayMockData = [
+  {
+    id: 'hol001',
+    title: 'New Year',
+    date: '2023-01-01',
+    description: 'New Year',
+    status: true,
+    created_at: '2023-01-01',
+    updated_at: '2023-01-01',
+    created_by_id: 'admin001',
+    updated_by_id: 'admin001'
+  }
+];

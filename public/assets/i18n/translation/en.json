@@ -205,5 +205,7 @@
     "pending": "Pending",
     "rejected": "Rejected",
     "status": "Status",
-    "document_name": "Document Name"
+    "document_name": "Document Name",
+    "holiday": "Holiday",
+    "holiday_list": "Holiday List"
 }
