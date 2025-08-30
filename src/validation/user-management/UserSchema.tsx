@@ -7,13 +7,13 @@ export const UserCreateSchema = Yup.object().shape({
   first_name: Yup.string()
     .required(
       t('form_validation_mandatory', {
-        field: t('first_name').toLowerCase()
+        field: t('first_name')
       })
     )
     .max(
       200,
       t('form_validation_max', {
-        field: t('first_name').toLowerCase(),
+        field: t('first_name'),
         max: '200'
       })
     ),
@@ -23,68 +23,65 @@ export const UserCreateSchema = Yup.object().shape({
     .max(
       200,
       t('form_validation_max', {
-        field: t('middle_name').toLowerCase(),
+        field: t('middle_name'),
         max: '200'
       })
     ),
   last_name: Yup.string()
     .required(
       t('form_validation_mandatory', {
-        field: t('last_name').toLowerCase()
+        field: t('last_name')
       })
     )
     .max(
       200,
       t('form_validation_max', {
-        field: t('last_name').toLowerCase(),
+        field: t('last_name'),
         max: '200'
       })
     ),
   username: Yup.string()
     .required(
       t('form_validation_mandatory', {
-        field: t('username').toLowerCase()
+        field: t('username')
       })
     )
     .max(
       200,
       t('form_validation_max', {
-        field: t('username').toLowerCase(),
+        field: t('username'),
         max: '200'
       })
     ),
   email: Yup.string()
     .required(
       t('form_validation_mandatory', {
-        field: t('email').toLowerCase()
+        field: t('email')
       })
     )
     .email(t('form_validation_invalid_email'))
     .max(
       200,
       t('form_validation_max', {
-        field: t('email').toLowerCase(),
+        field: t('email'),
         max: '200'
       })
     ),
   phone: Yup.string()
     .required(
       t('form_validation_mandatory', {
-        field: t('phone').toLowerCase()
+        field: t('phone')
       })
     )
-    .matches(
-      phoneRegex,
-      t('form_validation_phone', { field: t('phone').toLowerCase() })
-    ),
+    .matches(phoneRegex, t('form_validation_phone', { field: t('phone') })),
   roleOptions: Yup.array().min(
     1,
-    t('form_validation_mandatory', { field: t('role').toLowerCase() })
+    t('form_validation_mandatory', { field: t('role') })
   ),
   password: Yup.string()
     .required(
       t('form_validation_mandatory', {
-        field: t('password').toLowerCase()
+        field: t('password')
       })
     )
     .matches(
@@ -94,7 +91,7 @@ export const UserCreateSchema = Yup.object().shape({
     .max(
       200,
       t('form_validation_max', {
-        field: t('password').toLowerCase(),
+        field: t('password'),
         max: '200'
       })
     )
@@ -104,13 +101,13 @@ export const UserUpdateSchema = Yup.object().shape({
   first_name: Yup.string()
     .required(
       t('form_validation_mandatory', {
-        field: t('first_name').toLowerCase()
+        field: t('first_name')
       })
     )
     .max(
       200,
       t('form_validation_max', {
-        field: t('first_name').toLowerCase(),
+        field: t('first_name'),
         max: '200'
       })
     ),
@@ -120,63 +117,60 @@ export const UserUpdateSchema = Yup.object().shape({
     .max(
       200,
       t('form_validation_max', {
-        field: t('middle_name').toLowerCase(),
+        field: t('middle_name'),
         max: '200'
       })
     ),
   last_name: Yup.string()
     .required(
       t('form_validation_mandatory', {
-        field: t('last_name').toLowerCase()
+        field: t('last_name')
       })
     )
     .max(
       200,
       t('form_validation_max', {
-        field: t('last_name').toLowerCase(),
+        field: t('last_name'),
         max: '200'
       })
     ),
   username: Yup.string()
     .required(
       t('form_validation_mandatory', {
-        field: t('username').toLowerCase()
+        field: t('username')
       })
     )
     .max(
       200,
       t('form_validation_max', {
-        field: t('username').toLowerCase(),
+        field: t('username'),
         max: '200'
       })
     ),
   email: Yup.string()
     .required(
       t('form_validation_mandatory', {
-        field: t('email').toLowerCase()
+        field: t('email')
       })
     )
     .email(t('form_validation_invalid_email'))
     .max(
       200,
       t('form_validation_max', {
-        field: t('email').toLowerCase(),
+        field: t('email'),
         max: '200'
       })
     ),
   phone: Yup.string()
     .required(
       t('form_validation_mandatory', {
-        field: t('phone').toLowerCase()
+        field: t('phone')
       })
     )
-    .matches(
-      phoneRegex,
-      t('form_validation_phone', { field: t('phone').toLowerCase() })
-    ),
+    .matches(phoneRegex, t('form_validation_phone', { field: t('phone') })),
   roleOptions: Yup.array().min(
     1,
-    t('form_validation_mandatory', { field: t('role').toLowerCase() })
+    t('form_validation_mandatory', { field: t('role') })
   ),
   password: Yup.string()
     .transform(v => (v === '' ? undefined : v))
@@ -186,7 +180,7 @@ export const UserUpdateSchema = Yup.object().shape({
         schema
           .required(
             t('form_validation_mandatory', {
-              field: t('password').toLowerCase()
+              field: t('password')
             })
           )
           .matches(
@@ -196,7 +190,7 @@ export const UserUpdateSchema = Yup.object().shape({
           .max(
             200,
             t('form_validation_max', {
-              field: t('password').toLowerCase(),
+              field: t('password'),
               max: '200'
             })
           ),

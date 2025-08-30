@@ -303,9 +303,7 @@ const EmployeeBasicInfoForm = ({
                           option?.value
                         )
                       }
-                      placeholder={`${t('select')} ${t(
-                        'gender'
-                      ).toLowerCase()} ....`}
+                      placeholder={`${t('select')} ${t('gender')} ....`}
                     />
                     {getIn(touched, 'basic_information.gender') &&
                       getIn(errors, 'basic_information.gender') && (

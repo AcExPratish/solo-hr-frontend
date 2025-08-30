@@ -4,9 +4,9 @@ import { useTranslation } from 'react-i18next';
 import { TModalProps } from '@/types/modules';
 import ModalForm from '@/components/common/custom/ModalForm';
 import { THoliday } from '@/types/modules/employee-management/holiday';
-import { HolidaySchema } from '@/validation/employee-management/HolidaySchema';
 import { Formik, getIn } from 'formik';
 import { formatDateForInput } from '@/helpers/date';
+import { HolidaySchema } from '@/validation/employee-management/HolidaySchema';
 
 export interface HolidayFormProps {
   formData: THoliday;

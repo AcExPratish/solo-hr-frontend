@@ -207,5 +207,8 @@
     "status": "Status",
     "document_name": "Document Name",
     "holiday": "Holiday",
-    "holiday_list": "Holiday List"
+    "holiday_list": "Holiday List",
+    "title": "Title",
+    "date": "Date",
+    "description": "Description"
 }

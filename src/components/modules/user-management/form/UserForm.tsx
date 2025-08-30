@@ -313,9 +313,7 @@ const UserForm = ({
                     value={values.roleOptions}
                     onBlur={() => setFieldTouched('roleOptions', true)}
                     onChange={options => setFieldValue('roleOptions', options)}
-                    placeholder={`${t('select')} ${t(
-                      'role'
-                    ).toLowerCase()} ....`}
+                    placeholder={`${t('select')} ${t('role')} ....`}
                   />
                   {touched.roleOptions && errors.roleOptions && (
                     <small className="text-danger"> {errors.roleOptions}</small>
