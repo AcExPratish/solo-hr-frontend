@@ -35,7 +35,7 @@ const initialValues: THoliday = {
   title: '',
   date: '',
   description: '',
-  status: false
+  status: true
 };
 
 const initialLoader: TLoader = {
@@ -101,11 +101,16 @@ const HolidayPage = () => {
 
   // On Submit
   const handleOnSubmit = (formData: THoliday) => {
+    const finalData = {
+      ...formData,
+      date: formData.date ? new Date(formData.date).toISOString() : ''
+    };
+
     setLoader({ form: true });
-    if (formData.id) {
-      updateItem(formData?.id, formData);
+    if (finalData.id) {
+      updateItem(finalData?.id, finalData);
     } else {
-      createItem(formData);
+      createItem(finalData);
     }
   };
 
