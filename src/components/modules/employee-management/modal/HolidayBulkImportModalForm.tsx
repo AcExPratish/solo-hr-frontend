@@ -2,7 +2,6 @@ import React from 'react';
 import { Card, Col, Row } from 'react-bootstrap';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faDownload, faTrashAlt } from '@fortawesome/free-solid-svg-icons';
-import { apiEndpoint } from '../../../../helpers/common';
 import { useTranslation } from 'react-i18next';
 import classNames from 'classnames';
 import { convertFileToAttachment } from '../../../../helpers/utils';
@@ -63,7 +62,7 @@ const HolidayBulkImportModalForm = ({
                     {t('download_sample_file')}
                   </Card.Title>
                   <a
-                    href={`${apiEndpoint}/holidays/download-sample`}
+                    href={`/sample/holiday-template.xlsx`}
                     target="_blank"
                     className="btn btn-phoenix-secondary w-100 "
                     rel="noreferrer"
@@ -72,8 +71,10 @@ const HolidayBulkImportModalForm = ({
                     {t('download_sample_file')}
                   </a>
                 </div>
+
                 <hr />
-                <div className="">
+
+                <div>
                   <Card.Title className="mb-3">
                     {t('holiday_bulk_upload')}
                   </Card.Title>
