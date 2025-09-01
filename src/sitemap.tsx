@@ -48,7 +48,7 @@ export const routes: RouteItems[] = [
     label: 'Employee Management',
     icon: UilUser,
     // TODO: Add permission for employee management
-    permission: 'users.view',
+    permission: 'users.view,holidays.view',
     active: true,
     pages: [
       {
@@ -64,8 +64,7 @@ export const routes: RouteItems[] = [
         name: 'Holiday',
         path: '/employee-management/holiday',
         pathName: 'holiday',
-        // TODO: Add permission for employee management
-        permission: 'users.view',
+        permission: 'holidays.view',
         icon: 'calendar',
         active: true
       }
@@ -75,7 +74,7 @@ export const routes: RouteItems[] = [
   {
     label: 'User Management',
     icon: UilFolder,
-    permission: 'users.view',
+    permission: 'users.view,roles.view',
     active: true,
     pages: [
       {

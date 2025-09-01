@@ -11,7 +11,6 @@ import {
   removeOneHoliday,
   updateOneHoliday
 } from '@/store/reducers/employee-management/holidaySlice';
-import { holidayMockData } from '@/data/mock-data';
 
 const useHolidayHook = () => {
   const dispatch = useDispatch();
@@ -21,13 +20,9 @@ const useHolidayHook = () => {
     filters: THolidayFilter
   ): Promise<THoliday[]> => {
     try {
-      // const resp = await HolidayService.fetchAll(filters);
-      // const meta = resp?.data?.data?.meta || null;
-      // const results: THoliday[] = resp?.data?.data?.rows || [];
-
-      const results: THoliday[] = holidayMockData;
-      const meta = null;
-      console.log('results', filters);
+      const resp = await HolidayService.fetchAll(filters);
+      const meta = resp?.data?.data?.meta || null;
+      const results: THoliday[] = resp?.data?.data?.rows || [];
 
       dispatch(getAllHoliday({ results, meta }));
       return results;

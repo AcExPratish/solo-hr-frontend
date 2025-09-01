@@ -35,7 +35,7 @@ const initialValues: THoliday = {
   title: '',
   date: '',
   description: '',
-  status: false
+  status: true
 };
 
 const initialLoader: TLoader = {
@@ -101,11 +101,16 @@ const HolidayPage = () => {
 
   // On Submit
   const handleOnSubmit = (formData: THoliday) => {
+    const finalData = {
+      ...formData,
+      date: formData.date ? new Date(formData.date).toISOString() : ''
+    };
+
     setLoader({ form: true });
-    if (formData.id) {
-      updateItem(formData?.id, formData);
+    if (finalData.id) {
+      updateItem(finalData?.id, finalData);
     } else {
-      createItem(formData);
+      createItem(finalData);
     }
   };
 
@@ -232,8 +237,7 @@ const HolidayPage = () => {
   }, [JSON.stringify(filter)]);
 
   React.useEffect(() => {
-    // TODO: Add permission for holiday management
-    if (!checkScope('users.view')) {
+    if (!checkScope('holidays.view')) {
       navigate('/errors/403');
     }
   }, []);
@@ -242,7 +246,7 @@ const HolidayPage = () => {
     <React.Fragment>
       <div className="d-sm-flex align-items-center justify-content-between mb-4">
         <h2 className="mb-0">{t('holiday_list')}</h2>
-        {checkScope('users.create') && (
+        {checkScope('holidays.create') && (
           <Button variant="primary" onClick={handleOnAdd}>
             <FontAwesomeIcon icon={faPlus} className="me-2" />
             {t('add')} {t('holiday')}
