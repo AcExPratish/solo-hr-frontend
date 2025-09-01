@@ -57,3 +57,10 @@ export interface TLoader {
 export interface TModalProps extends ModalProps {
   type?: 'add' | 'edit' | 'view' | string;
 }
+
+export interface TImportFileInfoResponse {
+  total_rows?: number;
+  total_success?: number;
+  total_duplicates?: number;
+  total_failed?: number;
+}

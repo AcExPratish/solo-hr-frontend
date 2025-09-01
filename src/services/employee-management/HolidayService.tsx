@@ -3,6 +3,7 @@ import { serializedObject } from '@/helpers/utils';
 import { apiEndpoint } from '@/helpers/common';
 import {
   THoliday,
+  THolidayBulkImport,
   THolidayFilter
 } from '@/types/modules/employee-management/holiday';
 
@@ -28,10 +29,19 @@ const destroy = (id: string) => {
   return api.delete(`${holidayEndpoint}/${id}`);
 };
 
+const bulkImport = (data: THolidayBulkImport) => {
+  return api.post(`${holidayEndpoint}/bulk-import`, data, {
+    headers: {
+      'Content-Type': 'multipart/form-data'
+    }
+  });
+};
+
 export default {
   fetchAll,
   fetchOne,
   create,
   update,
-  destroy
+  destroy,
+  bulkImport
 };

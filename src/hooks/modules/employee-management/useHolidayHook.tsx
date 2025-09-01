@@ -2,6 +2,7 @@ import { useDispatch, useSelector } from '@/store';
 import HolidayService from '@/services/employee-management/HolidayService';
 import {
   THoliday,
+  THolidayBulkImport,
   THolidayFilter
 } from '@/types/modules/employee-management/holiday';
 import {
@@ -85,12 +86,24 @@ const useHolidayHook = () => {
     }
   };
 
+  const bulkImportHoliday = async (data: THolidayBulkImport) => {
+    try {
+      const resp = await HolidayService.bulkImport(data);
+      const row = resp?.data?.data || null;
+      return row;
+    } catch (e) {
+      console.error('bulkImportHoliday', e);
+      throw e;
+    }
+  };
+
   return {
     fetchAllHoliday,
     fetchOneHoliday,
     createHoliday,
     updateHoliday,
     deleteHoliday,
+    bulkImportHoliday,
 
     holidays,
     holiday,

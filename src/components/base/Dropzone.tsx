@@ -2,14 +2,13 @@ import classNames from 'classnames';
 import {
   Accept,
   DropEvent,
-  FileRejection,
   DropzoneProps as ReactDropZoneProps,
+  FileRejection,
   useDropzone
 } from 'react-dropzone';
 import Button from './Button';
-import imageIcon from 'assets/img/icons/image-icon.png';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import {
+import React, {
   Dispatch,
   PropsWithChildren,
   SetStateAction,
@@ -22,10 +21,12 @@ import AttachmentPreview, {
 } from 'components/common/AttachmentPreview';
 import { convertFileToAttachment } from 'helpers/utils';
 import ImageAttachmentPreview from 'components/common/ImageAttachmentPreview';
-import { faTrashAlt } from '@fortawesome/free-solid-svg-icons';
+import { faImage, faTrashAlt } from '@fortawesome/free-solid-svg-icons';
+import { IconDefinition } from '@fortawesome/fontawesome-svg-core';
 
 interface DropzoneProps {
   className?: string;
+  icon?: IconDefinition;
   size?: 'sm';
   reactDropZoneProps?: ReactDropZoneProps;
   accept?: Accept;
@@ -42,6 +43,7 @@ interface DropzoneProps {
 
 const Dropzone = ({
   className,
+  icon = faImage,
   size,
   onDrop,
   accept,
@@ -109,16 +111,22 @@ const Dropzone = ({
               Browse from device
             </Button>
             <br />
-            <img
+            <FontAwesomeIcon
+              style={{ height: '50px' }}
               className="mt-3"
-              src={imageIcon}
-              width={classNames({ 24: size === 'sm', 40: size !== 'sm' })}
-              alt=""
+              icon={icon as IconDefinition}
             />
+            {/*<img*/}
+            {/*  className="mt-3"*/}
+            {/*  src={imageIcon}*/}
+            {/*  width={classNames({ 24: size === 'sm', 40: size !== 'sm' })}*/}
+            {/*  alt=""*/}
+            {/*/>*/}
           </div>
         )}
       </div>
       {!imageOnly &&
+        !noPreview &&
         previews.map((file, index) => (
           <div
             key={index}
@@ -128,7 +136,10 @@ const Dropzone = ({
           >
             <AttachmentPreview attachment={file} />
 
-            <button className="btn p-0" onClick={() => handleRemoveFile(index)}>
+            <button
+              className="btn p-0 text-danger"
+              onClick={() => handleRemoveFile(index)}
+            >
               <FontAwesomeIcon icon={faTrashAlt} className="fs-0" />
             </button>
           </div>
