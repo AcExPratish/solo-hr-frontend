@@ -1,13 +1,13 @@
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
-import { TLoader } from '@/types/modules';
+import { TImportFileInfoResponse, TLoader } from '@/types/modules';
 import { useTranslation } from 'react-i18next';
 import { checkScope } from '@/helpers/auth';
 import { confirmAlert } from '@/components/common/custom/ConfirmAlert';
 import useAdvanceTable, { UseAdvanceTableProps } from '@/hooks/useAdvanceTable';
 import { toast } from 'react-toastify';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faPlus } from '@fortawesome/free-solid-svg-icons';
+import { faFileExcel, faPlus } from '@fortawesome/free-solid-svg-icons';
 import Button from '@/components/base/Button';
 import SearchBox from '@/components/common/SearchBox';
 import AdvanceTableProvider from '@/providers/AdvanceTableProvider';
@@ -17,11 +17,14 @@ import HolidayTable, {
 } from '@/components/modules/employee-management/table/HolidayTable';
 import {
   THoliday,
+  THolidayBulkImport,
   THolidayFilter
 } from '@/types/modules/employee-management/holiday';
 import HolidayForm from '@/components/modules/employee-management/form/HolidayForm';
 import { pageCount } from '@/helpers/utils';
 import useHolidayHook from '@/hooks/modules/employee-management/useHolidayHook';
+import HolidayBulkImportModalForm from '@/components/modules/employee-management/modal/HolidayBulkImportModalForm';
+import ImportFileInfoModal from '@/components/common/custom/ImportFileInfoModal';
 
 // Initial values
 const initialFilter: THolidayFilter = {
@@ -43,22 +46,42 @@ const initialLoader: TLoader = {
   form: false
 };
 
+const initialImportFileInfo: TImportFileInfoResponse = {
+  total_rows: 0,
+  total_success: 0,
+  total_duplicates: 0,
+  total_failed: 0
+};
+
 const HolidayPage = () => {
   // React Hooks
   const navigate = useNavigate();
   const { t } = useTranslation();
   const page = t('holiday');
 
-  // User States
+  // Use States
   const [loader, setLoader] = React.useState<TLoader>(initialLoader);
   const [filter, setFilter] = React.useState<THolidayFilter>(initialFilter);
   const [searchInput, setSearchInput] = React.useState<string>('');
   const [holiday, setHoliday] = React.useState<THoliday>(initialValues);
+  const [importFileInfo, setImportFileInfo] =
+    React.useState<TImportFileInfoResponse>(initialImportFileInfo);
   const [modal, setModal] = React.useState<ModalProps>({
     show: false,
     placement: 'end',
     type: ''
   });
+  const [bulkImportModal, setBulkImportModal] = React.useState<ModalProps>({
+    show: false,
+    placement: 'end',
+    type: ''
+  });
+  const [importFileInfoModal, setImportFileInfoModal] =
+    React.useState<ModalProps>({
+      show: false,
+      placement: 'end',
+      type: ''
+    });
 
   // Custom Hooks
   const {
@@ -67,7 +90,8 @@ const HolidayPage = () => {
     fetchAllHoliday,
     createHoliday,
     updateHoliday,
-    deleteHoliday
+    deleteHoliday,
+    bulkImportHoliday
   } = useHolidayHook();
 
   // Handlers
@@ -112,6 +136,34 @@ const HolidayPage = () => {
     } else {
       createItem(finalData);
     }
+  };
+
+  const handleOnBulkImport = (formData: THolidayBulkImport) => {
+    setLoader({ form: true });
+    bulkImportHoliday(formData as unknown as THolidayBulkImport)
+      .then(resp => {
+        // bulk import modal
+        setBulkImportModal({
+          ...bulkImportModal,
+          ...{ show: false, type: '' }
+        });
+
+        toast.success(t('file_imported_successfully', { file: t('holiday') }));
+
+        // import file info modal
+        setImportFileInfo(resp);
+        setImportFileInfoModal({
+          ...importFileInfoModal,
+          ...{ show: true }
+        });
+      })
+      .catch(() => {
+        toast.error(t('file_imported_failed', { file: t('holiday') }));
+        setImportFileInfo(initialImportFileInfo);
+      })
+      .finally(() => {
+        setLoader({ form: false });
+      });
   };
 
   // Table
@@ -247,10 +299,25 @@ const HolidayPage = () => {
       <div className="d-sm-flex align-items-center justify-content-between mb-4">
         <h2 className="mb-0">{t('holiday_list')}</h2>
         {checkScope('holidays.create') && (
-          <Button variant="primary" onClick={handleOnAdd}>
-            <FontAwesomeIcon icon={faPlus} className="me-2" />
-            {t('add')} {t('holiday')}
-          </Button>
+          <div className="d-flex gap-2">
+            <Button
+              variant="primary"
+              onClick={() =>
+                setBulkImportModal({
+                  ...bulkImportModal,
+                  ...{ show: true, type: 'add' }
+                })
+              }
+            >
+              <FontAwesomeIcon icon={faFileExcel} className="me-2" />
+              {t('import_holiday')}
+            </Button>
+
+            <Button variant="primary" onClick={handleOnAdd}>
+              <FontAwesomeIcon icon={faPlus} className="me-2" />
+              {t('add')} {t('holiday')}
+            </Button>
+          </div>
         )}
       </div>
 
@@ -277,6 +344,31 @@ const HolidayPage = () => {
         }}
         onClose={() => setModal({ ...modal, ...{ show: false, type: '' } })}
         loading={loader.form}
+      />
+
+      <HolidayBulkImportModalForm
+        modal={bulkImportModal}
+        onSubmit={values => {
+          handleOnBulkImport(values);
+        }}
+        onClose={() =>
+          setBulkImportModal({
+            ...bulkImportModal,
+            ...{ show: false, type: '' }
+          })
+        }
+        loading={loader.form}
+      />
+
+      <ImportFileInfoModal
+        formData={importFileInfo}
+        modal={importFileInfoModal}
+        onClose={() =>
+          setImportFileInfoModal({
+            ...importFileInfoModal,
+            ...{ show: false, type: '' }
+          })
+        }
       />
     </React.Fragment>
   );

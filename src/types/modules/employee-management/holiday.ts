@@ -14,3 +14,7 @@ export interface THoliday {
 }
 
 export interface THolidayFilter extends TFilter {}
+
+export interface THolidayBulkImport {
+  file: File;
+}

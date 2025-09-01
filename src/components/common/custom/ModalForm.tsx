@@ -2,7 +2,7 @@ import React from 'react';
 import { useTranslation } from 'react-i18next';
 import { Modal, ModalProps } from 'react-bootstrap';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faPlus, faSave } from '@fortawesome/free-solid-svg-icons';
+import { faFileExcel, faPlus, faSave } from '@fortawesome/free-solid-svg-icons';
 import Button from '../../base/Button';
 
 interface ModalFormProps {
@@ -30,12 +30,19 @@ const ModalForm = ({
   const { t }: { t: any } = useTranslation();
 
   return (
-    <Modal size={size} onHide={onClose} {...modal} backdrop={'static'}>
+    <Modal
+      size={size}
+      onHide={onClose}
+      {...modal}
+      backdrop={'static'}
+      onExited={onClose}
+    >
       <Modal.Header className="border-0 ps-4 pe-4 pb-0" closeButton>
         <Modal.Title>
           {type === 'edit' && `${t('edit')} ${t(title)}`}
           {type === 'add' && `${t('add')} ${t(title)}`}
           {type === 'view' && `${t('view')} ${t(title)}`}
+          {type === 'import' && `${t('import')} ${t(title)}`}
         </Modal.Title>
       </Modal.Header>
 
@@ -72,6 +79,14 @@ const ModalForm = ({
                 <React.Fragment>
                   <FontAwesomeIcon icon={faPlus} className="me-2" />
                   <span>{`${t('add')} ${t('new')}`}</span>
+                  <span className="ms-1">{t(title)}</span>
+                </React.Fragment>
+              )}
+
+              {type == 'import' && (
+                <React.Fragment>
+                  <FontAwesomeIcon icon={faFileExcel} className="me-2" />
+                  <span>{`${t('import')}`}</span>
                   <span className="ms-1">{t(title)}</span>
                 </React.Fragment>
               )}

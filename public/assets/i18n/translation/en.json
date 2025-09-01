@@ -209,5 +209,16 @@
     "holiday_list": "Holiday List",
     "title": "Title",
     "date": "Date",
-    "description": "Description"
+    "description": "Description",
+    "download_sample_file": "Download Sample File",
+    "upload_file": "Upload File",
+    "holiday_bulk_upload": "Holiday Bulk Upload",
+    "import_holiday": "Import Holiday",
+    "file_imported_successfully": "{{file}} bulk import successful",
+    "file_imported_failed": "{{file}} bulk import failed",
+    "import": "Import",
+    "total_rows": "Total Rows",
+    "total_success": "Total Success",
+    "total_duplicates": "Total Duplicates",
+    "total_errors": "Total Errors"
 }
