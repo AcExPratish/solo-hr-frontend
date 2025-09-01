@@ -156,6 +156,7 @@ const HolidayPage = () => {
           ...importFileInfoModal,
           ...{ show: true }
         });
+        fetchAllItem();
       })
       .catch(() => {
         toast.error(t('file_imported_failed', { file: t('holiday') }));
