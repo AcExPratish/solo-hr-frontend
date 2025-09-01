@@ -123,15 +123,16 @@ export const holidayTableColumns = ({
         return (
           <ActionTableItems
             data={row}
-            //TODO: Add permission for holiday management
             onView={
-              checkScope('users.view') ? () => onView?.(row, true) : undefined
+              checkScope('holidays.view')
+                ? () => onView?.(row, true)
+                : undefined
             }
             onEdit={
-              checkScope('users.update') ? () => onEdit?.(row) : undefined
+              checkScope('holidays.update') ? () => onEdit?.(row) : undefined
             }
             onDelete={
-              checkScope('users.delete') ? () => onDelete?.(row) : undefined
+              checkScope('holidays.delete') ? () => onDelete?.(row) : undefined
             }
           />
         );

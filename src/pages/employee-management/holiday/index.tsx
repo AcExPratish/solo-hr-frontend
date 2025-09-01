@@ -232,8 +232,7 @@ const HolidayPage = () => {
   }, [JSON.stringify(filter)]);
 
   React.useEffect(() => {
-    // TODO: Add permission for holiday management
-    if (!checkScope('users.view')) {
+    if (!checkScope('holidays.view')) {
       navigate('/errors/403');
     }
   }, []);
@@ -242,7 +241,7 @@ const HolidayPage = () => {
     <React.Fragment>
       <div className="d-sm-flex align-items-center justify-content-between mb-4">
         <h2 className="mb-0">{t('holiday_list')}</h2>
-        {checkScope('users.create') && (
+        {checkScope('holidays.create') && (
           <Button variant="primary" onClick={handleOnAdd}>
             <FontAwesomeIcon icon={faPlus} className="me-2" />
             {t('add')} {t('holiday')}
