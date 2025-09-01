@@ -14,6 +14,8 @@ import NavbarVerticalCollapseProvider from './NavbarVerticalCollapseProvider';
 import { checkScope } from '@/helpers/auth';
 import React from 'react';
 import { useTranslation } from 'react-i18next';
+import useAuthHook from '@/hooks/modules/useAuthHook';
+import { TRole } from '@/types/modules/user-management/role';
 
 const NavbarVerical = () => {
   const {
@@ -28,8 +30,14 @@ const NavbarVerical = () => {
 
   const { t } = useTranslation();
   const { breakpoints } = useBreakpoints();
+  const { user } = useAuthHook();
+
   const mappedRoutes = React.useMemo(() => {
     let mappedRoutes: RouteItems[] = JSON.parse(JSON.stringify(routes));
+
+    if (user?.roles?.some((role: TRole) => role?.is_superuser)) {
+      return mappedRoutes;
+    }
 
     mappedRoutes = mappedRoutes
       .filter(routeParent =>
