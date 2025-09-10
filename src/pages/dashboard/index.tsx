@@ -4,6 +4,7 @@ import EmployeeDashboard from './EmployeeDashboard';
 const Dashboard = () => {
   return (
     <React.Fragment>
+      {/* Employee Dashboard */}
       <EmployeeDashboard />
     </React.Fragment>
   );
