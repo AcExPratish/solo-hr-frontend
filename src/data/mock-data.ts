@@ -1,4 +1,10 @@
+import { TEmployeeDashboard } from '@/types/modules/dashboard';
 import { TEmployee } from '@/types/modules/employee-management/employee';
+import {
+  faCalendarAlt,
+  faClockFour,
+  faFileAlt
+} from '@fortawesome/free-regular-svg-icons';
 
 export const employeeMockData: TEmployee = {
   id: 'u001',
@@ -290,3 +296,41 @@ export const holidayMockData = [
     updated_by_id: 'admin001'
   }
 ];
+
+export const employeeDashboardData: TEmployeeDashboard = {
+  kpis: [
+    {
+      title: 'On-Time Streak',
+      value: '14 days',
+      change: 2,
+      icon: faClockFour
+    },
+    {
+      title: 'Hours This Week',
+      value: '42.5h',
+      change: 2,
+      icon: faClockFour
+    },
+    {
+      title: 'Leave Balance',
+      value: '18 days',
+      change: -2,
+      icon: faCalendarAlt
+    },
+    {
+      title: 'Document Status',
+      value: '85%',
+      change: 15,
+      icon: faFileAlt
+    }
+  ],
+  attendances: [
+    { day: 'Mon', clock_in: '09:00', clock_out: '18:00', status: 'present' },
+    { day: 'Tue', clock_in: '09:15', clock_out: '18:30', status: 'late' },
+    { day: 'Wed', clock_in: '08:45', clock_out: '17:45', status: 'present' },
+    { day: 'Thu', clock_in: '09:00', clock_out: '18:00', status: 'present' },
+    { day: 'Fri', clock_in: '09:05', clock_out: '18:15', status: 'present' },
+    { day: 'Sat', clock_in: '-', clock_out: '-', status: 'weekend' },
+    { day: 'Sun', clock_in: '-', clock_out: '-', status: 'weekend' }
+  ]
+};

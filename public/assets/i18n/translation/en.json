@@ -220,5 +220,7 @@
     "total_rows": "Total Rows",
     "total_success": "Total Success",
     "total_duplicates": "Total Duplicates",
-    "total_errors": "Total Errors"
+    "total_errors": "Total Errors",
+    "weekly_clock_in_out_times": "Weekly Clock In/Out Times",
+    "rest": "Rest"
 }
