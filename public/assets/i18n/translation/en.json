@@ -222,5 +222,8 @@
     "total_duplicates": "Total Duplicates",
     "total_errors": "Total Errors",
     "weekly_clock_in_out_times": "Weekly Clock In/Out Times",
-    "rest": "Rest"
+    "rest": "Rest",
+    "monthly_attendance_summary": "Monthly Attendance Summary",
+    "late": "Late",
+    "absent": "Absent"
 }

@@ -23,7 +23,7 @@ const EmployeeDashboardWeeklyClockInOutTimes = ({
         {/* Weekly Clock In/Out : Title */}
         <div className="bg-white rounded-3 shadow-sm shadow-sm mb-0 pb-0">
           <div className="p-3">
-            <h6 className="fw-semibold text-dark small">
+            <h6 className="fw-semibold text-dark fs-9">
               {t('weekly_clock_in_out_times')}
             </h6>
           </div>

@@ -332,5 +332,6 @@ export const employeeDashboardData: TEmployeeDashboard = {
     { day: 'Fri', clock_in: '09:05', clock_out: '18:15', status: 'present' },
     { day: 'Sat', clock_in: '-', clock_out: '-', status: 'weekend' },
     { day: 'Sun', clock_in: '-', clock_out: '-', status: 'weekend' }
-  ]
+  ],
+  monthlyAttendanceSummary: { month: 'May', present: 24, late: 2, absent: 4 }
 };
