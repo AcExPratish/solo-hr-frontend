@@ -19,14 +19,16 @@ const EmployeeDashboardWeeklyClockInOutTimes = ({
 
   return (
     <Row>
-      <Col xs={12} className="p-1 m-0 overflow-auto">
+      <Col xs={12} className="p-1 m-0">
         {/* Weekly Clock In/Out : Title */}
-        <div className="bg-white rounded-3 shadow-sm shadow-sm">
+        <div className="bg-white rounded-3 shadow-sm shadow-sm mb-0 pb-0">
           <div className="p-3">
             <h6 className="fw-semibold text-dark small">
               {t('weekly_clock_in_out_times')}
             </h6>
           </div>
+
+          <hr className="text-gray-200 p-0 m-0 mb-2" />
 
           {/* Weekly Clock In/Out : Chart Container */}
           <div className="p-3">
