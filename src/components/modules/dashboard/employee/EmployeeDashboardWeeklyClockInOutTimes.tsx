@@ -53,27 +53,31 @@ const EmployeeDashboardWeeklyClockInOutTimes = ({
                           }}
                         >
                           {/* Clock In/Out : Chart Bar */}
-                          {day?.status !== 'weekend' && (
-                            <>
-                              <div
-                                title={day?.clock_in ?? ''}
-                                className="rounded-top bg-info cursor-pointer"
-                                style={{
-                                  width: '12px',
-                                  height: `${80 + Math.random() * 40}px`
-                                }}
-                              />
+                          <div
+                            title={day?.clock_in ?? ''}
+                            className={`rounded-top cursor-pointer ${
+                              day?.status === 'weekend'
+                                ? 'bg-gray-500'
+                                : 'bg-info'
+                            }`}
+                            style={{
+                              width: '12px',
+                              height: `${80 + Math.random() * 40}px`
+                            }}
+                          />
 
-                              <div
-                                title={day?.clock_out ?? ''}
-                                className="rounded-bottom bg-success cursor-pointer"
-                                style={{
-                                  width: '12px',
-                                  height: `${60 + Math.random() * 40}px`
-                                }}
-                              />
-                            </>
-                          )}
+                          <div
+                            title={day?.clock_out ?? ''}
+                            className={`rounded-bottom cursor-pointer ${
+                              day?.status === 'weekend'
+                                ? 'bg-gray-500'
+                                : 'bg-success'
+                            }`}
+                            style={{
+                              width: '12px',
+                              height: `${80 + Math.random() * 40}px`
+                            }}
+                          />
                         </div>
 
                         {/* Clock In/Out : Chart Day and Times */}
