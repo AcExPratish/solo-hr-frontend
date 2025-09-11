@@ -1,6 +1,5 @@
 import React from 'react';
 import { TEmployeeDashboardMonthlyAttendanceSummary } from '@/types/modules/dashboard';
-import { Col, Row } from 'react-bootstrap';
 import { useTranslation } from 'react-i18next';
 import PhoenixLoader from '@/components/common/PhoenixLoader';
 import Chart from 'react-apexcharts';
@@ -83,32 +82,27 @@ const EmployeeDashboardMonthlyAttendanceSummary = ({
   };
 
   return (
-    <Row>
-      <Col xs={12} md={6} className="p-1 m-0">
-        {/* Monthly Attendance Summary : Title */}
-        <div className="bg-white rounded-3 shadow-sm shadow-sm mb-0 pb-0">
-          <div className="p-3">
-            <h6 className="fw-semibold text-dark fs-9">
-              {t('monthly_attendance_summary')}
-            </h6>
-          </div>
+    <div className="bg-white rounded-3 shadow-sm shadow-sm mb-0 pb-0">
+      <div className="p-3">
+        <h6 className="fw-semibold text-dark fs-9">
+          {t('monthly_attendance_summary')}
+        </h6>
+      </div>
 
-          <hr className="text-gray-200 p-0 m-0 mb-2" />
+      <hr className="text-gray-200 p-0 m-0 mb-2" />
 
-          <div className="p-3">
-            <div className="rounded">
-              <div className="d-flex align-items-end justify-content-around h-100 px-3 pb-3">
-                {loading ? (
-                  <PhoenixLoader />
-                ) : (
-                  <Chart options={options} series={series} type="donut" />
-                )}
-              </div>
-            </div>
+      <div className="p-3">
+        <div className="rounded">
+          <div className="d-flex align-items-end justify-content-around h-100 px-3 pb-3">
+            {loading ? (
+              <PhoenixLoader />
+            ) : (
+              <Chart options={options} series={series} type="donut" />
+            )}
           </div>
         </div>
-      </Col>
-    </Row>
+      </div>
+    </div>
   );
 };
 
