@@ -33,6 +33,7 @@ const EmployeeDashboard = () => {
           />
         </Col>
 
+        {/* Employee Dashboard Upcoming Events */}
         <Col xs={12} md={6} style={{ padding: '0rem .375rem', margin: '0' }}>
           <DashboardUpcomingEvents
             upcomingEvents={upcomingEvents ?? []}
