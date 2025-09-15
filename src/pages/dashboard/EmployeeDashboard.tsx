@@ -4,10 +4,12 @@ import EmployeeDashboardWeeklyClockInOutTimes from '@/components/modules/dashboa
 import { employeeDashboardData } from '@/data/mock-data';
 import EmployeeDashboardMonthlyAttendanceSummary from '@/components/modules/dashboard/employee/EmployeeDashboardMonthlyAttendanceSummary';
 import { Col, Row } from 'react-bootstrap';
+import DashboardUpcomingEvents from '@/components/modules/dashboard/DashboardUpcomingEvents';
 
 const EmployeeDashboard = () => {
   const [loading, setLoading] = React.useState<boolean>(false);
-  const { kpis, attendances, monthlyAttendanceSummary } = employeeDashboardData;
+  const { kpis, attendances, monthlyAttendanceSummary, upcomingEvents } =
+    employeeDashboardData;
 
   // Use Effects
   React.useEffect(() => {
@@ -32,8 +34,8 @@ const EmployeeDashboard = () => {
         </Col>
 
         <Col xs={12} md={6} style={{ padding: '0rem .375rem', margin: '0' }}>
-          <EmployeeDashboardMonthlyAttendanceSummary
-            monthlyAttendanceSummary={monthlyAttendanceSummary ?? {}}
+          <DashboardUpcomingEvents
+            upcomingEvents={upcomingEvents ?? []}
             loading={loading}
           />
         </Col>

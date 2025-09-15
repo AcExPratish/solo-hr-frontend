@@ -195,3 +195,8 @@ export const convertToMonAbbrevDate = date => {
   if (!date) return '';
   return date ? moment(date).format('MMM D, YYYY') : '';
 };
+
+export const convertToMonthDay = date => {
+  if (!date) return '';
+  return moment(date).format('MMM D');
+};

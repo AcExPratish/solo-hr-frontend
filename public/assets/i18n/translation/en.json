@@ -225,5 +225,9 @@
     "rest": "Rest",
     "monthly_attendance_summary": "Monthly Attendance Summary",
     "late": "Late",
-    "absent": "Absent"
+    "absent": "Absent",
+    "upcoming": "Upcoming",
+    "holidays": "Holidays",
+    "birthdays": "Birthdays",
+    "anniversaries": "Anniversaries"
 }
