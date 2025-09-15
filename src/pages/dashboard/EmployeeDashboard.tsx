@@ -23,7 +23,7 @@ const EmployeeDashboard = () => {
       <EmployeeDashboardKPI kpis={kpis ?? []} loading={loading} />
 
       {/* Employee Dashboard Monthly Attendance Summary */}
-      <Row>
+      <Row className="gap-2 gap-md-0">
         <Col xs={12} md={6} style={{ padding: '0rem .300rem', margin: '0' }}>
           <EmployeeDashboardMonthlyAttendanceSummary
             monthlyAttendanceSummary={monthlyAttendanceSummary ?? {}}
