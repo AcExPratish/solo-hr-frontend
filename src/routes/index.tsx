@@ -5,12 +5,12 @@ import Error404 from 'pages/error/Error404';
 import Error403 from 'pages/error/Error403';
 import Error500 from 'pages/error/Error500';
 import App from 'App';
-import ComingSoon from 'pages/ComingSoon';
 
 import { AuthRoutes } from './AuthRoutes';
 import AuthGuard from '@/utils/route-guard/AuthGuard';
 import UserManagementRoutes from './UserManagementRoutes';
 import EmployeeManagementRoutes from './EmployeeManagementRoutes';
+import Dashboard from '@/pages/dashboard';
 
 const routes: RouteObject[] = [
   {
@@ -32,25 +32,11 @@ const routes: RouteObject[] = [
         children: [
           {
             index: true,
-            element: <></>
+            element: <Dashboard />
           },
           {
             path: '/dashboard',
-            children: [
-              {
-                path: 'project-management',
-                element: <>Project Management</>
-              }
-            ]
-          },
-          {
-            path: '/pages',
-            children: [
-              {
-                path: 'coming-soon',
-                element: <ComingSoon />
-              }
-            ]
+            element: <Dashboard />
           }
         ]
       },
