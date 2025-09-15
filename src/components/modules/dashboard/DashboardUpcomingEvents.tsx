@@ -92,7 +92,11 @@ const DashboardUpcomingEvents = ({
                           <span className="mb-0 fs-9 fw-bold">
                             {data?.title ?? ''}
                           </span>
-                          <span className="mb-0 fs-10 fw-normal text-gray-700">
+                          <span
+                            title={data?.description ?? ''}
+                            className="mb-0 fs-10 fw-normal text-gray-700 text-truncate d-inline-block cursor-pointer"
+                            style={{ maxWidth: '100px' }}
+                          >
                             {data?.description ?? ''}
                           </span>
                         </div>
