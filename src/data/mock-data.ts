@@ -333,5 +333,28 @@ export const employeeDashboardData: TEmployeeDashboard = {
     { day: 'Sat', clock_in: '-', clock_out: '-', status: 'weekend' },
     { day: 'Sun', clock_in: '-', clock_out: '-', status: 'weekend' }
   ],
-  monthlyAttendanceSummary: { month: 'May', present: 24, late: 2, absent: 4 }
+  monthlyAttendanceSummary: { month: 'May', present: 24, late: 2, absent: 4 },
+  upcomingEvents: [
+    {
+      id: '1',
+      title: 'Holiday',
+      date: '2023-01-01',
+      description: 'Holiday',
+      type: 'holiday'
+    },
+    {
+      id: '2',
+      title: 'Birthday',
+      date: '2023-01-02',
+      description: 'Birthday',
+      type: 'birthday'
+    },
+    {
+      id: '3',
+      title: 'Anniversary',
+      date: '2023-01-03',
+      description: 'Anniversary',
+      type: 'anniversary'
+    }
+  ]
 };

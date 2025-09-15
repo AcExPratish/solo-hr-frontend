@@ -4,6 +4,7 @@ export interface TEmployeeDashboard {
   kpis?: TEmployeeDashboardKPI[];
   attendances?: TEmployeeDashboardAttendance[];
   monthlyAttendanceSummary?: TEmployeeDashboardMonthlyAttendanceSummary;
+  upcomingEvents?: TEmployeeDashboardEvent[];
 }
 
 export interface TEmployeeDashboardKPI {
@@ -27,4 +28,17 @@ export interface TEmployeeDashboardMonthlyAttendanceSummary {
   present?: number;
   late?: number;
   absent?: number;
+}
+
+export interface TEmployeeDashboardEvent {
+  id?: string;
+  title?: string;
+  date?: string;
+  description?: string;
+  status?: string;
+  created_at?: string;
+  updated_at?: string;
+  created_by_id?: string;
+  updated_by_id?: string;
+  type?: 'holiday' | 'birthday' | 'anniversary';
 }
