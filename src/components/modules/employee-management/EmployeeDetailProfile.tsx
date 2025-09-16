@@ -82,9 +82,9 @@ const EmployeeDetailProfile = ({
 
             <Col
               xs={12}
-              className="d-flex flex-column flex-sm-row flex-wrap align-items-center justify-content-center"
+              className="d-flex flex-column flex-sm-row flex-wrap align-items-center justify-content-center gap-2"
             >
-              <Badge bg="success" className="me-2">
+              <Badge bg="success">
                 <FontAwesomeIcon icon={faUser} className="me-1" />
                 {designations?.find(
                   designation =>
@@ -92,6 +92,7 @@ const EmployeeDetailProfile = ({
                     employee?.basic_information?.designation_id
                 )?.name ?? ''}
               </Badge>
+
               <Badge bg="light" text="dark">
                 {calculateTotalExperience(employee?.experience ?? []).years}
                 <span className="ms-1">{t('years_of_experience')}</span>

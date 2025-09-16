@@ -49,7 +49,7 @@ const EmployeeDashboardMonthlyAttendanceSummary = ({
     plotOptions: {
       pie: {
         donut: {
-          size: '72%',
+          size: '60%',
           labels: {
             show: true,
             name: {
@@ -74,7 +74,7 @@ const EmployeeDashboardMonthlyAttendanceSummary = ({
         options: {
           legend: { fontSize: '12px' },
           plotOptions: {
-            pie: { donut: { size: '72%' } }
+            pie: { donut: { size: '60%' } }
           }
         }
       }
@@ -93,7 +93,7 @@ const EmployeeDashboardMonthlyAttendanceSummary = ({
 
       <div className="p-3">
         <div className="rounded">
-          <div className="d-flex align-items-end justify-content-around h-100 px-3 pb-3">
+          <div className="d-flex align-items-center justify-content-center h-100 px-3 pb-3">
             {loading ? (
               <PhoenixLoader />
             ) : (
