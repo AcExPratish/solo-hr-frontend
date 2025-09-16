@@ -1,10 +1,12 @@
 import { IconProp } from '@fortawesome/fontawesome-svg-core';
+import { TUser } from './user-management/user';
 
 export interface TEmployeeDashboard {
   kpis?: TEmployeeDashboardKPI[];
   attendances?: TEmployeeDashboardAttendance[];
   monthlyAttendanceSummary?: TEmployeeDashboardMonthlyAttendanceSummary;
   upcomingEvents?: TEmployeeDashboardEvent[];
+  upcomingLeaves?: TEmployeeDashboardLeave[];
 }
 
 export interface TEmployeeDashboardKPI {
@@ -41,4 +43,18 @@ export interface TEmployeeDashboardEvent {
   created_by_id?: string;
   updated_by_id?: string;
   type?: 'holiday' | 'birthday' | 'anniversary';
+}
+
+export interface TEmployeeDashboardLeave {
+  id?: string;
+  title?: string;
+  date?: string;
+  description?: string;
+  status?: string;
+  created_at?: string;
+  updated_at?: string;
+  created_by_id?: string;
+  updated_by_id?: string;
+  type?: 'today' | 'this_week' | 'this_month';
+  user?: TUser;
 }

@@ -356,5 +356,49 @@ export const employeeDashboardData: TEmployeeDashboard = {
       description: 'Anniversary',
       type: 'anniversary'
     }
+  ],
+  upcomingLeaves: [
+    {
+      id: '1',
+      title: 'Sick Leave',
+      date: '2023-01-01',
+      description: 'Leave',
+      type: 'today',
+      user: {
+        id: '1',
+        first_name: 'John',
+        middle_name: 'Michael',
+        last_name: 'Doe',
+        avatar: '/avatars/jdoe.png'
+      }
+    },
+    {
+      id: '2',
+      title: 'Annual Leave',
+      date: '2023-01-02',
+      description: 'Leave',
+      type: 'this_week',
+      user: {
+        id: '1',
+        first_name: 'John',
+        middle_name: 'Michael',
+        last_name: 'Doe',
+        avatar: '/avatars/jdoe.png'
+      }
+    },
+    {
+      id: '3',
+      title: 'Casual Leave',
+      date: '2023-01-03',
+      description: 'Leave',
+      type: 'this_month',
+      user: {
+        id: '1',
+        first_name: 'John',
+        middle_name: 'Michael',
+        last_name: 'Doe',
+        avatar: '/avatars/jdoe.png'
+      }
+    }
   ]
 };

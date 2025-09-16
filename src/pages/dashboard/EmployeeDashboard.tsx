@@ -5,11 +5,17 @@ import { employeeDashboardData } from '@/data/mock-data';
 import EmployeeDashboardMonthlyAttendanceSummary from '@/components/modules/dashboard/employee/EmployeeDashboardMonthlyAttendanceSummary';
 import { Col, Row } from 'react-bootstrap';
 import DashboardUpcomingEvents from '@/components/modules/dashboard/DashboardUpcomingEvents';
+import DashboardUpcomingLeaves from '@/components/modules/dashboard/DashboardUpcomingLeaves';
 
 const EmployeeDashboard = () => {
   const [loading, setLoading] = React.useState<boolean>(false);
-  const { kpis, attendances, monthlyAttendanceSummary, upcomingEvents } =
-    employeeDashboardData;
+  const {
+    kpis,
+    attendances,
+    monthlyAttendanceSummary,
+    upcomingEvents,
+    upcomingLeaves
+  } = employeeDashboardData;
 
   // Use Effects
   React.useEffect(() => {
@@ -24,9 +30,9 @@ const EmployeeDashboard = () => {
       {/* Employee Dashboard KPIs */}
       <EmployeeDashboardKPI kpis={kpis ?? []} loading={loading} />
 
-      {/* Employee Dashboard Monthly Attendance Summary */}
       <Row className="gap-2 gap-md-0">
-        <Col xs={12} md={6} style={{ padding: '0rem .300rem', margin: '0' }}>
+        {/* Employee Dashboard Monthly Attendance Summary */}
+        <Col xs={12} md={4} style={{ padding: '0rem .300rem', margin: '0' }}>
           <EmployeeDashboardMonthlyAttendanceSummary
             monthlyAttendanceSummary={monthlyAttendanceSummary ?? {}}
             loading={loading}
@@ -34,9 +40,17 @@ const EmployeeDashboard = () => {
         </Col>
 
         {/* Employee Dashboard Upcoming Events */}
-        <Col xs={12} md={6} style={{ padding: '0rem .375rem', margin: '0' }}>
+        <Col xs={12} md={4} style={{ padding: '0rem .375rem', margin: '0' }}>
           <DashboardUpcomingEvents
             upcomingEvents={upcomingEvents ?? []}
+            loading={loading}
+          />
+        </Col>
+
+        {/* Employee Dashboard Upcoming Leaves*/}
+        <Col xs={12} md={4} style={{ padding: '0rem .375rem', margin: '0' }}>
+          <DashboardUpcomingLeaves
+            upcomingLeaves={upcomingLeaves ?? []}
             loading={loading}
           />
         </Col>
