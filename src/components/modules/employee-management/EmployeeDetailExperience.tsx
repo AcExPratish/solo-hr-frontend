@@ -69,18 +69,18 @@ const EmployeeDetailExperience = ({
 
               <Col xs={12} md={6}>
                 <div className="d-flex align-items-center gap-1 justify-content-end">
-                  <span className="text-muted fw-semibold small">
+                  <span className="text-muted fw-semibold fs-10">
                     {convertToMonAbbrevDate(data?.start_date)}
                   </span>
 
                   {data?.is_current && (
-                    <span className="text-muted fw-semibold small">
+                    <span className="text-muted fw-semibold fs-10">
                       {` - ${t('present')}`}
                     </span>
                   )}
 
                   {!data?.is_current && data?.end_date && (
-                    <span className="text-muted fw-semibold small">
+                    <span className="text-muted fw-semibold fs-10">
                       {` - ${convertToMonAbbrevDate(data?.end_date)}`}
                     </span>
                   )}
