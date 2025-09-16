@@ -78,7 +78,11 @@ const DashboardUpcomingEvents = ({
               <Stack
                 className="mb-3 h-100"
                 gap={3}
-                style={{ minHeight: '251.6px', overflowY: 'scroll' }}
+                style={{
+                  minHeight: '251.6px',
+                  height: '251.6px',
+                  overflowY: 'scroll'
+                }}
               >
                 {Array.isArray(upcomingEventItems) &&
                   upcomingEventItems?.map(
