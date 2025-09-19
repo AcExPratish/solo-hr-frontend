@@ -1,0 +1,31 @@
+# Node modules (will be installed inside Docker)
+node_modules
+npm-debug.log
+yarn.lock
+pnpm-lock.yaml
+
+# Build output (rebuilt inside container)
+build
+dist
+
+# Dependency caches
+.cache
+.npm
+.yarn
+
+# Logs
+logs
+*.log
+*.log.*
+
+# OS and editor files
+.DS_Store
+Thumbs.db
+*.swp
+*.swo
+.vscode
+.idea
+*.iml
+
+# Test coverage
+coverage
