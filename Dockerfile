@@ -1,5 +1,5 @@
 # ---- Base Node image ----
-FROM node:20-alpine AS base
+FROM node:22-alpine AS base
 
 # Set working directory
 WORKDIR /app
@@ -18,7 +18,7 @@ FROM base AS build
 RUN npm run build
 
 # ---- Production stage ----
-FROM node:20-alpine AS production
+FROM node:22-alpine AS production
 
 WORKDIR /app
 
@@ -28,8 +28,8 @@ RUN npm install -g serve
 # Copy build files from previous stage
 COPY --from=build /app/build ./build
 
-# Expose port 3000 (default CRA serve port)
-EXPOSE 3000
+# Expose port 5173 (default CRA serve port)
+EXPOSE 5173
 
 # Run the production build using serve
-CMD ["serve", "-s", "build", "-l", "3000"]
+CMD ["serve", "-s", "build", "-l", "5173"]
