@@ -15,12 +15,14 @@ import avatar from 'assets/img/team/40x40/avatar.webp';
 
 interface employeeTableColumnsProps {
   onView?: (data: TEmployee, show: boolean) => void;
+  onDetailedView?: (data: TEmployee) => void;
   onEdit?: (data: TEmployee) => void;
   onDelete?: (data: TEmployee) => void;
 }
 
 export const employeeTableColumns = ({
   onView,
+  onDetailedView,
   onEdit,
   onDelete
 }: employeeTableColumnsProps) => {
@@ -142,6 +144,9 @@ export const employeeTableColumns = ({
             data={row}
             onView={
               checkScope('users.view') ? () => onView?.(row, true) : undefined
+            }
+            onDetailedView={
+              checkScope('users.view') ? () => onDetailedView?.(row) : undefined
             }
             onEdit={
               checkScope('users.update') ? () => onEdit?.(row) : undefined

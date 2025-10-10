@@ -1,12 +1,18 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { Button, OverlayTrigger, Tooltip } from 'react-bootstrap';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faEdit, faEye, faTrashCan } from '@fortawesome/free-solid-svg-icons';
+import {
+  faBook,
+  faEdit,
+  faEye,
+  faTrashCan
+} from '@fortawesome/free-solid-svg-icons';
 import { useTranslation } from 'react-i18next';
 
 interface ActionTableItemsProps {
   data: any;
   onView?: (data: any) => void;
+  onDetailedView?: (data: any) => void;
   onEdit?: (data: any) => void;
   onDelete?: (data: any) => void;
 }
@@ -14,6 +20,7 @@ interface ActionTableItemsProps {
 const ActionTableItems = ({
   data,
   onView,
+  onDetailedView,
   onEdit,
   onDelete
 }: ActionTableItemsProps) => {
@@ -35,6 +42,26 @@ const ActionTableItems = ({
               className="btn-sm ml-2"
             >
               <FontAwesomeIcon icon={faEye} />
+            </Button>
+          </span>
+        </OverlayTrigger>
+      )}
+
+      {onDetailedView && (
+        <OverlayTrigger
+          placement="top"
+          overlay={<Tooltip id="view-tooltip">{t('detailed_view')}</Tooltip>}
+        >
+          <span>
+            <Button
+              variant="phoenix-info"
+              onClick={() => {
+                onDetailedView?.(data);
+              }}
+              style={{ marginLeft: '4px' }}
+              className="btn-sm ml-2"
+            >
+              <FontAwesomeIcon icon={faBook} />
             </Button>
           </span>
         </OverlayTrigger>

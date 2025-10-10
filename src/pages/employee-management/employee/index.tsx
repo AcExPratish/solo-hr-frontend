@@ -103,6 +103,10 @@ const EmployeePage = () => {
     setModal({ ...modal, ...{ show: true, type: 'view' } });
   };
 
+  const handleOnDetailedView = (data: TEmployee) => {
+    navigate(`/employee-management/employee/detail/${data?._id}`);
+  };
+
   const handleOnAdd = () => {
     setEmployee(initialValues);
     setModal({ ...modal, ...{ show: true, type: 'add' } });
@@ -142,6 +146,7 @@ const EmployeePage = () => {
       data: employees,
       columns: employeeTableColumns({
         onView: handleOnView,
+        onDetailedView: handleOnDetailedView,
         onEdit: handleOnEdit,
         onDelete: handleOnDelete
       }),
