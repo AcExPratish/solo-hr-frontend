@@ -22,7 +22,7 @@ interface EmployeeExperienceFormProps {
 }
 
 const emptyContact = (): TEmployeeExperience => ({
-  id: undefined,
+  _id: undefined,
   company_name: '',
   designation: '',
   start_date: '',
@@ -45,9 +45,9 @@ const EmployeeExperienceForm = ({
 
   // On Submit
   const handleOnSubmit = async (values: TEmployee) => {
-    const { id, experience } = values;
+    const { _id, experience } = values;
     onSubmit({
-      id,
+      _id,
       experience,
       form_type: 'experience'
     });

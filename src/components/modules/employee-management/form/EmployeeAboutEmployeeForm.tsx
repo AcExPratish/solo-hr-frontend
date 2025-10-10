@@ -30,9 +30,9 @@ const EmployeeAboutEmployeeForm = ({
 
   // On Submit
   const handleOnSubmit = async (values: TEmployee) => {
-    const { id } = values;
+    const { _id } = values;
     onSubmit({
-      id,
+      _id,
       basic_information: {
         about: values?.basic_information?.about
       },

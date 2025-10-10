@@ -22,7 +22,7 @@ interface EmployeeEducationFormProps {
 }
 
 const emptyContact = (): TEmployeeEducation => ({
-  id: undefined,
+  _id: undefined,
   institution_name: '',
   course: '',
   start_date: '',
@@ -46,9 +46,9 @@ const EmployeeEducationForm = ({
 
   // On Submit
   const handleOnSubmit = async (values: TEmployee) => {
-    const { id, education } = values;
+    const { _id, education } = values;
     onSubmit({
-      id,
+      _id,
       education,
       form_type: 'education'
     });

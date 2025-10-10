@@ -28,12 +28,12 @@ const EmployeeDetailSupportingDocuments = ({
 
   // Use Memos
   const supportingDocumentsData = React.useMemo(() => {
-    return Object.entries(employee?.supporting_documents ?? {})?.map(
-      ([key, data]) => ({
+    return Object.entries(employee?.supporting_documents ?? {})
+      ?.filter(([key]) => key != '_id')
+      ?.map(([key, data]) => ({
         ...data,
         document_name: key as TEmployeeDocumentName
-      })
-    );
+      }));
   }, [employee]);
 
   // Table

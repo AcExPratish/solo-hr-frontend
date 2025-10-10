@@ -21,7 +21,7 @@ interface EmployeeEmergencyContactFormProps {
 }
 
 const emptyContact = (): TEmployeeEmergencyContact => ({
-  id: undefined,
+  _id: undefined,
   name: '',
   relationship: '',
   phone_1: '',
@@ -43,9 +43,9 @@ const EmployeeEmergencyContactForm = ({
 
   // On Submit
   const handleOnSubmit = async (values: TEmployee) => {
-    const { id, emergency_contact } = values;
+    const { _id, emergency_contact } = values;
     onSubmit({
-      id,
+      _id,
       emergency_contact,
       form_type: 'emergency_contact'
     });

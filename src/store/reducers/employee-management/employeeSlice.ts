@@ -33,14 +33,14 @@ const employeeSlice = createSlice({
 
     updateOneEmployee(state, action) {
       state.employees = state.employees.map(item => {
-        if (item.id !== action.payload.id) return item;
+        if (item._id !== action.payload._id) return item;
         else return { ...item, ...action.payload.row };
       });
     },
 
     removeOneEmployee(state, action) {
       state.employees = state.employees.filter(
-        item => item.id !== action.payload.id
+        item => item._id !== action.payload._id
       );
     }
   }

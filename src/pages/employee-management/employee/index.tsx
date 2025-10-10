@@ -109,7 +109,7 @@ const EmployeePage = () => {
   };
 
   const handleOnEdit = (data: TEmployee) => {
-    fetchOneItem(data);
+    setEmployee(data);
     setModal({ ...modal, ...{ show: true, type: 'edit' } });
   };
 
@@ -129,8 +129,8 @@ const EmployeePage = () => {
   // On Submit
   const handleOnSubmit = (formData: TEmployee) => {
     setLoader({ form: true });
-    if (formData.id) {
-      updateItem(formData?.id, formData);
+    if (formData?._id) {
+      updateItem(formData?._id, formData);
     } else {
       createItem(formData);
     }
@@ -172,7 +172,7 @@ const EmployeePage = () => {
   // API Handlers
   const createItem = (data: TEmployee) => {
     setModal({ ...modal, ...{ show: true } });
-    createEmployee(data, 'basic_info')
+    createEmployee(data)
       .then(() => {
         toast.success(
           t('message_success_create', {
@@ -190,9 +190,9 @@ const EmployeePage = () => {
       });
   };
 
-  const updateItem = (id: string, data: TEmployee) => {
+  const updateItem = (_id: string, data: TEmployee) => {
     setModal({ ...modal, ...{ show: true } });
-    updateEmployee(id, 'basic_info', data)
+    updateEmployee(_id, 'basic_info', data)
       .then(() => {
         toast.success(
           t('message_success_update', {
@@ -211,8 +211,8 @@ const EmployeePage = () => {
 
   const deleteItem = (data: TEmployee) => {
     setLoader({ list: true });
-    if (data?.id) {
-      deleteEmployee(data?.id)
+    if (data?._id) {
+      deleteEmployee(data?._id)
         .then(() => {
           toast.success(
             t('message_success_delete', {
@@ -232,7 +232,7 @@ const EmployeePage = () => {
 
   const fetchOneItem = (row: TEmployee) => {
     setLoader({ list: true });
-    fetchOneEmployee(row?.id || '')
+    fetchOneEmployee(row?._id || '')
       .then(resp => {
         setEmployee(resp);
       })

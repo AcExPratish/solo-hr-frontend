@@ -28,12 +28,12 @@ const EmployeeDetailStatutoryInformation = ({
 
   // Use Memos
   const statutoryInformationData = React.useMemo(() => {
-    return Object.entries(employee?.statutory_information ?? {})?.map(
-      ([key, data]) => ({
+    return Object.entries(employee?.statutory_information ?? {})
+      ?.filter(([key]) => key != '_id')
+      ?.map(([key, data]) => ({
         ...data,
         document_name: key as TEmployeeDocumentName
-      })
-    );
+      }));
   }, [employee]);
 
   // Table

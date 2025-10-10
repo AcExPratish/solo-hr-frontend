@@ -7,7 +7,7 @@ import {
 } from '@fortawesome/free-regular-svg-icons';
 
 export const employeeMockData: TEmployee = {
-  id: 'u001',
+  _id: 'u001',
   first_name: 'John',
   middle_name: 'Michael',
   last_name: 'Doe',
@@ -48,14 +48,14 @@ export const employeeMockData: TEmployee = {
 
   emergency_contact: [
     {
-      id: 'ec001',
+      _id: 'ec001',
       name: 'Jane Doe',
       relationship: 'Wife',
       phone_1: '+9779811111111',
       phone_2: '+9779822222222'
     },
     {
-      id: 'ec002',
+      _id: 'ec002',
       name: 'Mark Doe',
       relationship: 'Brother',
       phone_1: '+9779833333333',
@@ -64,7 +64,7 @@ export const employeeMockData: TEmployee = {
   ],
 
   bank_information: {
-    id: 'bi001',
+    _id: 'bi001',
     bank_name: 'Nepal Investment Bank',
     branch_address: 'New Road, Kathmandu',
     account_holder_name: 'John Doe',
@@ -75,7 +75,7 @@ export const employeeMockData: TEmployee = {
 
   statutory_information: {
     citizen_investment_trust: {
-      id: 'si001',
+      _id: 'si001',
       id_number: 'CIT12345',
       issue_date: '2019-01-01',
       expiry_date: '2029-01-01',
@@ -84,7 +84,7 @@ export const employeeMockData: TEmployee = {
       verification_status: 'rejected'
     },
     social_security_fund: {
-      id: 'si001',
+      _id: 'si001',
       id_number: 'SSF98765',
       issue_date: '2018-06-01',
       expiry_date: '2028-06-01',
@@ -93,7 +93,7 @@ export const employeeMockData: TEmployee = {
       verification_status: 'pending'
     },
     provident_fund: {
-      id: 'si001',
+      _id: 'si001',
       id_number: 'PF456789',
       issue_date: '2020-05-01',
       expiry_date: '2030-05-01',
@@ -102,7 +102,7 @@ export const employeeMockData: TEmployee = {
       verification_status: 'pending'
     },
     police_clearance: {
-      id: 'si001',
+      _id: 'si001',
       id_number: 'PC112233',
       issue_date: '2022-02-01',
       expiry_date: '2025-02-01',
@@ -111,7 +111,7 @@ export const employeeMockData: TEmployee = {
       verification_status: 'verified'
     },
     health_insurance: {
-      id: 'si001',
+      _id: 'si001',
       id_number: 'HI223344',
       issue_date: '2021-03-15',
       expiry_date: '2026-03-15',
@@ -120,7 +120,7 @@ export const employeeMockData: TEmployee = {
       verification_status: 'verified'
     },
     tax_clearance: {
-      id: 'si001',
+      _id: 'si001',
       id_number: 'TAX556677',
       issue_date: '2023-04-01',
       expiry_date: '2024-04-01',
@@ -132,7 +132,7 @@ export const employeeMockData: TEmployee = {
 
   supporting_documents: {
     pan: {
-      id: 'sd001',
+      _id: 'sd001',
       id_number: 'PAN123456',
       issue_date: '2017-05-01',
       expiry_date: '2027-05-01',
@@ -141,7 +141,7 @@ export const employeeMockData: TEmployee = {
       verification_status: 'verified'
     },
     national_id: {
-      id: 'sd002',
+      _id: 'sd002',
       id_number: 'NID998877',
       issue_date: '2019-07-01',
       expiry_date: '2029-07-01',
@@ -150,7 +150,7 @@ export const employeeMockData: TEmployee = {
       verification_status: 'verified'
     },
     citizenship: {
-      id: 'sd003',
+      _id: 'sd003',
       id_number: 'CTZ445566',
       issue_date: '2008-01-01',
       expiry_date: undefined,
@@ -159,7 +159,7 @@ export const employeeMockData: TEmployee = {
       verification_status: 'verified'
     },
     passport: {
-      id: 'sd004',
+      _id: 'sd004',
       id_number: 'PP778899',
       issue_date: '2021-10-01',
       expiry_date: '2031-10-01',
@@ -168,7 +168,7 @@ export const employeeMockData: TEmployee = {
       verification_status: 'verified'
     },
     driving_license: {
-      id: 'sd005',
+      _id: 'sd005',
       id_number: 'DL334455',
       issue_date: '2015-08-01',
       expiry_date: '2025-08-01',
@@ -180,14 +180,14 @@ export const employeeMockData: TEmployee = {
 
   family_information: [
     {
-      id: 'fi001',
+      _id: 'fi001',
       name: 'Jane Doe',
       relationship: 'Wife',
       phone_1: '+9779811111111',
       phone_2: '+9779822222222'
     },
     {
-      id: 'fi002',
+      _id: 'fi002',
       name: 'Sophia Doe',
       relationship: 'Daughter',
       phone_1: undefined,
@@ -197,7 +197,7 @@ export const employeeMockData: TEmployee = {
 
   education: [
     {
-      id: 'ed001',
+      _id: 'ed001',
       institution_name: 'Tribhuvan University',
       course: 'BSc Computer Science',
       start_date: '2008-01-01',
@@ -206,7 +206,7 @@ export const employeeMockData: TEmployee = {
       percentage_or_gpa: '3.6 GPA'
     },
     {
-      id: 'ed002',
+      _id: 'ed002',
       institution_name: 'Kathmandu University',
       course: 'MSc Information Technology',
       start_date: '2013-01-01',
@@ -218,7 +218,7 @@ export const employeeMockData: TEmployee = {
 
   experience: [
     {
-      id: 'exp001',
+      _id: 'exp001',
       company_name: 'ABC Tech Pvt. Ltd.',
       designation: 'Junior Developer',
       start_date: '2012-02-01',
@@ -226,7 +226,7 @@ export const employeeMockData: TEmployee = {
       is_current: false
     },
     {
-      id: 'exp002',
+      _id: 'exp002',
       company_name: 'XYZ Solutions',
       designation: 'Software Engineer',
       start_date: '2014-06-01',
@@ -234,7 +234,7 @@ export const employeeMockData: TEmployee = {
       is_current: false
     },
     {
-      id: 'exp003',
+      _id: 'exp003',
       company_name: 'InnovateNepal',
       designation: 'Senior Software Engineer',
       start_date: '2020-01-01',

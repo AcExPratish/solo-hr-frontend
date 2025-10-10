@@ -27,7 +27,7 @@ export interface TEmployeeBasicInformation {
 }
 
 export interface TEmployeeEmergencyContact {
-  id?: string;
+  _id?: string;
   name?: string;
   relationship?: string;
   phone_1?: string;
@@ -35,7 +35,7 @@ export interface TEmployeeEmergencyContact {
 }
 
 export interface TEmployeeBankInformation {
-  id?: string;
+  _id?: string;
   bank_name?: string;
   branch_address?: string;
   account_holder_name?: string;
@@ -63,7 +63,7 @@ export type TEmployeeDocumentName =
   | 'driving_license';
 
 export interface TEmployeeDocument {
-  id?: string;
+  _id?: string;
   id_number?: string;
   issue_date?: string;
   expiry_date?: string; // If applicable
@@ -95,7 +95,7 @@ export interface TEmployeeSupportingDocuments {
 }
 
 export interface TEmployeeFamilyInformation {
-  id?: string;
+  _id?: string;
   name?: string;
   relationship?: string;
   phone_1?: string;
@@ -103,7 +103,7 @@ export interface TEmployeeFamilyInformation {
 }
 
 export interface TEmployeeEducation {
-  id?: string;
+  _id?: string;
   institution_name?: string;
   course?: string;
   start_date?: string;
@@ -113,7 +113,7 @@ export interface TEmployeeEducation {
 }
 
 export interface TEmployeeExperience {
-  id?: string;
+  _id?: string;
   company_name?: string;
   designation?: string;
   start_date?: string;
@@ -134,6 +134,7 @@ export type TEmployeeFormType =
   | 'experience';
 
 export interface TEmployee extends TUser {
+  _id?: string;
   basic_information?: TEmployeeBasicInformation;
   emergency_contact?: TEmployeeEmergencyContact[];
   bank_information?: TEmployeeBankInformation;

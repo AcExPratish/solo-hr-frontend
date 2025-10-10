@@ -12,7 +12,6 @@ import {
   TEmployeeFormType
 } from '@/types/modules/employee-management/employee';
 import EmployeeService from '@/services/employee-management/EmployeeService';
-import { employeeMockData } from '@/data/mock-data';
 
 const useEmployeeHook = () => {
   const dispatch = useDispatch();
@@ -34,15 +33,10 @@ const useEmployeeHook = () => {
     }
   };
 
-  const fetchOneEmployee = async (id: string): Promise<TEmployee> => {
+  const fetchOneEmployee = async (_id: string): Promise<TEmployee> => {
     try {
-      await new Promise(resolve => {
-        console.log('fetchOneEmployee', id);
-        setTimeout(resolve, 500);
-      });
-      // const resp = await EmployeeService.fetchOne(id);
-      // const row = resp?.data?.data || null;
-      const row = employeeMockData;
+      const resp = await EmployeeService.fetchOne(_id);
+      const row = resp?.data?.data || null;
       dispatch(getOneEmployee({ row }));
       return row;
     } catch (e) {
@@ -52,12 +46,9 @@ const useEmployeeHook = () => {
     }
   };
 
-  const createEmployee = async (
-    data: TEmployee,
-    slug: TEmployeeFormType
-  ): Promise<TEmployee> => {
+  const createEmployee = async (data: TEmployee): Promise<TEmployee> => {
     try {
-      const resp = await EmployeeService.create(data, slug);
+      const resp = await EmployeeService.create(data);
       const row = resp?.data?.data || null;
       dispatch(createOneEmployee({ row }));
       return row;
@@ -68,14 +59,14 @@ const useEmployeeHook = () => {
   };
 
   const updateEmployee = async (
-    id: string,
+    _id: string,
     slug: TEmployeeFormType,
     data: TEmployee
   ): Promise<TEmployee> => {
     try {
-      const resp = await EmployeeService.update(id, slug, data);
+      const resp = await EmployeeService.update(_id, slug, data);
       const row = resp?.data?.data || null;
-      dispatch(updateOneEmployee({ id, row }));
+      dispatch(updateOneEmployee({ _id, slug, row }));
       return row;
     } catch (e) {
       console.error('updateEmployee', e);
@@ -83,11 +74,11 @@ const useEmployeeHook = () => {
     }
   };
 
-  const deleteEmployee = async (id: string): Promise<TEmployee> => {
+  const deleteEmployee = async (_id: string): Promise<TEmployee> => {
     try {
-      const resp = await EmployeeService.destroy(id);
+      const resp = await EmployeeService.destroy(_id);
       const row = resp?.data?.data || null;
-      dispatch(removeOneEmployee({ id }));
+      dispatch(removeOneEmployee({ _id }));
       return row;
     } catch (e) {
       console.error('deleteEmployee', e);

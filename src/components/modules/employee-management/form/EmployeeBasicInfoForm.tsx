@@ -36,7 +36,7 @@ const EmployeeBasicInfoForm = ({
   // On Submit
   const handleOnSubmit = async (values: TEmployee) => {
     const {
-      id,
+      _id,
       first_name,
       middle_name,
       last_name,
@@ -48,7 +48,7 @@ const EmployeeBasicInfoForm = ({
     } = values;
 
     onSubmit({
-      id,
+      _id,
       first_name,
       middle_name,
       last_name,

@@ -32,9 +32,9 @@ const EmployeeSupportingDocumentsForm = ({
 
   // On Submit
   const handleOnSubmit = async (values: TEmployee) => {
-    const { id, supporting_documents } = values;
+    const { _id, supporting_documents } = values;
     onSubmit({
-      id,
+      _id,
       supporting_documents,
       form_type: 'supporting_documents'
     });

@@ -34,7 +34,7 @@ import EmployeeSupportingDocumentsForm from '@/components/modules/employee-manag
 
 // Initial Values
 const initialValues: TEmployee = {
-  id: undefined,
+  _id: undefined,
   first_name: '',
   middle_name: '',
   last_name: '',
@@ -63,7 +63,7 @@ const initialValues: TEmployee = {
   },
   emergency_contact: [],
   bank_information: {
-    id: '',
+    _id: '',
     bank_name: '',
     branch_address: '',
     account_holder_name: '',
@@ -73,7 +73,7 @@ const initialValues: TEmployee = {
   },
   statutory_information: {
     citizen_investment_trust: {
-      id: '',
+      _id: '',
       id_number: '',
       issue_date: '',
       expiry_date: '',
@@ -82,7 +82,7 @@ const initialValues: TEmployee = {
       verification_status: 'pending'
     },
     social_security_fund: {
-      id: '',
+      _id: '',
       id_number: '',
       issue_date: '',
       expiry_date: '',
@@ -91,7 +91,7 @@ const initialValues: TEmployee = {
       verification_status: 'pending'
     },
     provident_fund: {
-      id: '',
+      _id: '',
       id_number: '',
       issue_date: '',
       expiry_date: '',
@@ -100,7 +100,7 @@ const initialValues: TEmployee = {
       verification_status: 'pending'
     },
     police_clearance: {
-      id: '',
+      _id: '',
       id_number: '',
       issue_date: '',
       expiry_date: '',
@@ -109,7 +109,7 @@ const initialValues: TEmployee = {
       verification_status: 'pending'
     },
     health_insurance: {
-      id: '',
+      _id: '',
       id_number: '',
       issue_date: '',
       expiry_date: '',
@@ -118,7 +118,7 @@ const initialValues: TEmployee = {
       verification_status: 'pending'
     },
     tax_clearance: {
-      id: '',
+      _id: '',
       id_number: '',
       issue_date: '',
       expiry_date: '',
@@ -129,7 +129,7 @@ const initialValues: TEmployee = {
   },
   supporting_documents: {
     pan: {
-      id: '',
+      _id: '',
       id_number: '',
       issue_date: '',
       expiry_date: '',
@@ -138,7 +138,7 @@ const initialValues: TEmployee = {
       verification_status: 'pending'
     },
     national_id: {
-      id: '',
+      _id: '',
       id_number: '',
       issue_date: '',
       expiry_date: '',
@@ -147,7 +147,7 @@ const initialValues: TEmployee = {
       verification_status: 'pending'
     },
     citizenship: {
-      id: '',
+      _id: '',
       id_number: '',
       issue_date: '',
       expiry_date: '',
@@ -156,7 +156,7 @@ const initialValues: TEmployee = {
       verification_status: 'pending'
     },
     passport: {
-      id: '',
+      _id: '',
       id_number: '',
       issue_date: '',
       expiry_date: '',
@@ -165,7 +165,7 @@ const initialValues: TEmployee = {
       verification_status: 'pending'
     },
     driving_license: {
-      id: '',
+      _id: '',
       id_number: '',
       issue_date: '',
       expiry_date: '',
@@ -256,8 +256,9 @@ const EmployeeDetailsPage = () => {
     setLoader({ list: true });
     openModal(formType);
 
-    updateEmployee(formData?.id as string, formType, formData)
-      .then(() => {
+    updateEmployee(formData?._id as string, formType, formData)
+      .then(resp => {
+        setEmployee(resp);
         toast.success(
           t('message_success_update', {
             page: t('profile'),
@@ -273,9 +274,9 @@ const EmployeeDetailsPage = () => {
   };
 
   // API Handlers
-  const fetchOneItem = (id: string) => {
+  const fetchOneItem = (_id: string) => {
     setLoader({ list: true });
-    fetchOneEmployee(id)
+    fetchOneEmployee(_id)
       .then((res: TEmployee) => setEmployee(res))
       .catch(() => toast.error(t('message_failed')))
       .finally(() => setLoader({ list: false }));

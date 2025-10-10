@@ -21,7 +21,7 @@ interface EmployeeFamilyInformationFormProps {
 }
 
 const emptyContact = (): TEmployeeFamilyInformation => ({
-  id: undefined,
+  _id: undefined,
   name: '',
   relationship: '',
   phone_1: '',
@@ -43,9 +43,9 @@ const EmployeeFamilyInformationForm = ({
 
   // On Submit
   const handleOnSubmit = async (values: TEmployee) => {
-    const { id, family_information } = values;
+    const { _id, family_information } = values;
     onSubmit({
-      id,
+      _id,
       family_information,
       form_type: 'family_information'
     });

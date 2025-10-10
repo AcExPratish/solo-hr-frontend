@@ -13,20 +13,20 @@ const fetchAll = (filters: TEmployeeFilter) => {
   return api.get(`${employeeEndpoint}?${serializedObject(filters)}`);
 };
 
-const fetchOne = (id: string) => {
-  return api.get(`${employeeEndpoint}/${id}`);
+const fetchOne = (_id: string) => {
+  return api.get(`${employeeEndpoint}/${_id}`);
 };
 
-const create = (data: TEmployee, slug: TEmployeeFormType) => {
-  return api.post(`${employeeEndpoint}/${slug}`, data);
+const create = (data: TEmployee) => {
+  return api.post(`${employeeEndpoint}`, data);
 };
 
-const update = (id: string, slug: TEmployeeFormType, data: TEmployee) => {
-  return api.put(`${employeeEndpoint}/${id}/${slug}`, data);
+const update = (_id: string, slug: TEmployeeFormType, data: TEmployee) => {
+  return api.put(`${employeeEndpoint}/${_id}/${slug}`, data);
 };
 
-const destroy = (id: string) => {
-  return api.delete(`${employeeEndpoint}/${id}`);
+const destroy = (_id: string) => {
+  return api.delete(`${employeeEndpoint}/${_id}`);
 };
 
 export default {
