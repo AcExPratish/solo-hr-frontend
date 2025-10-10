@@ -110,7 +110,7 @@ const EmployeeDetailProfile = ({
               <InfoRow
                 icon={faIdCard}
                 label={t('emp_id')}
-                value={employee?.id ?? ''}
+                value={employee?._id ?? ''}
               />
               <InfoRow
                 icon={faUser}

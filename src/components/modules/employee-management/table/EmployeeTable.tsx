@@ -30,18 +30,6 @@ export const employeeTableColumns = ({
   const { t }: { t: any } = useTranslation();
   const columns: ColumnDef<TEmployee>[] = [
     {
-      header: `${t('emp_id')}`,
-      accessorKey: 'id',
-      cell: original => {
-        const { row } = original;
-        return <span>{row?.original?.id}</span>;
-      },
-      meta: {
-        cellProps: { className: 'text-body' },
-        headerProps: { style: { width: '5%' }, className: '' }
-      }
-    },
-    {
       header: `${t('name')}`,
       accessorKey: 'name',
       cell: original => {
