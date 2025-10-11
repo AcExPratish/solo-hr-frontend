@@ -34,7 +34,7 @@ Get the figma design file here:
 
 # 📁 Project Structure
 
-📦suave-hr-frontend
+📦solo-hr-frontend
 ┣ 📂.vscode
 ┃ ┗ 📜settings.json
 ┣ 📂public

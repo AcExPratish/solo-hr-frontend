@@ -53,58 +53,61 @@ const ForgotPasswordForm = () => {
 
         {alert && <AlertMessage type={alert.type} message={alert.message} />}
 
-        <Formik
-          initialValues={initialValues}
-          enableReinitialize
-          onSubmit={handleOnForgotPasswordSubmit}
-          validationSchema={ForgotPasswordSchema}
-        >
-          {({
-            handleSubmit,
-            handleChange,
-            handleBlur,
-            values,
-            errors,
-            touched
-          }) => (
-            <Form
-              noValidate
-              onSubmit={handleSubmit}
-              className="d-flex  align-items-center mb-5"
-            >
-              <Form.Control
-                type="email"
-                id="to"
-                placeholder={t('email')}
-                onChange={handleChange}
-                onBlur={handleBlur}
-                value={values.to}
-                name="to"
-                className={`flex-1 form-control form-icon-input ${
-                  touched.to && errors.to ? 'is-invalid' : ''
-                }`}
-              />
-
-              {touched.to && errors.to && (
-                <Form.Control.Feedback type="invalid">
-                  {errors.to}
-                </Form.Control.Feedback>
-              )}
-
-              <Button
-                variant="primary"
-                className="ms-2"
-                endIcon={
-                  <FontAwesomeIcon icon={faChevronRight} className="ms-2" />
-                }
-                type="submit"
-                disabled={loading}
+        {alert?.type != 'SUCCESS' && (
+          <Formik
+            initialValues={initialValues}
+            enableReinitialize
+            onSubmit={handleOnForgotPasswordSubmit}
+            validationSchema={ForgotPasswordSchema}
+          >
+            {({
+              handleSubmit,
+              handleChange,
+              handleBlur,
+              values,
+              errors,
+              touched
+            }) => (
+              <Form
+                noValidate
+                onSubmit={handleSubmit}
+                className="d-flex  align-items-center mb-5"
               >
-                {t('send')}
-              </Button>
-            </Form>
-          )}
-        </Formik>
+                <Form.Control
+                  type="email"
+                  id="to"
+                  placeholder={t('email')}
+                  onChange={handleChange}
+                  onBlur={handleBlur}
+                  value={values.to}
+                  name="to"
+                  className={`flex-1 form-control form-icon-input ${
+                    touched.to && errors.to ? 'is-invalid' : ''
+                  }`}
+                />
+
+                {touched.to && errors.to && (
+                  <Form.Control.Feedback type="invalid">
+                    {errors.to}
+                  </Form.Control.Feedback>
+                )}
+
+                <Button
+                  variant="primary"
+                  className="ms-2"
+                  endIcon={
+                    <FontAwesomeIcon icon={faChevronRight} className="ms-2" />
+                  }
+                  type="submit"
+                  disabled={loading}
+                >
+                  {t('send')}
+                </Button>
+              </Form>
+            )}
+          </Formik>
+        )}
+
         <Link to="#" className="fs-9 fw-bold">
           {t('still_having_problems')}?
         </Link>
