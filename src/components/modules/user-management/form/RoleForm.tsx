@@ -139,7 +139,7 @@ const RoleForm = ({
           <Form noValidate>
             <FloatingLabel className="mb-3" label={t('name')}>
               <Form.Control
-                disabled={isView}
+                disabled={isView || !!values?.id}
                 id="name"
                 name="name"
                 type="text"
