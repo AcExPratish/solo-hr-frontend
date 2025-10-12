@@ -144,8 +144,6 @@ export interface TEmployee extends TUser {
   family_information?: TEmployeeFamilyInformation[];
   education?: TEmployeeEducation[];
   experience?: TEmployeeExperience[];
-
-  // Form Type -> For Frontend Only
   form_type?: TEmployeeFormType;
 }
 
