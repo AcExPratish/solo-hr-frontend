@@ -135,6 +135,7 @@ export type TEmployeeFormType =
 
 export interface TEmployee extends TUser {
   _id?: string;
+  user_id?: string;
   basic_information?: TEmployeeBasicInformation;
   emergency_contact?: TEmployeeEmergencyContact[];
   bank_information?: TEmployeeBankInformation;
