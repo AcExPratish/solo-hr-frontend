@@ -272,6 +272,19 @@ const EmployeeDetailsPage = () => {
     setExperienceModal(prev => ({ ...prev, show, type: show ? 'edit' : '' }));
   };
 
+  const closeAllDialogs = () => {
+    handleBasicInfoEditModal(false);
+    handlePersonalInfoEditModal(false);
+    handleEmergencyContactEditModal(false);
+    handleAboutEditModal(false);
+    handleBankInformationEditModal(false);
+    handleFamilyInformationEditModal(false);
+    handleStatutoryInformationEditModal(false);
+    handleSupportingDocumentsEditModal(false);
+    handleEducationEditModal(false);
+    handleExperienceEditModal(false);
+  };
+
   // On Submit
   const handleOnSubmit = (formData: TEmployee) => {
     const formType = formData?.form_type as TEmployeeFormType;
@@ -286,7 +299,7 @@ const EmployeeDetailsPage = () => {
             name: getUserFirstAndLastName(formData)
           })
         );
-        // closeModal(formType);
+        closeAllDialogs();
       })
       .catch(() => {
         toast.error(t('message_failed'));

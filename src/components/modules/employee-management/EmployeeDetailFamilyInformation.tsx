@@ -26,15 +26,14 @@ const EmployeeDetailFamilyInformation = ({
   const { t } = useTranslation();
 
   // Table
-  const mappedTable = () => {
-    const tempTable: UseAdvanceTableProps<TEmployeeFamilyInformation> = {
+  const tableConfig = React.useMemo(() => {
+    return {
       data: employee?.family_information || [],
       columns: employeeFamilyInformationTableColumns(),
       sortable: true
-    };
-    return tempTable;
-  };
-  const table = useAdvanceTable(mappedTable());
+    } as UseAdvanceTableProps<TEmployeeFamilyInformation>;
+  }, [employee?.family_information]);
+  const table = useAdvanceTable(tableConfig);
 
   return (
     <Accordion className="mb-4 bg-white text-black border rounded-1 py-2 border-1 border-gray-200">
