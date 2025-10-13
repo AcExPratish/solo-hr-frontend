@@ -6,6 +6,7 @@ import Badge from '@/components/base/Badge';
 import { getIn } from 'formik';
 import avatar from 'assets/img/team/40x40/avatar.webp';
 import { IMAGE_ACCEPTED_TYPES } from '@/data';
+import { storageEndpoint } from '@/helpers/common';
 
 interface CustomAvatarHandlerProps {
   label: string;
@@ -133,7 +134,9 @@ const CustomAvatarHandler = ({
         {/* Avatar Image */}
         <div className="me-2">
           <SafeImage
-            src={selectedImage || undefined}
+            src={
+              selectedImage ? `${storageEndpoint}/${selectedImage}` : undefined
+            }
             size={avatarSize}
             errorImage={avatar}
           />

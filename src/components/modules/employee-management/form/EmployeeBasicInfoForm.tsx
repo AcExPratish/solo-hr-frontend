@@ -11,6 +11,8 @@ import ReactGroupSelect from '@/components/base/ReactGroupSelect';
 import { genderOptions } from '@/data';
 import CustomAvatarHandler from '@/components/common/custom/CustomAvatarHandler';
 import { isImageFile } from '@/helpers/utils';
+import useFileHook from '@/hooks/modules/useFileHook';
+import { toast } from 'react-toastify';
 
 export interface EmployeeBasicInfoFormProps {
   formData: TEmployee;
@@ -29,6 +31,7 @@ const EmployeeBasicInfoForm = ({
 }: EmployeeBasicInfoFormProps) => {
   // React Hooks
   const { t } = useTranslation();
+  const { uploadFile } = useFileHook();
 
   // Use States
   const isView = modal.type === 'view';
@@ -86,8 +89,17 @@ const EmployeeBasicInfoForm = ({
       }) => {
         const handleImageChange = async (file: File) => {
           await setFieldValue('avatar', file, false);
-          setFieldValue('avatar', file);
           await validateField('avatar');
+          await uploadFile(file, 'avatar')
+            .then(res => {
+              setFieldValue('avatar', res);
+            })
+            .catch(e => {
+              if (e.status === 422) {
+                toast.error(e?.data?.message);
+              }
+              console.error(e);
+            });
         };
 
         const handleImageDelete = async () => {
