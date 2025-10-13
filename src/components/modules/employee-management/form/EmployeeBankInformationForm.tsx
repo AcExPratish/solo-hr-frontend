@@ -51,7 +51,6 @@ const EmployeeBankInformationForm = ({
         handleBlur,
         handleChange,
         errors,
-        touched,
         handleSubmit,
         resetForm
       }) => (
@@ -82,16 +81,14 @@ const EmployeeBankInformationForm = ({
                     onBlur={handleBlur}
                     onChange={handleChange}
                     isInvalid={Boolean(
-                      getIn(touched, 'bank_information.bank_name') &&
-                        getIn(errors, 'bank_informa tion.bank_name')
+                      getIn(errors, 'bank_information.bank_name')
                     )}
                   />
-                  {getIn(touched, 'bank_information.bank_name') &&
-                    getIn(errors, 'bank_information.bank_name') && (
-                      <Form.Control.Feedback type="invalid">
-                        {getIn(errors, 'bank_information.bank_name')}
-                      </Form.Control.Feedback>
-                    )}
+                  {getIn(errors, 'bank_information.bank_name') && (
+                    <Form.Control.Feedback type="invalid">
+                      {getIn(errors, 'bank_information.bank_name')}
+                    </Form.Control.Feedback>
+                  )}
                 </FloatingLabel>
               </Col>
 
@@ -108,16 +105,14 @@ const EmployeeBankInformationForm = ({
                     onBlur={handleBlur}
                     onChange={handleChange}
                     isInvalid={Boolean(
-                      getIn(touched, 'bank_information.branch_address') &&
-                        getIn(errors, 'bank_information.branch_address')
+                      getIn(errors, 'bank_information.branch_address')
                     )}
                   />
-                  {getIn(touched, 'bank_information.branch_address') &&
-                    getIn(errors, 'bank_information.branch_address') && (
-                      <Form.Control.Feedback type="invalid">
-                        {getIn(errors, 'bank_information.branch_address')}
-                      </Form.Control.Feedback>
-                    )}
+                  {getIn(errors, 'bank_information.branch_address') && (
+                    <Form.Control.Feedback type="invalid">
+                      {getIn(errors, 'bank_information.branch_address')}
+                    </Form.Control.Feedback>
+                  )}
                 </FloatingLabel>
               </Col>
 
@@ -134,16 +129,14 @@ const EmployeeBankInformationForm = ({
                     onBlur={handleBlur}
                     onChange={handleChange}
                     isInvalid={Boolean(
-                      getIn(touched, 'bank_information.swift_code') &&
-                        getIn(errors, 'bank_information.swift_code')
+                      getIn(errors, 'bank_information.swift_code')
                     )}
                   />
-                  {getIn(touched, 'bank_information.swift_code') &&
-                    getIn(errors, 'bank_information.swift_code') && (
-                      <Form.Control.Feedback type="invalid">
-                        {getIn(errors, 'bank_information.swift_code')}
-                      </Form.Control.Feedback>
-                    )}
+                  {getIn(errors, 'bank_information.swift_code') && (
+                    <Form.Control.Feedback type="invalid">
+                      {getIn(errors, 'bank_information.swift_code')}
+                    </Form.Control.Feedback>
+                  )}
                 </FloatingLabel>
               </Col>
 
@@ -160,16 +153,14 @@ const EmployeeBankInformationForm = ({
                     onBlur={handleBlur}
                     onChange={handleChange}
                     isInvalid={Boolean(
-                      getIn(touched, 'bank_information.account_holder_name') &&
-                        getIn(errors, 'bank_information.account_holder_name')
+                      getIn(errors, 'bank_information.account_holder_name')
                     )}
                   />
-                  {getIn(touched, 'bank_information.account_holder_name') &&
-                    getIn(errors, 'bank_information.account_holder_name') && (
-                      <Form.Control.Feedback type="invalid">
-                        {getIn(errors, 'bank_information.account_holder_name')}
-                      </Form.Control.Feedback>
-                    )}
+                  {getIn(errors, 'bank_information.account_holder_name') && (
+                    <Form.Control.Feedback type="invalid">
+                      {getIn(errors, 'bank_information.account_holder_name')}
+                    </Form.Control.Feedback>
+                  )}
                 </FloatingLabel>
               </Col>
 
@@ -186,16 +177,14 @@ const EmployeeBankInformationForm = ({
                     onBlur={handleBlur}
                     onChange={handleChange}
                     isInvalid={Boolean(
-                      getIn(touched, 'bank_information.account_number') &&
-                        getIn(errors, 'bank_information.account_number')
+                      getIn(errors, 'bank_information.account_number')
                     )}
                   />
-                  {getIn(touched, 'bank_information.account_number') &&
-                    getIn(errors, 'bank_information.account_number') && (
-                      <Form.Control.Feedback type="invalid">
-                        {getIn(errors, 'bank_information.account_number')}
-                      </Form.Control.Feedback>
-                    )}
+                  {getIn(errors, 'bank_information.account_number') && (
+                    <Form.Control.Feedback type="invalid">
+                      {getIn(errors, 'bank_information.account_number')}
+                    </Form.Control.Feedback>
+                  )}
                 </FloatingLabel>
               </Col>
 
@@ -212,16 +201,14 @@ const EmployeeBankInformationForm = ({
                     onBlur={handleBlur}
                     onChange={handleChange}
                     isInvalid={Boolean(
-                      getIn(touched, 'bank_information.account_type') &&
-                        getIn(errors, 'bank_information.account_type')
+                      getIn(errors, 'bank_information.account_type')
                     )}
                   />
-                  {getIn(touched, 'bank_information.account_type') &&
-                    getIn(errors, 'bank_information.account_type') && (
-                      <Form.Control.Feedback type="invalid">
-                        {getIn(errors, 'bank_information.account_type')}
-                      </Form.Control.Feedback>
-                    )}
+                  {getIn(errors, 'bank_information.account_type') && (
+                    <Form.Control.Feedback type="invalid">
+                      {getIn(errors, 'bank_information.account_type')}
+                    </Form.Control.Feedback>
+                  )}
                 </FloatingLabel>
               </Col>
             </Row>
