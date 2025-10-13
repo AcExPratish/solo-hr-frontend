@@ -46,6 +46,7 @@ const EmployeeDetailBankInformation = ({
             </div>
           </div>
         </Accordion.Header>
+
         <Accordion.Body className="px-3">
           <Row className="d-flex flex-wrap gap-3 gap-md-0">
             {bankInformationOptions?.map(
