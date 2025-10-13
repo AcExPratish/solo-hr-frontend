@@ -1,9 +1,11 @@
 import * as Yup from 'yup';
 import i18next from 'i18next';
 import { phoneRegex } from '@/helpers/regex';
+import { imageValidatorSchema } from '..';
 const t = i18next.t;
 
 export const UserCreateSchema = Yup.object().shape({
+  avatar: imageValidatorSchema,
   first_name: Yup.string()
     .required(
       t('form_validation_mandatory', {
@@ -85,6 +87,7 @@ export const UserCreateSchema = Yup.object().shape({
 });
 
 export const UserUpdateSchema = Yup.object().shape({
+  avatar: imageValidatorSchema,
   first_name: Yup.string()
     .required(
       t('form_validation_mandatory', {
