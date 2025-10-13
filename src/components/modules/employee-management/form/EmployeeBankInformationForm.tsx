@@ -117,30 +117,6 @@ const EmployeeBankInformationForm = ({
               </Col>
 
               <Col xs={12} md={4}>
-                <FloatingLabel label={t('swift_code')}>
-                  <Form.Control
-                    disabled={isView}
-                    id="bank_information.swift_code"
-                    type="text"
-                    name="bank_information.swift_code"
-                    placeholder={t('swift_code')}
-                    className={`form-control form-icon-input`}
-                    value={values?.bank_information?.swift_code || ''}
-                    onBlur={handleBlur}
-                    onChange={handleChange}
-                    isInvalid={Boolean(
-                      getIn(errors, 'bank_information.swift_code')
-                    )}
-                  />
-                  {getIn(errors, 'bank_information.swift_code') && (
-                    <Form.Control.Feedback type="invalid">
-                      {getIn(errors, 'bank_information.swift_code')}
-                    </Form.Control.Feedback>
-                  )}
-                </FloatingLabel>
-              </Col>
-
-              <Col xs={12} md={4}>
                 <FloatingLabel label={t('account_holder_name')}>
                   <Form.Control
                     disabled={isView}
@@ -207,6 +183,30 @@ const EmployeeBankInformationForm = ({
                   {getIn(errors, 'bank_information.account_type') && (
                     <Form.Control.Feedback type="invalid">
                       {getIn(errors, 'bank_information.account_type')}
+                    </Form.Control.Feedback>
+                  )}
+                </FloatingLabel>
+              </Col>
+
+              <Col xs={12} md={4}>
+                <FloatingLabel label={t('swift_code')}>
+                  <Form.Control
+                    disabled={isView}
+                    id="bank_information.swift_code"
+                    type="text"
+                    name="bank_information.swift_code"
+                    placeholder={t('swift_code')}
+                    className={`form-control form-icon-input`}
+                    value={values?.bank_information?.swift_code || ''}
+                    onBlur={handleBlur}
+                    onChange={handleChange}
+                    isInvalid={Boolean(
+                      getIn(errors, 'bank_information.swift_code')
+                    )}
+                  />
+                  {getIn(errors, 'bank_information.swift_code') && (
+                    <Form.Control.Feedback type="invalid">
+                      {getIn(errors, 'bank_information.swift_code')}
                     </Form.Control.Feedback>
                   )}
                 </FloatingLabel>
