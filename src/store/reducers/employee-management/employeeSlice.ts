@@ -28,7 +28,7 @@ const employeeSlice = createSlice({
     },
 
     createOneEmployee(state, action) {
-      state.employees = [...state.employees, action.payload.row];
+      state.employees = [action.payload.row, ...state.employees];
     },
 
     updateOneEmployee(state, action) {

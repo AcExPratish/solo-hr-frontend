@@ -28,7 +28,7 @@ const userSlice = createSlice({
     },
 
     createOneUser(state, action) {
-      state.users = [...state.users, action.payload.row];
+      state.users = [action.payload.row, ...state.users];
     },
 
     updateOneUser(state, action) {

@@ -28,7 +28,7 @@ const roleSlice = createSlice({
     },
 
     createOneRole(state, action) {
-      state.roles = [...state.roles, action.payload.row];
+      state.roles = [action.payload.row, ...state.roles];
     },
 
     updateOneRole(state, action) {

@@ -28,7 +28,7 @@ const holidaySlice = createSlice({
     },
 
     createOneHoliday(state, action) {
-      state.holidays = [...state.holidays, action.payload.row];
+      state.holidays = [action.payload.row, ...state.holidays];
     },
 
     updateOneHoliday(state, action) {
