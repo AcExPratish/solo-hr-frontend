@@ -62,7 +62,7 @@ const EmployeeDetailProfile = ({
           >
             <SafeImage
               size="xl"
-              className="text-success"
+              className="text-success w-100 h-100"
               src={
                 employee?.avatar ? `${storageEndpoint}/${employee?.avatar}` : ''
               }
