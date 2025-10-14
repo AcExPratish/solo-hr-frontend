@@ -95,6 +95,7 @@ const EmployeeBasicInfoForm = ({
               setFieldValue('avatar', res);
             })
             .catch(e => {
+              setFieldValue('avatar', null);
               if (e.status === 422) {
                 toast.error(e?.data?.message);
               }
