@@ -125,7 +125,7 @@ export const employeeDocumentTableColumns = () => {
             title={
               verificationStatusOptions?.find(
                 item => item?.value === row?.original?.verification_status
-              )?.label ?? ''
+              )?.label ?? t('pending')
             }
             icon={faCheckCircle}
             iconClass={`${verificationStatusOptions?.find(

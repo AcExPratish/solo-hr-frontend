@@ -70,7 +70,7 @@ const EmployeeImageInformation = ({
               verificationStatusOptions?.find(
                 item =>
                   item?.value === getIn(values, `${name}.verification_status`)
-              )?.label ?? ''
+              )?.label ?? t('pending')
             }
             icon={faCheckCircle}
             iconClass={`${verificationStatusOptions?.find(
