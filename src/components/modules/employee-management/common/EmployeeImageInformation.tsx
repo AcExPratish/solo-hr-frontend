@@ -8,6 +8,8 @@ import { isImageFile } from '@/helpers/utils';
 import { faCheckCircle } from '@fortawesome/free-solid-svg-icons';
 import TooltipIconButton from '@/components/common/TooltipIconButton';
 import { verificationStatusOptions } from '@/data';
+import useFileHook from '@/hooks/modules/useFileHook';
+import { toast } from 'react-toastify';
 
 export interface EmployeeImageInformationProps {
   title: string;
@@ -21,6 +23,7 @@ const EmployeeImageInformation = ({
   isView
 }: EmployeeImageInformationProps) => {
   const { t } = useTranslation();
+  const { uploadFile } = useFileHook();
 
   const {
     values,
@@ -36,8 +39,20 @@ const EmployeeImageInformation = ({
 
   const handleImageChange = async (file: File) => {
     await setFieldValue(`${name}.image`, file, false);
-    setFieldValue(`${name}.image`, file);
     await validateField(`${name}.image`);
+    await uploadFile(file, 'employees.documents')
+      .then(res => {
+        setFieldValue(`${name}.image`, res);
+      })
+      .catch(e => {
+        setFieldValue(`${name}.image`, null);
+        if (e?.status === 422) {
+          toast.error(e?.data?.message);
+        } else {
+          toast.error(e?.data?.message || t('message_failed'));
+        }
+        console.error(e);
+      });
   };
 
   const handleImageDelete = async () => {
