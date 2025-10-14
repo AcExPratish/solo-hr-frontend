@@ -96,11 +96,7 @@ const EmployeeBasicInfoForm = ({
             })
             .catch(e => {
               setFieldValue('avatar', null);
-              if (e.status === 422) {
-                toast.error(e?.data?.message);
-              } else {
-                toast.error(e?.data?.message || t('message_failed'));
-              }
+              toast.error(e?.data?.message || t('message_failed'));
               console.error(e);
             });
         };

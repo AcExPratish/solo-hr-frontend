@@ -8,6 +8,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faEye } from '@fortawesome/free-solid-svg-icons';
 import imageNotAvailable from '@/assets/img/image-not-available.png';
 import { IMAGE_ACCEPTED_TYPES } from '@/data';
+import { storageEndpoint } from '@/helpers/common';
 
 interface CustomImageHandlerProps {
   label: string;
@@ -130,7 +131,9 @@ const CustomImageHandler = ({
         {/* Image with hover overlay */}
         <div className="me-2 avatar-hover-wrapper">
           <SafeImage
-            src={selectedImage || undefined}
+            src={
+              selectedImage ? `${storageEndpoint}/${selectedImage}` : undefined
+            }
             size={avatarSize}
             rounded="square"
             thumbnail={true}
@@ -207,7 +210,11 @@ const CustomImageHandler = ({
           <div className="lightbox-inner" onClick={e => e.stopPropagation()}>
             <img
               className="lightbox-img"
-              src={currentImage as string}
+              src={
+                selectedImage
+                  ? `${storageEndpoint}/${selectedImage}`
+                  : undefined
+              }
               alt={t('preview') as string}
               onError={e => {
                 const target = e.currentTarget as HTMLImageElement;
