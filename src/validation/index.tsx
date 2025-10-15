@@ -23,10 +23,10 @@ export const employeeDocumentSchema = Yup.object().shape({
     .nullable()
     .notRequired()
     .max(
-      200,
+      50,
       t('form_validation_max', {
         field: t('id_number'),
-        max: 200
+        max: 50
       })
     ),
   issue_date: Yup.date().nullable().notRequired(),
@@ -35,11 +35,12 @@ export const employeeDocumentSchema = Yup.object().shape({
     .nullable()
     .notRequired()
     .max(
-      200,
+      255,
       t('form_validation_max', {
         field: t('id_number'),
-        max: 200
+        max: 255
       })
     ),
+  verification_status: Yup.string().nullable().notRequired(),
   image: imageValidatorSchema
 });

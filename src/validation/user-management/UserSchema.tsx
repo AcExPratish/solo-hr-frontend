@@ -13,20 +13,20 @@ export const UserCreateSchema = Yup.object().shape({
       })
     )
     .max(
-      200,
+      100,
       t('form_validation_max', {
         field: t('first_name'),
-        max: '200'
+        max: '100'
       })
     ),
   middle_name: Yup.string()
     .notRequired()
     .nullable()
     .max(
-      200,
+      100,
       t('form_validation_max', {
         field: t('middle_name'),
-        max: '200'
+        max: '100'
       })
     ),
   last_name: Yup.string()
@@ -36,10 +36,10 @@ export const UserCreateSchema = Yup.object().shape({
       })
     )
     .max(
-      200,
+      100,
       t('form_validation_max', {
         field: t('last_name'),
-        max: '200'
+        max: '100'
       })
     ),
   email: Yup.string()
@@ -50,10 +50,10 @@ export const UserCreateSchema = Yup.object().shape({
     )
     .email(t('form_validation_invalid_email'))
     .max(
-      200,
+      255,
       t('form_validation_max', {
         field: t('email'),
-        max: '200'
+        max: '255'
       })
     ),
   phone: Yup.string()
@@ -95,20 +95,20 @@ export const UserUpdateSchema = Yup.object().shape({
       })
     )
     .max(
-      200,
+      100,
       t('form_validation_max', {
         field: t('first_name'),
-        max: '200'
+        max: '100'
       })
     ),
   middle_name: Yup.string()
     .notRequired()
     .nullable()
     .max(
-      200,
+      100,
       t('form_validation_max', {
         field: t('middle_name'),
-        max: '200'
+        max: '100'
       })
     ),
   last_name: Yup.string()
@@ -118,10 +118,10 @@ export const UserUpdateSchema = Yup.object().shape({
       })
     )
     .max(
-      200,
+      100,
       t('form_validation_max', {
         field: t('last_name'),
-        max: '200'
+        max: '100'
       })
     ),
   email: Yup.string()
@@ -132,10 +132,10 @@ export const UserUpdateSchema = Yup.object().shape({
     )
     .email(t('form_validation_invalid_email'))
     .max(
-      200,
+      255,
       t('form_validation_max', {
         field: t('email'),
-        max: '200'
+        max: '255'
       })
     ),
   phone: Yup.string()

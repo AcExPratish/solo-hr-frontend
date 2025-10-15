@@ -10,10 +10,10 @@ export const HolidaySchema = Yup.object().shape({
       })
     )
     .max(
-      200,
+      100,
       t('form_validation_max', {
         field: t('title'),
-        max: '200'
+        max: '100'
       })
     ),
   date: Yup.date().required(
@@ -28,10 +28,10 @@ export const HolidaySchema = Yup.object().shape({
       })
     )
     .max(
-      200,
+      255,
       t('form_validation_max', {
         field: t('description'),
-        max: '200'
+        max: '255'
       })
     ),
   status: Yup.boolean().required(

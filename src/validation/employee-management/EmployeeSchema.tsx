@@ -16,20 +16,20 @@ export const EmployeeBasicInfoSchema = Yup.object().shape({
       })
     )
     .max(
-      200,
+      100,
       t('form_validation_max', {
         field: t('first_name'),
-        max: '200'
+        max: '100'
       })
     ),
   middle_name: Yup.string()
     .notRequired()
     .nullable()
     .max(
-      200,
+      100,
       t('form_validation_max', {
         field: t('middle_name'),
-        max: '200'
+        max: '100'
       })
     ),
   last_name: Yup.string()
@@ -39,10 +39,10 @@ export const EmployeeBasicInfoSchema = Yup.object().shape({
       })
     )
     .max(
-      200,
+      100,
       t('form_validation_max', {
         field: t('last_name'),
-        max: '200'
+        max: '100'
       })
     ),
   email: Yup.string()
@@ -53,10 +53,10 @@ export const EmployeeBasicInfoSchema = Yup.object().shape({
     )
     .email(t('form_validation_invalid_email'))
     .max(
-      200,
+      255,
       t('form_validation_max', {
         field: t('email'),
-        max: '200'
+        max: '255'
       })
     ),
   basic_information: Yup.object().shape({
@@ -86,11 +86,71 @@ export const EmployeeBasicInfoSchema = Yup.object().shape({
           to: todaysDate
         })
       ),
-    gender: Yup.string().required(
+    gender: Yup.number().required(
       t('form_validation_mandatory', {
         field: t('gender')
       })
-    )
+    ),
+    province: Yup.string()
+      .notRequired()
+      .nullable()
+      .max(
+        100,
+        t('form_validation_max', {
+          field: t('province'),
+          max: '100'
+        })
+      ),
+    district: Yup.string()
+      .notRequired()
+      .nullable()
+      .max(
+        100,
+        t('form_validation_max', {
+          field: t('district'),
+          max: '100'
+        })
+      ),
+    city: Yup.string()
+      .notRequired()
+      .nullable()
+      .max(
+        100,
+        t('form_validation_max', {
+          field: t('city'),
+          max: '100'
+        })
+      ),
+    address: Yup.string()
+      .notRequired()
+      .nullable()
+      .max(
+        255,
+        t('form_validation_max', {
+          field: t('address'),
+          max: '255'
+        })
+      ),
+    zip_code: Yup.string()
+      .notRequired()
+      .nullable()
+      .max(
+        100,
+        t('form_validation_max', {
+          field: t('zip_code'),
+          max: '100'
+        })
+      ),
+    postal_code: Yup.string()
+      .notRequired()
+      .nullable()
+      .max(
+        100,
+        t('form_validation_max', {
+          field: t('postal_code'),
+          max: '100'
+        })
+      )
   }),
   phone: Yup.string()
     .required(
@@ -133,7 +193,7 @@ export const EmployeePersonalInfoSchema = Yup.object().shape({
           max: '4'
         })
       ),
-    marital_status: Yup.string()
+    marital_status: Yup.number()
       .notRequired()
       .nullable()
       .max(
@@ -147,10 +207,10 @@ export const EmployeePersonalInfoSchema = Yup.object().shape({
       .notRequired()
       .nullable()
       .max(
-        50,
+        10,
         t('form_validation_max', {
           field: t('employment_of_spouse'),
-          max: '50'
+          max: '10'
         })
       ),
     no_of_children: Yup.string()
@@ -162,20 +222,41 @@ export const EmployeePersonalInfoSchema = Yup.object().shape({
           field: t('no_of_children')
         })
       )
+      .max(
+        10,
+        t('form_validation_max', {
+          field: t('no_of_children'),
+          max: '10'
+        })
+      )
   })
 });
 
 export const EmployeeEmergencyContactSchema = Yup.object().shape({
   emergency_contact: Yup.array().of(
     Yup.object().shape({
-      name: Yup.string().required(
-        t('form_validation_mandatory', { field: t('name') })
-      ),
-      relationship: Yup.string().required(
-        t('form_validation_mandatory', {
-          field: t('relationship')
-        })
-      ),
+      name: Yup.string()
+        .required(t('form_validation_mandatory', { field: t('name') }))
+        .max(
+          100,
+          t('form_validation_max', {
+            field: t('name'),
+            max: '100'
+          })
+        ),
+      relationship: Yup.string()
+        .required(
+          t('form_validation_mandatory', {
+            field: t('relationship')
+          })
+        )
+        .max(
+          100,
+          t('form_validation_max', {
+            field: t('relationship'),
+            max: '100'
+          })
+        ),
       phone_1: Yup.string()
         .required(
           t('form_validation_mandatory', {
@@ -202,10 +283,10 @@ export const EmployeeAboutEmployeeSchema = Yup.object().shape({
       .notRequired()
       .nullable()
       .max(
-        250,
+        255,
         t('form_validation_max', {
           field: t('about'),
-          max: '250'
+          max: '255'
         })
       )
   })
@@ -216,10 +297,10 @@ export const EmployeeBankInformationSchema = Yup.object().shape({
     bank_name: Yup.string()
       .required(t('form_validation_mandatory', { field: t('bank_name') }))
       .max(
-        250,
+        255,
         t('form_validation_max', {
           field: t('bank_name'),
-          max: '250'
+          max: '255'
         })
       ),
     branch_address: Yup.string()
@@ -229,10 +310,10 @@ export const EmployeeBankInformationSchema = Yup.object().shape({
         })
       )
       .max(
-        250,
+        255,
         t('form_validation_max', {
           field: t('branch_address'),
-          max: '250'
+          max: '255'
         })
       ),
     account_holder_name: Yup.string()
@@ -242,10 +323,10 @@ export const EmployeeBankInformationSchema = Yup.object().shape({
         })
       )
       .max(
-        250,
+        255,
         t('form_validation_max', {
           field: t('account_holder_name'),
-          max: '250'
+          max: '255'
         })
       ),
     account_number: Yup.string()
@@ -255,30 +336,30 @@ export const EmployeeBankInformationSchema = Yup.object().shape({
         })
       )
       .max(
-        50,
+        255,
         t('form_validation_max', {
           field: t('account_number'),
-          max: '50'
+          max: '255'
         })
       ),
     account_type: Yup.string()
       .notRequired()
       .nullable()
       .max(
-        50,
+        255,
         t('form_validation_max', {
           field: t('account_type'),
-          max: '50'
+          max: '255'
         })
       ),
     swift_code: Yup.string()
       .notRequired()
       .nullable()
       .max(
-        50,
+        255,
         t('form_validation_max', {
           field: t('swift_code'),
-          max: '50'
+          max: '255'
         })
       )
   })
@@ -287,14 +368,28 @@ export const EmployeeBankInformationSchema = Yup.object().shape({
 export const EmployeeFamilyInformationSchema = Yup.object().shape({
   family_information: Yup.array().of(
     Yup.object().shape({
-      name: Yup.string().required(
-        t('form_validation_mandatory', { field: t('name') })
-      ),
-      relationship: Yup.string().required(
-        t('form_validation_mandatory', {
-          field: t('relationship')
-        })
-      ),
+      name: Yup.string()
+        .required(t('form_validation_mandatory', { field: t('name') }))
+        .max(
+          50,
+          t('form_validation_max', {
+            field: t('name'),
+            max: '50'
+          })
+        ),
+      relationship: Yup.string()
+        .required(
+          t('form_validation_mandatory', {
+            field: t('relationship')
+          })
+        )
+        .max(
+          100,
+          t('form_validation_max', {
+            field: t('name'),
+            max: '100'
+          })
+        ),
       phone_1: Yup.string()
         .required(
           t('form_validation_mandatory', {
@@ -346,19 +441,19 @@ export const EmployeeEducationSchema = Yup.object().shape({
           })
         )
         .max(
-          250,
+          255,
           t('form_validation_max', {
             field: t('institution_name'),
-            max: '250'
+            max: '255'
           })
         ),
       course: Yup.string()
         .required(t('form_validation_mandatory', { field: t('course') }))
         .max(
-          250,
+          255,
           t('form_validation_max', {
             field: t('course'),
-            max: '250'
+            max: '255'
           })
         ),
       start_date: Yup.date().required(
@@ -404,10 +499,10 @@ export const EmployeeEducationSchema = Yup.object().shape({
         .notRequired()
         .nullable()
         .max(
-          10,
+          4,
           t('form_validation_max', {
             field: t('percentage_or_gpa'),
-            max: '10'
+            max: '4'
           })
         )
     })
@@ -424,10 +519,10 @@ export const EmployeeExperienceSchema = Yup.object().shape({
           })
         )
         .max(
-          250,
+          255,
           t('form_validation_max', {
             field: t('company_name'),
-            max: '250'
+            max: '255'
           })
         ),
       designation: Yup.string()
@@ -437,10 +532,10 @@ export const EmployeeExperienceSchema = Yup.object().shape({
           })
         )
         .max(
-          250,
+          255,
           t('form_validation_max', {
             field: t('designation'),
-            max: '250'
+            max: '255'
           })
         ),
       start_date: Yup.date().required(

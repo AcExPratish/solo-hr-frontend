@@ -10,10 +10,10 @@ export const RoleSchema = Yup.object().shape({
       })
     )
     .max(
-      200,
+      100,
       t('form_validation_max', {
         field: t('name'),
-        max: '200'
+        max: '100'
       })
     )
 });
