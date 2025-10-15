@@ -46,9 +46,10 @@ const EmployeeEducationForm = ({
 
   // On Submit
   const handleOnSubmit = async (values: TEmployee) => {
-    const { _id, education } = values;
+    const { _id, user_id, education } = values;
     onSubmit({
       _id,
+      user_id,
       education,
       form_type: 'education'
     });

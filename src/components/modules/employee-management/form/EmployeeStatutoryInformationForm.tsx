@@ -32,9 +32,10 @@ const EmployeeStatutoryInformationForm = ({
 
   // On Submit
   const handleOnSubmit = async (values: TEmployee) => {
-    const { _id, statutory_information } = values;
+    const { _id, user_id, statutory_information } = values;
     onSubmit({
       _id,
+      user_id,
       statutory_information,
       form_type: 'statutory_information'
     });
