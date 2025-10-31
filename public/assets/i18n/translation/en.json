@@ -236,5 +236,14 @@
     "this_month": "This Month",
     "detailed_view": "Detailed View",
     "leave": "Leave",
-    "leave_list": "Leave List"
+    "leave_list": "Leave List",
+    "leave_type": "Leave Type",
+    "no_of_days": "No of Days",
+    "days": "Days",
+    "total_days": "Total Days",
+    "from": "From",
+    "to": "To",
+    "from_date": "From Date",
+    "to_date": "To Date",
+    "reason": "Reason"
 }

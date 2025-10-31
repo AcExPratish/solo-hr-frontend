@@ -24,18 +24,6 @@ export const holidayTableColumns = ({
   const { t }: { t: any } = useTranslation();
   const columns: ColumnDef<THoliday>[] = [
     {
-      header: `${t('sn')}`,
-      accessorKey: 'id',
-      cell: original => {
-        const { row } = original;
-        return <span>{row.index + 1}</span>;
-      },
-      meta: {
-        cellProps: { className: 'text-body' },
-        headerProps: { style: { width: '5%' }, className: '' }
-      }
-    },
-    {
       header: `${t('title')}`,
       accessorKey: 'title',
       cell: original => {

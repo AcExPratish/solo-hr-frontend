@@ -2,13 +2,13 @@ import { TMeta } from '@/types/modules';
 import { THoliday } from '@/types/modules/employee-management/holiday';
 import { createSlice } from '@reduxjs/toolkit';
 
-interface UserState {
+interface HolidayState {
   holidays: THoliday[];
   holiday: THoliday;
   meta: TMeta;
 }
 
-const initialState: UserState = {
+const initialState: HolidayState = {
   holidays: [],
   holiday: <THoliday>{},
   meta: <TMeta>{}

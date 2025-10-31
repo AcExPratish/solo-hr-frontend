@@ -12,30 +12,34 @@ import Button from '@/components/base/Button';
 import SearchBox from '@/components/common/SearchBox';
 import AdvanceTableProvider from '@/providers/AdvanceTableProvider';
 import { ModalProps } from 'react-bootstrap';
-import HolidayTable, {
-  holidayTableColumns
-} from '@/components/modules/employee-management/table/HolidayTable';
-import {
-  THoliday,
-  THolidayFilter
-} from '@/types/modules/employee-management/holiday';
-import HolidayForm from '@/components/modules/employee-management/form/HolidayForm';
 import { pageCount } from '@/helpers/utils';
-import useHolidayHook from '@/hooks/modules/employee-management/useHolidayHook';
+import LeaveTable, {
+  leaveAdminTableColumns
+} from '@/components/modules/employee-management/table/LeaveTable';
+import {
+  TLeave,
+  TLeaveFilter
+} from '@/types/modules/employee-management/leave';
+import useLeaveHook from '@/hooks/modules/employee-management/useLeaveHook';
+import LeaveForm from '@/components/modules/employee-management/form/LeaveForm';
+import useLeaveTypeHook from '@/hooks/modules/employee-management/useLeaveTypeHook';
 
 // Initial values
-const initialFilter: THolidayFilter = {
+const initialFilter: TLeaveFilter = {
   page: 1,
   limit: 10,
   search: ''
 };
 
-const initialValues: THoliday = {
+const initialValues: TLeave = {
   id: undefined,
-  title: '',
-  date: '',
-  description: '',
-  status: true
+  user_id: '',
+  leave_type_id: '',
+  from_date: '',
+  to_date: '',
+  total_days: 0,
+  reason: '',
+  status: 'pending'
 };
 
 const initialLoader: TLoader = {
@@ -51,9 +55,9 @@ const LeavePage = () => {
 
   // Use States
   const [loader, setLoader] = React.useState<TLoader>(initialLoader);
-  const [filter, setFilter] = React.useState<THolidayFilter>(initialFilter);
+  const [filter, setFilter] = React.useState<TLeaveFilter>(initialFilter);
   const [searchInput, setSearchInput] = React.useState<string>('');
-  const [holiday, setHoliday] = React.useState<THoliday>(initialValues);
+  const [leave, setLeave] = React.useState<TLeave>(initialValues);
   const [modal, setModal] = React.useState<ModalProps>({
     show: false,
     placement: 'end',
@@ -61,36 +65,31 @@ const LeavePage = () => {
   });
 
   // Custom Hooks
-  const {
-    holidays,
-    meta,
-    fetchAllHoliday,
-    createHoliday,
-    updateHoliday,
-    deleteHoliday
-  } = useHolidayHook();
+  const { leaves, meta, fetchAllLeave, createLeave, updateLeave, deleteLeave } =
+    useLeaveHook();
+  const { fetchAllLeaveType } = useLeaveTypeHook();
 
   // Handlers
-  const handleOnView = (data: THoliday) => {
-    setHoliday(data);
+  const handleOnView = (data: TLeave) => {
+    setLeave(data);
     setModal({ ...modal, ...{ show: true, type: 'view' } });
   };
 
   const handleOnAdd = () => {
-    setHoliday(initialValues);
+    setLeave(initialValues);
     setModal({ ...modal, ...{ show: true, type: 'add' } });
   };
 
-  const handleOnEdit = (data: THoliday) => {
-    setHoliday(data);
+  const handleOnEdit = (data: TLeave) => {
+    setLeave(data);
     setModal({ ...modal, ...{ show: true, type: 'edit' } });
   };
 
-  const handleOnDelete = (data: THoliday) => {
+  const handleOnDelete = (data: TLeave) => {
     confirmAlert({
       title: `${t('dialog_delete_title')}`,
       message: `${t('dialog_delete_body', {
-        name: data.title
+        name: data?.id
       })}`
     }).then(resp => {
       if (resp && data) {
@@ -100,10 +99,13 @@ const LeavePage = () => {
   };
 
   // On Submit
-  const handleOnSubmit = (formData: THoliday) => {
+  const handleOnSubmit = (formData: TLeave) => {
     const finalData = {
       ...formData,
-      date: formData.date ? new Date(formData.date).toISOString() : ''
+      from_date: formData.from_date
+        ? new Date(formData.from_date).toISOString()
+        : '',
+      to_date: formData.to_date ? new Date(formData.to_date).toISOString() : ''
     };
 
     setLoader({ form: true });
@@ -116,9 +118,9 @@ const LeavePage = () => {
 
   // Table
   const mappedTable = () => {
-    const tempTable: UseAdvanceTableProps<THoliday> = {
-      data: holidays,
-      columns: holidayTableColumns({
+    const tempTable: UseAdvanceTableProps<TLeave> = {
+      data: leaves,
+      columns: leaveAdminTableColumns({
         onView: handleOnView,
         onEdit: handleOnEdit,
         onDelete: handleOnDelete
@@ -148,17 +150,17 @@ const LeavePage = () => {
   const table = useAdvanceTable(mappedTable());
 
   // API Handlers
-  const createItem = (data: THoliday) => {
+  const createItem = (data: TLeave) => {
     setModal({ ...modal, ...{ show: true } });
-    createHoliday(data)
+    createLeave(data)
       .then(() => {
         toast.success(
           t('message_success_create', {
             page,
-            name: data.title
+            name: data.id
           })
         );
-        setHoliday(initialValues);
+        setLeave(initialValues);
         setModal({ ...modal, ...{ show: false } });
         setLoader({ form: false });
       })
@@ -168,14 +170,14 @@ const LeavePage = () => {
       });
   };
 
-  const updateItem = (id: string, data: THoliday) => {
+  const updateItem = (id: string, data: TLeave) => {
     setModal({ ...modal, ...{ show: true } });
-    updateHoliday(id, data)
+    updateLeave(id, data)
       .then(() => {
         toast.success(
           t('message_success_update', {
             page,
-            name: data.title
+            name: data.id
           })
         );
         setModal({ ...modal, ...{ show: false } });
@@ -187,15 +189,15 @@ const LeavePage = () => {
       });
   };
 
-  const deleteItem = (data: THoliday) => {
+  const deleteItem = (data: TLeave) => {
     setLoader({ list: true });
     if (data?.id) {
-      deleteHoliday(data?.id)
+      deleteLeave(data?.id)
         .then(() => {
           toast.success(
             t('message_success_delete', {
               page,
-              name: data.title
+              name: data.id
             })
           );
           setLoader({ list: false });
@@ -210,7 +212,7 @@ const LeavePage = () => {
 
   const fetchAllItem = () => {
     setLoader({ list: true });
-    fetchAllHoliday(filter)
+    fetchAllLeave(filter)
       .then(() => {
         setLoader({ list: false });
       })
@@ -240,6 +242,8 @@ const LeavePage = () => {
     if (!checkScope('leaves.view')) {
       navigate('/errors/403');
     }
+
+    fetchAllLeaveType({ page: 1, limit: 100 }).catch(e => console.error(e));
   }, []);
 
   return (
@@ -260,19 +264,19 @@ const LeavePage = () => {
         <div className="mb-4 d-flex justify-content-end align-items-center gap-2">
           <SearchBox
             value={searchInput}
-            placeholder={`${t('search')} ${t('holiday')}`}
+            placeholder={`${t('search')} ${t('leave')}`}
             onChange={e => setSearchInput(e.target.value)}
           />
         </div>
 
         <div className="mx-n4 px-4 mx-lg-n6 px-lg-6 bg-body-emphasis border-top border-bottom border-translucent position-relative top-1">
-          <HolidayTable loader={loader.list} />
+          <LeaveTable loader={loader.list} />
         </div>
       </AdvanceTableProvider>
 
       {/* Modals */}
-      <HolidayForm
-        formData={holiday}
+      <LeaveForm
+        formData={leave}
         modal={modal}
         onSubmit={values => {
           handleOnSubmit(values);
