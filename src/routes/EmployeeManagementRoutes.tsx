@@ -5,6 +5,7 @@ import MainLayout from '../layouts/MainLayout';
 import { lazy, Suspense } from 'react';
 import PhoenixLoader from '../components/common/PhoenixLoader';
 import HolidayPage from '@/pages/employee-management/holiday';
+import LeavePage from '@/pages/employee-management/leave';
 
 const EmployeesPage = lazy(
   () => import('@/pages/employee-management/employee')
@@ -46,6 +47,15 @@ const EmployeeManagementRoutes: RouteObject = {
       element: (
         <Suspense fallback={<PhoenixLoader />}>
           <HolidayPage />
+        </Suspense>
+      )
+    },
+    {
+      path: 'leave',
+      index: true,
+      element: (
+        <Suspense fallback={<PhoenixLoader />}>
+          <LeavePage />
         </Suspense>
       )
     }

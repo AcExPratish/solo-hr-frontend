@@ -234,5 +234,7 @@
     "today": "Today",
     "this_week": "This Week",
     "this_month": "This Month",
-    "detailed_view": "Detailed View"
+    "detailed_view": "Detailed View",
+    "leave": "Leave",
+    "leave_list": "Leave List"
 }
